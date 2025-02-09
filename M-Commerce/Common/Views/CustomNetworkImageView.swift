@@ -11,13 +11,27 @@ class ImageLoader: ObservableObject {
     @Published var image: UIImage?
 
     private var cancellable: AnyCancellable?
+    private static var imageCache = NSCache<NSURL, UIImage>()
 
     func load(from url: URL) {
+        // Check cache first
+        if let cachedImage = Self.imageCache.object(forKey: url as NSURL) {
+            DispatchQueue.main.async {
+                self.image = cachedImage
+            }
+            return
+        }
+
+        // Download only if not cached
         cancellable = URLSession.shared.dataTaskPublisher(for: url)
             .map { UIImage(data: $0.data) }
             .replaceError(with: nil)
             .receive(on: DispatchQueue.main)
-            .assign(to: \.image, on: self)
+            .sink { [weak self] image in
+                guard let self = self, let image = image else { return }
+                Self.imageCache.setObject(image, forKey: url as NSURL) // Cache the image
+                self.image = image
+            }
     }
 
     deinit {
@@ -26,9 +40,10 @@ class ImageLoader: ObservableObject {
 }
 
 struct CustomNetworkImageView: View {
-    @StateObject private var loader = ImageLoader()
+    
     let url: URL
-
+    @StateObject private var loader = ImageLoader()
+    
     var body: some View {
         Group {
             if let image = loader.image {
@@ -36,11 +51,13 @@ struct CustomNetworkImageView: View {
                     .resizable()
                     
             } else {
-                ProgressView() // Loading indicator
+                ShimmerView(width: 150, height: 150)
             }
         }
         .onAppear {
-            loader.load(from: url)
+            if loader.image == nil { // Load image only if not already loaded
+                loader.load(from: url)
+            }
         }
     }
 }
