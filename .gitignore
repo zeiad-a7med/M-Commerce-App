@@ -8,3 +8,10 @@ Build/
 Pods/
 *.lock
 podfile.lock
+
+*.xcworkspace/
+*.xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+*.xcodeproj/project.xcworkspace/
+*.xcodeproj/xcuserdata/
