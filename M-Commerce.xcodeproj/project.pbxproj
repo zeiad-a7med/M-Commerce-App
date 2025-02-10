@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXContainerItemProxy section */
@@ -30,21 +30,9 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		8930E38B2D59160F00DCD5D8 /* M-Commerce */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "M-Commerce";
-			sourceTree = "<group>";
-		};
-		8930E39C2D59161100DCD5D8 /* M-CommerceTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "M-CommerceTests";
-			sourceTree = "<group>";
-		};
-		8930E3A62D59161100DCD5D8 /* M-CommerceUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "M-CommerceUITests";
-			sourceTree = "<group>";
-		};
+		8930E38B2D59160F00DCD5D8 /* M-Commerce */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "M-Commerce"; sourceTree = "<group>"; };
+		8930E39C2D59161100DCD5D8 /* M-CommerceTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "M-CommerceTests"; sourceTree = "<group>"; };
+		8930E3A62D59161100DCD5D8 /* M-CommerceUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "M-CommerceUITests"; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +175,7 @@
 				};
 			};
 			buildConfigurationList = 8930E3842D59160F00DCD5D8 /* Build configuration list for PBXProject "M-Commerce" */;
+			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -195,7 +184,6 @@
 			);
 			mainGroup = 8930E3802D59160F00DCD5D8;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			productRefGroup = 8930E38A2D59160F00DCD5D8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

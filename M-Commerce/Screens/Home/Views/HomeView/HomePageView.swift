@@ -13,7 +13,6 @@ struct HomePageView: View {
 
         NavigationStack {
             ZStack {  //start of: ZStack
-                ThemeManager.backgroundColor.ignoresSafeArea(edges: .all)
                 ScrollView {
                     LazyVStack {
                         CustomSearchBarView(
