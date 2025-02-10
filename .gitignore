@@ -1,42 +1,10 @@
-# macOS System Files
-.DS_Store
-.AppleDouble
-.LSOverride
 
 # Derived Data
 DerivedData/
 build/
 Build/
 
-# Swift Package Manager
-.swiftpm/
-Package.resolved
-Package.pins
-
 # CocoaPods
 Pods/
 *.lock
 podfile.lock
-
-# Carthage
-Carthage/
-Carthage/Checkouts
-Carthage/Build
-
-# Fastlane
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots/
-fastlane/test_output/
-
-# Archives
-*.xcarchive
-*.ipa
-*.dSYM.zip
-*.dSYM
-
-# Temporary files
-*.swp
-*.swo
-*.swn
-*.tmp
