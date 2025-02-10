@@ -3,14 +3,6 @@
 .AppleDouble
 .LSOverride
 
-# Xcode
-*.xcworkspace/
-*.xcuserdata/
-*.xcscmblueprint
-*.xccheckout
-*.xcodeproj/project.xcworkspace/
-*.xcodeproj/xcuserdata/
-
 # Derived Data
 DerivedData/
 build/
@@ -42,13 +34,6 @@ fastlane/test_output/
 *.ipa
 *.dSYM.zip
 *.dSYM
-
-# Firebase / Google Services
-GoogleService-Info.plist
-
-# Environment Variables
-.env
-*.xcconfig
 
 # Temporary files
 *.swp
