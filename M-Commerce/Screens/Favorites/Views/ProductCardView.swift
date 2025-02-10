@@ -9,8 +9,9 @@ import SwiftUI
 
 struct ProductCardView: View {
     @State var isFavorite: Bool = false
+    let cornerRadius:CGFloat = 30.0
+    let shadowRadius:CGFloat = 7.0
     var body: some View {
-
         VStack {
             CustomNetworkImageView(
                 url: URL(
@@ -36,7 +37,8 @@ struct ProductCardView: View {
                 alignment: .topTrailing
             )
             .frame(width: 180, height: 200)
-            .cornerRadius(20)
+            .cornerRadius(cornerRadius)
+            .shadow(radius: shadowRadius)
             Text("Box HeadPhone 234")
                 .font(.headline)
                 .fontWeight(.bold)

@@ -21,7 +21,7 @@ struct ButtonView: View {
             Image(systemName: imageSystemName)
                 .padding(.trailing, cartTrailingPadding)
                 .padding(.top, cartTopPadding)
-                .foregroundStyle(navigationBarItemsColor)
+                .foregroundStyle(ThemeManager.navigationBarItemsColor)
                 .overlay(alignment: .topTrailing
                          ,content: {
                     PopupCircleView(productCounter: itemCounter)

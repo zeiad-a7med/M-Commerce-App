@@ -16,7 +16,7 @@ struct FavoritesView: View {
     ]
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 CustomSearchBarView(
                     placeholder:"search in favorites.....",
