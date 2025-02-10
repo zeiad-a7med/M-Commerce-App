@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -47,6 +47,12 @@
 		48AD58D62D5ADFAA00AFC9D8 /* M_Commerce_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M_Commerce_AppUITests.swift; sourceTree = "<group>"; };
 		48AD58D82D5ADFAA00AFC9D8 /* M_Commerce_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M_Commerce_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		894B09BA2D5A56BC006325AC /* Common */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Common; sourceTree = "<group>"; };
+		894B09BC2D5A56BC006325AC /* Helpers */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Helpers; sourceTree = "<group>"; };
+		894B09D32D5A56C4006325AC /* Screens */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Screens; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		48AD58B32D5ADFA600AFC9D8 /* Frameworks */ = {
@@ -96,6 +102,9 @@
 		48AD58B82D5ADFA600AFC9D8 /* M-Commerce-App */ = {
 			isa = PBXGroup;
 			children = (
+				894B09D32D5A56C4006325AC /* Screens */,
+				894B09BA2D5A56BC006325AC /* Common */,
+				894B09BC2D5A56BC006325AC /* Helpers */,
 				48AD58B92D5ADFA600AFC9D8 /* M_Commerce_AppApp.swift */,
 				48AD58BB2D5ADFA600AFC9D8 /* ContentView.swift */,
 				48AD58BD2D5ADFA600AFC9D8 /* Item.swift */,
@@ -144,6 +153,11 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				894B09BA2D5A56BC006325AC /* Common */,
+				894B09BC2D5A56BC006325AC /* Helpers */,
+				894B09D32D5A56C4006325AC /* Screens */,
 			);
 			name = "M-Commerce-App";
 			productName = "M-Commerce-App";

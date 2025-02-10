@@ -9,6 +9,26 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+    var body: some View {
+        TabView {
+            HomePageView()
+                .tabItem {
+                    Label("Home", systemImage: "house.fill")
+                }
+            FavoritesView()
+                .tabItem {
+                    Label("Favorites", systemImage: "heart.fill")
+                }
+                .badge(10)
+        }
+    }
+}
+#Preview {
+    ContentView()
+}
+
+
+struct ContentView2: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
 
@@ -56,6 +76,6 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView2()
         .modelContainer(for: Item.self, inMemory: true)
 }
