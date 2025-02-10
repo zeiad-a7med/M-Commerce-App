@@ -14,10 +14,7 @@ struct ButtonView: View {
     let cartTopPadding:CGFloat      = 3.0
     let cartTrailingPadding:CGFloat = 3.0
     var body: some View {
-        Button(action: {
-            //navigate to cart
-            
-        }, label: {
+        
             Image(systemName: imageSystemName)
                 .padding(.trailing, cartTrailingPadding)
                 .padding(.top, cartTopPadding)
@@ -26,7 +23,7 @@ struct ButtonView: View {
                          ,content: {
                     PopupCircleView(productCounter: itemCounter)
                 })
-        })
+        
     }
 }
 
