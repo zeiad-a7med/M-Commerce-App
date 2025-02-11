@@ -10,7 +10,9 @@
 *.perspectivev3
 xcuserdata/
 *.xcworkspace
-
+*.pbxproj
+project.pbxproj
+M-Commerce-App.xcodeproj/project.pbxproj
 # Derived Data & Build Artifacts
 DerivedData/
 build/
