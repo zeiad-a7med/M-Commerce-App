@@ -97,7 +97,7 @@ struct AdCardView: View {
 
 #Preview {
     let tempImageList = ImageList(id: "")
-    AdCardView(
+    return AdCardView(
         imageList: tempImageList,
         discountCode: [
             DiscountCode(), DiscountCode(code: "ByeBye"),
