@@ -9,6 +9,8 @@ import SwiftUI
 
 struct HomePageView: View {
     let screenTitle: String = "Home"
+    let tempImageList = ImageList(id: "")
+    @State var isCopied: Bool = false
     var body: some View {
 
         NavigationStack {
@@ -32,12 +34,28 @@ struct HomePageView: View {
                         HeaderView(
                             title: ThemeManager.firstSectionTitle,
                             color: ThemeManager.titleColor)
+                        AdCardView(
+                            imageList: tempImageList,
+                            discountCode: [
+                                DiscountCode(), DiscountCode(code: "ByeBye"),
+                                DiscountCode(code: "areWeThereYet"),
+                            ], pricesruleList: PriceRulesList(id: "")
+                        ) {
+                            self.isCopied.toggle()
+                        }
                         HeaderView(
                             title: ThemeManager.secondSectionTitle,
                             color: ThemeManager.titleColor)
                         BrandsView(imageUrlArray: dummyImgsUrlArray)
                         Spacer()
                     }
+                }
+                if isCopied{
+                    Text("Copied to Clipboard")
+                        .foregroundStyle(.gray)
+                        .transition(.move(edge: .bottom))
+                        .frame(height:50 , alignment: .bottom)
+                        .offset(y:UIScreen.main.bounds.height/3)
                 }
             }  //end of: ZStack
             .navigationTitle(screenTitle)

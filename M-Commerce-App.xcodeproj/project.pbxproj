@@ -28,6 +28,9 @@
 		89D508692D5C10CE00046FA9 /* BrandsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D5085B2D5C10CE00046FA9 /* BrandsView.swift */; };
 		89D5086A2D5C10CE00046FA9 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D5085C2D5C10CE00046FA9 /* HeaderView.swift */; };
 		89D5086B2D5C10CE00046FA9 /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D5085E2D5C10CE00046FA9 /* HomePageView.swift */; };
+		89D508702D5C11EF00046FA9 /* AdCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D5086C2D5C11EF00046FA9 /* AdCardView.swift */; };
+		89D508712D5C11EF00046FA9 /* AdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D5086D2D5C11EF00046FA9 /* AdModel.swift */; };
+		89D508722D5C11EF00046FA9 /* AdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D5086E2D5C11EF00046FA9 /* AdViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +75,9 @@
 		89D5085B2D5C10CE00046FA9 /* BrandsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsView.swift; sourceTree = "<group>"; };
 		89D5085C2D5C10CE00046FA9 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		89D5085E2D5C10CE00046FA9 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
+		89D5086C2D5C11EF00046FA9 /* AdCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdCardView.swift; sourceTree = "<group>"; };
+		89D5086D2D5C11EF00046FA9 /* AdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdModel.swift; sourceTree = "<group>"; };
+		89D5086E2D5C11EF00046FA9 /* AdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,10 +273,21 @@
 		89D508622D5C10CE00046FA9 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				89D5086F2D5C11EF00046FA9 /* AdsCard */,
 				89D508562D5C10CE00046FA9 /* Favorites */,
 				89D508612D5C10CE00046FA9 /* Home */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		89D5086F2D5C11EF00046FA9 /* AdsCard */ = {
+			isa = PBXGroup;
+			children = (
+				89D5086C2D5C11EF00046FA9 /* AdCardView.swift */,
+				89D5086D2D5C11EF00046FA9 /* AdModel.swift */,
+				89D5086E2D5C11EF00046FA9 /* AdViewModel.swift */,
+			);
+			path = AdsCard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -409,6 +426,9 @@
 				89D508642D5C10CE00046FA9 /* ProductCardView.swift in Sources */,
 				89D508652D5C10CE00046FA9 /* FavoritesView.swift in Sources */,
 				89D508662D5C10CE00046FA9 /* ButtonView.swift in Sources */,
+				89D508702D5C11EF00046FA9 /* AdCardView.swift in Sources */,
+				89D508712D5C11EF00046FA9 /* AdModel.swift in Sources */,
+				89D508722D5C11EF00046FA9 /* AdViewModel.swift in Sources */,
 				89D508672D5C10CE00046FA9 /* PopupCircleView.swift in Sources */,
 				89D508682D5C10CE00046FA9 /* BrandCard.swift in Sources */,
 				89D508692D5C10CE00046FA9 /* BrandsView.swift in Sources */,
