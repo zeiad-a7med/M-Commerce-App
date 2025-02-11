@@ -1,57 +1,48 @@
-# macOS System Files
+# macOS system files
 .DS_Store
-.AppleDouble
-.LSOverride
 
-# Xcode
-*.xcworkspace/
-*.xcuserdata/
+# Xcode specific
+*.xcuserstate
 *.xcscmblueprint
-*.xccheckout
-*.xcodeproj/project.xcworkspace/
-*.xcodeproj/xcuserdata/
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+xcuserdata/
+*.xcworkspace
 
-# Derived Data
+# Derived Data & Build Artifacts
 DerivedData/
 build/
-Build/
+*.hmap
+*.ipa
 
 # Swift Package Manager
 .swiftpm/
+.build/
 Package.resolved
-Package.pins
 
 # CocoaPods
 Pods/
-*.lock
-podfile.lock
+Podfile.lock
 
 # Carthage
 Carthage/
 Carthage/Checkouts
 Carthage/Build
 
-# Fastlane
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots/
-fastlane/test_output/
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
 
-# Archives
-*.xcarchive
-*.ipa
-*.dSYM.zip
-*.dSYM
+# SwiftLint
+.swiftlint.yml
 
-# Firebase / Google Services
-GoogleService-Info.plist
-
-# Environment Variables
-.env
+# Configuration Files
 *.xcconfig
+.env
 
-# Temporary files
+# Temporary Files
 *.swp
 *.swo
 *.swn
-*.tmp
