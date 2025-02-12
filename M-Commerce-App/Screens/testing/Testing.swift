@@ -11,13 +11,31 @@ struct Testing: View {
     @StateObject var viewModelTest = ViewModelTest()
     var body: some View {
 
-        if !viewModelTest.isLoading {
-            List(viewModelTest.items, id: \.self) { item in
-                Text(item)
-            }
-        } else {
-            ProgressView()
-        }
+//        if !viewModelTest.isLoading {
+//            List(viewModelTest.items, id: \.self) { item in
+//                Text(item)
+//            }
+//        } else {
+//            ProgressView()
+//        }
+        
+        ScrollView {
+                    LazyVStack {
+                        ForEach(viewModelTest.items, id: \.self) { item in
+                            Text(item)
+                                .frame(height:200)
+                                .padding()
+                                .onAppear {
+                                    if item == viewModelTest.items.last {
+                                        viewModelTest.loadMore()
+                                    }
+                                }
+                        }
+                        if viewModelTest.isLoading {
+                            ProgressView("Loading more...")
+                        }
+                    }
+                }
     }
 }
 
