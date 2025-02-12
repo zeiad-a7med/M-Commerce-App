@@ -14,7 +14,7 @@ final class ViewModelTest: ObservableObject {
     func fetch() {
         
         
-        ApolloNetwokService.shared.apollo.fetch(query: GetAllProductsQuery(first: 10)) { result in
+        ApolloNetwokService.shared.apollo.fetch(query: GetAllProductsQuery(first: 30)) { result in
           switch result {
           case .success(let graphQLResult):
               graphQLResult.data?.products.edges.forEach { edge in
