@@ -13,9 +13,8 @@ struct HomePageView: View {
     @State var isCopied: Bool = false
     var body: some View {
 
-        NavigationStack {
+        NavigationView {
             ZStack {  //start of: ZStack
-                ThemeManager.backgroundColor.ignoresSafeArea(edges: .all)
                 ScrollView {
                     LazyVStack {
                         CustomSearchBarView(
@@ -64,12 +63,18 @@ struct HomePageView: View {
                     placement: .topBarTrailing,
                     content: {
                         LazyHStack {
+                            NavigationLink(destination: Text("cart")
+                                           , label: {
                             ButtonView(
                                 imageSystemName: ThemeManager.cartImg,
                                 itemCounter: 10)
+                        })
+                            NavigationLink(destination: FavoritesView()
+                                           , label: {
                             ButtonView(
                                 imageSystemName: ThemeManager.favouriteImg,
                                 itemCounter: 2)
+                            })
                         }
                     })
             }
@@ -78,7 +83,7 @@ struct HomePageView: View {
 }
 
 #Preview {
-    NavigationStack {
+    NavigationView {
         HomePageView()
     }
 }

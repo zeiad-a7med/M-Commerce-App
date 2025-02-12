@@ -38,6 +38,9 @@
 		89D508B72D5C26E900046FA9 /* ApolloNetwokService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D508B52D5C26E900046FA9 /* ApolloNetwokService.swift */; };
 		89D508BB2D5C270900046FA9 /* Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D508B82D5C270900046FA9 /* Testing.swift */; };
 		89D508BC2D5C270900046FA9 /* ViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D508B92D5C270900046FA9 /* ViewModelTest.swift */; };
+		C4FD201C2D5C300400CD1C4A /* FilterBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FD201A2D5C300400CD1C4A /* FilterBar.swift */; };
+		C4FD201D2D5C300400CD1C4A /* ProductsSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FD201B2D5C300400CD1C4A /* ProductsSubView.swift */; };
+		C4FD201F2D5C301600CD1C4A /* CategorieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FD201E2D5C301600CD1C4A /* CategorieView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +93,9 @@
 		89D508B52D5C26E900046FA9 /* ApolloNetwokService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApolloNetwokService.swift; sourceTree = "<group>"; };
 		89D508B82D5C270900046FA9 /* Testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testing.swift; sourceTree = "<group>"; };
 		89D508B92D5C270900046FA9 /* ViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTest.swift; sourceTree = "<group>"; };
+		C4FD201A2D5C300400CD1C4A /* FilterBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBar.swift; sourceTree = "<group>"; };
+		C4FD201B2D5C300400CD1C4A /* ProductsSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsSubView.swift; sourceTree = "<group>"; };
+		C4FD201E2D5C301600CD1C4A /* CategorieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorieView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -291,6 +297,7 @@
 		89D508622D5C10CE00046FA9 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				C4FD20182D5C2FB700CD1C4A /* categories */,
 				89D5086F2D5C11EF00046FA9 /* AdsCard */,
 				89D508562D5C10CE00046FA9 /* Favorites */,
 				89D508612D5C10CE00046FA9 /* Home */,
@@ -379,6 +386,22 @@
 				89D508B92D5C270900046FA9 /* ViewModelTest.swift */,
 			);
 			path = testing;
+		C4FD20182D5C2FB700CD1C4A /* categories */ = {
+			isa = PBXGroup;
+			children = (
+				C4FD20192D5C2FCF00CD1C4A /* Views */,
+			);
+			path = categories;
+			sourceTree = "<group>";
+		};
+		C4FD20192D5C2FCF00CD1C4A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C4FD201A2D5C300400CD1C4A /* FilterBar.swift */,
+				C4FD201B2D5C300400CD1C4A /* ProductsSubView.swift */,
+				C4FD201E2D5C301600CD1C4A /* CategorieView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -528,12 +551,15 @@
 				89D508662D5C10CE00046FA9 /* ButtonView.swift in Sources */,
 				89D508702D5C11EF00046FA9 /* AdCardView.swift in Sources */,
 				89D508712D5C11EF00046FA9 /* AdModel.swift in Sources */,
+				C4FD201F2D5C301600CD1C4A /* CategorieView.swift in Sources */,
 				89D508722D5C11EF00046FA9 /* AdViewModel.swift in Sources */,
 				89D508672D5C10CE00046FA9 /* PopupCircleView.swift in Sources */,
 				89D508682D5C10CE00046FA9 /* BrandCard.swift in Sources */,
 				89D508692D5C10CE00046FA9 /* BrandsView.swift in Sources */,
 				89D5086A2D5C10CE00046FA9 /* HeaderView.swift in Sources */,
 				89D5086B2D5C10CE00046FA9 /* HomePageView.swift in Sources */,
+				C4FD201C2D5C300400CD1C4A /* FilterBar.swift in Sources */,
+				C4FD201D2D5C300400CD1C4A /* ProductsSubView.swift in Sources */,
 				89D5084B2D5C10C600046FA9 /* CustomSearchBarView.swift in Sources */,
 				89D5084C2D5C10C600046FA9 /* ShimmerView.swift in Sources */,
 				89D5084F2D5C10CA00046FA9 /* ThemeManager.swift in Sources */,
