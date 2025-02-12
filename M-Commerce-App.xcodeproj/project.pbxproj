@@ -283,11 +283,35 @@
 		89D5086F2D5C11EF00046FA9 /* AdsCard */ = {
 			isa = PBXGroup;
 			children = (
-				89D5086C2D5C11EF00046FA9 /* AdCardView.swift */,
-				89D5086D2D5C11EF00046FA9 /* AdModel.swift */,
-				89D5086E2D5C11EF00046FA9 /* AdViewModel.swift */,
+				89D508752D5C1E3100046FA9 /* Model */,
+				89D508742D5C1E2800046FA9 /* ViewModel */,
+				89D508732D5C1E2200046FA9 /* View */,
 			);
 			path = AdsCard;
+			sourceTree = "<group>";
+		};
+		89D508732D5C1E2200046FA9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				89D5086C2D5C11EF00046FA9 /* AdCardView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		89D508742D5C1E2800046FA9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				89D5086E2D5C11EF00046FA9 /* AdViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		89D508752D5C1E3100046FA9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				89D5086D2D5C11EF00046FA9 /* AdModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
