@@ -3,10 +3,8 @@ query GetCollections($first : Int, $after : String) {
         totalCount
         nodes {
             description
-            descriptionHtml
             handle
             id
-            onlineStoreUrl
             title
             trackingParameters
             updatedAt
@@ -14,8 +12,6 @@ query GetCollections($first : Int, $after : String) {
                 altText
                 height
                 originalSrc
-                src
-                transformedSrc
                 url
                 width
                 id

@@ -7,7 +7,7 @@ public class GetCollectionsQuery: GraphQLQuery {
   public static let operationName: String = "GetCollections"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query GetCollections($first: Int, $after: String) { collections(first: $first, after: $after) { __typename totalCount nodes { __typename description descriptionHtml handle id onlineStoreUrl title trackingParameters updatedAt image { __typename altText height originalSrc src transformedSrc url width id } } pageInfo { __typename endCursor hasNextPage hasPreviousPage startCursor } } }"#
+      #"query GetCollections($first: Int, $after: String) { collections(first: $first, after: $after) { __typename totalCount nodes { __typename description handle id title trackingParameters updatedAt image { __typename altText height originalSrc url width id } } pageInfo { __typename endCursor hasNextPage hasPreviousPage startCursor } } }"#
     ))
 
   public var first: GraphQLNullable<Int>
@@ -74,10 +74,8 @@ public class GetCollectionsQuery: GraphQLQuery {
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
           .field("description", String.self),
-          .field("descriptionHtml", ShopifyAPIKit.HTML.self),
           .field("handle", String.self),
           .field("id", ShopifyAPIKit.ID.self),
-          .field("onlineStoreUrl", ShopifyAPIKit.URL?.self),
           .field("title", String.self),
           .field("trackingParameters", String?.self),
           .field("updatedAt", ShopifyAPIKit.DateTime.self),
@@ -86,15 +84,11 @@ public class GetCollectionsQuery: GraphQLQuery {
 
         /// Stripped description of the collection, single line with HTML tags removed.
         public var description: String { __data["description"] }
-        /// The description of the collection, complete with HTML formatting.
-        public var descriptionHtml: ShopifyAPIKit.HTML { __data["descriptionHtml"] }
         /// A human-friendly unique string for the collection automatically generated from its title.
         /// Limit of 255 characters.
         public var handle: String { __data["handle"] }
         /// A globally-unique ID.
         public var id: ShopifyAPIKit.ID { __data["id"] }
-        /// The URL used for viewing the resource on the shop's Online Store. Returns `null` if the resource is currently not published to the Online Store sales channel.
-        public var onlineStoreUrl: ShopifyAPIKit.URL? { __data["onlineStoreUrl"] }
         /// The collection’s name. Limit of 255 characters.
         public var title: String { __data["title"] }
         /// URL parameters to be added to a page URL to track the origin of on-site search traffic for [analytics reporting](https://help.shopify.com/manual/reports-and-analytics/shopify-reports/report-types/default-reports/behaviour-reports). Returns a result when accessed through the [search](https://shopify.dev/docs/api/storefront/current/queries/search) or [predictiveSearch](https://shopify.dev/docs/api/storefront/current/queries/predictiveSearch) queries, otherwise returns null.
@@ -117,8 +111,6 @@ public class GetCollectionsQuery: GraphQLQuery {
             .field("altText", String?.self),
             .field("height", Int?.self),
             .field("originalSrc", ShopifyAPIKit.URL.self),
-            .field("src", ShopifyAPIKit.URL.self),
-            .field("transformedSrc", ShopifyAPIKit.URL.self),
             .field("url", ShopifyAPIKit.URL.self),
             .field("width", Int?.self),
             .field("id", ShopifyAPIKit.ID?.self),
@@ -133,15 +125,6 @@ public class GetCollectionsQuery: GraphQLQuery {
           /// If there are any existing transformations in the original source URL, they will remain and not be stripped.
           @available(*, deprecated, message: "Use `url` instead.")
           public var originalSrc: ShopifyAPIKit.URL { __data["originalSrc"] }
-          /// The location of the image as a URL.
-          @available(*, deprecated, message: "Use `url` instead.")
-          public var src: ShopifyAPIKit.URL { __data["src"] }
-          /// The location of the transformed image as a URL.
-          ///
-          /// All transformation arguments are considered "best-effort". If they can be applied to an image, they will be.
-          /// Otherwise any transformations which an image type doesn't support will be ignored.
-          @available(*, deprecated, message: "Use `url(transform:)` instead")
-          public var transformedSrc: ShopifyAPIKit.URL { __data["transformedSrc"] }
           /// The location of the image as a URL.
           ///
           /// If no transform options are specified, then the original image will be preserved including any pre-applied transforms.
