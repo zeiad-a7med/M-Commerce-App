@@ -31,6 +31,13 @@
 		89D508702D5C11EF00046FA9 /* AdCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D5086C2D5C11EF00046FA9 /* AdCardView.swift */; };
 		89D508712D5C11EF00046FA9 /* AdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D5086D2D5C11EF00046FA9 /* AdModel.swift */; };
 		89D508722D5C11EF00046FA9 /* AdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D5086E2D5C11EF00046FA9 /* AdViewModel.swift */; };
+		89D508AA2D5C25CD00046FA9 /* schema.graphqls in Resources */ = {isa = PBXBuildFile; fileRef = 89D508A82D5C25CD00046FA9 /* schema.graphqls */; };
+		89D508AC2D5C25CD00046FA9 /* GetAllProducts.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 89D508A52D5C25CD00046FA9 /* GetAllProducts.graphql */; };
+		89D508B12D5C266C00046FA9 /* ShopifyAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 89D508B02D5C266C00046FA9 /* ShopifyAPI */; };
+		89D508B42D5C269800046FA9 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 89D508B32D5C269800046FA9 /* Apollo */; };
+		89D508B72D5C26E900046FA9 /* ApolloNetwokService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D508B52D5C26E900046FA9 /* ApolloNetwokService.swift */; };
+		89D508BB2D5C270900046FA9 /* Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D508B82D5C270900046FA9 /* Testing.swift */; };
+		89D508BC2D5C270900046FA9 /* ViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D508B92D5C270900046FA9 /* ViewModelTest.swift */; };
 		C4FD201C2D5C300400CD1C4A /* FilterBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FD201A2D5C300400CD1C4A /* FilterBar.swift */; };
 		C4FD201D2D5C300400CD1C4A /* ProductsSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FD201B2D5C300400CD1C4A /* ProductsSubView.swift */; };
 		C4FD201F2D5C301600CD1C4A /* CategorieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FD201E2D5C301600CD1C4A /* CategorieView.swift */; };
@@ -81,6 +88,11 @@
 		89D5086C2D5C11EF00046FA9 /* AdCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdCardView.swift; sourceTree = "<group>"; };
 		89D5086D2D5C11EF00046FA9 /* AdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdModel.swift; sourceTree = "<group>"; };
 		89D5086E2D5C11EF00046FA9 /* AdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdViewModel.swift; sourceTree = "<group>"; };
+		89D508A52D5C25CD00046FA9 /* GetAllProducts.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetAllProducts.graphql; sourceTree = "<group>"; };
+		89D508A82D5C25CD00046FA9 /* schema.graphqls */ = {isa = PBXFileReference; lastKnownFileType = text; path = schema.graphqls; sourceTree = "<group>"; };
+		89D508B52D5C26E900046FA9 /* ApolloNetwokService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApolloNetwokService.swift; sourceTree = "<group>"; };
+		89D508B82D5C270900046FA9 /* Testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testing.swift; sourceTree = "<group>"; };
+		89D508B92D5C270900046FA9 /* ViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTest.swift; sourceTree = "<group>"; };
 		C4FD201A2D5C300400CD1C4A /* FilterBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBar.swift; sourceTree = "<group>"; };
 		C4FD201B2D5C300400CD1C4A /* ProductsSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsSubView.swift; sourceTree = "<group>"; };
 		C4FD201E2D5C301600CD1C4A /* CategorieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorieView.swift; sourceTree = "<group>"; };
@@ -91,6 +103,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89D508B12D5C266C00046FA9 /* ShopifyAPI in Frameworks */,
+				89D508B42D5C269800046FA9 /* Apollo in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +131,7 @@
 				48F009EE2D5C94F9002A016E /* M-Commerce-App */,
 				48F00A012D5C9500002A016E /* M-Commerce-AppTests */,
 				48F00A0B2D5C9501002A016E /* M-Commerce-AppUITests */,
+				89D508B22D5C269800046FA9 /* Frameworks */,
 				48F009ED2D5C94F9002A016E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -134,6 +149,9 @@
 		48F009EE2D5C94F9002A016E /* M-Commerce-App */ = {
 			isa = PBXGroup;
 			children = (
+				89D508BA2D5C270900046FA9 /* testing */,
+				89D508B62D5C26E900046FA9 /* ApolloNetwokService */,
+				89D508A92D5C25CD00046FA9 /* graphql */,
 				89D508492D5C10C600046FA9 /* Common */,
 				89D5084E2D5C10CA00046FA9 /* Helpers */,
 				89D508622D5C10CE00046FA9 /* Screens */,
@@ -321,6 +339,53 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		89D508A62D5C25CD00046FA9 /* Queries */ = {
+			isa = PBXGroup;
+			children = (
+				89D508AE2D5C25EB00046FA9 /* Products */,
+			);
+			path = Queries;
+			sourceTree = "<group>";
+		};
+		89D508A92D5C25CD00046FA9 /* graphql */ = {
+			isa = PBXGroup;
+			children = (
+				89D508A62D5C25CD00046FA9 /* Queries */,
+				89D508A82D5C25CD00046FA9 /* schema.graphqls */,
+			);
+			path = graphql;
+			sourceTree = "<group>";
+		};
+		89D508AE2D5C25EB00046FA9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				89D508A52D5C25CD00046FA9 /* GetAllProducts.graphql */,
+			);
+			path = Products;
+			sourceTree = "<group>";
+		};
+		89D508B22D5C269800046FA9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		89D508B62D5C26E900046FA9 /* ApolloNetwokService */ = {
+			isa = PBXGroup;
+			children = (
+				89D508B52D5C26E900046FA9 /* ApolloNetwokService.swift */,
+			);
+			path = ApolloNetwokService;
+			sourceTree = "<group>";
+		};
+		89D508BA2D5C270900046FA9 /* testing */ = {
+			isa = PBXGroup;
+			children = (
+				89D508B82D5C270900046FA9 /* Testing.swift */,
+				89D508B92D5C270900046FA9 /* ViewModelTest.swift */,
+			);
+			path = testing;
 		C4FD20182D5C2FB700CD1C4A /* categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -427,6 +492,10 @@
 				Base,
 			);
 			mainGroup = 48F009E32D5C94F9002A016E;
+			packageReferences = (
+				89D508A42D5C23D900046FA9 /* XCRemoteSwiftPackageReference "apollo-ios" */,
+				89D508AF2D5C266C00046FA9 /* XCLocalSwiftPackageReference "ShopifyAPI" */,
+			);
 			productRefGroup = 48F009ED2D5C94F9002A016E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -443,6 +512,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89D508AA2D5C25CD00046FA9 /* schema.graphqls in Resources */,
+				89D508AC2D5C25CD00046FA9 /* GetAllProducts.graphql in Resources */,
 				48F009F92D5C94FF002A016E /* Preview Assets.xcassets in Resources */,
 				48F009F62D5C94FF002A016E /* Assets.xcassets in Resources */,
 			);
@@ -469,10 +540,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89D508BB2D5C270900046FA9 /* Testing.swift in Sources */,
+				89D508BC2D5C270900046FA9 /* ViewModelTest.swift in Sources */,
 				48F009F42D5C94F9002A016E /* Item.swift in Sources */,
 				89D5084A2D5C10C600046FA9 /* CustomNetworkImageView.swift in Sources */,
 				89D508632D5C10CE00046FA9 /* favoritesService.swift in Sources */,
 				89D508642D5C10CE00046FA9 /* ProductCardView.swift in Sources */,
+				89D508B72D5C26E900046FA9 /* ApolloNetwokService.swift in Sources */,
 				89D508652D5C10CE00046FA9 /* FavoritesView.swift in Sources */,
 				89D508662D5C10CE00046FA9 /* ButtonView.swift in Sources */,
 				89D508702D5C11EF00046FA9 /* AdCardView.swift in Sources */,
@@ -814,6 +888,36 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		89D508AF2D5C266C00046FA9 /* XCLocalSwiftPackageReference "ShopifyAPI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ShopifyAPI;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		89D508A42D5C23D900046FA9 /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.17.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		89D508B02D5C266C00046FA9 /* ShopifyAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ShopifyAPI;
+		};
+		89D508B32D5C269800046FA9 /* Apollo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 89D508A42D5C23D900046FA9 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = Apollo;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 48F009E42D5C94F9002A016E /* Project object */;
 }

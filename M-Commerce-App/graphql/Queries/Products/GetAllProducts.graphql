@@ -1,0 +1,21 @@
+query GetAllProducts($first : Int) {
+  products(first: $first) {
+    edges {
+      node {
+        title
+        id
+        images(first: 10) {
+          edges {
+            node {
+              id
+              src
+              url
+              width
+            }
+          }
+        }
+      }
+      cursor
+    }
+  }
+}
