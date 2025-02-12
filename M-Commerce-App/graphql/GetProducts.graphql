@@ -1,0 +1,22 @@
+query MyQuery {
+  products(first: 10) {
+    edges {
+      cursor
+      node {
+        id
+        title
+        images(first: 10) {
+          edges {
+            node {
+              src
+              width
+              height
+              url
+            }
+            cursor
+          }
+        }
+      }
+    }
+  }
+}
