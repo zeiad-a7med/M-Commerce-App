@@ -14,6 +14,11 @@
 		48F00A032D5C9500002A016E /* M_Commerce_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F00A022D5C9500002A016E /* M_Commerce_AppTests.swift */; };
 		48F00A0D2D5C9501002A016E /* M_Commerce_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F00A0C2D5C9501002A016E /* M_Commerce_AppUITests.swift */; };
 		48F00A0F2D5C9501002A016E /* M_Commerce_AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F00A0E2D5C9501002A016E /* M_Commerce_AppUITestsLaunchTests.swift */; };
+		48F00A212D5CAE45002A016E /* ShoppingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F00A1C2D5CAE45002A016E /* ShoppingView.swift */; };
+		48F00A222D5CAE45002A016E /* NumberOfItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F00A1D2D5CAE45002A016E /* NumberOfItems.swift */; };
+		48F00A232D5CAE45002A016E /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F00A1E2D5CAE45002A016E /* DeleteButton.swift */; };
+		48F00A242D5CAE45002A016E /* RowCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F00A1F2D5CAE45002A016E /* RowCard.swift */; };
+		48F00A252D5CAE45002A016E /* imageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F00A202D5CAE45002A016E /* imageCard.swift */; };
 		89D508432D5C0CD400046FA9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D508352D5C0CD400046FA9 /* ContentView.swift */; };
 		89D5084A2D5C10C600046FA9 /* CustomNetworkImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D508452D5C10C600046FA9 /* CustomNetworkImageView.swift */; };
 		89D5084B2D5C10C600046FA9 /* CustomSearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D508462D5C10C600046FA9 /* CustomSearchBarView.swift */; };
@@ -61,6 +66,11 @@
 		48F00A082D5C9501002A016E /* M-Commerce-AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "M-Commerce-AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F00A0C2D5C9501002A016E /* M_Commerce_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M_Commerce_AppUITests.swift; sourceTree = "<group>"; };
 		48F00A0E2D5C9501002A016E /* M_Commerce_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M_Commerce_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		48F00A1C2D5CAE45002A016E /* ShoppingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingView.swift; sourceTree = "<group>"; };
+		48F00A1D2D5CAE45002A016E /* NumberOfItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberOfItems.swift; sourceTree = "<group>"; };
+		48F00A1E2D5CAE45002A016E /* DeleteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
+		48F00A1F2D5CAE45002A016E /* RowCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowCard.swift; sourceTree = "<group>"; };
+		48F00A202D5CAE45002A016E /* imageCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = imageCard.swift; sourceTree = "<group>"; };
 		89D508352D5C0CD400046FA9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		89D508452D5C10C600046FA9 /* CustomNetworkImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNetworkImageView.swift; sourceTree = "<group>"; };
 		89D508462D5C10C600046FA9 /* CustomSearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBarView.swift; sourceTree = "<group>"; };
@@ -128,6 +138,7 @@
 		48F009EE2D5C94F9002A016E /* M-Commerce-App */ = {
 			isa = PBXGroup;
 			children = (
+				48F00A1B2D5CAE45002A016E /* ShopingCartScreen */,
 				89D508492D5C10C600046FA9 /* Common */,
 				89D5084E2D5C10CA00046FA9 /* Helpers */,
 				89D508622D5C10CE00046FA9 /* Screens */,
@@ -163,6 +174,18 @@
 				48F00A0E2D5C9501002A016E /* M_Commerce_AppUITestsLaunchTests.swift */,
 			);
 			path = "M-Commerce-AppUITests";
+			sourceTree = "<group>";
+		};
+		48F00A1B2D5CAE45002A016E /* ShopingCartScreen */ = {
+			isa = PBXGroup;
+			children = (
+				48F00A1C2D5CAE45002A016E /* ShoppingView.swift */,
+				48F00A1D2D5CAE45002A016E /* NumberOfItems.swift */,
+				48F00A1E2D5CAE45002A016E /* DeleteButton.swift */,
+				48F00A1F2D5CAE45002A016E /* RowCard.swift */,
+				48F00A202D5CAE45002A016E /* imageCard.swift */,
+			);
+			path = ShopingCartScreen;
 			sourceTree = "<group>";
 		};
 		89D508482D5C10C600046FA9 /* Views */ = {
@@ -444,12 +467,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48F00A212D5CAE45002A016E /* ShoppingView.swift in Sources */,
 				48F009F42D5C94F9002A016E /* Item.swift in Sources */,
 				89D5084A2D5C10C600046FA9 /* CustomNetworkImageView.swift in Sources */,
 				89D508632D5C10CE00046FA9 /* favoritesService.swift in Sources */,
 				89D508642D5C10CE00046FA9 /* ProductCardView.swift in Sources */,
 				89D508652D5C10CE00046FA9 /* FavoritesView.swift in Sources */,
 				89D508662D5C10CE00046FA9 /* ButtonView.swift in Sources */,
+				48F00A252D5CAE45002A016E /* imageCard.swift in Sources */,
 				89D508702D5C11EF00046FA9 /* AdCardView.swift in Sources */,
 				89D508712D5C11EF00046FA9 /* AdModel.swift in Sources */,
 				89D508722D5C11EF00046FA9 /* AdViewModel.swift in Sources */,
@@ -457,11 +482,14 @@
 				89D508682D5C10CE00046FA9 /* BrandCard.swift in Sources */,
 				89D508692D5C10CE00046FA9 /* BrandsView.swift in Sources */,
 				89D5086A2D5C10CE00046FA9 /* HeaderView.swift in Sources */,
+				48F00A232D5CAE45002A016E /* DeleteButton.swift in Sources */,
 				89D5086B2D5C10CE00046FA9 /* HomePageView.swift in Sources */,
+				48F00A222D5CAE45002A016E /* NumberOfItems.swift in Sources */,
 				89D5084B2D5C10C600046FA9 /* CustomSearchBarView.swift in Sources */,
 				89D5084C2D5C10C600046FA9 /* ShimmerView.swift in Sources */,
 				89D5084F2D5C10CA00046FA9 /* ThemeManager.swift in Sources */,
 				89D508432D5C0CD400046FA9 /* ContentView.swift in Sources */,
+				48F00A242D5CAE45002A016E /* RowCard.swift in Sources */,
 				48F009F02D5C94F9002A016E /* M_Commerce_AppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
