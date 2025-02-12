@@ -26,6 +26,7 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "Cart": return ShopifyAPIKit.Objects.Cart
     case "CartLine": return ShopifyAPIKit.Objects.CartLine
     case "Collection": return ShopifyAPIKit.Objects.Collection
+    case "CollectionConnection": return ShopifyAPIKit.Objects.CollectionConnection
     case "Comment": return ShopifyAPIKit.Objects.Comment
     case "Company": return ShopifyAPIKit.Objects.Company
     case "CompanyContact": return ShopifyAPIKit.Objects.CompanyContact
@@ -33,10 +34,11 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "ComponentizableCartLine": return ShopifyAPIKit.Objects.ComponentizableCartLine
     case "Customer": return ShopifyAPIKit.Objects.Customer
     case "ExternalVideo": return ShopifyAPIKit.Objects.ExternalVideo
+    case "Filter": return ShopifyAPIKit.Objects.Filter
+    case "FilterValue": return ShopifyAPIKit.Objects.FilterValue
     case "GenericFile": return ShopifyAPIKit.Objects.GenericFile
     case "Image": return ShopifyAPIKit.Objects.Image
     case "ImageConnection": return ShopifyAPIKit.Objects.ImageConnection
-    case "ImageEdge": return ShopifyAPIKit.Objects.ImageEdge
     case "Location": return ShopifyAPIKit.Objects.Location
     case "MailingAddress": return ShopifyAPIKit.Objects.MailingAddress
     case "Market": return ShopifyAPIKit.Objects.Market
@@ -47,13 +49,15 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "Metafield": return ShopifyAPIKit.Objects.Metafield
     case "Metaobject": return ShopifyAPIKit.Objects.Metaobject
     case "Model3d": return ShopifyAPIKit.Objects.Model3d
+    case "MoneyV2": return ShopifyAPIKit.Objects.MoneyV2
     case "Order": return ShopifyAPIKit.Objects.Order
     case "Page": return ShopifyAPIKit.Objects.Page
+    case "PageInfo": return ShopifyAPIKit.Objects.PageInfo
     case "Product": return ShopifyAPIKit.Objects.Product
     case "ProductConnection": return ShopifyAPIKit.Objects.ProductConnection
-    case "ProductEdge": return ShopifyAPIKit.Objects.ProductEdge
     case "ProductOption": return ShopifyAPIKit.Objects.ProductOption
     case "ProductOptionValue": return ShopifyAPIKit.Objects.ProductOptionValue
+    case "ProductPriceRange": return ShopifyAPIKit.Objects.ProductPriceRange
     case "ProductVariant": return ShopifyAPIKit.Objects.ProductVariant
     case "QueryRoot": return ShopifyAPIKit.Objects.QueryRoot
     case "SearchQuerySuggestion": return ShopifyAPIKit.Objects.SearchQuerySuggestion

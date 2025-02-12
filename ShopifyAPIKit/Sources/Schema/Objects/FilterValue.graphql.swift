@@ -4,9 +4,9 @@
 import ApolloAPI
 
 public extension Objects {
-  /// An auto-generated type which holds one Product and a cursor during pagination.
-  static let ProductEdge = ApolloAPI.Object(
-    typename: "ProductEdge",
+  /// A selectable value within a filter.
+  static let FilterValue = ApolloAPI.Object(
+    typename: "FilterValue",
     implementedInterfaces: [],
     keyFields: nil
   )

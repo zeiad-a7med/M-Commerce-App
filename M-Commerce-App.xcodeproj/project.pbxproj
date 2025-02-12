@@ -15,13 +15,13 @@
 		48F00A0D2D5C9501002A016E /* M_Commerce_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F00A0C2D5C9501002A016E /* M_Commerce_AppUITests.swift */; };
 		48F00A0F2D5C9501002A016E /* M_Commerce_AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F00A0E2D5C9501002A016E /* M_Commerce_AppUITestsLaunchTests.swift */; };
 		890D86BE2D5CD3EF0062E8D1 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 890D86BD2D5CD3EF0062E8D1 /* Apollo */; };
-		890D86C42D5CD4B90062E8D1 /* GetAllProducts.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 890D86BF2D5CD4B90062E8D1 /* GetAllProducts.graphql */; };
-		890D86C52D5CD4B90062E8D1 /* GetProducts.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 890D86C12D5CD4B90062E8D1 /* GetProducts.graphql */; };
 		890D86C62D5CD4B90062E8D1 /* schema.graphqls in Resources */ = {isa = PBXBuildFile; fileRef = 890D86C22D5CD4B90062E8D1 /* schema.graphqls */; };
 		890D86C92D5CD5320062E8D1 /* ShopifyAPIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 890D86C82D5CD5320062E8D1 /* ShopifyAPIKit */; };
 		890D86CC2D5CD55E0062E8D1 /* ApolloNetwokService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890D86CA2D5CD55E0062E8D1 /* ApolloNetwokService.swift */; };
 		890D86D02D5CD5710062E8D1 /* ViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890D86CE2D5CD5710062E8D1 /* ViewModelTest.swift */; };
 		890D86D12D5CD5710062E8D1 /* Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890D86CD2D5CD5710062E8D1 /* Testing.swift */; };
+		890D86D72D5CF07D0062E8D1 /* GetCollection.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 890D86D62D5CF07D0062E8D1 /* GetCollection.graphql */; };
+		890D86E12D5CF63A0062E8D1 /* GetCollections.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 890D86E02D5CF63A0062E8D1 /* GetCollections.graphql */; };
 		89D508432D5C0CD400046FA9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D508352D5C0CD400046FA9 /* ContentView.swift */; };
 		89D5084A2D5C10C600046FA9 /* CustomNetworkImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D508452D5C10C600046FA9 /* CustomNetworkImageView.swift */; };
 		89D5084B2D5C10C600046FA9 /* CustomSearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D508462D5C10C600046FA9 /* CustomSearchBarView.swift */; };
@@ -72,12 +72,12 @@
 		48F00A082D5C9501002A016E /* M-Commerce-AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "M-Commerce-AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F00A0C2D5C9501002A016E /* M_Commerce_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M_Commerce_AppUITests.swift; sourceTree = "<group>"; };
 		48F00A0E2D5C9501002A016E /* M_Commerce_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M_Commerce_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		890D86BF2D5CD4B90062E8D1 /* GetAllProducts.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetAllProducts.graphql; sourceTree = "<group>"; };
-		890D86C12D5CD4B90062E8D1 /* GetProducts.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetProducts.graphql; sourceTree = "<group>"; };
 		890D86C22D5CD4B90062E8D1 /* schema.graphqls */ = {isa = PBXFileReference; lastKnownFileType = text; path = schema.graphqls; sourceTree = "<group>"; };
 		890D86CA2D5CD55E0062E8D1 /* ApolloNetwokService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApolloNetwokService.swift; sourceTree = "<group>"; };
 		890D86CD2D5CD5710062E8D1 /* Testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testing.swift; sourceTree = "<group>"; };
 		890D86CE2D5CD5710062E8D1 /* ViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTest.swift; sourceTree = "<group>"; };
+		890D86D62D5CF07D0062E8D1 /* GetCollection.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetCollection.graphql; sourceTree = "<group>"; };
+		890D86E02D5CF63A0062E8D1 /* GetCollections.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetCollections.graphql; sourceTree = "<group>"; };
 		89D508352D5C0CD400046FA9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		89D508452D5C10C600046FA9 /* CustomNetworkImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNetworkImageView.swift; sourceTree = "<group>"; };
 		89D508462D5C10C600046FA9 /* CustomSearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBarView.swift; sourceTree = "<group>"; };
@@ -192,7 +192,8 @@
 		890D86C02D5CD4B90062E8D1 /* Queries */ = {
 			isa = PBXGroup;
 			children = (
-				890D86BF2D5CD4B90062E8D1 /* GetAllProducts.graphql */,
+				890D86D62D5CF07D0062E8D1 /* GetCollection.graphql */,
+				890D86E02D5CF63A0062E8D1 /* GetCollections.graphql */,
 			);
 			path = Queries;
 			sourceTree = "<group>";
@@ -200,8 +201,8 @@
 		890D86C32D5CD4B90062E8D1 /* graphql */ = {
 			isa = PBXGroup;
 			children = (
-				890D86C02D5CD4B90062E8D1 /* Queries */,
-				890D86C12D5CD4B90062E8D1 /* GetProducts.graphql */,
+				890D86DA2D5CF5D80062E8D1 /* Products */,
+				890D86D82D5CF5A40062E8D1 /* Collection */,
 				890D86C22D5CD4B90062E8D1 /* schema.graphqls */,
 			);
 			path = graphql;
@@ -222,6 +223,45 @@
 				890D86CE2D5CD5710062E8D1 /* ViewModelTest.swift */,
 			);
 			path = testing;
+			sourceTree = "<group>";
+		};
+		890D86D82D5CF5A40062E8D1 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				890D86D92D5CF5BF0062E8D1 /* Mutations */,
+				890D86C02D5CD4B90062E8D1 /* Queries */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		890D86D92D5CF5BF0062E8D1 /* Mutations */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Mutations;
+			sourceTree = "<group>";
+		};
+		890D86DA2D5CF5D80062E8D1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				890D86DB2D5CF5E20062E8D1 /* Mutations */,
+				890D86DD2D5CF5E20062E8D1 /* Queries */,
+			);
+			path = Products;
+			sourceTree = "<group>";
+		};
+		890D86DB2D5CF5E20062E8D1 /* Mutations */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Mutations;
+			sourceTree = "<group>";
+		};
+		890D86DD2D5CF5E20062E8D1 /* Queries */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Queries;
 			sourceTree = "<group>";
 		};
 		89D508482D5C10C600046FA9 /* Views */ = {
@@ -502,9 +542,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				48F009F92D5C94FF002A016E /* Preview Assets.xcassets in Resources */,
-				890D86C42D5CD4B90062E8D1 /* GetAllProducts.graphql in Resources */,
-				890D86C52D5CD4B90062E8D1 /* GetProducts.graphql in Resources */,
 				890D86C62D5CD4B90062E8D1 /* schema.graphqls in Resources */,
+				890D86E12D5CF63A0062E8D1 /* GetCollections.graphql in Resources */,
+				890D86D72D5CF07D0062E8D1 /* GetCollection.graphql in Resources */,
 				48F009F62D5C94FF002A016E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

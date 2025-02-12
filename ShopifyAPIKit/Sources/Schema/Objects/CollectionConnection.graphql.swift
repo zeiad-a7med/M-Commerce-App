@@ -4,9 +4,9 @@
 import ApolloAPI
 
 public extension Objects {
-  /// An auto-generated type which holds one Image and a cursor during pagination.
-  static let ImageEdge = ApolloAPI.Object(
-    typename: "ImageEdge",
+  /// An auto-generated type for paginating through multiple Collections.
+  static let CollectionConnection = ApolloAPI.Object(
+    typename: "CollectionConnection",
     implementedInterfaces: [],
     keyFields: nil
   )
