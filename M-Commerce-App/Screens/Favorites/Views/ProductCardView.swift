@@ -21,18 +21,9 @@ struct ProductCardView: View {
             )
             .cornerRadius(20)
             .overlay(
-                Button(action: {
-                    isFavorite = isFavorite ? false : true
-                }) {
-                    Image(systemName: (isFavorite) ? "heart.fill" : "heart")
-                        .foregroundStyle(.red)
-                        .frame(alignment: .bottomLeading)
-                        .background {
-                            Circle()
-                                .frame(width: 34, height: 35)
-                                .foregroundStyle(.white.opacity(0.5))
-                        }
-                }
+                FavoriteButtonView(
+                    size: 20
+                )
                     .padding(20),
                 alignment: .topTrailing
             )
@@ -57,6 +48,7 @@ struct ProductCardView: View {
         }
     }
 }
+
 
 #Preview {
     ProductCardView()
