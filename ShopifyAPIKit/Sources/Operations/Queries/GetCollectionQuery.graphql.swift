@@ -7,7 +7,7 @@ public class GetCollectionQuery: GraphQLQuery {
   public static let operationName: String = "GetCollection"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query GetCollection($id: ID, $first: Int) { collection(id: $id) { __typename id description handle title image { __typename id height width url originalSrc } products(first: $first) { __typename nodes { __typename id availableForSale title productType tags vendor images(first: 1) { __typename nodes { __typename id height width url originalSrc } } priceRange { __typename maxVariantPrice { __typename amount currencyCode } minVariantPrice { __typename amount currencyCode } } } filters { __typename id label type values { __typename count id label input } } } } }"#
+      #"query GetCollection($id: ID, $first: Int) { collection(id: $id) { __typename id description handle title image { __typename id height width url originalSrc altText } products(first: $first) { __typename nodes { __typename id availableForSale title productType tags vendor images(first: 1) { __typename nodes { __typename id height width url originalSrc } } priceRange { __typename maxVariantPrice { __typename amount currencyCode } minVariantPrice { __typename amount currencyCode } } } filters { __typename id label type values { __typename count id label input } } } } }"#
     ))
 
   public var id: GraphQLNullable<ID>
@@ -85,6 +85,7 @@ public class GetCollectionQuery: GraphQLQuery {
           .field("width", Int?.self),
           .field("url", ShopifyAPIKit.URL.self),
           .field("originalSrc", ShopifyAPIKit.URL.self),
+          .field("altText", String?.self),
         ] }
 
         /// A unique ID for the image.
@@ -106,6 +107,8 @@ public class GetCollectionQuery: GraphQLQuery {
         /// If there are any existing transformations in the original source URL, they will remain and not be stripped.
         @available(*, deprecated, message: "Use `url` instead.")
         public var originalSrc: ShopifyAPIKit.URL { __data["originalSrc"] }
+        /// A word or phrase to share the nature or contents of an image.
+        public var altText: String? { __data["altText"] }
       }
 
       /// Collection.Products
