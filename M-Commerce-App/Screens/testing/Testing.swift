@@ -8,10 +8,15 @@
 import SwiftUI
 
 struct Testing: View {
-    @StateObject var launchViewModel = ViewModelTest()
+    @StateObject var viewModelTest = ViewModelTest()
     var body: some View {
-        if(!launchViewModel.isLoading){
-            Text(launchViewModel.products[0])
+
+        if !viewModelTest.isLoading {
+            List(viewModelTest.items, id: \.self) { item in
+                Text(item)
+            }
+        } else {
+            ProgressView()
         }
     }
 }

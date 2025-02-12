@@ -9,7 +9,7 @@ import ShopifyAPIKit
 import SwiftUI
 
 final class ViewModelTest: ObservableObject {
-    @Published var products: [String] = []
+    @Published var items: [String] = []
     @Published var isLoading: Bool = true
     init() {
         fetch()
@@ -23,9 +23,7 @@ final class ViewModelTest: ObservableObject {
             case .success(let graphQLResult):
                 graphQLResult.data?.products.edges.forEach { edge in
                     print("title: \(edge.node.title)")
-                    print("title: \(edge.node.id)")
-                    self.products.append(edge.node.title)
-
+                    self.items.append(edge.node.title)
                 }
                 self.isLoading = false
             case .failure(let error):
