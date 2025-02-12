@@ -14,11 +14,6 @@ struct ContentView: View {
                 .tabItem {
                     Label("Home", systemImage: "house.fill")
                 }
-            FavoritesView()
-                .tabItem {
-                    Label("Favorites", systemImage: "heart.fill")
-                }
-                .badge(10)
         }
     }
 }
