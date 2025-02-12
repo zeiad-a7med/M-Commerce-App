@@ -1,9 +1,0 @@
-#apollo
-https://github.com/apollographql/apollo-ios.git
-
-#to initialize api package from Apollo Package
-./apollo-ios-cli init --schema-namespace ShopifyAPI --module-type swiftPackageManager
-
-#to generate queries and mutations
-./apollo-ios-cli generate
-
