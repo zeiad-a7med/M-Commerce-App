@@ -18,6 +18,10 @@ struct ContentView: View {
                 .tabItem {
                     Label("Categories", systemImage: "square.stack.3d.up.fill")
                 }
+            Testing()
+                .tabItem {
+                    Label("Testing", systemImage: "square.stack.3d.up.fill")
+                }
         }
     }
 }
