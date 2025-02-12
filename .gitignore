@@ -10,6 +10,8 @@
 *.perspectivev3
 xcuserdata/
 *.xcworkspace
+*.xcuserstate
+project.xcworkspace/
 # Derived Data & Build Artifacts
 DerivedData/
 build/
