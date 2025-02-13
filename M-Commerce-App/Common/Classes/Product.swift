@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ShopifyAPIKit
 
 struct Product: Codable {
     let availableForSale: Bool
@@ -25,4 +26,21 @@ struct Product: Codable {
     let images: [ImgModel]
     let encodedVariantExistence: String
     let encodedVariantAvailability: String
+    
+    //Getters
+    var price: Double {
+        get {
+            return Double(priceRange.minVariantPrice.amount) ?? 0
+        }
+    }
+    var formattedPrice: String {
+        get {
+            return String(format: "%.2f", price)
+        }
+    }
+    var currency: String? {
+        get {
+            return priceRange.minVariantPrice.currencyCode
+        }
+    }
 }
