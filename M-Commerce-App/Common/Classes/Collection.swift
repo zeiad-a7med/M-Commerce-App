@@ -14,6 +14,6 @@ struct Collection: Codable {
     var title: String?
     var trackingParameters: String?
     var updatedAt: String?
-    var image: ImgModel?
+    var img: ImgModel?
     var products:[Product]?
 }
