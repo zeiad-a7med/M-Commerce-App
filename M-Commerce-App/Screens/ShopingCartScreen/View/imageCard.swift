@@ -13,8 +13,7 @@ struct imageCard: View {
         AsyncImage(url: URL(string: img)) { phase in
                 switch phase {
                 case .empty:
-                    ProgressView()
-                        
+                    ShimmerView(width: 325, height: 100)
                         .frame(width: 325 , height: 100)
                         .clipShape(RoundedRectangle(cornerRadius: 15))
                         .containerRelativeFrame(.horizontal, alignment: .center)

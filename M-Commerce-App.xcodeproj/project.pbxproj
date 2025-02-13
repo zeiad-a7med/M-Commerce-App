@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		489EA8AE2D5DF0D400F4B1BE /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489EA8AD2D5DF0D400F4B1BE /* Cart.swift */; };
+		489EA8B02D5DF1A900F4B1BE /* ShoppingCartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489EA8AF2D5DF1A900F4B1BE /* ShoppingCartViewModel.swift */; };
 		48F009F02D5C94F9002A016E /* M_Commerce_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F009EF2D5C94F9002A016E /* M_Commerce_AppApp.swift */; };
 		48F009F42D5C94F9002A016E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F009F32D5C94F9002A016E /* Item.swift */; };
 		48F009F62D5C94FF002A016E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48F009F52D5C94FF002A016E /* Assets.xcassets */; };
@@ -56,6 +58,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		489EA8AD2D5DF0D400F4B1BE /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
+		489EA8AF2D5DF1A900F4B1BE /* ShoppingCartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewModel.swift; sourceTree = "<group>"; };
 		48F009EC2D5C94F9002A016E /* M-Commerce-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "M-Commerce-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F009EF2D5C94F9002A016E /* M_Commerce_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M_Commerce_AppApp.swift; sourceTree = "<group>"; };
 		48F009F32D5C94F9002A016E /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -115,6 +119,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		489EA8AA2D5DF09700F4B1BE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				48F00A202D5CAE45002A016E /* imageCard.swift */,
+				48F00A1F2D5CAE45002A016E /* RowCard.swift */,
+				48F00A1E2D5CAE45002A016E /* DeleteButton.swift */,
+				48F00A1D2D5CAE45002A016E /* NumberOfItems.swift */,
+				48F00A1C2D5CAE45002A016E /* ShoppingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		489EA8AB2D5DF0AF00F4B1BE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				489EA8AF2D5DF1A900F4B1BE /* ShoppingCartViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		489EA8AC2D5DF0BA00F4B1BE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				489EA8AD2D5DF0D400F4B1BE /* Cart.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		48F009E32D5C94F9002A016E = {
 			isa = PBXGroup;
 			children = (
@@ -138,7 +170,6 @@
 		48F009EE2D5C94F9002A016E /* M-Commerce-App */ = {
 			isa = PBXGroup;
 			children = (
-				48F00A1B2D5CAE45002A016E /* ShopingCartScreen */,
 				89D508492D5C10C600046FA9 /* Common */,
 				89D5084E2D5C10CA00046FA9 /* Helpers */,
 				89D508622D5C10CE00046FA9 /* Screens */,
@@ -179,11 +210,9 @@
 		48F00A1B2D5CAE45002A016E /* ShopingCartScreen */ = {
 			isa = PBXGroup;
 			children = (
-				48F00A1C2D5CAE45002A016E /* ShoppingView.swift */,
-				48F00A1D2D5CAE45002A016E /* NumberOfItems.swift */,
-				48F00A1E2D5CAE45002A016E /* DeleteButton.swift */,
-				48F00A1F2D5CAE45002A016E /* RowCard.swift */,
-				48F00A202D5CAE45002A016E /* imageCard.swift */,
+				489EA8AC2D5DF0BA00F4B1BE /* Model */,
+				489EA8AB2D5DF0AF00F4B1BE /* ViewModel */,
+				489EA8AA2D5DF09700F4B1BE /* View */,
 			);
 			path = ShopingCartScreen;
 			sourceTree = "<group>";
@@ -296,6 +325,7 @@
 		89D508622D5C10CE00046FA9 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				48F00A1B2D5CAE45002A016E /* ShopingCartScreen */,
 				89D5086F2D5C11EF00046FA9 /* AdsCard */,
 				89D508562D5C10CE00046FA9 /* Favorites */,
 				89D508612D5C10CE00046FA9 /* Home */,
@@ -467,6 +497,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				489EA8AE2D5DF0D400F4B1BE /* Cart.swift in Sources */,
 				48F00A212D5CAE45002A016E /* ShoppingView.swift in Sources */,
 				48F009F42D5C94F9002A016E /* Item.swift in Sources */,
 				89D5084A2D5C10C600046FA9 /* CustomNetworkImageView.swift in Sources */,
@@ -475,6 +506,7 @@
 				89D508652D5C10CE00046FA9 /* FavoritesView.swift in Sources */,
 				89D508662D5C10CE00046FA9 /* ButtonView.swift in Sources */,
 				48F00A252D5CAE45002A016E /* imageCard.swift in Sources */,
+				489EA8B02D5DF1A900F4B1BE /* ShoppingCartViewModel.swift in Sources */,
 				89D508702D5C11EF00046FA9 /* AdCardView.swift in Sources */,
 				89D508712D5C11EF00046FA9 /* AdModel.swift in Sources */,
 				89D508722D5C11EF00046FA9 /* AdViewModel.swift in Sources */,

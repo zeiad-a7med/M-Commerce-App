@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DeleteButton: View {
+
     var body: some View {
         Circle()
             .frame(width: 25,height: 25)
