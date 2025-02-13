@@ -10,6 +10,7 @@ import SwiftUI
 struct CustomRoundedButtonView: View {
     var text: String
     var systemIconName: String?
+    var width : CGFloat?
     var onTap: (() -> Void)?
     var body: some View {
         Button(
@@ -30,6 +31,7 @@ struct CustomRoundedButtonView: View {
             }
         )
         .padding(20)
+        .padding(.horizontal,width)
         .background(ThemeManager.darkPuble)
         .cornerRadius(30)
     }
@@ -39,6 +41,7 @@ struct CustomRoundedButtonView: View {
     CustomRoundedButtonView(
         text:"Add to Cart",
         systemIconName: "handbag",
+        width: 100,
         onTap: {
             print("Tapped")
         }

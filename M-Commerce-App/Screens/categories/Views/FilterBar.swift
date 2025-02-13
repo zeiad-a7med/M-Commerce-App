@@ -12,10 +12,10 @@ struct FilterBar: View {
     @State var selectedItem:String = "All"
     @State var previousSelectedFilter:String = ""
     
-    let unSelectedFilterColor = Color.primary
-    let selectedFilterColor = Color.secondary
+    let unSelectedFilterColor = Color.white
+    let selectedFilterColor = ThemeManager.darkPuble
     let unSelectedFilterTxtColor = Color.secondary
-    let selectedFilterTxtColor = Color.primary
+    let selectedFilterTxtColor = Color.white
     let filterItems:[String] = ["All","Men","Women","Children"]
     
     let paddingRadius:CGFloat = 8.0

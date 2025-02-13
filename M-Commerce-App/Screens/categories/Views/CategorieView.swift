@@ -48,7 +48,7 @@ struct CategorieView: View {
                                     isSelectedPopup.toggle()
                                 }
                             }, label: {
-                                FloatingButtonView(color: .primary, inconName: "plus")
+                                FloatingButtonView(color: ThemeManager.darkPuble, inconName: "plus")
                             })
                         }
                         
@@ -61,8 +61,7 @@ struct CategorieView: View {
                     placement: .topBarTrailing,
                     content: {
                         LazyHStack {
-                            NavigationLink(destination: Text("cart")
-                                .font(.title)
+                            NavigationLink(destination: ShoppingView()
                                            , label: {
                             ButtonView(
                                 imageSystemName: ThemeManager.cartImg,

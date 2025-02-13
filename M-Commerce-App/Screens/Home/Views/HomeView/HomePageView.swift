@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomePageView: View {
-    @StateObject var bViewModel:BrandsViewModel = BrandsViewModel()
+    @StateObject var bViewModel: BrandsViewModel = BrandsViewModel()
     let screenTitle: String = "Home"
     let tempImageList = ImageList(id: "")
     @State var isCopied: Bool = false
@@ -47,19 +47,21 @@ struct HomePageView: View {
                             title: ThemeManager.secondSectionTitle,
                             color: ThemeManager.titleColor)
                         if let bv = bViewModel.brands.collections {
-                            BrandsView(brandsDetails: bv, reload: {
-                                bViewModel.loadMore()
-                            })
+                            BrandsView(
+                                brandsDetails: bv,
+                                reload: {
+                                    bViewModel.loadMore()
+                                })
                         }
                         Spacer()
                     }
                 }
-                if isCopied{
+                if isCopied {
                     Text("Copied to Clipboard")
                         .foregroundStyle(.gray)
                         .transition(.move(edge: .bottom))
-                        .frame(height:50 , alignment: .bottom)
-                        .offset(y:UIScreen.main.bounds.height/3)
+                        .frame(height: 50, alignment: .bottom)
+                        .offset(y: UIScreen.main.bounds.height / 3)
                 }
             }  //end of: ZStack
             .navigationTitle(screenTitle)
@@ -68,18 +70,21 @@ struct HomePageView: View {
                     placement: .topBarTrailing,
                     content: {
                         LazyHStack {
-                            NavigationLink(destination: Text("cart")
-                                           , label: {
-                            ButtonView(
-                                imageSystemName: ThemeManager.cartImg,
-                                itemCounter: 10)
-                        })
-                            NavigationLink(destination: FavoritesView()
-                                           , label: {
-                            ButtonView(
-                                imageSystemName: ThemeManager.favouriteImg,
-                                itemCounter: 2)
-                            })
+                            NavigationLink(
+                                destination: ShoppingView(),
+                                label: {
+                                    ButtonView(
+                                        imageSystemName: ThemeManager.cartImg,
+                                        itemCounter: 10)
+                                })
+                            NavigationLink(
+                                destination: FavoritesView(),
+                                label: {
+                                    ButtonView(
+                                        imageSystemName: ThemeManager
+                                            .favouriteImg,
+                                        itemCounter: 2)
+                                })
                         }
                     })
             }
@@ -88,9 +93,9 @@ struct HomePageView: View {
 }
 
 #Preview {
-//    NavigationView {
-        HomePageView()
-//    }
+    //    NavigationView {
+    HomePageView()
+    //    }
 }
 
 let dummyImgsUrlArray = [
