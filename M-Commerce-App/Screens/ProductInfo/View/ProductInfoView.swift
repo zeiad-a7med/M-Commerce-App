@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProductInfoView: View {
+    @Environment(\.modelContext) private var context
     @StateObject var viewModel = ProductViewModel(
         productId: "gid://shopify/Product/15046227394931")
     @State var val: Int = 0
@@ -30,7 +31,7 @@ struct ProductInfoView: View {
                                     index, discount in
                                     CustomNetworkImageView(
                                         url: URL(
-                                            string: viewModel.product?.images[
+                                            string: viewModel.product?.images![
                                                 index
                                             ].url ?? ""
 
@@ -73,13 +74,16 @@ struct ProductInfoView: View {
                                 alignment: .leading)
                             Spacer()
                             FavoriteButtonView(
+                                onFavorite:{ val in
+                                    viewModel.addToFavoriteAlert()
+                                },
                                 size: 30
                             )
                         }.padding(.bottom, 20)
 
                         ScrollView {
                             ReadMoreTextView(
-                                text: viewModel.product?.description ?? "",
+                                text: viewModel.product?.desc ?? "",
                                 lineLimit: 3
                             )
                             .font(.system(size: 19))
@@ -127,9 +131,35 @@ struct ProductInfoView: View {
                 }
                 .ignoresSafeArea(.all)
             }
+            .alert(
+                viewModel.alertContent?.title ?? "",
+                isPresented: Binding(
+                    get: { viewModel.alertContent?.isVisible ?? false },
+                    set: { viewModel.alertContent?.isVisible = $0 }
+                )
+            ) {
+                Button("Save") {
+//                    viewModel.addToFavorite()
+                    context.insert(viewModel.product!)
+                    print("savew")
+                    do {
+                        try context.save()
+                        print("saveqq")
+                    } catch {
+                        print("error")
+                    }
+                }
+                Button("Cancel") {
+                    
+                }
+            } message: {
+                Text(viewModel.alertContent?.message ?? "")
+            }
+            
         }
 
     }
+        
 }
 struct RoundedCornerShape: Shape {
     var corners: UIRectCorner
@@ -146,4 +176,5 @@ struct RoundedCornerShape: Shape {
 
 #Preview {
     ProductInfoView()
+        .modelContainer(for: Product.self, inMemory: true)
 }

@@ -7,30 +7,51 @@
 
 import Foundation
 import ShopifyAPIKit
+import SwiftData
 
-struct Product: Codable {
-    let availableForSale: Bool
-    let description: String
-    let handle: String
-    let id: String
-    let isGiftCard: Bool
-    let productType: String
-    let tags: [String]
-    let title: String
-    let totalInventory: Int
-    let updatedAt: String
-    let vendor: String
-    let category: String?
-    let priceRange: PriceRange
-    let featuredImage: ImgModel
-    let images: [ImgModel]
-    let encodedVariantExistence: String
-    let encodedVariantAvailability: String
+@Model
+final class Product{
+    var availableForSale: Bool?
+    var desc: String?
+    var handle: String?
+    var id: String
+    var isGiftCard: Bool?
+    var productType: String?
+    var tags: [String]?
+    var title: String
+    var totalInventory: Int?
+    var updatedAt: String?
+    var vendor: String?
+    var category: String?
+    var priceRange: PriceRange?
+    var featuredImage: ImgModel?
+    var images: [ImgModel]?
+    var encodedVariantExistence: String?
+    var encodedVariantAvailability: String?
     
+    init(availableForSale: Bool? = nil, desc: String? = nil, handle: String? = nil, id: String, isGiftCard: Bool? = nil, productType: String? = nil, tags: [String]? = nil, title: String, totalInventory: Int? = nil, updatedAt: String? = nil, vendor: String? = nil, category: String? = nil, priceRange: PriceRange? = nil, featuredImage: ImgModel? = nil, images: [ImgModel]? = nil, encodedVariantExistence: String? = nil, encodedVariantAvailability: String? = nil) {
+        self.availableForSale = availableForSale
+        self.desc = desc
+        self.handle = handle
+        self.id = id
+        self.isGiftCard = isGiftCard
+        self.productType = productType
+        self.tags = tags
+        self.title = title
+        self.totalInventory = totalInventory
+        self.updatedAt = updatedAt
+        self.vendor = vendor
+        self.category = category
+        self.priceRange = priceRange
+        self.featuredImage = featuredImage
+        self.images = images
+        self.encodedVariantExistence = encodedVariantExistence
+        self.encodedVariantAvailability = encodedVariantAvailability
+    }
     //Getters
     var price: Double {
         get {
-            return Double(priceRange.minVariantPrice.amount) ?? 0
+            return Double(priceRange?.minVariantPrice.amount ?? "0") ?? 0
         }
     }
     var formattedPrice: String {
@@ -40,7 +61,7 @@ struct Product: Codable {
     }
     var currency: String? {
         get {
-            return priceRange.minVariantPrice.currencyCode
+            return priceRange?.minVariantPrice.currencyCode
         }
     }
 }

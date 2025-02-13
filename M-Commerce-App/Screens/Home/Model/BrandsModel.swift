@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BrandsResponse: Codable {
+struct BrandsResponse{
     var collectionCount: String?
     var collections: [Collection]?
     var pageInfo: PageInfo?

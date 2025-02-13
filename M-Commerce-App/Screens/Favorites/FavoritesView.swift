@@ -6,9 +6,9 @@
 //
 
 import SwiftUI
-
+import SwiftData
 struct FavoritesView: View {
-
+    @Query private var products: [Product]
     // Define the number of columns for the grid
     let columns: [GridItem] = [
         GridItem(.flexible(), spacing: 16),  // First column
@@ -16,7 +16,6 @@ struct FavoritesView: View {
     ]
 
     var body: some View {
-
         ScrollView {
             CustomSearchBarView(
                 placeholder: "search in favorites.....",
@@ -42,10 +41,13 @@ struct FavoritesView: View {
 
             // Use LazyVGrid for grid layout
             LazyVGrid(columns: columns, spacing: 16) {
-                // Add your product cards as grid items
-                ProductCardView()
-                ProductCardView()
-                ProductCardView()
+                ForEach(products) { product in
+                    NavigationLink {
+                        ProductInfoView()
+                    } label: {
+                        ProductCardView()
+                    }
+                }
 
             }
             .padding(.horizontal)
@@ -57,4 +59,6 @@ struct FavoritesView: View {
 
 #Preview {
     FavoritesView()
+        .modelContainer(for: Product.self, inMemory: true)
+
 }

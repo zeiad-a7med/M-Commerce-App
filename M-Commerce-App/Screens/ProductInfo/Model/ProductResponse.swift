@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct ProductResponse : Codable{
+struct ProductResponse{
     var product : Product?
     var success : Bool?
     var message : String?

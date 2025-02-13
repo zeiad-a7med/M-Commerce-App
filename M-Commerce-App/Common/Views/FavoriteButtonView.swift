@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct FavoriteButtonView: View {
-    var onFavorite : (() -> Void)?
+    var onFavorite : ((Bool) -> Void)?
     let size : Double
     @State var isFavorite: Bool = false
     var body: some View {
         Button(action: {
             isFavorite.toggle()
-            onFavorite?()
+            onFavorite?(isFavorite)
         }) {
             Image(systemName: (isFavorite) ? "heart.fill" : "heart")
                 .foregroundStyle(.red)
