@@ -1,0 +1,65 @@
+query GetAllTheProducts($first: Int, $after: String) {
+    products(first: $first, after: $after) {
+        nodes {
+            availableForSale
+            description
+            encodedVariantAvailability
+            handle
+            id
+            isGiftCard
+            productType
+            tags
+            title
+            totalInventory
+            trackingParameters
+            updatedAt
+            vendor
+            category {
+                id
+                name
+            }
+            encodedVariantExistence
+            featuredImage {
+                altText
+                height
+                id
+                originalSrc
+                url
+                width
+            }
+            images(first: 5) {
+                nodes {
+                    altText
+                    height
+                    id
+                    originalSrc
+                    src
+                    url
+                    width
+                }
+                pageInfo {
+                    endCursor
+                    hasNextPage
+                    hasPreviousPage
+                    startCursor
+                }
+            }
+            priceRange {
+                minVariantPrice {
+                    amount
+                    currencyCode
+                }
+                maxVariantPrice {
+                    amount
+                    currencyCode
+                }
+            }
+        }
+        pageInfo {
+            endCursor
+            hasNextPage
+            hasPreviousPage
+            startCursor
+        }
+    }
+}

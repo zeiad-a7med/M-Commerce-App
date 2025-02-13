@@ -13,6 +13,7 @@ query GetCollection(
             width
             url
             originalSrc
+            altText
         }
         products(first: $first) {
             nodes {

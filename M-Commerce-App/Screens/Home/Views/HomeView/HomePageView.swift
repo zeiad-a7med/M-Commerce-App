@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomePageView: View {
+    @StateObject var bViewModel:BrandsViewModel = BrandsViewModel()
     let screenTitle: String = "Home"
     let tempImageList = ImageList(id: "")
     @State var isCopied: Bool = false
@@ -45,7 +46,11 @@ struct HomePageView: View {
                         HeaderView(
                             title: ThemeManager.secondSectionTitle,
                             color: ThemeManager.titleColor)
-                        BrandsView(imageUrlArray: dummyImgsUrlArray)
+                        if let bv = bViewModel.brands.collections {
+                            BrandsView(brandsDetails: bv, reload: {
+                                bViewModel.loadMore()
+                            })
+                        }
                         Spacer()
                     }
                 }
@@ -83,9 +88,9 @@ struct HomePageView: View {
 }
 
 #Preview {
-    NavigationView {
+//    NavigationView {
         HomePageView()
-    }
+//    }
 }
 
 let dummyImgsUrlArray = [
