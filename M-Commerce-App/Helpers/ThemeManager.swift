@@ -10,7 +10,7 @@ import SwiftUI
 
 class ThemeManager {
     static let darkPuble: Color = Color(
-        red: 48 / 255, green: 25 / 255, blue: 52 / 255, opacity: 1.0)
+        red: 80 / 255, green: 78 / 255, blue: 177 / 255, opacity: 1.0)
     static let navigationBarItemsColor: Color = darkPuble
     static let backgroundColor: Color = Color.white
     static let firstSectionTitle: String = "Ads"

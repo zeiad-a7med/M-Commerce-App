@@ -1,0 +1,62 @@
+query GetProduct ($id : ID!) {
+    product(id: $id) {
+        id
+        title
+        availableForSale
+        description
+        encodedVariantAvailability
+        encodedVariantExistence
+        handle
+        isGiftCard
+        productType
+        tags
+        totalInventory
+        vendor
+        updatedAt
+        images(first: 10) {
+            nodes {
+                id
+                url
+                originalSrc
+                altText
+                width
+                height
+            }
+        }
+        featuredImage {
+            id
+            url
+            originalSrc
+            altText
+            width
+            height
+        }
+        adjacentVariants {
+            availableForSale
+            barcode
+            currentlyNotInStock
+            id
+            quantityAvailable
+            requiresComponents
+            requiresShipping
+            sku
+            taxable
+            title
+            weight
+        }
+        category {
+            id
+            name
+        }
+        priceRange {
+            maxVariantPrice {
+                amount
+                currencyCode
+            }
+            minVariantPrice {
+                amount
+                currencyCode
+            }
+        }
+    }
+}
