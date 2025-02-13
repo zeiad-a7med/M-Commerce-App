@@ -7,6 +7,7 @@
 
 import Foundation
 import ShopifyAPIKit
+
 protocol ProductServiceProtocol {
     static func getProductFromApi(
         complitionHandler: @escaping (ProductResponse?) -> Void)
@@ -16,53 +17,74 @@ class ProductService: ProductServiceProtocol {
     static func getProductFromApi(
         complitionHandler: @escaping (ProductResponse?) -> Void
     ) {
-//        guard
-//            let url = URL(
-//                string:
-//                    ApiEndpoint.baseUrl
-//            )
-//        else {
-//            print("Invalid URL")
-//            return
-//        }
-//        URLSession.shared.dataTask(with: url) { data, response, error in
-//            if let error = error {
-//                print("Error fetching data: \(error.localizedDescription)")
-//                return
-//            }
-//            guard let data = data else {
-//                print("No data received")
-//                return
-//            }
-//            do {
-//                let forcastResponse = try JSONDecoder().decode(
-//                    ForcastResponse.self, from: data)
-//                complitionHandler(forcastResponse)
-//            } catch {
-//                print("Error decoding JSON: \(error.localizedDescription)")
-//            }
-//        }.resume()
-//        
-        
         ApolloNetwokService.shared.apollo.fetch(
-            query: GetCollectionsQuery(first: 10, after: nil)
+            query: GetProductQuery(id: "gid://shopify/Product/15046227394931")
         ) { result in
             switch result {
             case .success(let graphQLResult):
-                graphQLResult.data?.collections.nodes.forEach { node in
-//                    self.items.append(node.title)
+                var productDTO = graphQLResult.data?.product
+                var images: [ImgModel] = []
+                productDTO?.images.nodes.forEach { img in
+                    images.append(
+                        ImgModel(
+                            altText: img.altText, height: img.height,
+                            originalSrc: img.originalSrc, url: img.url,
+                            width: img.width, id: img.id))
+
                 }
-                
-                let updatedPageInfo = PageInfo(
-                    startCursor : graphQLResult.data?.collections.pageInfo.startCursor,
-                    endCursor : graphQLResult.data?.collections.pageInfo.endCursor,
-                    hasNextPage : graphQLResult.data?.collections.pageInfo.hasNextPage ?? false,
-                    hasPreviousPage : graphQLResult.data?.collections.pageInfo.hasPreviousPage ?? false
+                var product = Product(
+                    availableForSale: productDTO?.availableForSale ?? false,
+                    description: productDTO?.description ?? "",
+                    handle: productDTO?.handle ?? "",
+                    id: productDTO?.id ?? "",
+                    isGiftCard: productDTO?.isGiftCard ?? false,
+                    productType: productDTO?.productType ?? "",
+                    tags: productDTO?.tags ?? [],
+                    title: productDTO?.title ?? "",
+                    totalInventory: productDTO?.totalInventory ?? 0,
+                    updatedAt: productDTO?.updatedAt ?? "",
+                    vendor: productDTO?.vendor ?? "",
+                    category: productDTO?.category?.name ?? "",
+                    priceRange: PriceRange(
+                        minVariantPrice: Price(
+                            amount: productDTO?.priceRange.minVariantPrice
+                                .amount ?? "",
+                            currencyCode: (productDTO?.priceRange
+                                .minVariantPrice.currencyCode.rawValue ?? "")
+
+                        ),
+                        maxVariantPrice: Price(
+                            amount: productDTO?.priceRange.maxVariantPrice
+                                .amount ?? "",
+                            currencyCode: (productDTO?.priceRange
+                                .maxVariantPrice.currencyCode.rawValue ?? "")
+                        )
+                    ),
+                    featuredImage: ImgModel(
+                        altText: productDTO?.featuredImage?.altText ?? "",
+                        height: productDTO?.featuredImage?.height ?? 0,
+                        originalSrc: productDTO?.featuredImage?.originalSrc
+                            ?? "",
+                        url: productDTO?.featuredImage?.url ?? "",
+                        id: productDTO?.featuredImage?.id ?? ""
+                    ),
+                    images: images,
+                    encodedVariantExistence: productDTO?.encodedVariantExistence
+                        ?? "",
+                    encodedVariantAvailability: productDTO?
+                        .encodedVariantAvailability ?? ""
                 )
-//                self.pageInfo = updatedPageInfo
-                
-//                self.isLoading = false
+                complitionHandler(
+                    ProductResponse(
+                        product: product,
+                        success: true
+                    ))
+
             case .failure(let error):
+                complitionHandler(
+                    ProductResponse(
+                        success: false
+                    ))
                 print("Failure! Error: \(error.localizedDescription)")
             }
         }

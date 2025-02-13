@@ -8,7 +8,7 @@
 import Foundation
 
 class ProductViewModel: ObservableObject {
-    @Published var product: ProductResponse?
+    @Published var product: Product?
     @Published var isLoading: Bool = true
     init() {
         getProductData()
@@ -19,8 +19,8 @@ class ProductViewModel: ObservableObject {
             guard let result = result else { return }
             DispatchQueue.main.async {
                 self.isLoading = false
-//                self.data = result
-//                self.isDay = self.data?.current?.is_day == 1
+                self.product = result.product
+                print(self.product?.title ?? "")
             }
         }
     }
