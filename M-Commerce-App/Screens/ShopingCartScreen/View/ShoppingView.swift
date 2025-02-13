@@ -13,6 +13,7 @@ struct ShoppingView: View {
     @State var cartItem : CartItem?
     @State var indexSet:IndexSet?
     @State var totalPrice : Double = 0.0
+    @State var showCheckOut : Bool = false
     @StateObject var viewModel = ShoppingCartViewModel()
     var body: some View {
         List {
@@ -22,8 +23,18 @@ struct ShoppingView: View {
                         if(number == 1 && !sign){
                            confirmZeroItemDeleteFlag = true
                            cartItem = Item
+                        }else{
+                            if let myIndex = self.viewModel.CartResult?.itemList!.firstIndex(of: cartItem!){
+                                if sign{
+                                    self.viewModel.CartResult?.itemList![myIndex].count! += 1
+                                }else{
+                                    self.viewModel.CartResult?.itemList![myIndex].count! -= 1
+                                }
+                            }
+                         
                         }
-                      
+                     
+                       
                     }
                 }
               
@@ -56,12 +67,25 @@ struct ShoppingView: View {
                 }
             }//confiramtion if less than 1
         }.buttonStyle(.borderless)
-        Button("Procced to Checkout") {
+        Button(action: {
+            totalPrice = 0.0
             CalculateTotalPrice()
-        }.foregroundStyle(.white)
+        
+                showCheckOut.toggle()
+            
+                
+        
+        }
+        , label: {
+            Text("Proceed to checkout")
+        }).foregroundStyle(.white)
             .frame(width: 300)
             .padding()
             .background(Color(#colorLiteral(red: 0.3154394925, green: 0.305562377, blue: 0.7188369632, alpha: 1)).clipShape(RoundedRectangle(cornerRadius: 25)))
+            .sheet(isPresented: $showCheckOut, content: {
+                CheckOutComponent(Total: String(totalPrice))
+                    .presentationDetents([.medium])
+            })
             
           
             
