@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct ProductInfoView: View {
-    @StateObject var viewModel = ProductViewModel()
+    @StateObject var viewModel = ProductViewModel(
+        productId: "gid://shopify/Product/15046227394931")
     @State var val: Int = 0
     var body: some View {
-        if(viewModel.isLoading){
+        if viewModel.isLoading {
             ProgressView()
-        }else{
+        } else {
             ZStack {
                 Color(.white)
                     .ignoresSafeArea(.all)
@@ -21,19 +22,24 @@ struct ProductInfoView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         VStack {
                             LazyHStack {
-                                ForEach(Array((viewModel.product?.images ?? []).enumerated()), id: \.offset) {
+                                ForEach(
+                                    Array(
+                                        (viewModel.product?.images ?? [])
+                                            .enumerated()), id: \.offset
+                                ) {
                                     index, discount in
                                     CustomNetworkImageView(
                                         url: URL(
-                                            string: viewModel.product?.images[index].url ?? ""
-                                                
+                                            string: viewModel.product?.images[
+                                                index
+                                            ].url ?? ""
+
                                         )!
                                     )
                                     .frame(
                                         width: UIScreen.main.bounds.width,
                                         height: UIScreen.main.bounds.width + 70
                                     )
-                                    
 
                                 }
                             }
@@ -61,7 +67,7 @@ struct ProductInfoView: View {
                                     .multilineTextAlignment(.leading)
                                     .bold(true)
                                     .padding(.bottom, 10)
-                                StarRatingView(rating: 2.5)
+                                StarRatingView(rating: Double.random(in: 2...5))
                             }.frame(
                                 width: UIScreen.main.bounds.width * 2 / 3,
                                 alignment: .leading)
@@ -73,9 +79,8 @@ struct ProductInfoView: View {
 
                         ScrollView {
                             ReadMoreTextView(
-                                text:
-                                    "he product is designed with high-quality materials to ensure durability and longevity. It features an ergonomic design that provides maximum comfort during use. Whether you’re using it for daily activities or special occasions, this product meets all your needs. It is lightweight, easy to carry, and packed with innovative features that set it apart from the competition. Additionally, it comes in various colors and sizes to suit different preferences. With its user-friendly interface and top-notch performance, this product is a must-have for anyone looking for quality and reliability.",
-                                lineLimit: 2
+                                text: viewModel.product?.description ?? "",
+                                lineLimit: 3
                             )
                             .font(.system(size: 19))
                             .foregroundColor(.primary)
@@ -92,22 +97,20 @@ struct ProductInfoView: View {
                         }
                         Spacer()
                         HStack {
-                            Text("LE")
+                            Text(viewModel.product?.currency ?? "")
                                 .foregroundStyle(ThemeManager.darkPuble)
                                 .font(.title)
-                            Text("35.5")
+                            Text(viewModel.product?.formattedPrice ?? "")
                                 .font(.title)
-                            
                             Spacer()
                             CustomRoundedButtonView(
-                                text:"Add to Cart",
+                                text: "Add to Cart",
                                 systemIconName: "handbag",
                                 onTap: {
                                     print("Tapped")
                                 }
                             )
-                            
-                            
+
                         }
 
                     }
@@ -125,7 +128,7 @@ struct ProductInfoView: View {
                 .ignoresSafeArea(.all)
             }
         }
-        
+
     }
 }
 struct RoundedCornerShape: Shape {

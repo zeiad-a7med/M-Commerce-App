@@ -8,14 +8,16 @@
 import Foundation
 
 class ProductViewModel: ObservableObject {
+    let productId: String
     @Published var product: Product?
     @Published var isLoading: Bool = true
-    init() {
-        getProductData()
+    init(productId: String) {
+        self.productId = productId
+        getProductData(productId: productId)
     }
-    func getProductData() {
+    func getProductData(productId: String) {
         isLoading = true
-        ProductService.getProductFromApi{ (result) in
+        ProductService.getProductFromApi(productId: productId){ (result) in
             guard let result = result else { return }
             DispatchQueue.main.async {
                 self.isLoading = false
@@ -23,5 +25,8 @@ class ProductViewModel: ObservableObject {
                 print(self.product?.title ?? "")
             }
         }
+    }
+    func addToFavorites(){
+        
     }
 }
