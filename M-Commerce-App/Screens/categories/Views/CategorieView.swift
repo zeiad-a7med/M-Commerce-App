@@ -9,7 +9,13 @@ import SwiftUI
 
 struct CategorieView: View {
     @State var isSelectedPopup: Bool = false
+    @State var filterType: String = ""
+    @State var subFilterType: String = ""
+    @State var filterString:String = ""
+    @State var prevFilterString:String = "ccc"
+    @StateObject var cViewModel:CategoriesViewModel = CategoriesViewModel(first: 10, after: nil, filter: "")
     var body: some View {
+        
         NavigationView {
             ZStack (alignment: .bottomTrailing){
                 ScrollView {
@@ -18,9 +24,17 @@ struct CategorieView: View {
                             print(text)
                         }).padding(10)
                         
-                        FilterBar()
+                        FilterBar(willFilter: { filterRes in
+                            subFilterType = ""
+                            filterType = filterRes
+                            print(filterRes)
+                            filter()
+                        })
                         
-                        ProductsSubView()
+                        if let filteredProd = cViewModel.categories.categoryProducts{
+                            ProductsSubView(filteredProducts: filteredProd)
+                        }
+                        
                     }
                 }
                 
@@ -28,17 +42,32 @@ struct CategorieView: View {
                     Spacer()
                         ZStack {
                             Button(action: {
-                                
+                                if self.subFilterType != "ACCESSORIES"{
+                                    self.subFilterType = "ACCESSORIES"
+                                }else{
+                                    self.subFilterType = ""
+                                }
+                                filter()
                             }, label: {
                                 FloatingButtonView(color: .gray, inconName: "hat.cap")
                             }).offset(y:isSelectedPopup ? -270.0 : 0.0)
                             Button(action: {
-                                
+                                if self.subFilterType != "T-SHIRTS"{
+                                    self.subFilterType = "T-SHIRTS"
+                                }else{
+                                    self.subFilterType = ""
+                                }
+                                filter()
                             }, label: {
                                 FloatingButtonView(color: .gray, inconName: "tshirt")
                             }).offset(y:isSelectedPopup ? -180.0 : 0.0)
                             Button(action: {
-                               
+                                if self.subFilterType != "SHOES"{
+                                    self.subFilterType = "SHOES"
+                                }else{
+                                    self.subFilterType = ""
+                                }
+                                filter()
                             }, label: {
                                 FloatingButtonView(color: .gray, inconName: "shoe")
                             }).offset(y:isSelectedPopup ? -90.0 : 0.0)
@@ -51,9 +80,7 @@ struct CategorieView: View {
                                 FloatingButtonView(color: ThemeManager.darkPuble, inconName: "plus")
                             })
                         }
-                        
                 }
-                
             }
             .navigationTitle("Categories")
             .toolbar {  //start of: toolbar
@@ -77,6 +104,32 @@ struct CategorieView: View {
                         }
                     })
             }//End of: toolbar
+        }
+    }
+    func filter(){
+        if filterString == prevFilterString {return}
+        if filterType == "All" {
+            filterType = ""
+        }
+        if  filterType != "" && subFilterType != "" {
+            filterString = "\(filterType) | \(subFilterType)"
+            print("1-\(filterString)")
+            self.cViewModel.fetchCategoriesWithFilter(first: 10, after: nil, filter: filterString)
+        }else if filterType == "" && subFilterType != "" {
+            print("2-\(filterString)")
+            filterString = "\(subFilterType)"
+            self.cViewModel.fetchCategoriesWithFilter(first: 10, after: nil, filter: filterString)
+        }else if filterType != "" && subFilterType == "" {
+            filterString = "\(filterType)"
+            print("3-\(filterString)")
+            self.cViewModel.fetchCategoriesWithFilter(first: 10, after: nil, filter: filterString)
+        }else if filterType == "" && subFilterType == "" {
+            filterString = ""
+            print("4-\(filterString)")
+            self.cViewModel.fetchCategoriesWithFilter(first: 10, after: nil, filter: filterString)
+        }else{
+            print("else")
+            self.cViewModel.fetchCategoriesWithFilter(first: 10, after: nil, filter: filterString)
         }
     }
 }

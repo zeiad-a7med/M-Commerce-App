@@ -11,12 +11,12 @@ import SwiftUI
 struct FilterBar: View {
     @State var selectedItem:String = "All"
     @State var previousSelectedFilter:String = ""
-    
+    var willFilter: (String) -> Void
     let unSelectedFilterColor = Color.white
     let selectedFilterColor = ThemeManager.darkPuble
     let unSelectedFilterTxtColor = Color.secondary
     let selectedFilterTxtColor = Color.white
-    let filterItems:[String] = ["All","Men","Women","Children"]
+    let filterItems:[String] = ["All","Men","Women","Kid"]
     
     let paddingRadius:CGFloat = 8.0
     let shadowRadius:CGFloat = 5.0
@@ -31,6 +31,7 @@ struct FilterBar: View {
                         selectedItem = itemIndex
                         if previousSelectedFilter != itemIndex {
                             //filter
+                            willFilter(itemIndex)
                             print(itemIndex)
                         }
                     }, label: {
@@ -50,7 +51,6 @@ struct FilterBar: View {
                             .padding(.top,paddingRadius)
                             .padding(.bottom,paddingRadius)
                     })
-
                 }
             }.padding(.leading,paddingRadius)
         }
@@ -58,5 +58,7 @@ struct FilterBar: View {
 }
 
 #Preview {
-    FilterBar()
+    FilterBar( willFilter: {_ in 
+        print("any")
+    })
 }
