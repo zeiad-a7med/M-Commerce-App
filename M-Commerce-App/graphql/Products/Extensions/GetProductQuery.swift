@@ -19,7 +19,7 @@ extension GetProductQuery{
         }
         let product = Product(
             availableForSale: productDTO.availableForSale,
-            description: productDTO.description,
+            desc: productDTO.description,
             handle: productDTO.handle,
             id: productDTO.id,
             isGiftCard: productDTO.isGiftCard,
