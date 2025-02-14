@@ -40,8 +40,11 @@ struct BrandsView: View {
     }
 }
 
+
+
 #Preview {
     BrandsView(brandsDetails: [Collection(id: "1", title: "Brand 1"), Collection(id: "2", title: "Brand 2"), Collection(id: "3", title: "Brand 3"), Collection(id: "4", title: "Brand 4"), Collection(id: "5", title: "Brand 5"), Collection(id: "6", title: "Men"), Collection(id: "7", title: "Brand 6"), Collection(id: "8", title: "women")], reload: {
         print("reloading")
     } )
 }
+
