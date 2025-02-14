@@ -20,7 +20,7 @@ struct BrandsView: View {
                 ForEach(brandsDetails, id: \.id, content: { brand in
                     if isValid(title: brand.title ?? ""){
                         NavigationLink(destination: {
-                            Text("Products")
+                            ProductsView(brandTitle: brand.title ?? "")
                         }, label: {
                             BrandCard(title: brand.title ?? "", imageUrl: brand.img?.url ?? "")
                                 .onAppear {
