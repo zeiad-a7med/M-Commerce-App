@@ -37,6 +37,6 @@ struct BrandsView: View {
     }
 }
 
-#Preview {
-//    BrandsView(brandsDetails: )
-}
+//#Preview {
+//    return BrandsView(brandsDetails: )
+//}
