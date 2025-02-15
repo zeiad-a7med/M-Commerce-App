@@ -1,0 +1,5 @@
+query GetProductsTypes ($first: Int!) {
+    productTypes(first: $first) {
+        nodes
+    }
+}

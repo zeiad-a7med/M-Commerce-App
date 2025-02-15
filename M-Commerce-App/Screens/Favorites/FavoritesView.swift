@@ -43,9 +43,9 @@ struct FavoritesView: View {
             // Use LazyVGrid for grid layout
             LazyVGrid(columns: columns, spacing: 16) {
                 // Add your product cards as grid items
-                ProductCardView()
-                ProductCardView()
-                ProductCardView()
+//                ProductCardView()
+//                ProductCardView()
+//                ProductCardView()
 
             }
             .padding(.horizontal)

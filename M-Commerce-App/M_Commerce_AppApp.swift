@@ -25,7 +25,7 @@ struct M_Commerce_AppApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ShoppingView()
+            ContentView()
         }
         .modelContainer(sharedModelContainer)
     }

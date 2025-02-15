@@ -30,7 +30,7 @@ struct ProductInfoView: View {
                                     index, discount in
                                     CustomNetworkImageView(
                                         url: URL(
-                                            string: viewModel.product?.images[
+                                            string: viewModel.product?.images?[
                                                 index
                                             ].url ?? ""
 
@@ -79,7 +79,7 @@ struct ProductInfoView: View {
 
                         ScrollView {
                             ReadMoreTextView(
-                                text: viewModel.product?.description ?? "",
+                                text: viewModel.product?.desc ?? "",
                                 lineLimit: 3
                             )
                             .font(.system(size: 19))

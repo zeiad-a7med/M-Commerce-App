@@ -1,0 +1,5 @@
+query GetProductsTags ($first: Int!) {
+    productTags(first: $first) {
+        nodes
+    }
+}
