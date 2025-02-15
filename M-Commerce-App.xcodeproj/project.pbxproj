@@ -58,6 +58,13 @@
 		890D87D92D5DF66C0062E8D1 /* BrandCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890D87B52D5DF66C0062E8D1 /* BrandCard.swift */; };
 		890D87DA2D5DF66C0062E8D1 /* ProductInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890D87952D5DF66C0062E8D1 /* ProductInfoView.swift */; };
 		890D87DB2D5DF66C0062E8D1 /* PopupCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890D87B32D5DF66C0062E8D1 /* PopupCircleView.swift */; };
+		89B00B6E2D610C0200AF1FB7 /* Login.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B6D2D610C0200AF1FB7 /* Login.graphql */; };
+		89B00B702D61126300AF1FB7 /* Register.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B6F2D61126300AF1FB7 /* Register.graphql */; };
+		89B00B722D61178900AF1FB7 /* Logout.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B712D61178900AF1FB7 /* Logout.graphql */; };
+		89B00B752D6119C600AF1FB7 /* Profile.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 89B00B742D6119C600AF1FB7 /* Profile.graphql */; };
+		89B00B792D611A7F00AF1FB7 /* ApplicationUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B782D611A7F00AF1FB7 /* ApplicationUser.swift */; };
+		89B00B7B2D6127C300AF1FB7 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B7A2D6127C300AF1FB7 /* Address.swift */; };
+		89B00B7D2D612A8900AF1FB7 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B7C2D612A8900AF1FB7 /* Order.swift */; };
 		89CAF31C2D6007AE003984FA /* SettingsListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAF3152D6007AE003984FA /* SettingsListRow.swift */; };
 		89CAF31D2D6007AE003984FA /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAF3192D6007AE003984FA /* Settings.swift */; };
 		89CAF31E2D6007AE003984FA /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAF3182D6007AE003984FA /* EditProfile.swift */; };
@@ -165,6 +172,13 @@
 		890D87B62D5DF66C0062E8D1 /* BrandsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsView.swift; sourceTree = "<group>"; };
 		890D87B72D5DF66C0062E8D1 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		890D87B92D5DF66C0062E8D1 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
+		89B00B6D2D610C0200AF1FB7 /* Login.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Login.graphql; sourceTree = "<group>"; };
+		89B00B6F2D61126300AF1FB7 /* Register.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Register.graphql; sourceTree = "<group>"; };
+		89B00B712D61178900AF1FB7 /* Logout.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Logout.graphql; sourceTree = "<group>"; };
+		89B00B742D6119C600AF1FB7 /* Profile.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Profile.graphql; sourceTree = "<group>"; };
+		89B00B782D611A7F00AF1FB7 /* ApplicationUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationUser.swift; sourceTree = "<group>"; };
+		89B00B7A2D6127C300AF1FB7 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		89B00B7C2D612A8900AF1FB7 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		89CAF3132D6007AE003984FA /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		89CAF3142D6007AE003984FA /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
 		89CAF3152D6007AE003984FA /* SettingsListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListRow.swift; sourceTree = "<group>"; };
@@ -304,6 +318,7 @@
 		890D86C32D5CD4B90062E8D1 /* graphql */ = {
 			isa = PBXGroup;
 			children = (
+				89B00B692D610BC000AF1FB7 /* Auth */,
 				C4F3FC6D2D5E6750005151E9 /* Categories */,
 				890D86DA2D5CF5D80062E8D1 /* Products */,
 				890D86D82D5CF5A40062E8D1 /* Collection */,
@@ -372,6 +387,9 @@
 				C44BEDAD2D5D1F540022B603 /* Product.swift */,
 				C44BEDAF2D5D1FC80022B603 /* Price.swift */,
 				C44BEDB12D5D1FD70022B603 /* PriceRange.swift */,
+				89B00B782D611A7F00AF1FB7 /* ApplicationUser.swift */,
+				89B00B7A2D6127C300AF1FB7 /* Address.swift */,
+				89B00B7C2D612A8900AF1FB7 /* Order.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -624,6 +642,41 @@
 				890D87BB2D5DF66C0062E8D1 /* Views */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		89B00B692D610BC000AF1FB7 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				89B00B6C2D610BE200AF1FB7 /* Extensions */,
+				89B00B6B2D610BDA00AF1FB7 /* Mutations */,
+				89B00B6A2D610BC900AF1FB7 /* Queries */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		89B00B6A2D610BC900AF1FB7 /* Queries */ = {
+			isa = PBXGroup;
+			children = (
+				89B00B742D6119C600AF1FB7 /* Profile.graphql */,
+			);
+			path = Queries;
+			sourceTree = "<group>";
+		};
+		89B00B6B2D610BDA00AF1FB7 /* Mutations */ = {
+			isa = PBXGroup;
+			children = (
+				89B00B6D2D610C0200AF1FB7 /* Login.graphql */,
+				89B00B712D61178900AF1FB7 /* Logout.graphql */,
+				89B00B6F2D61126300AF1FB7 /* Register.graphql */,
+			);
+			path = Mutations;
+			sourceTree = "<group>";
+		};
+		89B00B6C2D610BE200AF1FB7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		89CAF3162D6007AE003984FA /* SubView */ = {
@@ -917,6 +970,7 @@
 				C4F3FC712D5E679A005151E9 /* GetProductsTypes.graphql in Resources */,
 				890D86E12D5CF63A0062E8D1 /* GetCollections.graphql in Resources */,
 				890D86D72D5CF07D0062E8D1 /* GetCollection.graphql in Resources */,
+				89B00B752D6119C600AF1FB7 /* Profile.graphql in Resources */,
 				48F009F62D5C94FF002A016E /* Assets.xcassets in Resources */,
 				C4F3FC732D5E6812005151E9 /* GetProductsTags.graphql in Resources */,
 			);
@@ -946,6 +1000,7 @@
 				48F009F42D5C94F9002A016E /* Item.swift in Sources */,
 				89D5084A2D5C10C600046FA9 /* CustomNetworkImageView.swift in Sources */,
 				C44BEDA72D5D198F0022B603 /* ImgModel.swift in Sources */,
+				89B00B6E2D610C0200AF1FB7 /* Login.graphql in Sources */,
 				C44BEDB02D5D1FC80022B603 /* Price.swift in Sources */,
 				C44BEDAE2D5D1F540022B603 /* Product.swift in Sources */,
 				C44BEDA32D5D17E10022B603 /* Collection.swift in Sources */,
@@ -962,6 +1017,7 @@
 				89CAF3202D6007AE003984FA /* Currency.swift in Sources */,
 				89CAF3212D6007AE003984FA /* ProfileImage.swift in Sources */,
 				890D87BF2D5DF66C0062E8D1 /* ProductsSubView.swift in Sources */,
+				89B00B7B2D6127C300AF1FB7 /* Address.swift in Sources */,
 				890D87C02D5DF66C0062E8D1 /* Testing.swift in Sources */,
 				C4BC56162D5F8EF400F9D42A /* ProductsViewModel.swift in Sources */,
 				890D87C12D5DF66C0062E8D1 /* favoritesService.swift in Sources */,
@@ -971,10 +1027,13 @@
 				890D87C42D5DF66C0062E8D1 /* ShoppingCartViewModel.swift in Sources */,
 				890D87C52D5DF66C0062E8D1 /* Cart.swift in Sources */,
 				890D87C62D5DF66C0062E8D1 /* FilterBar.swift in Sources */,
+				89B00B722D61178900AF1FB7 /* Logout.graphql in Sources */,
 				890D87C72D5DF66C0062E8D1 /* BrandsModel.swift in Sources */,
+				89B00B792D611A7F00AF1FB7 /* ApplicationUser.swift in Sources */,
 				890D87C82D5DF66C0062E8D1 /* HeaderView.swift in Sources */,
 				890D87C92D5DF66C0062E8D1 /* BrandsViewModel.swift in Sources */,
 				89CAF3272D603C01003984FA /* FavoritesManager.swift in Sources */,
+				89B00B7D2D612A8900AF1FB7 /* Order.swift in Sources */,
 				C4BC560C2D5F631B00F9D42A /* GetFilteredProducts.swift in Sources */,
 				890D87CA2D5DF66C0062E8D1 /* FavoritesView.swift in Sources */,
 				890D87CB2D5DF66C0062E8D1 /* CheckOutComponent.swift in Sources */,
@@ -1007,6 +1066,7 @@
 				890D870F2D5D25500062E8D1 /* StarRatingView.swift in Sources */,
 				890D86CC2D5CD55E0062E8D1 /* ApolloNetwokService.swift in Sources */,
 				C4F3FC7B2D5E88CC005151E9 /* CategoriesModel.swift in Sources */,
+				89B00B702D61126300AF1FB7 /* Register.graphql in Sources */,
 				89CAF32B2D606813003984FA /* SnackbarManager.swift in Sources */,
 				890D87552D5D55C00062E8D1 /* ReadMoreText.swift in Sources */,
 				89D5084C2D5C10C600046FA9 /* ShimmerView.swift in Sources */,
