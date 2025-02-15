@@ -37,7 +37,7 @@ final class BrandsViewModel: ObservableObject {
                         title: node.title,
                         trackingParameters: node.trackingParameters,
                         updatedAt: node.updatedAt,
-                        img: ImgModel(url: node.image?.url ?? "")
+                        img: ImgModel(height: node.image?.height ?? 0, url: node.image?.url ?? "", width: node.image?.width ?? 0, id: node.image?.id ?? "")
                                         ))
                 }
                 
@@ -73,7 +73,7 @@ final class BrandsViewModel: ObservableObject {
                         title: node.title,
                         trackingParameters: node.trackingParameters,
                         updatedAt: node.updatedAt,
-                        img: ImgModel(url: node.image?.url ?? "")
+                        img: ImgModel(altText: node.image?.altText ?? "", height: node.image?.height ?? 0, originalSrc: node.image?.originalSrc ?? "", url: node.image?.url ?? "", width: node.image?.width ?? 0, id: node.image?.id ?? "")
                                         ))
                 }
                 

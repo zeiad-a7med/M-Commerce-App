@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PageInfo : Codable {
+struct PageInfo {
     var startCursor: String?
     var endCursor: String?
     var hasNextPage: Bool = false

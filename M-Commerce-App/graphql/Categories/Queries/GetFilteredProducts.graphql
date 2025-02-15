@@ -1,0 +1,40 @@
+query GetFilteredProducts($first: Int, $after: String, $query: String ) {
+    products(first: $first, after: $after, query: $query) {
+        nodes {
+            id
+            isGiftCard
+            productType
+            tags
+            title
+            totalInventory
+            vendor
+            handle
+            images(first: 1) {
+                nodes {
+                    altText
+                    height
+                    id
+                    originalSrc
+                    url
+                    width
+                }
+            }
+            priceRange {
+                maxVariantPrice {
+                    amount
+                    currencyCode
+                }
+                minVariantPrice {
+                    amount
+                    currencyCode
+                }
+            }
+        }
+        pageInfo {
+            endCursor
+            hasNextPage
+            hasPreviousPage
+            startCursor
+        }
+    }
+}

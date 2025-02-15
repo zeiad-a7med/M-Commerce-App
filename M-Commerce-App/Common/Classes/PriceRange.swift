@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PriceRange: Codable {
+struct PriceRange {
     let minVariantPrice: Price
     let maxVariantPrice: Price
 }

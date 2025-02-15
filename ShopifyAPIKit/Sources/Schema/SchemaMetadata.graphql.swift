@@ -67,6 +67,7 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "ShopPayInstallmentsFinancingPlanTerm": return ShopifyAPIKit.Objects.ShopPayInstallmentsFinancingPlanTerm
     case "ShopPayInstallmentsProductVariantPricing": return ShopifyAPIKit.Objects.ShopPayInstallmentsProductVariantPricing
     case "ShopPolicy": return ShopifyAPIKit.Objects.ShopPolicy
+    case "StringConnection": return ShopifyAPIKit.Objects.StringConnection
     case "TaxonomyCategory": return ShopifyAPIKit.Objects.TaxonomyCategory
     case "UrlRedirect": return ShopifyAPIKit.Objects.UrlRedirect
     case "Video": return ShopifyAPIKit.Objects.Video
