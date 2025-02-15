@@ -10,12 +10,19 @@ import SwiftUI
 struct BrandsGrid: View {
     var columns: [GridItem]
     var products: [Product]
+    var loadMore: ()->Void
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns) {
                 ForEach(products, id: \.id) { product in
                     ProductCardView(product: product)
                         .padding(.top,20)
+                        .onAppear() {
+                            if product.id == products.last?.id {
+                                print("loading more...!")
+                                loadMore()
+                            }
+                        }
                 }
             }
             
@@ -24,5 +31,7 @@ struct BrandsGrid: View {
 }
 
 #Preview {
-    BrandsGrid(columns: [], products: [])
+    BrandsGrid(columns: [], products: [], loadMore: {
+        print("loading more...!")
+    })
 }

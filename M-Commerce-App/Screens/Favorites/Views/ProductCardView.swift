@@ -35,13 +35,13 @@ struct ProductCardView: View {
                             .resizable()
                             .scaledToFill()
                     case .empty:
-                        Image(systemName: "Placeholder Image")
+                        Image(systemName: "network.slash")
                             .scaledToFit()
                     case .failure(_):
-                        Image(systemName: "Error Image")
+                        Image(systemName: "wifi.slash")
                             .scaledToFit()
                     @unknown default:
-                        Image(systemName: "Placeholder Image")
+                        Image(systemName: "circle.slash")
                             .scaledToFit()
                     }
                 }

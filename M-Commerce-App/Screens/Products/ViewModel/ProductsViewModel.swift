@@ -27,8 +27,28 @@ final class ProductsViewModel : ObservableObject {
             case .failure(let error):
                 print(error)
             }
+            self.isLoading = false
         }
-        self.isLoading = false
+        
+    }
+    func loadMore(query: String) {
+        if !(products.pageInfo?.hasNextPage ?? true) { return }
+        isLoading = true
+        ApolloNetwokService.shared.apollo.fetch(query: GetFilteredProductsQuery(first: 10, after: GraphQLNullable(stringLiteral: products.pageInfo?.endCursor ?? ""), query: GraphQLNullable<String>.some(query))) { result in
+            switch result {
+            case .success(let graphQLResult):
+                if let data = graphQLResult.data?.products {
+                    var tempProducts: BrandResponse = BrandResponse()
+                    tempProducts = GetFilteredProductsQuery.parseFilteredProducts(from: data)
+                    self.products.pageInfo = tempProducts.pageInfo
+                    self.products.BrandProducts?.append(contentsOf: tempProducts.BrandProducts ?? [])
+                }
+            case .failure(let error):
+                print(error)
+            }
+            self.isLoading = false
+        }
+
     }
     
     

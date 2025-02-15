@@ -58,6 +58,7 @@ final class BrandsViewModel: ObservableObject {
     
     func loadMore() {
         if (self.brands.pageInfo?.hasNextPage == false) { return }
+        self.isLoading = true
         ApolloNetwokService.shared.apollo.fetch(
             query: GetCollectionsQuery(
                 first: countity, after: GraphQLNullable(stringLiteral: self.brands.pageInfo?.endCursor ?? ""))
