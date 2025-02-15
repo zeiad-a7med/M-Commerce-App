@@ -31,9 +31,6 @@ struct HomePageView: View {
                             }
                         )
                         .padding([.leading,.trailing],20)
-                        HeaderView(
-                            title: ThemeManager.firstSectionTitle,
-                            color: ThemeManager.titleColor)
                         AdCardView(
                             imageList: tempImageList,
                             discountCode: [

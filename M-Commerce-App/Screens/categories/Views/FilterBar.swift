@@ -9,56 +9,49 @@ import SwiftUI
 
 
 struct FilterBar: View {
-    @State var selectedItem:String = "All"
-    @State var previousSelectedFilter:String = ""
+    @State private var selectedItem:Int = 0
+    let filterItems:[String]
     var willFilter: (String) -> Void
     let unSelectedFilterColor = Color.white
     let selectedFilterColor = ThemeManager.darkPuble
     let unSelectedFilterTxtColor = Color.secondary
     let selectedFilterTxtColor = Color.white
-    let filterItems:[String] = ["All","Men","Women","Kid"]
-    
     let paddingRadius:CGFloat = 8.0
     let shadowRadius:CGFloat = 5.0
-    let cornerRadius:CGFloat = 10.0
+    let cornerRadius:CGFloat = 15.0
+    
     
     var body: some View {
-        ScrollView (.horizontal){
-            LazyHStack (alignment: .center){
-                ForEach(filterItems, id: \.self) { itemIndex in
+        ScrollView (.horizontal, showsIndicators: false){
+            HStack {
+                ForEach(filterItems.indices, id: \.self) { itemIndex in
                     Button(action: {
-                        previousSelectedFilter = selectedItem
-                        selectedItem = itemIndex
-                        if previousSelectedFilter != itemIndex {
-                            //filter
-                            willFilter(itemIndex)
-                            print(itemIndex)
+                        if selectedItem != itemIndex {
+                           selectedItem = itemIndex
+                            willFilter(filterItems[itemIndex])
+                            print(filterItems[itemIndex])
                         }
                     }, label: {
-                        Text(itemIndex)
+                        Text(filterItems[itemIndex])
                             .font(.headline)
                             .bold()
                             .foregroundStyle(selectedItem == itemIndex ?
                                              selectedFilterTxtColor : unSelectedFilterTxtColor)
-                            .padding(.leading,22)
-                            .padding(.trailing,22)
-                            .padding(.top,paddingRadius)
-                            .padding(.bottom,paddingRadius)
+                            .frame(minWidth: 100, idealWidth: 120, maxWidth: 160, minHeight: 40, idealHeight: 40, maxHeight: 40, alignment: .center)
                             .background(selectedItem == itemIndex ?
                                         selectedFilterColor : unSelectedFilterColor)
                             .cornerRadius(cornerRadius)
                             .shadow(radius: shadowRadius)
-                            .padding(.top,paddingRadius)
-                            .padding(.bottom,paddingRadius)
                     })
-                }
-            }.padding(.leading,paddingRadius)
+                }.padding([.leading, .trailing],5)
+                    .padding([.top, .bottom],10)
+            }
         }
     }
 }
 
 #Preview {
-    FilterBar( willFilter: {_ in 
+    FilterBar(filterItems: ["All","Men","Women","Kid","sales","children"], willFilter: {_ in
         print("any")
     })
 }

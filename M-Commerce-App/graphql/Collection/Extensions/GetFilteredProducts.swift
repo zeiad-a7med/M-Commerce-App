@@ -12,7 +12,7 @@ import SwiftUI
 extension GetFilteredProductsQuery {
     
     static func parseFilteredProducts(from prod: GetFilteredProductsQuery.Data.Products) -> CategoriesResponse {
-        var categories: CategoriesResponse = CategoriesResponse()
+        let categories: CategoriesResponse = CategoriesResponse()
         var productsArray = [Product]()
         
         
@@ -28,7 +28,7 @@ extension GetFilteredProductsQuery {
             let price1 = Price(amount: prod.priceRange.maxVariantPrice.amount, currencyCode: prod.priceRange.maxVariantPrice.currencyCode.rawValue)
             let price2 = Price(amount: prod.priceRange.minVariantPrice.amount, currencyCode: prod.priceRange.minVariantPrice.currencyCode.rawValue)
             let pr = PriceRange(minVariantPrice: price1, maxVariantPrice: price2)
-            var prodTemp = Product(desc: "", handle: prod.handle, id: prod.id, isGiftCard: prod.isGiftCard, productType: prod.productType, tags: prod.tags, title: prod.title, totalInventory: prod.totalInventory, updatedAt: "", vendor: prod.vendor, category: "", priceRange: pr, featuredImage: imgM)
+            let prodTemp = Product(desc: "", handle: prod.handle, id: prod.id, isGiftCard: prod.isGiftCard, productType: prod.productType, tags: prod.tags, title: prod.title, totalInventory: prod.totalInventory, updatedAt: "", vendor: prod.vendor, category: "", priceRange: pr, featuredImage: imgM)
             prodTemp.handle = prod.handle
             productsArray.append(prodTemp)
         })
@@ -57,7 +57,7 @@ extension GetFilteredProductsQuery {
             let price1 = Price(amount: prod.priceRange.maxVariantPrice.amount, currencyCode: prod.priceRange.maxVariantPrice.currencyCode.rawValue)
             let price2 = Price(amount: prod.priceRange.minVariantPrice.amount, currencyCode: prod.priceRange.minVariantPrice.currencyCode.rawValue)
             let pr = PriceRange(minVariantPrice: price1, maxVariantPrice: price2)
-            var prodTemp = Product(desc: "", handle: prod.handle, id: prod.id, isGiftCard: prod.isGiftCard, productType: prod.productType, tags: prod.tags, title: prod.title, totalInventory: prod.totalInventory, updatedAt: "", vendor: prod.vendor, category: "", priceRange: pr, featuredImage: imgM)
+            let prodTemp = Product(desc: "", handle: prod.handle, id: prod.id, isGiftCard: prod.isGiftCard, productType: prod.productType, tags: prod.tags, title: prod.title, totalInventory: prod.totalInventory, updatedAt: "", vendor: prod.vendor, category: "", priceRange: pr, featuredImage: imgM)
             prodTemp.handle = prod.handle
             productsArray.append(prodTemp)
         })
