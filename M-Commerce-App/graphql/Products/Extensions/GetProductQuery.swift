@@ -50,6 +50,7 @@ extension GetProductQuery{
                 height: productDTO.featuredImage?.height ?? 0,
                 originalSrc: productDTO.featuredImage?.originalSrc,
                 url: productDTO.featuredImage?.url ?? "",
+                width: productDTO.featuredImage?.height ?? 0,
                 id: productDTO.featuredImage?.id ?? ""
             ),
             images: images,

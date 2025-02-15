@@ -12,6 +12,7 @@ struct HomePageView: View {
     let screenTitle: String = "Home"
     let tempImageList = ImageList(id: "")
     @State var isCopied: Bool = false
+    @State var favoriteCount : Int = 0
     var body: some View {
 
         NavigationView {
@@ -82,8 +83,11 @@ struct HomePageView: View {
                                     ButtonView(
                                         imageSystemName: ThemeManager
                                             .favouriteImg,
-                                        itemCounter: 2)
+                                        itemCounter: favoriteCount)
                                 })
+                            .onAppear {
+                                favoriteCount = FavoritesManager.shared.favorites.count
+                            }
                         }
                     })
             }

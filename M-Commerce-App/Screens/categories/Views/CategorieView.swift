@@ -11,75 +11,102 @@ struct CategorieView: View {
     @State var isSelectedPopup: Bool = false
     @State var filterType: String = ""
     @State var subFilterType: String = ""
-    @State var filterString:String = ""
-    @State var prevFilterString:String = "ccc"
-    @StateObject var cViewModel:CategoriesViewModel = CategoriesViewModel(first: 10, after: nil, filter: "")
+    @State var filterString: String = ""
+    @State var prevFilterString: String = "ccc"
+    @State var favoriteCount : Int = 0
+    @StateObject var cViewModel: CategoriesViewModel = CategoriesViewModel(
+        first: 10, after: nil, filter: "")
     var body: some View {
-        
+
         NavigationView {
-            ZStack (alignment: .bottomTrailing){
+            ZStack(alignment: .bottomTrailing) {
                 ScrollView {
                     LazyVStack {
-                        CustomSearchBarView(placeholder: "search for a product...", onChange: {text in
-                            print(text)
-                        }).padding(10)
-                        
+                        CustomSearchBarView(
+                            placeholder: "search for a product...",
+                            onChange: { text in
+                                print(text)
+                            }
+                        ).padding(10)
+
                         FilterBar(willFilter: { filterRes in
                             subFilterType = ""
                             filterType = filterRes
                             print(filterRes)
                             filter()
                         })
-                        
-                        if let filteredProd = cViewModel.categories.categoryProducts{
+
+                        if let filteredProd = cViewModel.categories
+                            .categoryProducts
+                        {
                             ProductsSubView(filteredProducts: filteredProd)
                         }
-                        
+
                     }
                 }
-                
+
                 HStack {
                     Spacer()
-                        ZStack {
-                            Button(action: {
-                                if self.subFilterType != "ACCESSORIES"{
+                    ZStack {
+                        Button(
+                            action: {
+                                if self.subFilterType != "ACCESSORIES" {
                                     self.subFilterType = "ACCESSORIES"
-                                }else{
+                                } else {
                                     self.subFilterType = ""
                                 }
                                 filter()
-                            }, label: {
-                                FloatingButtonView(color: .gray, inconName: "hat.cap")
-                            }).offset(y:isSelectedPopup ? -270.0 : 0.0)
-                            Button(action: {
-                                if self.subFilterType != "T-SHIRTS"{
+                            },
+                            label: {
+                                FloatingButtonView(
+                                    color: .gray, inconName: "hat.cap")
+                            }
+                        ).offset(y: isSelectedPopup ? -270.0 : 0.0)
+                        Button(
+                            action: {
+                                if self.subFilterType != "T-SHIRTS" {
                                     self.subFilterType = "T-SHIRTS"
-                                }else{
+                                } else {
                                     self.subFilterType = ""
                                 }
                                 filter()
-                            }, label: {
-                                FloatingButtonView(color: .gray, inconName: "tshirt")
-                            }).offset(y:isSelectedPopup ? -180.0 : 0.0)
-                            Button(action: {
-                                if self.subFilterType != "SHOES"{
+                            },
+                            label: {
+                                FloatingButtonView(
+                                    color: .gray, inconName: "tshirt")
+                            }
+                        ).offset(y: isSelectedPopup ? -180.0 : 0.0)
+                        Button(
+                            action: {
+                                if self.subFilterType != "SHOES" {
                                     self.subFilterType = "SHOES"
-                                }else{
+                                } else {
                                     self.subFilterType = ""
                                 }
                                 filter()
-                            }, label: {
-                                FloatingButtonView(color: .gray, inconName: "shoe")
-                            }).offset(y:isSelectedPopup ? -90.0 : 0.0)
-                            
-                            Button(action: {
-                                withAnimation(.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 0)) {
+                            },
+                            label: {
+                                FloatingButtonView(
+                                    color: .gray, inconName: "shoe")
+                            }
+                        ).offset(y: isSelectedPopup ? -90.0 : 0.0)
+
+                        Button(
+                            action: {
+                                withAnimation(
+                                    .spring(
+                                        response: 0.5, dampingFraction: 0.5,
+                                        blendDuration: 0)
+                                ) {
                                     isSelectedPopup.toggle()
                                 }
-                            }, label: {
-                                FloatingButtonView(color: ThemeManager.darkPuble, inconName: "plus")
+                            },
+                            label: {
+                                FloatingButtonView(
+                                    color: ThemeManager.darkPuble,
+                                    inconName: "plus")
                             })
-                        }
+                    }
                 }
             }
             .navigationTitle("Categories")
@@ -88,48 +115,58 @@ struct CategorieView: View {
                     placement: .topBarTrailing,
                     content: {
                         LazyHStack {
-                            NavigationLink(destination: ShoppingView()
-                                           , label: {
-                            ButtonView(
-                                imageSystemName: ThemeManager.cartImg,
-                                itemCounter: 10)
-                        })
-                            NavigationLink(destination: FavoritesView()
-                                .font(.title)
-                                           , label: {
-                            ButtonView(
-                                imageSystemName: ThemeManager.favouriteImg,
-                                itemCounter: 2)
-                            })
+                            NavigationLink(
+                                destination: ShoppingView(),
+                                label: {
+                                    ButtonView(
+                                        imageSystemName: ThemeManager.cartImg,
+                                        itemCounter: 10)
+                                })
+                            NavigationLink(
+                                destination: FavoritesView(),
+                                label: {
+                                    ButtonView(
+                                        imageSystemName: ThemeManager
+                                            .favouriteImg,
+                                        itemCounter: favoriteCount)
+                                })
+                            .onAppear {
+                                favoriteCount = FavoritesManager.shared.favorites.count
+                            }
                         }
                     })
-            }//End of: toolbar
+            }  //End of: toolbar
         }
     }
-    func filter(){
-        if filterString == prevFilterString {return}
+    func filter() {
+        if filterString == prevFilterString { return }
         if filterType == "All" {
             filterType = ""
         }
-        if  filterType != "" && subFilterType != "" {
+        if filterType != "" && subFilterType != "" {
             filterString = "\(filterType) | \(subFilterType)"
             print("1-\(filterString)")
-            self.cViewModel.fetchCategoriesWithFilter(first: 10, after: nil, filter: filterString)
-        }else if filterType == "" && subFilterType != "" {
+            self.cViewModel.fetchCategoriesWithFilter(
+                first: 10, after: nil, filter: filterString)
+        } else if filterType == "" && subFilterType != "" {
             print("2-\(filterString)")
             filterString = "\(subFilterType)"
-            self.cViewModel.fetchCategoriesWithFilter(first: 10, after: nil, filter: filterString)
-        }else if filterType != "" && subFilterType == "" {
+            self.cViewModel.fetchCategoriesWithFilter(
+                first: 10, after: nil, filter: filterString)
+        } else if filterType != "" && subFilterType == "" {
             filterString = "\(filterType)"
             print("3-\(filterString)")
-            self.cViewModel.fetchCategoriesWithFilter(first: 10, after: nil, filter: filterString)
-        }else if filterType == "" && subFilterType == "" {
+            self.cViewModel.fetchCategoriesWithFilter(
+                first: 10, after: nil, filter: filterString)
+        } else if filterType == "" && subFilterType == "" {
             filterString = ""
             print("4-\(filterString)")
-            self.cViewModel.fetchCategoriesWithFilter(first: 10, after: nil, filter: filterString)
-        }else{
+            self.cViewModel.fetchCategoriesWithFilter(
+                first: 10, after: nil, filter: filterString)
+        } else {
             print("else")
-            self.cViewModel.fetchCategoriesWithFilter(first: 10, after: nil, filter: filterString)
+            self.cViewModel.fetchCategoriesWithFilter(
+                first: 10, after: nil, filter: filterString)
         }
     }
 }
@@ -142,7 +179,7 @@ struct FloatingButtonView: View {
     var color: Color
     var inconName: String
     var body: some View {
-        ZStack{
+        ZStack {
             Circle()
                 .fill(color)
                 .frame(width: 60, height: 60)

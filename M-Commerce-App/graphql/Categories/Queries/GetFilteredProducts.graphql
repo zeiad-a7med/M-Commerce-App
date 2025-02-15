@@ -9,16 +9,15 @@ query GetFilteredProducts($first: Int, $after: String, $query: String ) {
             totalInventory
             vendor
             handle
-            images(first: 1) {
-                nodes {
-                    altText
-                    height
-                    id
-                    originalSrc
-                    url
-                    width
-                }
+            featuredImage {
+                id
+                url
+                originalSrc
+                altText
+                width
+                height
             }
+
             priceRange {
                 maxVariantPrice {
                     amount

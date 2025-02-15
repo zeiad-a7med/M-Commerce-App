@@ -8,16 +8,25 @@
 import SwiftUI
 
 struct ProductInfoView: View {
-    @StateObject var viewModel = ProductViewModel(
-        productId: "gid://shopify/Product/1504622739493")
+    var productId: String
+    @StateObject var viewModel: ProductViewModel
+    @ObservedObject private var favoritesManager = FavoritesManager.shared  // Singleton instance
+    init(productId: String) {
+        self.productId = productId
+        _viewModel = StateObject(
+            wrappedValue: ProductViewModel(productId: productId))
+    }
+
     @State var val: Int = 0
     var body: some View {
         if viewModel.isLoading {
             ProgressView()
         } else {
-            if(viewModel.productRes?.success == false){
-                Text(viewModel.productRes?.message ?? "")
-            }else{
+            if viewModel.productRes?.success == false {
+                ContentUnavailableView(
+                    "No Product Found", systemImage: "square.3.layers.3d.slash",
+                    description: Text("cant find this product"))
+            } else {
                 ZStack {
                     Color(.white)
                         .ignoresSafeArea(.all)
@@ -27,21 +36,24 @@ struct ProductInfoView: View {
                                 LazyHStack {
                                     ForEach(
                                         Array(
-                                            (viewModel.productRes?.product?.images ?? [])
+                                            (viewModel.productRes?.product?
+                                                .images ?? [])
                                                 .enumerated()), id: \.offset
                                     ) {
                                         index, discount in
                                         CustomNetworkImageView(
                                             url: URL(
-                                                string: viewModel.productRes?.product?.images?[
-                                                    index
-                                                ].url ?? ""
+                                                string: viewModel.productRes?
+                                                    .product?.images?[
+                                                        index
+                                                    ].url ?? ""
 
                                             )!
                                         )
                                         .frame(
                                             width: UIScreen.main.bounds.width,
-                                            height: UIScreen.main.bounds.width + 70
+                                            height: UIScreen.main.bounds.width
+                                                + 70
                                         )
 
                                     }
@@ -65,24 +77,30 @@ struct ProductInfoView: View {
 
                             HStack {
                                 VStack(alignment: .leading) {
-                                    Text(viewModel.productRes?.product?.title ?? "")
-                                        .font(.title2)
-                                        .multilineTextAlignment(.leading)
-                                        .bold(true)
-                                        .padding(.bottom, 10)
-                                    StarRatingView(rating: Double.random(in: 2...5))
+                                    Text(
+                                        viewModel.productRes?.product?.title
+                                            ?? ""
+                                    )
+                                    .font(.title2)
+                                    .multilineTextAlignment(.leading)
+                                    .bold(true)
+                                    .padding(.bottom, 10)
+                                    StarRatingView(
+                                        rating: Double.random(in: 2...5))
                                 }.frame(
                                     width: UIScreen.main.bounds.width * 2 / 3,
                                     alignment: .leading)
                                 Spacer()
                                 FavoriteButtonView(
+                                    product: viewModel.productRes!.product!,
                                     size: 30
                                 )
                             }.padding(.bottom, 20)
 
                             ScrollView {
                                 ReadMoreTextView(
-                                    text: viewModel.productRes?.product?.desc ?? "",
+                                    text: viewModel.productRes?.product?.desc
+                                        ?? "",
                                     lineLimit: 3
                                 )
                                 .font(.system(size: 19))
@@ -100,11 +118,17 @@ struct ProductInfoView: View {
                             }
                             Spacer()
                             HStack {
-                                Text(viewModel.productRes?.product?.currency ?? "")
-                                    .foregroundStyle(ThemeManager.darkPuble)
-                                    .font(.title)
-                                Text(viewModel.productRes?.product?.formattedPrice ?? "")
-                                    .font(.title)
+                                Text(
+                                    viewModel.productRes?.product?.currency
+                                        ?? ""
+                                )
+                                .foregroundStyle(ThemeManager.darkPuble)
+                                .font(.title)
+                                Text(
+                                    viewModel.productRes?.product?
+                                        .formattedPrice ?? ""
+                                )
+                                .font(.title)
                                 Spacer()
                                 CustomRoundedButtonView(
                                     text: "Add to Cart",
@@ -131,24 +155,12 @@ struct ProductInfoView: View {
                     .ignoresSafeArea(.all)
                 }
             }
-            
+
         }
 
     }
 }
-struct RoundedCornerShape: Shape {
-    var corners: UIRectCorner
-    var radius: CGFloat
-
-    func path(in rect: CGRect) -> Path {
-        let path = UIBezierPath(
-            roundedRect: rect,
-            byRoundingCorners: corners,
-            cornerRadii: CGSize(width: radius, height: radius))
-        return Path(path.cgPath)
-    }
-}
 
 #Preview {
-    ProductInfoView()
+    ProductInfoView(productId: "gid://shopify/Product/15046227394931")
 }

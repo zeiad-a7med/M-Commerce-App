@@ -13,12 +13,12 @@ struct ProductsSubView: View {
         LazyVStack{
             ForEach(Array(stride(from: 0, to: filteredProducts.count, by: 2)), id: \.self) { index in
                 HStack{
-                    ProductCardView(url:
-                                        filteredProducts[index].images?[0].url ?? "", title: filteredProducts[index].title ?? "", desc: filteredProducts[index].vendor ?? "", price: filteredProducts[index].priceRange?.minVariantPrice.amount ?? "0")
+                    ProductCardView(product:
+                                        filteredProducts[index])
                     if index + 1 < filteredProducts.count {
-                        ProductCardView(url: filteredProducts[index + 1].images?[0].originalSrc ?? "", title: filteredProducts[index + 1].title ?? "", desc: filteredProducts[index + 1].vendor ?? "", price: filteredProducts[index + 1].priceRange?.minVariantPrice.amount ?? "0")
+                        ProductCardView(product: filteredProducts[index + 1])
                     }else{
-                        ProductCardView(url: filteredProducts[index].images?.first?.url ?? "", title: filteredProducts[index].title ?? "", desc: filteredProducts[index].vendor ?? "", price: filteredProducts[index].priceRange?.minVariantPrice.amount ?? "0").hidden()
+                        ProductCardView(product: filteredProducts[index])
                     }
                 }
             }
