@@ -9,124 +9,129 @@ import SwiftUI
 
 struct ProductInfoView: View {
     @StateObject var viewModel = ProductViewModel(
-        productId: "gid://shopify/Product/15046227394931")
+        productId: "gid://shopify/Product/1504622739493")
     @State var val: Int = 0
     var body: some View {
         if viewModel.isLoading {
             ProgressView()
         } else {
-            ZStack {
-                Color(.white)
-                    .ignoresSafeArea(.all)
-                VStack {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        VStack {
-                            LazyHStack {
-                                ForEach(
-                                    Array(
-                                        (viewModel.product?.images ?? [])
-                                            .enumerated()), id: \.offset
-                                ) {
-                                    index, discount in
-                                    CustomNetworkImageView(
-                                        url: URL(
-                                            string: viewModel.product?.images?[
-                                                index
-                                            ].url ?? ""
+            if(viewModel.productRes?.success == false){
+                Text(viewModel.productRes?.message ?? "")
+            }else{
+                ZStack {
+                    Color(.white)
+                        .ignoresSafeArea(.all)
+                    VStack {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            VStack {
+                                LazyHStack {
+                                    ForEach(
+                                        Array(
+                                            (viewModel.productRes?.product?.images ?? [])
+                                                .enumerated()), id: \.offset
+                                    ) {
+                                        index, discount in
+                                        CustomNetworkImageView(
+                                            url: URL(
+                                                string: viewModel.productRes?.product?.images?[
+                                                    index
+                                                ].url ?? ""
 
-                                        )!
-                                    )
-                                    .frame(
-                                        width: UIScreen.main.bounds.width,
-                                        height: UIScreen.main.bounds.width + 70
-                                    )
+                                            )!
+                                        )
+                                        .frame(
+                                            width: UIScreen.main.bounds.width,
+                                            height: UIScreen.main.bounds.width + 70
+                                        )
 
+                                    }
                                 }
+
                             }
 
                         }
-
+                        .frame(
+                            width: UIScreen.main.bounds.width,
+                            height: UIScreen.main.bounds.width + 70
+                        )
+                        .ignoresSafeArea(.all)
+                        .scrollTargetLayout()
+                        .scrollTargetBehavior(.paging)
+                        Spacer()
                     }
-                    .frame(
-                        width: UIScreen.main.bounds.width,
-                        height: UIScreen.main.bounds.width + 70
-                    )
-                    .ignoresSafeArea(.all)
-                    .scrollTargetLayout()
-                    .scrollTargetBehavior(.paging)
-                    Spacer()
-                }
-                VStack {
-                    Spacer()
-                    VStack(alignment: .leading) {
-
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(viewModel.product?.title ?? "")
-                                    .font(.title2)
-                                    .multilineTextAlignment(.leading)
-                                    .bold(true)
-                                    .padding(.bottom, 10)
-                                StarRatingView(rating: Double.random(in: 2...5))
-                            }.frame(
-                                width: UIScreen.main.bounds.width * 2 / 3,
-                                alignment: .leading)
-                            Spacer()
-                            FavoriteButtonView(
-                                size: 30
-                            )
-                        }.padding(.bottom, 20)
-
-                        ScrollView {
-                            ReadMoreTextView(
-                                text: viewModel.product?.desc ?? "",
-                                lineLimit: 3
-                            )
-                            .font(.system(size: 19))
-                            .foregroundColor(.primary)
-                            .padding(.bottom, 10)
+                    VStack {
+                        Spacer()
+                        VStack(alignment: .leading) {
 
                             HStack {
-                                Text("Choose amount:")
-                                    .bold(true)
+                                VStack(alignment: .leading) {
+                                    Text(viewModel.productRes?.product?.title ?? "")
+                                        .font(.title2)
+                                        .multilineTextAlignment(.leading)
+                                        .bold(true)
+                                        .padding(.bottom, 10)
+                                    StarRatingView(rating: Double.random(in: 2...5))
+                                }.frame(
+                                    width: UIScreen.main.bounds.width * 2 / 3,
+                                    alignment: .leading)
                                 Spacer()
-                                CustomStepper(numberOfItem: 1) { count in
-                                    print(count)
+                                FavoriteButtonView(
+                                    size: 30
+                                )
+                            }.padding(.bottom, 20)
+
+                            ScrollView {
+                                ReadMoreTextView(
+                                    text: viewModel.productRes?.product?.desc ?? "",
+                                    lineLimit: 3
+                                )
+                                .font(.system(size: 19))
+                                .foregroundColor(.primary)
+                                .padding(.bottom, 10)
+
+                                HStack {
+                                    Text("Choose amount:")
+                                        .bold(true)
+                                    Spacer()
+                                    CustomStepper(numberOfItem: 1) { count in
+                                        print(count)
+                                    }
                                 }
                             }
-                        }
-                        Spacer()
-                        HStack {
-                            Text(viewModel.product?.currency ?? "")
-                                .foregroundStyle(ThemeManager.darkPuble)
-                                .font(.title)
-                            Text(viewModel.product?.formattedPrice ?? "")
-                                .font(.title)
                             Spacer()
-                            CustomRoundedButtonView(
-                                text: "Add to Cart",
-                                systemIconName: "handbag",
-                                onTap: {
-                                    print("Tapped")
-                                }
-                            )
+                            HStack {
+                                Text(viewModel.productRes?.product?.currency ?? "")
+                                    .foregroundStyle(ThemeManager.darkPuble)
+                                    .font(.title)
+                                Text(viewModel.productRes?.product?.formattedPrice ?? "")
+                                    .font(.title)
+                                Spacer()
+                                CustomRoundedButtonView(
+                                    text: "Add to Cart",
+                                    systemIconName: "handbag",
+                                    onTap: {
+                                        print("Tapped")
+                                    }
+                                )
+
+                            }
 
                         }
-
+                        .padding(30)
+                        .frame(
+                            width: UIScreen.main.bounds.width,
+                            height: UIScreen.main.bounds.height / 2
+                        )
+                        .background(.thickMaterial)
+                        .clipShape(
+                            RoundedCornerShape(
+                                corners: [.topRight, .topLeft], radius: 40)
+                        )
                     }
-                    .padding(30)
-                    .frame(
-                        width: UIScreen.main.bounds.width,
-                        height: UIScreen.main.bounds.height / 2
-                    )
-                    .background(.thickMaterial)
-                    .clipShape(
-                        RoundedCornerShape(
-                            corners: [.topRight, .topLeft], radius: 40)
-                    )
+                    .ignoresSafeArea(.all)
                 }
-                .ignoresSafeArea(.all)
             }
+            
         }
 
     }

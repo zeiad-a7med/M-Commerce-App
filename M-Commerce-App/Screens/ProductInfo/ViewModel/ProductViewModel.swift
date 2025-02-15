@@ -9,7 +9,7 @@ import Foundation
 
 class ProductViewModel: ObservableObject {
     let productId: String
-    @Published var product: Product?
+    @Published var productRes: ProductResponse?
     @Published var isLoading: Bool = true
     init(productId: String) {
         self.productId = productId
@@ -21,8 +21,7 @@ class ProductViewModel: ObservableObject {
             guard let result = result else { return }
             DispatchQueue.main.async {
                 self.isLoading = false
-                self.product = result.product
-                print(self.product?.title ?? "")
+                self.productRes = result
             }
         }
     }

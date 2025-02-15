@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ImgModel {
+struct ImgModel : Codable{
     var altText:String?
     var height:Int?
     var originalSrc:String?

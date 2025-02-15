@@ -28,7 +28,8 @@ class ProductService: ProductServiceProtocol {
                 guard let productDTO else {
                     complitionHandler(
                         ProductResponse(
-                            success: false
+                            success: false,
+                            message: graphQLResult.errors?.first?.message ?? "No data"
                         ))
                     return
                 }
