@@ -17,19 +17,18 @@ extension GetFilteredProductsQuery {
         
         
         prod.nodes.forEach({ prod in
-            var imgArray = [ImgModel]()
-            imgArray.removeAll()
-            prod.images.nodes.forEach { image in
-                print("title: ",prod.title)
-                print("vendor: ",prod.vendor)
-                let imgM = ImgModel(altText: image.altText, height: image.height, originalSrc: image.originalSrc, url: image.url, width: image.width, id: image.id)
-                imgArray.append(imgM)
+            
+            let image = prod.featuredImage
+            var imgM = ImgModel()
+            if(image != nil){
+                imgM = ImgModel(altText: image?.altText, height: image?.height, originalSrc: image?.originalSrc, url: image?.url, width: image?.width, id: image?.id)
             }
             
-            let price1 = Price(amount: prod.priceRange.maxVariantPrice.amount, currencyCode: nil)
-            let price2 = Price(amount: prod.priceRange.minVariantPrice.amount, currencyCode: nil)
+            
+            let price1 = Price(amount: prod.priceRange.maxVariantPrice.amount, currencyCode: prod.priceRange.maxVariantPrice.currencyCode.rawValue)
+            let price2 = Price(amount: prod.priceRange.minVariantPrice.amount, currencyCode: prod.priceRange.minVariantPrice.currencyCode.rawValue)
             let pr = PriceRange(minVariantPrice: price1, maxVariantPrice: price2)
-            var prodTemp = Product(desc: "", handle: prod.handle, id: prod.id, isGiftCard: prod.isGiftCard, productType: prod.productType, tags: prod.tags, title: prod.title, totalInventory: prod.totalInventory, updatedAt: "", vendor: prod.vendor, category: "", priceRange: pr, images: imgArray)
+            var prodTemp = Product(desc: "", handle: prod.handle, id: prod.id, isGiftCard: prod.isGiftCard, productType: prod.productType, tags: prod.tags, title: prod.title, totalInventory: prod.totalInventory, updatedAt: "", vendor: prod.vendor, category: "", priceRange: pr, featuredImage: imgM)
             prodTemp.handle = prod.handle
             productsArray.append(prodTemp)
         })
@@ -49,19 +48,16 @@ extension GetFilteredProductsQuery {
         let brandProducts: BrandResponse = BrandResponse()
         var productsArray = [Product]()
         prod.nodes.forEach({ prod in
-            var imgArray = [ImgModel]()
-            imgArray.removeAll()
-            prod.images.nodes.forEach { image in
-                print("title: ",prod.title)
-                print("vendor: ",prod.vendor)
-                let imgM = ImgModel(altText: image.altText, height: image.height, originalSrc: image.originalSrc, url: image.url, width: image.width, id: image.id)
-                imgArray.append(imgM)
+            let image = prod.featuredImage
+            var imgM = ImgModel()
+            if(image != nil){
+                imgM = ImgModel(altText: image?.altText, height: image?.height, originalSrc: image?.originalSrc, url: image?.url, width: image?.width, id: image?.id)
             }
             
-            let price1 = Price(amount: prod.priceRange.maxVariantPrice.amount, currencyCode: nil)
-            let price2 = Price(amount: prod.priceRange.minVariantPrice.amount, currencyCode: nil)
+            let price1 = Price(amount: prod.priceRange.maxVariantPrice.amount, currencyCode: prod.priceRange.maxVariantPrice.currencyCode.rawValue)
+            let price2 = Price(amount: prod.priceRange.minVariantPrice.amount, currencyCode: prod.priceRange.minVariantPrice.currencyCode.rawValue)
             let pr = PriceRange(minVariantPrice: price1, maxVariantPrice: price2)
-            var prodTemp = Product(desc: "", handle: prod.handle, id: prod.id, isGiftCard: prod.isGiftCard, productType: prod.productType, tags: prod.tags, title: prod.title, totalInventory: prod.totalInventory, updatedAt: "", vendor: prod.vendor, category: "", priceRange: pr, images: imgArray)
+            var prodTemp = Product(desc: "", handle: prod.handle, id: prod.id, isGiftCard: prod.isGiftCard, productType: prod.productType, tags: prod.tags, title: prod.title, totalInventory: prod.totalInventory, updatedAt: "", vendor: prod.vendor, category: "", priceRange: pr, featuredImage: imgM)
             prodTemp.handle = prod.handle
             productsArray.append(prodTemp)
         })

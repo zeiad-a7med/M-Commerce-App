@@ -14,7 +14,7 @@ final class Product{
     var availableForSale: Bool?
     var desc: String?
     var handle: String?
-    var id: String
+    @Attribute(.unique) var id: String
     var isGiftCard: Bool?
     var productType: String?
     var tags: [String]?
@@ -56,12 +56,22 @@ final class Product{
     }
     var formattedPrice: String {
         get {
-            return String(format: "%.2f", price)
+            return String(format: "%.1f", price)
         }
     }
     var currency: String? {
         get {
             return priceRange?.minVariantPrice.currencyCode
         }
+    }
+    
+    
+    static func toSaveProduct(_ product: Product) -> Product {
+        return Product(
+            id: product.id,
+            title: product.title,
+            vendor: product.vendor
+//            featuredImage: product.featuredImage
+        )
     }
 }

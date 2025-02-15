@@ -13,8 +13,8 @@ struct BrandsGrid: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns) {
-                ForEach(products, id: \.id) { result in
-                    ProductCardView(url: result.images?.first?.url ?? "", title: result.title ?? "title", desc: result.vendor ?? "description", price: result.priceRange?.minVariantPrice.amount ?? "")
+                ForEach(products, id: \.id) { product in
+                    ProductCardView(product: product)
                         .padding(.top,20)
                 }
             }

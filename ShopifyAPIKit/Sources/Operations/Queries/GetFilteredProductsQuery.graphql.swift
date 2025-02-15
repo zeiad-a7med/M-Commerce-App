@@ -7,7 +7,7 @@ public class GetFilteredProductsQuery: GraphQLQuery {
   public static let operationName: String = "GetFilteredProducts"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query GetFilteredProducts($first: Int, $after: String, $query: String) { products(first: $first, after: $after, query: $query) { __typename nodes { __typename id isGiftCard productType tags title totalInventory vendor handle images(first: 1) { __typename nodes { __typename altText height id originalSrc url width } } priceRange { __typename maxVariantPrice { __typename amount currencyCode } minVariantPrice { __typename amount currencyCode } } } pageInfo { __typename endCursor hasNextPage hasPreviousPage startCursor } } }"#
+      #"query GetFilteredProducts($first: Int, $after: String, $query: String) { products(first: $first, after: $after, query: $query) { __typename nodes { __typename id isGiftCard productType tags title totalInventory vendor handle featuredImage { __typename id url originalSrc altText width height } priceRange { __typename maxVariantPrice { __typename amount currencyCode } minVariantPrice { __typename amount currencyCode } } } pageInfo { __typename endCursor hasNextPage hasPreviousPage startCursor } } }"#
     ))
 
   public var first: GraphQLNullable<Int>
@@ -83,7 +83,7 @@ public class GetFilteredProductsQuery: GraphQLQuery {
           .field("totalInventory", Int?.self),
           .field("vendor", String.self),
           .field("handle", String.self),
-          .field("images", Images.self, arguments: ["first": 1]),
+          .field("featuredImage", FeaturedImage?.self),
           .field("priceRange", PriceRange.self),
         ] }
 
@@ -113,69 +113,54 @@ public class GetFilteredProductsQuery: GraphQLQuery {
         /// A handle can contain letters, hyphens (`-`), and numbers, but no spaces.
         /// The handle is used in the online store URL for the product.
         public var handle: String { __data["handle"] }
-        /// List of images associated with the product.
-        public var images: Images { __data["images"] }
+        /// The featured image for the product.
+        ///
+        /// This field is functionally equivalent to `images(first: 1)`.
+        public var featuredImage: FeaturedImage? { __data["featuredImage"] }
         /// The minimum and maximum prices of a product, expressed in decimal numbers.
         /// For example, if the product is priced between $10.00 and $50.00,
         /// then the price range is $10.00 - $50.00.
         public var priceRange: PriceRange { __data["priceRange"] }
 
-        /// Products.Node.Images
+        /// Products.Node.FeaturedImage
         ///
-        /// Parent Type: `ImageConnection`
-        public struct Images: ShopifyAPIKit.SelectionSet {
+        /// Parent Type: `Image`
+        public struct FeaturedImage: ShopifyAPIKit.SelectionSet {
           public let __data: DataDict
           public init(_dataDict: DataDict) { __data = _dataDict }
 
-          public static var __parentType: any ApolloAPI.ParentType { ShopifyAPIKit.Objects.ImageConnection }
+          public static var __parentType: any ApolloAPI.ParentType { ShopifyAPIKit.Objects.Image }
           public static var __selections: [ApolloAPI.Selection] { [
             .field("__typename", String.self),
-            .field("nodes", [Node].self),
+            .field("id", ShopifyAPIKit.ID?.self),
+            .field("url", ShopifyAPIKit.URL.self),
+            .field("originalSrc", ShopifyAPIKit.URL.self),
+            .field("altText", String?.self),
+            .field("width", Int?.self),
+            .field("height", Int?.self),
           ] }
 
-          /// A list of the nodes contained in ImageEdge.
-          public var nodes: [Node] { __data["nodes"] }
-
-          /// Products.Node.Images.Node
+          /// A unique ID for the image.
+          public var id: ShopifyAPIKit.ID? { __data["id"] }
+          /// The location of the image as a URL.
           ///
-          /// Parent Type: `Image`
-          public struct Node: ShopifyAPIKit.SelectionSet {
-            public let __data: DataDict
-            public init(_dataDict: DataDict) { __data = _dataDict }
-
-            public static var __parentType: any ApolloAPI.ParentType { ShopifyAPIKit.Objects.Image }
-            public static var __selections: [ApolloAPI.Selection] { [
-              .field("__typename", String.self),
-              .field("altText", String?.self),
-              .field("height", Int?.self),
-              .field("id", ShopifyAPIKit.ID?.self),
-              .field("originalSrc", ShopifyAPIKit.URL.self),
-              .field("url", ShopifyAPIKit.URL.self),
-              .field("width", Int?.self),
-            ] }
-
-            /// A word or phrase to share the nature or contents of an image.
-            public var altText: String? { __data["altText"] }
-            /// The original height of the image in pixels. Returns `null` if the image isn't hosted by Shopify.
-            public var height: Int? { __data["height"] }
-            /// A unique ID for the image.
-            public var id: ShopifyAPIKit.ID? { __data["id"] }
-            /// The location of the original image as a URL.
-            ///
-            /// If there are any existing transformations in the original source URL, they will remain and not be stripped.
-            @available(*, deprecated, message: "Use `url` instead.")
-            public var originalSrc: ShopifyAPIKit.URL { __data["originalSrc"] }
-            /// The location of the image as a URL.
-            ///
-            /// If no transform options are specified, then the original image will be preserved including any pre-applied transforms.
-            ///
-            /// All transformation options are considered "best-effort". Any transformation that the original image type doesn't support will be ignored.
-            ///
-            /// If you need multiple variations of the same image, then you can use [GraphQL aliases](https://graphql.org/learn/queries/#aliases).
-            public var url: ShopifyAPIKit.URL { __data["url"] }
-            /// The original width of the image in pixels. Returns `null` if the image isn't hosted by Shopify.
-            public var width: Int? { __data["width"] }
-          }
+          /// If no transform options are specified, then the original image will be preserved including any pre-applied transforms.
+          ///
+          /// All transformation options are considered "best-effort". Any transformation that the original image type doesn't support will be ignored.
+          ///
+          /// If you need multiple variations of the same image, then you can use [GraphQL aliases](https://graphql.org/learn/queries/#aliases).
+          public var url: ShopifyAPIKit.URL { __data["url"] }
+          /// The location of the original image as a URL.
+          ///
+          /// If there are any existing transformations in the original source URL, they will remain and not be stripped.
+          @available(*, deprecated, message: "Use `url` instead.")
+          public var originalSrc: ShopifyAPIKit.URL { __data["originalSrc"] }
+          /// A word or phrase to share the nature or contents of an image.
+          public var altText: String? { __data["altText"] }
+          /// The original width of the image in pixels. Returns `null` if the image isn't hosted by Shopify.
+          public var width: Int? { __data["width"] }
+          /// The original height of the image in pixels. Returns `null` if the image isn't hosted by Shopify.
+          public var height: Int? { __data["height"] }
         }
 
         /// Products.Node.PriceRange

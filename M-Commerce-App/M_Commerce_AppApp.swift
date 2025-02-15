@@ -5,19 +5,21 @@
 //  Created by Andrew Emad on 12/02/2025.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 @main
 struct M_Commerce_AppApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Product.self,
+            Product.self
         ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+        let modelConfiguration = ModelConfiguration(
+            schema: schema, isStoredInMemoryOnly: false)
 
         do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            return try ModelContainer(
+                for: schema, configurations: [modelConfiguration])
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
         }
@@ -25,7 +27,12 @@ struct M_Commerce_AppApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ZStack {
+                ContentView()
+                SnackbarView()
+                    .environmentObject(SnackbarManager.shared)
+            }
+            
         }
         .modelContainer(sharedModelContainer)
     }
