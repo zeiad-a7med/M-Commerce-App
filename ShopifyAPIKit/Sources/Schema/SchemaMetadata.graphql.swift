@@ -25,6 +25,7 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "Blog": return ShopifyAPIKit.Objects.Blog
     case "Cart": return ShopifyAPIKit.Objects.Cart
     case "CartLine": return ShopifyAPIKit.Objects.CartLine
+    case "CartUserError": return ShopifyAPIKit.Objects.CartUserError
     case "Collection": return ShopifyAPIKit.Objects.Collection
     case "CollectionConnection": return ShopifyAPIKit.Objects.CollectionConnection
     case "Comment": return ShopifyAPIKit.Objects.Comment
@@ -33,6 +34,11 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "CompanyLocation": return ShopifyAPIKit.Objects.CompanyLocation
     case "ComponentizableCartLine": return ShopifyAPIKit.Objects.ComponentizableCartLine
     case "Customer": return ShopifyAPIKit.Objects.Customer
+    case "CustomerAccessToken": return ShopifyAPIKit.Objects.CustomerAccessToken
+    case "CustomerAccessTokenCreatePayload": return ShopifyAPIKit.Objects.CustomerAccessTokenCreatePayload
+    case "CustomerAccessTokenDeletePayload": return ShopifyAPIKit.Objects.CustomerAccessTokenDeletePayload
+    case "CustomerCreatePayload": return ShopifyAPIKit.Objects.CustomerCreatePayload
+    case "CustomerUserError": return ShopifyAPIKit.Objects.CustomerUserError
     case "ExternalVideo": return ShopifyAPIKit.Objects.ExternalVideo
     case "Filter": return ShopifyAPIKit.Objects.Filter
     case "FilterValue": return ShopifyAPIKit.Objects.FilterValue
@@ -41,16 +47,21 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "ImageConnection": return ShopifyAPIKit.Objects.ImageConnection
     case "Location": return ShopifyAPIKit.Objects.Location
     case "MailingAddress": return ShopifyAPIKit.Objects.MailingAddress
+    case "MailingAddressConnection": return ShopifyAPIKit.Objects.MailingAddressConnection
     case "Market": return ShopifyAPIKit.Objects.Market
     case "MediaImage": return ShopifyAPIKit.Objects.MediaImage
     case "MediaPresentation": return ShopifyAPIKit.Objects.MediaPresentation
     case "Menu": return ShopifyAPIKit.Objects.Menu
     case "MenuItem": return ShopifyAPIKit.Objects.MenuItem
     case "Metafield": return ShopifyAPIKit.Objects.Metafield
+    case "MetafieldDeleteUserError": return ShopifyAPIKit.Objects.MetafieldDeleteUserError
+    case "MetafieldsSetUserError": return ShopifyAPIKit.Objects.MetafieldsSetUserError
     case "Metaobject": return ShopifyAPIKit.Objects.Metaobject
     case "Model3d": return ShopifyAPIKit.Objects.Model3d
     case "MoneyV2": return ShopifyAPIKit.Objects.MoneyV2
+    case "Mutation": return ShopifyAPIKit.Objects.Mutation
     case "Order": return ShopifyAPIKit.Objects.Order
+    case "OrderConnection": return ShopifyAPIKit.Objects.OrderConnection
     case "Page": return ShopifyAPIKit.Objects.Page
     case "PageInfo": return ShopifyAPIKit.Objects.PageInfo
     case "Product": return ShopifyAPIKit.Objects.Product
@@ -70,6 +81,8 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "StringConnection": return ShopifyAPIKit.Objects.StringConnection
     case "TaxonomyCategory": return ShopifyAPIKit.Objects.TaxonomyCategory
     case "UrlRedirect": return ShopifyAPIKit.Objects.UrlRedirect
+    case "UserError": return ShopifyAPIKit.Objects.UserError
+    case "UserErrorsShopPayPaymentRequestSessionUserErrors": return ShopifyAPIKit.Objects.UserErrorsShopPayPaymentRequestSessionUserErrors
     case "Video": return ShopifyAPIKit.Objects.Video
     default: return nil
     }
