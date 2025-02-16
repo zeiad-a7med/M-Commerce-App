@@ -30,6 +30,7 @@ class LoginViewModel: ObservableObject {
                 if result.success {
                     SnackbarManager.shared.show(
                         message: "Signed in successfully 🤝🏻!")
+                    AuthManager.shared.updateUser(updatedUser: result.applicationUser!)
                 } else {
                     SnackbarManager.shared.show(
                         message: "\(result.messages.first ?? "")!")

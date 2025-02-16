@@ -38,7 +38,7 @@ class AuthManager: ObservableObject {
 
     /// Update user details (name, email, etc.)
     func updateUser(updatedUser : ApplicationUser) {
-        guard let modelContext = modelContext, let user = applicationUser else {
+        guard modelContext != nil else{
             return
         }
         applicationUser = updatedUser
@@ -59,6 +59,9 @@ class AuthManager: ObservableObject {
         } catch {
             print("Error logging out user: \(error)")
         }
+    }
+    func isLoggedIn() -> Bool {
+        return applicationUser != nil
     }
 
     /// Save changes to the database
