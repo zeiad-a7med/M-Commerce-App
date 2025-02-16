@@ -136,13 +136,14 @@ struct RegisterView: View {
                     }.padding(.bottom, 30)
 
                     CustomRoundedButtonView(
-                        text: "Create Account", width: 100,
+                        text: "Create Account", width: 50,
                         onTap: {
                             var codedPhone: String = phone
                             codedPhone.insert(
                                 contentsOf: selectedCountry.code,
                                 at: phone.startIndex)
                             print(codedPhone)
+                            SnackbarManager.shared.show(message: "Successfully registered 🤝🏻!")
                         },
                         isButtonEnabled: $isFormValid
                     )

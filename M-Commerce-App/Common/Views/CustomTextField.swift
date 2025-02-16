@@ -55,7 +55,7 @@ struct CustomTextField: View {
                                     errorMessage = TextValidation.validateText(
                                         text, type: validationType!)
                                 }
-                                isValid?(!hasError)
+                                isValid?(!hasError && !text.isEmpty)
                             }
 
                         })

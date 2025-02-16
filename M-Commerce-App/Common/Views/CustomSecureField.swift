@@ -57,7 +57,7 @@ struct CustomSecureField: View {
                                             TextValidation.validateText(
                                                 text, type: validationType!)
                                     }
-                                    isValid?(!hasError)
+                                    isValid?(!hasError && !text.isEmpty)
                                 }
                             })
                 } else {
@@ -81,7 +81,7 @@ struct CustomSecureField: View {
                                             TextValidation.validateText(
                                                 text, type: validationType!)
                                     }
-                                    isValid?(!hasError)
+                                    isValid?(!hasError && !text.isEmpty)
                                 }
                             })
 
