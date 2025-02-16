@@ -37,12 +37,11 @@ class AuthManager: ObservableObject {
     }
 
     /// Update user details (name, email, etc.)
-    func updateUser(name: String? = nil, email: String? = nil) {
+    func updateUser(updatedUser : ApplicationUser) {
         guard let modelContext = modelContext, let user = applicationUser else {
             return
         }
-//        if let name = name { user.name = name }
-        if let email = email { user.email = email }
+        applicationUser = updatedUser
         saveContext()
     }
 
