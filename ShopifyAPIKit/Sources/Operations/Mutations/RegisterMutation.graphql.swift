@@ -7,7 +7,7 @@ public class RegisterMutation: GraphQLMutation {
   public static let operationName: String = "Register"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"mutation Register($firstName: String, $lastName: String, $email: String!, $phone: String, $password: String!, $acceptsMarketing: Boolean) { customerCreate( input: { firstName: $firstName lastName: $lastName email: $email phone: $phone password: $password acceptsMarketing: $acceptsMarketing } ) { __typename customer { __typename acceptsMarketing createdAt displayName email firstName id lastName numberOfOrders phone } userErrors { __typename field message } } }"#
+      #"mutation Register($firstName: String, $lastName: String, $email: String!, $phone: String, $password: String!, $acceptsMarketing: Boolean) { customerCreate( input: { firstName: $firstName lastName: $lastName email: $email phone: $phone password: $password acceptsMarketing: $acceptsMarketing } ) { __typename customer { __typename acceptsMarketing createdAt displayName email firstName id lastName numberOfOrders phone } customerUserErrors { __typename field message } } }"#
     ))
 
   public var firstName: GraphQLNullable<String>
@@ -72,14 +72,13 @@ public class RegisterMutation: GraphQLMutation {
       public static var __selections: [ApolloAPI.Selection] { [
         .field("__typename", String.self),
         .field("customer", Customer?.self),
-        .field("userErrors", [UserError].self),
+        .field("customerUserErrors", [CustomerUserError].self),
       ] }
 
       /// The created customer object.
       public var customer: Customer? { __data["customer"] }
       /// The list of errors that occurred from executing the mutation.
-      @available(*, deprecated, message: "Use `customerUserErrors` instead.")
-      public var userErrors: [UserError] { __data["userErrors"] }
+      public var customerUserErrors: [CustomerUserError] { __data["customerUserErrors"] }
 
       /// CustomerCreate.Customer
       ///
@@ -122,14 +121,14 @@ public class RegisterMutation: GraphQLMutation {
         public var phone: String? { __data["phone"] }
       }
 
-      /// CustomerCreate.UserError
+      /// CustomerCreate.CustomerUserError
       ///
-      /// Parent Type: `UserError`
-      public struct UserError: ShopifyAPIKit.SelectionSet {
+      /// Parent Type: `CustomerUserError`
+      public struct CustomerUserError: ShopifyAPIKit.SelectionSet {
         public let __data: DataDict
         public init(_dataDict: DataDict) { __data = _dataDict }
 
-        public static var __parentType: any ApolloAPI.ParentType { ShopifyAPIKit.Objects.UserError }
+        public static var __parentType: any ApolloAPI.ParentType { ShopifyAPIKit.Objects.CustomerUserError }
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
           .field("field", [String]?.self),

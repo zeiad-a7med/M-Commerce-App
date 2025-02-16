@@ -7,7 +7,7 @@ public class LoginMutation: GraphQLMutation {
   public static let operationName: String = "Login"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"mutation Login($email: String!, $password: String!) { customerAccessTokenCreate(input: { email: $email, password: $password }) { __typename customerAccessToken { __typename accessToken expiresAt } userErrors { __typename field message } } }"#
+      #"mutation Login($email: String!, $password: String!) { customerAccessTokenCreate(input: { email: $email, password: $password }) { __typename customerAccessToken { __typename accessToken expiresAt } customerUserErrors { __typename field message } } }"#
     ))
 
   public var email: String
@@ -53,14 +53,13 @@ public class LoginMutation: GraphQLMutation {
       public static var __selections: [ApolloAPI.Selection] { [
         .field("__typename", String.self),
         .field("customerAccessToken", CustomerAccessToken?.self),
-        .field("userErrors", [UserError].self),
+        .field("customerUserErrors", [CustomerUserError].self),
       ] }
 
       /// The newly created customer access token object.
       public var customerAccessToken: CustomerAccessToken? { __data["customerAccessToken"] }
       /// The list of errors that occurred from executing the mutation.
-      @available(*, deprecated, message: "Use `customerUserErrors` instead.")
-      public var userErrors: [UserError] { __data["userErrors"] }
+      public var customerUserErrors: [CustomerUserError] { __data["customerUserErrors"] }
 
       /// CustomerAccessTokenCreate.CustomerAccessToken
       ///
@@ -82,14 +81,14 @@ public class LoginMutation: GraphQLMutation {
         public var expiresAt: ShopifyAPIKit.DateTime { __data["expiresAt"] }
       }
 
-      /// CustomerAccessTokenCreate.UserError
+      /// CustomerAccessTokenCreate.CustomerUserError
       ///
-      /// Parent Type: `UserError`
-      public struct UserError: ShopifyAPIKit.SelectionSet {
+      /// Parent Type: `CustomerUserError`
+      public struct CustomerUserError: ShopifyAPIKit.SelectionSet {
         public let __data: DataDict
         public init(_dataDict: DataDict) { __data = _dataDict }
 
-        public static var __parentType: any ApolloAPI.ParentType { ShopifyAPIKit.Objects.UserError }
+        public static var __parentType: any ApolloAPI.ParentType { ShopifyAPIKit.Objects.CustomerUserError }
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
           .field("field", [String]?.self),

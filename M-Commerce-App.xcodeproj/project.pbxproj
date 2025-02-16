@@ -59,6 +59,10 @@
 		890D87DA2D5DF66C0062E8D1 /* ProductInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890D87952D5DF66C0062E8D1 /* ProductInfoView.swift */; };
 		890D87DB2D5DF66C0062E8D1 /* PopupCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890D87B32D5DF66C0062E8D1 /* PopupCircleView.swift */; };
 		8952A6792D61FB260003ACF4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952A6762D61FB260003ACF4 /* LoginView.swift */; };
+		8952A67B2D6201A80003ACF4 /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952A67A2D6201A80003ACF4 /* RegisterResponse.swift */; };
+		8952A67E2D6202340003ACF4 /* RegisterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952A67D2D6202340003ACF4 /* RegisterService.swift */; };
+		8952A6802D6206960003ACF4 /* RegisterMutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952A67F2D6206960003ACF4 /* RegisterMutation.swift */; };
+		8952A6822D620F870003ACF4 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952A6812D620F870003ACF4 /* RegisterViewModel.swift */; };
 		89B00B6E2D610C0200AF1FB7 /* Login.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B6D2D610C0200AF1FB7 /* Login.graphql */; };
 		89B00B702D61126300AF1FB7 /* Register.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B6F2D61126300AF1FB7 /* Register.graphql */; };
 		89B00B722D61178900AF1FB7 /* Logout.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B712D61178900AF1FB7 /* Logout.graphql */; };
@@ -181,6 +185,10 @@
 		890D87B72D5DF66C0062E8D1 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		890D87B92D5DF66C0062E8D1 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
 		8952A6762D61FB260003ACF4 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		8952A67A2D6201A80003ACF4 /* RegisterResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterResponse.swift; sourceTree = "<group>"; };
+		8952A67D2D6202340003ACF4 /* RegisterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterService.swift; sourceTree = "<group>"; };
+		8952A67F2D6206960003ACF4 /* RegisterMutation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterMutation.swift; sourceTree = "<group>"; };
+		8952A6812D620F870003ACF4 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		89B00B6D2D610C0200AF1FB7 /* Login.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Login.graphql; sourceTree = "<group>"; };
 		89B00B6F2D61126300AF1FB7 /* Register.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Register.graphql; sourceTree = "<group>"; };
 		89B00B712D61178900AF1FB7 /* Logout.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Logout.graphql; sourceTree = "<group>"; };
@@ -696,6 +704,14 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		8952A67C2D62021F0003ACF4 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				8952A67D2D6202340003ACF4 /* RegisterService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		89B00B692D610BC000AF1FB7 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -727,6 +743,7 @@
 		89B00B6C2D610BE200AF1FB7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				8952A67F2D6206960003ACF4 /* RegisterMutation.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -761,6 +778,7 @@
 		89B00B812D6130EB00AF1FB7 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				8952A6812D620F870003ACF4 /* RegisterViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -768,6 +786,8 @@
 		89B00B822D6130F500AF1FB7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8952A67C2D62021F0003ACF4 /* Service */,
+				8952A67A2D6201A80003ACF4 /* RegisterResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1110,10 +1130,12 @@
 				C44BEDA32D5D17E10022B603 /* Collection.swift in Sources */,
 				C4BC561C2D5F937C00F9D42A /* FlatFilterBar.swift in Sources */,
 				89B00B8F2D6157DE00AF1FB7 /* TextValidation.swift in Sources */,
+				8952A67B2D6201A80003ACF4 /* RegisterResponse.swift in Sources */,
 				890D87422D5D43F70062E8D1 /* CustomStepper.swift in Sources */,
 				C44BEDB22D5D1FD70022B603 /* PriceRange.swift in Sources */,
 				890D87BD2D5DF66C0062E8D1 /* ProductCardView.swift in Sources */,
 				890D87BE2D5DF66C0062E8D1 /* CategorieView.swift in Sources */,
+				8952A6822D620F870003ACF4 /* RegisterViewModel.swift in Sources */,
 				89CAF31C2D6007AE003984FA /* SettingsListRow.swift in Sources */,
 				89CAF31D2D6007AE003984FA /* Settings.swift in Sources */,
 				89CAF31E2D6007AE003984FA /* EditProfile.swift in Sources */,
@@ -1133,6 +1155,7 @@
 				890D87C42D5DF66C0062E8D1 /* ShoppingCartViewModel.swift in Sources */,
 				89B00B862D61392700AF1FB7 /* Country.swift in Sources */,
 				890D87C52D5DF66C0062E8D1 /* Cart.swift in Sources */,
+				8952A6802D6206960003ACF4 /* RegisterMutation.swift in Sources */,
 				890D87C62D5DF66C0062E8D1 /* FilterBar.swift in Sources */,
 				89B00B722D61178900AF1FB7 /* Logout.graphql in Sources */,
 				890D87C72D5DF66C0062E8D1 /* BrandsModel.swift in Sources */,
@@ -1162,6 +1185,7 @@
 				890D87D62D5DF66C0062E8D1 /* AdCardView.swift in Sources */,
 				89B00B8D2D6148CF00AF1FB7 /* CustomSecureField.swift in Sources */,
 				890D87D72D5DF66C0062E8D1 /* AdModel.swift in Sources */,
+				8952A67E2D6202340003ACF4 /* RegisterService.swift in Sources */,
 				890D87D82D5DF66C0062E8D1 /* DeleteButton.swift in Sources */,
 				890D87D92D5DF66C0062E8D1 /* BrandCard.swift in Sources */,
 				890D87DA2D5DF66C0062E8D1 /* ProductInfoView.swift in Sources */,

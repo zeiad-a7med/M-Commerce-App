@@ -27,7 +27,7 @@ mutation Register (
             numberOfOrders
             phone
         }
-        userErrors {
+        customerUserErrors {
             field
             message
         }
