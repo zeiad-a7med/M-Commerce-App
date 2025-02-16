@@ -26,8 +26,6 @@ struct HomePageView: View {
                             },
                             prefix: {
                                 Image(systemName: "magnifyingglass")
-                                    .foregroundColor(.black)
-                                    .font(.title2)
                             }
                         )
                         .padding([.leading,.trailing],20)
