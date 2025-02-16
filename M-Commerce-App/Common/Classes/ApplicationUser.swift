@@ -13,6 +13,7 @@ import SwiftData
 final class ApplicationUser{
     @Attribute(.unique) var id: String
     var accessToken: String?
+    var accessTokenExpiresAt: String?
     var displayName: String?
     var email: String?
     var firstName: String?
@@ -22,9 +23,10 @@ final class ApplicationUser{
     var addresses: [Address]?
     var defaultAddress: Address?
     var orders: [Order]?
-    init(id: String, accessToken: String? = nil, displayName: String? = nil, email: String? = nil, firstName: String? = nil, lastName: String? = nil, numberOfOrders: Int? = nil, phone: String? = nil, addresses: [Address]? = nil, defaultAddress: Address? = nil, orders: [Order]? = nil) {
+    init(id: String, accessToken: String? = nil,accessTokenExpiresAt: String? = nil, displayName: String? = nil, email: String? = nil, firstName: String? = nil, lastName: String? = nil, numberOfOrders: Int? = nil, phone: String? = nil, addresses: [Address]? = nil, defaultAddress: Address? = nil, orders: [Order]? = nil) {
         self.id = id
         self.accessToken = accessToken
+        self.accessTokenExpiresAt = accessTokenExpiresAt
         self.displayName = displayName
         self.email = email
         self.firstName = firstName
