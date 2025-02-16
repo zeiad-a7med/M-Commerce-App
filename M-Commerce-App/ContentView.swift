@@ -11,16 +11,18 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
 
     var body: some View {
-        TabView {
-            HomePageView()
-                .tabItem {
-                    Label("Home", systemImage: "house.fill")
-                }
-            CategorieView()
-                .tabItem {
-                    Label("Categories", systemImage: "square.stack.3d.up.fill")
-                }
-        }.onAppear {
+//        TabView {
+//            HomePageView()
+//                .tabItem {
+//                    Label("Home", systemImage: "house.fill")
+//                }
+//            CategorieView()
+//                .tabItem {
+//                    Label("Categories", systemImage: "square.stack.3d.up.fill")
+//                }
+//        }
+        RegisterView()
+        .onAppear {
             FavoritesManager.shared.setContext(modelContext) // Now modelContext is available
         }
     }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RegisterView: View {
+    @StateObject var viewModel = RegisterViewModel()
     @State private var selectedCountry: Country = Constants.countries.first!
     @State private var currentCurrency: String = "USD"
 
@@ -142,8 +143,13 @@ struct RegisterView: View {
                             codedPhone.insert(
                                 contentsOf: selectedCountry.code,
                                 at: phone.startIndex)
-                            print(codedPhone)
-                            SnackbarManager.shared.show(message: "Successfully registered 🤝🏻!")
+                            viewModel.register(
+                                firstName: firstName,
+                                lastName: lastName,
+                                email: email,
+                                phone: codedPhone,
+                                password: password
+                            )
                         },
                         isButtonEnabled: $isFormValid
                     )
