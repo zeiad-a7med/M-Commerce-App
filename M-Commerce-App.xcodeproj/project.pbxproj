@@ -65,6 +65,11 @@
 		89B00B792D611A7F00AF1FB7 /* ApplicationUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B782D611A7F00AF1FB7 /* ApplicationUser.swift */; };
 		89B00B7B2D6127C300AF1FB7 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B7A2D6127C300AF1FB7 /* Address.swift */; };
 		89B00B7D2D612A8900AF1FB7 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B7C2D612A8900AF1FB7 /* Order.swift */; };
+		89B00B842D61312A00AF1FB7 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B832D61312A00AF1FB7 /* RegisterView.swift */; };
+		89B00B862D61392700AF1FB7 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B852D61392700AF1FB7 /* Country.swift */; };
+		89B00B8B2D6139A300AF1FB7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B8A2D6139A300AF1FB7 /* Constants.swift */; };
+		89B00B8D2D6148CF00AF1FB7 /* CustomSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B8C2D6148CF00AF1FB7 /* CustomSecureField.swift */; };
+		89B00B8F2D6157DE00AF1FB7 /* TextValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B8E2D6157DD00AF1FB7 /* TextValidation.swift */; };
 		89CAF31C2D6007AE003984FA /* SettingsListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAF3152D6007AE003984FA /* SettingsListRow.swift */; };
 		89CAF31D2D6007AE003984FA /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAF3192D6007AE003984FA /* Settings.swift */; };
 		89CAF31E2D6007AE003984FA /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAF3182D6007AE003984FA /* EditProfile.swift */; };
@@ -179,6 +184,11 @@
 		89B00B782D611A7F00AF1FB7 /* ApplicationUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationUser.swift; sourceTree = "<group>"; };
 		89B00B7A2D6127C300AF1FB7 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		89B00B7C2D612A8900AF1FB7 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		89B00B832D61312A00AF1FB7 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		89B00B852D61392700AF1FB7 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		89B00B8A2D6139A300AF1FB7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = /Users/zeiad/Documents/Constants.swift; sourceTree = "<absolute>"; };
+		89B00B8C2D6148CF00AF1FB7 /* CustomSecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSecureField.swift; sourceTree = "<group>"; };
+		89B00B8E2D6157DD00AF1FB7 /* TextValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextValidation.swift; sourceTree = "<group>"; };
 		89CAF3132D6007AE003984FA /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		89CAF3142D6007AE003984FA /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
 		89CAF3152D6007AE003984FA /* SettingsListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListRow.swift; sourceTree = "<group>"; };
@@ -266,6 +276,7 @@
 		48F009EE2D5C94F9002A016E /* M-Commerce-App */ = {
 			isa = PBXGroup;
 			children = (
+				89B00B872D61398100AF1FB7 /* Constanst */,
 				890D86CB2D5CD55E0062E8D1 /* ApolloNetwokService */,
 				890D86C32D5CD4B90062E8D1 /* graphql */,
 				89D508492D5C10C600046FA9 /* Common */,
@@ -390,6 +401,7 @@
 				89B00B782D611A7F00AF1FB7 /* ApplicationUser.swift */,
 				89B00B7A2D6127C300AF1FB7 /* Address.swift */,
 				89B00B7C2D612A8900AF1FB7 /* Order.swift */,
+				89B00B852D61392700AF1FB7 /* Country.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -679,6 +691,54 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		89B00B7E2D61304200AF1FB7 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				89B00B7F2D6130BF00AF1FB7 /* Register */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		89B00B7F2D6130BF00AF1FB7 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				89B00B822D6130F500AF1FB7 /* Model */,
+				89B00B812D6130EB00AF1FB7 /* ViewModel */,
+				89B00B802D6130E100AF1FB7 /* View */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		89B00B802D6130E100AF1FB7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				89B00B832D61312A00AF1FB7 /* RegisterView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		89B00B812D6130EB00AF1FB7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		89B00B822D6130F500AF1FB7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		89B00B872D61398100AF1FB7 /* Constanst */ = {
+			isa = PBXGroup;
+			children = (
+				89B00B8A2D6139A300AF1FB7 /* Constants.swift */,
+			);
+			path = Constanst;
+			sourceTree = "<group>";
+		};
 		89CAF3162D6007AE003984FA /* SubView */ = {
 			isa = PBXGroup;
 			children = (
@@ -721,6 +781,7 @@
 				890D87542D5D55C00062E8D1 /* ReadMoreText.swift */,
 				89CAF3222D602432003984FA /* RoundedCornerShape.swift */,
 				89CAF3282D60666B003984FA /* SnakeBar.swift */,
+				89B00B8C2D6148CF00AF1FB7 /* CustomSecureField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -740,6 +801,7 @@
 				89D5084D2D5C10CA00046FA9 /* ThemeManager.swift */,
 				89CAF3262D603C01003984FA /* FavoritesManager.swift */,
 				89CAF32A2D606813003984FA /* SnackbarManager.swift */,
+				89B00B8E2D6157DD00AF1FB7 /* TextValidation.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -747,6 +809,7 @@
 		89D508622D5C10CE00046FA9 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				89B00B7E2D61304200AF1FB7 /* Auth */,
 				89CAF31B2D6007AE003984FA /* Settings */,
 				C4BC560D2D5F8E2400F9D42A /* Products */,
 				890D878E2D5DF66C0062E8D1 /* ShopingCartScreen */,
@@ -1005,6 +1068,7 @@
 				C44BEDAE2D5D1F540022B603 /* Product.swift in Sources */,
 				C44BEDA32D5D17E10022B603 /* Collection.swift in Sources */,
 				C4BC561C2D5F937C00F9D42A /* FlatFilterBar.swift in Sources */,
+				89B00B8F2D6157DE00AF1FB7 /* TextValidation.swift in Sources */,
 				890D87422D5D43F70062E8D1 /* CustomStepper.swift in Sources */,
 				C44BEDB22D5D1FD70022B603 /* PriceRange.swift in Sources */,
 				890D87BD2D5DF66C0062E8D1 /* ProductCardView.swift in Sources */,
@@ -1025,6 +1089,7 @@
 				890D87C22D5DF66C0062E8D1 /* RowCard.swift in Sources */,
 				890D87C32D5DF66C0062E8D1 /* AdViewModel.swift in Sources */,
 				890D87C42D5DF66C0062E8D1 /* ShoppingCartViewModel.swift in Sources */,
+				89B00B862D61392700AF1FB7 /* Country.swift in Sources */,
 				890D87C52D5DF66C0062E8D1 /* Cart.swift in Sources */,
 				890D87C62D5DF66C0062E8D1 /* FilterBar.swift in Sources */,
 				89B00B722D61178900AF1FB7 /* Logout.graphql in Sources */,
@@ -1052,6 +1117,7 @@
 				89CAF3292D60666B003984FA /* SnakeBar.swift in Sources */,
 				89CAF3232D602432003984FA /* RoundedCornerShape.swift in Sources */,
 				890D87D62D5DF66C0062E8D1 /* AdCardView.swift in Sources */,
+				89B00B8D2D6148CF00AF1FB7 /* CustomSecureField.swift in Sources */,
 				890D87D72D5DF66C0062E8D1 /* AdModel.swift in Sources */,
 				890D87D82D5DF66C0062E8D1 /* DeleteButton.swift in Sources */,
 				890D87D92D5DF66C0062E8D1 /* BrandCard.swift in Sources */,
@@ -1064,6 +1130,7 @@
 				890D86E42D5CFF220062E8D1 /* PageInfo.swift in Sources */,
 				89D5084B2D5C10C600046FA9 /* CustomSearchBarView.swift in Sources */,
 				890D870F2D5D25500062E8D1 /* StarRatingView.swift in Sources */,
+				89B00B842D61312A00AF1FB7 /* RegisterView.swift in Sources */,
 				890D86CC2D5CD55E0062E8D1 /* ApolloNetwokService.swift in Sources */,
 				C4F3FC7B2D5E88CC005151E9 /* CategoriesModel.swift in Sources */,
 				89B00B702D61126300AF1FB7 /* Register.graphql in Sources */,
@@ -1075,6 +1142,7 @@
 				89D508432D5C0CD400046FA9 /* ContentView.swift in Sources */,
 				C4F3FC7D2D5E9256005151E9 /* CategoriesViewModel.swift in Sources */,
 				48F009F02D5C94F9002A016E /* M_Commerce_AppApp.swift in Sources */,
+				89B00B8B2D6139A300AF1FB7 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

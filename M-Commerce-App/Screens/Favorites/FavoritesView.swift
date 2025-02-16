@@ -32,17 +32,6 @@ struct FavoritesView: View {
                         },
                         prefix: {
                             Image(systemName: "magnifyingglass")
-                                .foregroundColor(.black)
-                                .font(.title2)
-                        },
-                        suffix: {
-                            Button(action: {
-                                print("Cleared")
-                            }) {
-                                Image(systemName: "line.3.horizontal.decrease")
-                                    .foregroundColor(.black)
-                                    .font(.title2)
-                            }
                         }
                     )
                     .padding()
