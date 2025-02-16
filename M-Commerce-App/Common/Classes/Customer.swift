@@ -9,12 +9,8 @@ import Foundation
 import ShopifyAPIKit
 import SwiftData
 
-import Foundation
-import ShopifyAPIKit
-import SwiftData
-
 @Model
-final class ApplicationUser{
+final class Customer{
     var accessToken: String?
     var accessTokenExpiresAt: String?
     @Attribute(.unique) var id: String

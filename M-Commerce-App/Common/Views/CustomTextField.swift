@@ -121,17 +121,17 @@ struct CustomTextField: View {
         onChange: { text in
             print("Search text: \(text)")
         },
-        prefix: {
-            Image(systemName: "magnifyingglass")
-
-        },
-        suffix: {
-            Button(action: {
-                print("Cleared")
-            }) {
-                Image(systemName: "heart")
-            }
-        },
+//        prefix: {
+//            Image(systemName: "magnifyingglass")
+//
+//        },
+//        suffix: {
+//            Button(action: {
+//                print("Cleared")
+//            }) {
+//                Image(systemName: "heart")
+//            }
+//        },
         characterLimit: 5
 
     )

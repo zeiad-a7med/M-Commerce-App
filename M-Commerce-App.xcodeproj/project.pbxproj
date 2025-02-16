@@ -66,11 +66,13 @@
 		8952A6892D621F340003ACF4 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952A6872D621F340003ACF4 /* LoginViewModel.swift */; };
 		8952A68A2D621F340003ACF4 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952A6852D621F340003ACF4 /* LoginResponse.swift */; };
 		8952A68B2D621F340003ACF4 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952A6832D621F340003ACF4 /* LoginService.swift */; };
+		8952A68D2D62698D0003ACF4 /* ProfileQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952A68C2D62698D0003ACF4 /* ProfileQuery.swift */; };
+		8952A6912D6284870003ACF4 /* ApplicationUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952A6902D6284870003ACF4 /* ApplicationUser.swift */; };
+		8952A6932D62865F0003ACF4 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952A6922D62865F0003ACF4 /* AuthManager.swift */; };
 		89B00B6E2D610C0200AF1FB7 /* Login.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B6D2D610C0200AF1FB7 /* Login.graphql */; };
 		89B00B702D61126300AF1FB7 /* Register.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B6F2D61126300AF1FB7 /* Register.graphql */; };
 		89B00B722D61178900AF1FB7 /* Logout.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B712D61178900AF1FB7 /* Logout.graphql */; };
 		89B00B752D6119C600AF1FB7 /* Profile.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 89B00B742D6119C600AF1FB7 /* Profile.graphql */; };
-		89B00B792D611A7F00AF1FB7 /* ApplicationUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B782D611A7F00AF1FB7 /* ApplicationUser.swift */; };
 		89B00B7B2D6127C300AF1FB7 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B7A2D6127C300AF1FB7 /* Address.swift */; };
 		89B00B7D2D612A8900AF1FB7 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B7C2D612A8900AF1FB7 /* Order.swift */; };
 		89B00B842D61312A00AF1FB7 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B832D61312A00AF1FB7 /* RegisterView.swift */; };
@@ -195,11 +197,13 @@
 		8952A6832D621F340003ACF4 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		8952A6852D621F340003ACF4 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		8952A6872D621F340003ACF4 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		8952A68C2D62698D0003ACF4 /* ProfileQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileQuery.swift; sourceTree = "<group>"; };
+		8952A6902D6284870003ACF4 /* ApplicationUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationUser.swift; sourceTree = "<group>"; };
+		8952A6922D62865F0003ACF4 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		89B00B6D2D610C0200AF1FB7 /* Login.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Login.graphql; sourceTree = "<group>"; };
 		89B00B6F2D61126300AF1FB7 /* Register.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Register.graphql; sourceTree = "<group>"; };
 		89B00B712D61178900AF1FB7 /* Logout.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Logout.graphql; sourceTree = "<group>"; };
 		89B00B742D6119C600AF1FB7 /* Profile.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Profile.graphql; sourceTree = "<group>"; };
-		89B00B782D611A7F00AF1FB7 /* ApplicationUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationUser.swift; sourceTree = "<group>"; };
 		89B00B7A2D6127C300AF1FB7 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		89B00B7C2D612A8900AF1FB7 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		89B00B832D61312A00AF1FB7 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
@@ -411,6 +415,7 @@
 		890D86E22D5CFF020062E8D1 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8952A6902D6284870003ACF4 /* ApplicationUser.swift */,
 				89CAF3242D60288F003984FA /* AlertContent.swift */,
 				890D86E32D5CFF170062E8D1 /* PageInfo.swift */,
 				C44BEDA22D5D17E10022B603 /* Collection.swift */,
@@ -418,7 +423,6 @@
 				C44BEDAD2D5D1F540022B603 /* Product.swift */,
 				C44BEDAF2D5D1FC80022B603 /* Price.swift */,
 				C44BEDB12D5D1FD70022B603 /* PriceRange.swift */,
-				89B00B782D611A7F00AF1FB7 /* ApplicationUser.swift */,
 				89B00B7A2D6127C300AF1FB7 /* Address.swift */,
 				89B00B7C2D612A8900AF1FB7 /* Order.swift */,
 				89B00B852D61392700AF1FB7 /* Country.swift */,
@@ -761,6 +765,7 @@
 			isa = PBXGroup;
 			children = (
 				8952A67F2D6206960003ACF4 /* RegisterMutation.swift */,
+				8952A68C2D62698D0003ACF4 /* ProfileQuery.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -878,6 +883,7 @@
 			children = (
 				89D5084D2D5C10CA00046FA9 /* ThemeManager.swift */,
 				89CAF3262D603C01003984FA /* FavoritesManager.swift */,
+				8952A6922D62865F0003ACF4 /* AuthManager.swift */,
 				89CAF32A2D606813003984FA /* SnackbarManager.swift */,
 				89B00B8E2D6157DD00AF1FB7 /* TextValidation.swift */,
 			);
@@ -1141,6 +1147,7 @@
 				48F009F42D5C94F9002A016E /* Item.swift in Sources */,
 				89D5084A2D5C10C600046FA9 /* CustomNetworkImageView.swift in Sources */,
 				C44BEDA72D5D198F0022B603 /* ImgModel.swift in Sources */,
+				8952A6912D6284870003ACF4 /* ApplicationUser.swift in Sources */,
 				89B00B6E2D610C0200AF1FB7 /* Login.graphql in Sources */,
 				C44BEDB02D5D1FC80022B603 /* Price.swift in Sources */,
 				C44BEDAE2D5D1F540022B603 /* Product.swift in Sources */,
@@ -1159,6 +1166,7 @@
 				89CAF31F2D6007AE003984FA /* ChangePassword.swift in Sources */,
 				89CAF3252D60288F003984FA /* AlertContent.swift in Sources */,
 				C401B5D12D6108CD004BCB2F /* FloatingButtonView.swift in Sources */,
+				8952A6932D62865F0003ACF4 /* AuthManager.swift in Sources */,
 				89CAF3202D6007AE003984FA /* Currency.swift in Sources */,
 				89CAF3212D6007AE003984FA /* ProfileImage.swift in Sources */,
 				890D87BF2D5DF66C0062E8D1 /* ProductsSubView.swift in Sources */,
@@ -1176,7 +1184,6 @@
 				890D87C62D5DF66C0062E8D1 /* FilterBar.swift in Sources */,
 				89B00B722D61178900AF1FB7 /* Logout.graphql in Sources */,
 				890D87C72D5DF66C0062E8D1 /* BrandsModel.swift in Sources */,
-				89B00B792D611A7F00AF1FB7 /* ApplicationUser.swift in Sources */,
 				890D87C82D5DF66C0062E8D1 /* HeaderView.swift in Sources */,
 				890D87C92D5DF66C0062E8D1 /* BrandsViewModel.swift in Sources */,
 				89CAF3272D603C01003984FA /* FavoritesManager.swift in Sources */,
@@ -1191,6 +1198,7 @@
 				890D87CE2D5DF66C0062E8D1 /* ProductService.swift in Sources */,
 				890D87CF2D5DF66C0062E8D1 /* BrandsView.swift in Sources */,
 				890D87D02D5DF66C0062E8D1 /* ShoppingView.swift in Sources */,
+				8952A68D2D62698D0003ACF4 /* ProfileQuery.swift in Sources */,
 				890D87D12D5DF66C0062E8D1 /* ButtonView.swift in Sources */,
 				890D87D22D5DF66C0062E8D1 /* ViewModelTest.swift in Sources */,
 				890D87D32D5DF66C0062E8D1 /* HomePageView.swift in Sources */,

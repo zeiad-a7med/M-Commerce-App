@@ -32,6 +32,10 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
-        .modelContainer(for: Product.self, inMemory: true)
+    ZStack {
+        ContentView()
+        SnackbarView()
+            .environmentObject(SnackbarManager.shared)
+    }
+    .modelContainer(for: [Product.self,ApplicationUser.self], inMemory: true)
 }
