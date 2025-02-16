@@ -23,7 +23,7 @@ struct CategorieView: View {
             ZStack(alignment: .bottomTrailing) {
                 ScrollView {
                     LazyVStack {
-                        CustomSearchBarView(
+                        CustomTextField(
                             placeholder: "search for a product...",
                             onChange: { text in
                                 print(text)

@@ -19,7 +19,7 @@ struct HomePageView: View {
             ZStack {  //start of: ZStack
                 ScrollView {
                     LazyVStack {
-                        CustomSearchBarView(
+                        CustomTextField(
                             placeholder: "search for brand ...",
                             onChange: { text in
                                 print("Search text: \(text)")

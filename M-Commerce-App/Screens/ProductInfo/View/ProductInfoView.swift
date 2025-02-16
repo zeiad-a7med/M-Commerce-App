@@ -135,7 +135,7 @@ struct ProductInfoView: View {
                                     systemIconName: "handbag",
                                     onTap: {
                                         print("Tapped")
-                                    }
+                                    },isButtonEnabled: .constant(true)
                                 )
 
                             }

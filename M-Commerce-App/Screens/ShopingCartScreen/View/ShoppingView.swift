@@ -79,7 +79,7 @@ struct ShoppingView: View {
                 totalPrice = 0.0
                 CalculateTotalPrice()
                 showCheckOut.toggle()
-            }
+            },isButtonEnabled: .constant(true)
         )
         .sheet(isPresented: $showCheckOut, content: {
             CheckOutComponent(totalPrice: $totalPrice)

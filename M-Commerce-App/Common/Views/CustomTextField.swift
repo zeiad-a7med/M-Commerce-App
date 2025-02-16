@@ -6,13 +6,15 @@
 //
 import SwiftUI
 
-struct CustomSearchBarView: View {
+struct CustomTextField: View {
     let placeholder: String
     var onChange: (String) -> Void
     var prefix: (() -> any View)?
     var suffix: (() -> any View)?
     var enableClearButton: Bool = true
     var validationType: ValidationType?
+    var characterLimit: Int?
+    var isValid: ((Bool) -> Void)?
 
     @State private var text: String = ""
     @FocusState private var isFocused: Bool
@@ -28,7 +30,9 @@ struct CustomSearchBarView: View {
                         .foregroundColor(
                             isFocused
                                 ? ThemeManager.darkPuble
-                                : .secondary.opacity(0.5))
+                                : .secondary.opacity(0.5)
+                        )
+                        .animation(.easeInOut(duration: 0.3), value: isFocused)
                 }
 
                 // TextField for search input
@@ -37,6 +41,12 @@ struct CustomSearchBarView: View {
                     .onChange(
                         of: text,
                         {
+                            if characterLimit != nil {
+                                if text.count > characterLimit! {
+                                    text = String(
+                                        text.prefix(characterLimit!))
+                                }
+                            }
                             onChange(text)
                             if validationType != nil {
                                 if text.isEmpty {
@@ -45,6 +55,7 @@ struct CustomSearchBarView: View {
                                     errorMessage = TextValidation.validateText(
                                         text, type: validationType!)
                                 }
+                                isValid?(!hasError)
                             }
 
                         })
@@ -58,7 +69,10 @@ struct CustomSearchBarView: View {
                             .foregroundColor(
                                 isFocused
                                     ? ThemeManager.darkPuble
-                                    : .secondary.opacity(0.5))
+                                    : .secondary.opacity(0.5)
+                            )
+                            .animation(
+                                .easeInOut(duration: 0.3), value: isFocused)
                     }
                 }
                 if (suffix != nil && text.isEmpty)
@@ -68,7 +82,9 @@ struct CustomSearchBarView: View {
                         .foregroundColor(
                             isFocused
                                 ? ThemeManager.darkPuble
-                                : .secondary.opacity(0.5))
+                                : .secondary.opacity(0.5)
+                        )
+                        .animation(.easeInOut(duration: 0.3), value: isFocused)
                 }
             }
             .padding()
@@ -80,8 +96,10 @@ struct CustomSearchBarView: View {
                             : isFocused
                                 ? ThemeManager.darkPuble
                                 : Color.gray.opacity(0.3),
-                        lineWidth: isFocused ? 2 : 1)
-                        .animation(.easeInOut(duration: 0.3), value: hasError) // Animate border color
+                        lineWidth: isFocused ? 2 : 1
+                    )
+                    .animation(.easeInOut(duration: 0.3), value: hasError)
+                    .animation(.easeInOut(duration: 0.3), value: isFocused)
 
             )
             if let error = errorMessage {
@@ -89,16 +107,16 @@ struct CustomSearchBarView: View {
                     .padding(.leading, 10)
                     .font(.caption)
                     .foregroundColor(.red)
-                    .transition(.opacity) // Smooth slide-in effect
+                    .transition(.opacity)  // Smooth slide-in effect
             }
 
         }
-        .animation(.easeInOut(duration: 0.3), value: errorMessage) // Ensure smooth updates
+        .animation(.easeInOut(duration: 0.3), value: errorMessage)  // Ensure smooth updates
     }
 }
 
 #Preview {
-    CustomSearchBarView(
+    CustomTextField(
         placeholder: "search in favorites.....",
         onChange: { text in
             print("Search text: \(text)")
@@ -113,7 +131,8 @@ struct CustomSearchBarView: View {
             }) {
                 Image(systemName: "heart")
             }
-        }
+        },
+        characterLimit: 5
 
     )
     .padding()

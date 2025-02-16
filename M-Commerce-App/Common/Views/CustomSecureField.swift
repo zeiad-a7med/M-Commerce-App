@@ -13,55 +13,80 @@ struct CustomSecureField: View {
     let placeholder: String
     var onChange: (String) -> Void
     var prefix: (() -> any View)?
-    
+    var validationType: ValidationType?
+    var characterLimit: Int?
+    var isValid: ((Bool) -> Void)?
+
     @State var isVisible: Bool = false
     @State private var errorMessage: String?
     var hasError: Bool { errorMessage != nil }
-    
+
     var body: some View {
-        VStack(alignment: .leading){
+        VStack(alignment: .leading) {
             HStack {
                 // Prefix view (e.g., magnifying glass icon)
                 if prefix != nil {
                     AnyView(prefix!())
                         .foregroundColor(
                             isFocused
-                            ? ThemeManager.darkPuble : .secondary.opacity(0.5))
+                                ? ThemeManager.darkPuble
+                                : .secondary.opacity(0.5)
+                        )
+                        .animation(.easeInOut(duration: 0.3), value: isFocused)
                 }
-                
+
                 // TextField for search input
-                if(isVisible){
+                if isVisible {
                     TextField(placeholder, text: $text)
                         .focused($isFocused)
                         .onChange(
                             of: text,
                             {
+                                if characterLimit != nil {
+                                    if text.count > characterLimit! {
+                                        text = String(
+                                            text.prefix(characterLimit!))
+                                    }
+                                }
                                 onChange(text)
-                                if text.isEmpty {
-                                    errorMessage = nil
-                                } else {
-                                    errorMessage = TextValidation.validateText(
-                                        text, type: .password)
+                                if validationType != nil {
+                                    if text.isEmpty {
+                                        errorMessage = nil
+                                    } else {
+                                        errorMessage =
+                                            TextValidation.validateText(
+                                                text, type: validationType!)
+                                    }
+                                    isValid?(!hasError)
                                 }
                             })
-                }else{
+                } else {
                     SecureField(placeholder, text: $text)
                         .focused($isFocused)
                         .onChange(
                             of: text,
                             {
+                                if characterLimit != nil {
+                                    if text.count > characterLimit! {
+                                        text = String(
+                                            text.prefix(characterLimit!))
+                                    }
+                                }
                                 onChange(text)
-                                if text.isEmpty {
-                                    errorMessage = nil
-                                } else {
-                                    errorMessage = TextValidation.validateText(
-                                        text, type: .password)
+                                if validationType != nil {
+                                    if text.isEmpty {
+                                        errorMessage = nil
+                                    } else {
+                                        errorMessage =
+                                            TextValidation.validateText(
+                                                text, type: validationType!)
+                                    }
+                                    isValid?(!hasError)
                                 }
                             })
-                    
+
                 }
-                
-                
+
                 Button(action: {
                     isVisible.toggle()
                     isFocused = true
@@ -69,9 +94,12 @@ struct CustomSecureField: View {
                     Image(systemName: isVisible ? "eye" : "eye.slash")
                         .foregroundColor(
                             isFocused
-                            ? ThemeManager.darkPuble : .secondary.opacity(0.5))
+                                ? ThemeManager.darkPuble
+                                : .secondary.opacity(0.5)
+                        )
+                        .animation(.easeInOut(duration: 0.3), value: isFocused)
                 }
-                
+
             }
             .padding()
             .overlay(
@@ -82,19 +110,21 @@ struct CustomSecureField: View {
                             : isFocused
                                 ? ThemeManager.darkPuble
                                 : Color.gray.opacity(0.3),
-                        lineWidth: isFocused ? 2 : 1)
+                        lineWidth: isFocused ? 2 : 1
+                    )
                     .animation(.easeInOut(duration: 0.3), value: hasError)
+                    .animation(.easeInOut(duration: 0.3), value: isFocused)
             )
-             // Animate border color
+            // Animate border color
             if let error = errorMessage {
                 Text(error)
                     .padding(.leading, 10)
                     .font(.caption)
                     .foregroundColor(.red)
-                    .transition(.opacity) // Smooth slide-in effect
+                    .transition(.opacity)  // Smooth slide-in effect
             }
         }
-        .animation(.easeInOut(duration: 0.3), value: errorMessage) // Ensure smooth updates
+        .animation(.easeInOut(duration: 0.3), value: errorMessage)  // Ensure smooth updates
     }
 }
 
@@ -109,4 +139,3 @@ struct CustomSecureField: View {
     )
     .padding()
 }
-

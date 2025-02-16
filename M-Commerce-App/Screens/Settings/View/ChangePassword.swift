@@ -67,7 +67,7 @@ struct ChangePassword: View {
                 Spacer()
                 
             }.padding()
-            CustomRoundedButtonView(text: "Save Changes",width: 80)
+            CustomRoundedButtonView(text: "Save Changes",width: 80,isButtonEnabled: .constant(true))
         }
     }
 }

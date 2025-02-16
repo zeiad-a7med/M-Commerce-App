@@ -25,7 +25,7 @@ struct FavoritesView: View {
                     description: Text("discovery new products and add them to your favorites"))
             } else {
                 ScrollView {
-                    CustomSearchBarView(
+                    CustomTextField(
                         placeholder: "search in favorites.....",
                         onChange: { text in
                             

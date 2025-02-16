@@ -48,7 +48,7 @@ struct CheckOutComponent: View {
                                                     width:60,
                                                     onTap: {
                                                         printMyVar()
-                                                    }
+                                                    },isButtonEnabled: .constant(true)
                                                 ).offset(y:25)
                                             }.offset(y:180)
 

@@ -12,6 +12,7 @@ struct CustomRoundedButtonView: View {
     var systemIconName: String?
     var width : CGFloat?
     var onTap: (() -> Void)?
+    @Binding var isButtonEnabled : Bool
     var body: some View {
         Button(
             action: {
@@ -30,10 +31,12 @@ struct CustomRoundedButtonView: View {
                 }
             }
         )
+        .disabled(!isButtonEnabled)
         .padding(20)
         .padding(.horizontal,width)
-        .background(ThemeManager.darkPuble)
+        .background(isButtonEnabled ? ThemeManager.darkPuble : ThemeManager.darkPuble.opacity(0.5))
         .cornerRadius(30)
+        .animation(.easeInOut(duration: 0.3), value: isButtonEnabled)
     }
 }
 
@@ -44,6 +47,7 @@ struct CustomRoundedButtonView: View {
         width: 100,
         onTap: {
             print("Tapped")
-        }
+        },
+        isButtonEnabled: .constant(true)
     )
 }
