@@ -162,10 +162,18 @@ struct RegisterView: View {
                     .onChange(of: passwordValid, { oldValue, newValue in
                         updateFormValidity()
                     })
+                    
+                    NavigationLink(destination: LoginView()) {
+                        Text("Already have an account? Sign In")
+                            .font(.footnote)
+                            .foregroundColor(.blue)
+                    }.padding(.top,10)
 
                 }.padding(20)
             }
-        }.navigationTitle("Create account")
+            .navigationTitle("Create account")
+            
+        }
     }
     func updateFormValidity() {
         isFormValid = [firstNameValid, lastNameValid, emailValid, phoneValid, passwordValid].allSatisfy { $0 }

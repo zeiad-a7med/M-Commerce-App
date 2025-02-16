@@ -1,0 +1,95 @@
+//
+//  RegisterView.swift
+//  M-Commerce-App
+//
+//  Created by Zeiad on 15/02/2025.
+//
+
+import SwiftUI
+
+struct LoginView: View {
+    @State private var email: String = ""
+    @State private var emailValid: Bool = false
+
+    @State private var password: String = ""
+    @State private var passwordValid: Bool = false
+
+    @State private var isFormValid = false
+
+    var body: some View {
+        NavigationView {
+            VStack {
+                //Email
+                VStack(alignment: .leading) {
+                    Text("Email")
+                        .font(.title2)
+                    CustomTextField(
+                        placeholder: "Enter your email",
+                        onChange: { val in
+                            email = val
+                        },
+                        prefix: { Image(systemName: "envelope") },
+                        validationType: .email,
+                        isValid: { valid in
+                            emailValid = valid
+                        }
+                    )
+                }.padding(.bottom, 10)
+
+                //Password
+                VStack(alignment: .leading) {
+                    Text("Password")
+                        .font(.title2)
+                    CustomSecureField(
+                        placeholder: "Enter your password",
+                        onChange: { val in
+                            password = val
+                        },
+                        prefix: { Image(systemName: "lock") },
+                        validationType: .password,
+                        isValid: { valid in
+                            passwordValid = valid
+                        }
+                    )
+                }.padding(.bottom, 30)
+
+                CustomRoundedButtonView(
+                    text: "Sign In", width: 50,
+                    onTap: {
+                        SnackbarManager.shared.show(message: "Signed in registered 🤝🏻!")
+                    },
+                    isButtonEnabled: $isFormValid
+                )
+                .onChange(of: emailValid, { oldValue, newValue in
+                    updateFormValidity()
+                })
+                .onChange(of: passwordValid, { oldValue, newValue in
+                    updateFormValidity()
+                })
+                
+                NavigationLink(destination: RegisterView()) {
+                    Text("Don't have an account? Create account")
+                        .font(.footnote)
+                        .foregroundColor(.blue)
+                }.padding(.top,10)
+                
+                Spacer()
+
+            }.padding(20)
+            .navigationTitle("Sign In")
+        }
+    }
+    func updateFormValidity() {
+        isFormValid = [emailValid,passwordValid].allSatisfy { $0 }
+    }
+}
+
+#Preview {
+    LoginView()
+}
+//lastName: "ahmed"
+//            email: "zeiadahmed194@gmail.com"
+//            phone: "+201018698825"
+//            password: "zeiadahmed194"
+//            acceptsMarketing: false
+//            firstName: "zeiad"
