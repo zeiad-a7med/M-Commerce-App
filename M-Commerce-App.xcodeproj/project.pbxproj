@@ -58,6 +58,7 @@
 		890D87D92D5DF66C0062E8D1 /* BrandCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890D87B52D5DF66C0062E8D1 /* BrandCard.swift */; };
 		890D87DA2D5DF66C0062E8D1 /* ProductInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890D87952D5DF66C0062E8D1 /* ProductInfoView.swift */; };
 		890D87DB2D5DF66C0062E8D1 /* PopupCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890D87B32D5DF66C0062E8D1 /* PopupCircleView.swift */; };
+		8952A6792D61FB260003ACF4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952A6762D61FB260003ACF4 /* LoginView.swift */; };
 		89B00B6E2D610C0200AF1FB7 /* Login.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B6D2D610C0200AF1FB7 /* Login.graphql */; };
 		89B00B702D61126300AF1FB7 /* Register.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B6F2D61126300AF1FB7 /* Register.graphql */; };
 		89B00B722D61178900AF1FB7 /* Logout.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B712D61178900AF1FB7 /* Logout.graphql */; };
@@ -179,6 +180,7 @@
 		890D87B62D5DF66C0062E8D1 /* BrandsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsView.swift; sourceTree = "<group>"; };
 		890D87B72D5DF66C0062E8D1 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		890D87B92D5DF66C0062E8D1 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
+		8952A6762D61FB260003ACF4 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		89B00B6D2D610C0200AF1FB7 /* Login.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Login.graphql; sourceTree = "<group>"; };
 		89B00B6F2D61126300AF1FB7 /* Register.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Register.graphql; sourceTree = "<group>"; };
 		89B00B712D61178900AF1FB7 /* Logout.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Logout.graphql; sourceTree = "<group>"; };
@@ -662,6 +664,38 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		8952A6742D61FB260003ACF4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8952A6752D61FB260003ACF4 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8952A6772D61FB260003ACF4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8952A6762D61FB260003ACF4 /* LoginView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8952A6782D61FB260003ACF4 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				8952A6742D61FB260003ACF4 /* Model */,
+				8952A6752D61FB260003ACF4 /* ViewModel */,
+				8952A6772D61FB260003ACF4 /* View */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		89B00B692D610BC000AF1FB7 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -701,6 +735,7 @@
 			isa = PBXGroup;
 			children = (
 				89B00B7F2D6130BF00AF1FB7 /* Register */,
+				8952A6782D61FB260003ACF4 /* Login */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1109,6 +1144,7 @@
 				C4BC560C2D5F631B00F9D42A /* GetFilteredProducts.swift in Sources */,
 				890D87CA2D5DF66C0062E8D1 /* FavoritesView.swift in Sources */,
 				890D87CB2D5DF66C0062E8D1 /* CheckOutComponent.swift in Sources */,
+				8952A6792D61FB260003ACF4 /* LoginView.swift in Sources */,
 				89EE56E32D5E322700B05457 /* GetProductQuery.swift in Sources */,
 				890D87CC2D5DF66C0062E8D1 /* NumberOfItems.swift in Sources */,
 				890D87CD2D5DF66C0062E8D1 /* ProductResponse.swift in Sources */,
