@@ -69,6 +69,7 @@
 		8952A68D2D62698D0003ACF4 /* ProfileQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952A68C2D62698D0003ACF4 /* ProfileQuery.swift */; };
 		8952A6912D6284870003ACF4 /* ApplicationUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952A6902D6284870003ACF4 /* ApplicationUser.swift */; };
 		8952A6932D62865F0003ACF4 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952A6922D62865F0003ACF4 /* AuthManager.swift */; };
+		8952A6972D629E010003ACF4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952A6962D629E010003ACF4 /* Constants.swift */; };
 		89B00B6E2D610C0200AF1FB7 /* Login.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B6D2D610C0200AF1FB7 /* Login.graphql */; };
 		89B00B702D61126300AF1FB7 /* Register.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B6F2D61126300AF1FB7 /* Register.graphql */; };
 		89B00B722D61178900AF1FB7 /* Logout.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B712D61178900AF1FB7 /* Logout.graphql */; };
@@ -77,7 +78,6 @@
 		89B00B7D2D612A8900AF1FB7 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B7C2D612A8900AF1FB7 /* Order.swift */; };
 		89B00B842D61312A00AF1FB7 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B832D61312A00AF1FB7 /* RegisterView.swift */; };
 		89B00B862D61392700AF1FB7 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B852D61392700AF1FB7 /* Country.swift */; };
-		89B00B8B2D6139A300AF1FB7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B8A2D6139A300AF1FB7 /* Constants.swift */; };
 		89B00B8D2D6148CF00AF1FB7 /* CustomSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B8C2D6148CF00AF1FB7 /* CustomSecureField.swift */; };
 		89B00B8F2D6157DE00AF1FB7 /* TextValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B00B8E2D6157DD00AF1FB7 /* TextValidation.swift */; };
 		89CAF31C2D6007AE003984FA /* SettingsListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAF3152D6007AE003984FA /* SettingsListRow.swift */; };
@@ -200,6 +200,7 @@
 		8952A68C2D62698D0003ACF4 /* ProfileQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileQuery.swift; sourceTree = "<group>"; };
 		8952A6902D6284870003ACF4 /* ApplicationUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationUser.swift; sourceTree = "<group>"; };
 		8952A6922D62865F0003ACF4 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		8952A6962D629E010003ACF4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		89B00B6D2D610C0200AF1FB7 /* Login.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Login.graphql; sourceTree = "<group>"; };
 		89B00B6F2D61126300AF1FB7 /* Register.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Register.graphql; sourceTree = "<group>"; };
 		89B00B712D61178900AF1FB7 /* Logout.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Logout.graphql; sourceTree = "<group>"; };
@@ -208,7 +209,6 @@
 		89B00B7C2D612A8900AF1FB7 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		89B00B832D61312A00AF1FB7 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		89B00B852D61392700AF1FB7 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
-		89B00B8A2D6139A300AF1FB7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = /Users/zeiad/Documents/Constants.swift; sourceTree = "<absolute>"; };
 		89B00B8C2D6148CF00AF1FB7 /* CustomSecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSecureField.swift; sourceTree = "<group>"; };
 		89B00B8E2D6157DD00AF1FB7 /* TextValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextValidation.swift; sourceTree = "<group>"; };
 		89CAF3132D6007AE003984FA /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
@@ -817,7 +817,7 @@
 		89B00B872D61398100AF1FB7 /* Constanst */ = {
 			isa = PBXGroup;
 			children = (
-				89B00B8A2D6139A300AF1FB7 /* Constants.swift */,
+				8952A6962D629E010003ACF4 /* Constants.swift */,
 			);
 			path = Constanst;
 			sourceTree = "<group>";
@@ -1164,6 +1164,7 @@
 				89CAF31D2D6007AE003984FA /* Settings.swift in Sources */,
 				89CAF31E2D6007AE003984FA /* EditProfile.swift in Sources */,
 				89CAF31F2D6007AE003984FA /* ChangePassword.swift in Sources */,
+				8952A6972D629E010003ACF4 /* Constants.swift in Sources */,
 				89CAF3252D60288F003984FA /* AlertContent.swift in Sources */,
 				C401B5D12D6108CD004BCB2F /* FloatingButtonView.swift in Sources */,
 				8952A6932D62865F0003ACF4 /* AuthManager.swift in Sources */,
@@ -1238,7 +1239,6 @@
 				C4F3FC7D2D5E9256005151E9 /* CategoriesViewModel.swift in Sources */,
 				C401B5CF2D61047F004BCB2F /* FloatingFilter.swift in Sources */,
 				48F009F02D5C94F9002A016E /* M_Commerce_AppApp.swift in Sources */,
-				89B00B8B2D6139A300AF1FB7 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
