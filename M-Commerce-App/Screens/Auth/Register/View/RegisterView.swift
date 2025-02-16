@@ -30,159 +30,175 @@ struct RegisterView: View {
     @State private var isFormValid = false
 
     var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack {
 
-                    //fistName
-                    VStack(alignment: .leading) {
-                        Text("First name")
-                            .font(.title2)
-                        CustomTextField(
-                            placeholder: "Enter your first name",
-                            onChange: { val in
-                                firstName = val
-                            },
-                            prefix: { Image(systemName: "person") },
-                            validationType: .name,
-                            isValid: { valid in
-                                firstNameValid = valid
-                            }
-                        )
-                    }.padding(.bottom, 10)
+        ScrollView {
+            VStack {
 
-                    //lastName
-                    VStack(alignment: .leading) {
-                        Text("Last name")
-                            .font(.title2)
-                        CustomTextField(
-                            placeholder: "Enter your last name",
-                            onChange: { val in
-                                lastName = val
-                            },
-                            prefix: { Image(systemName: "person") },
-                            validationType: .name,
-                            isValid: { valid in
-                                lastNameValid = valid
-                            }
-                        )
-                    }.padding(.bottom, 10)
-
-                    //Email
-                    VStack(alignment: .leading) {
-                        Text("Email")
-                            .font(.title2)
-                        CustomTextField(
-                            placeholder: "Enter your email",
-                            onChange: { val in
-                                email = val
-                            },
-                            prefix: { Image(systemName: "envelope") },
-                            validationType: .email,
-                            isValid: { valid in
-                                emailValid = valid
-                            }
-                        )
-                    }.padding(.bottom, 10)
-
-                    //phone
-
-                    VStack(alignment: .leading) {
-                        Text("phone")
-                            .font(.title2)
-                        CustomTextField(
-                            placeholder: "Enter your phone number",
-                            onChange: { val in
-                                phone = val
-                            },
-                            prefix: {
-                                Picker(
-                                    "Select Country",
-                                    selection: $selectedCountry
-                                ) {
-                                    ForEach(Constants.countries, id: \.self) {
-                                        country in
-                                        Text(
-                                            "\(country.flag) \(country.name) (\(country.code))"
-                                        )
-                                        .tag(country)
-                                    }
-                                }
-                                .pickerStyle(MenuPickerStyle())
-
-                            },
-                            validationType: .phoneNumber,
-                            characterLimit: 10,
-                            isValid: { valid in
-                                phoneValid = valid
-                            }
-                        )
-                    }.padding(.bottom, 10)
-
-                    //Password
-                    VStack(alignment: .leading) {
-                        Text("Password")
-                            .font(.title2)
-                        CustomSecureField(
-                            placeholder: "Enter your password",
-                            onChange: { val in
-                                password = val
-                            },
-                            prefix: { Image(systemName: "lock") },
-                            validationType: .password,
-                            isValid: { valid in
-                                passwordValid = valid
-                            }
-                        )
-                    }.padding(.bottom, 30)
-
-                    CustomRoundedButtonView(
-                        text: "Create Account", width: 50,
-                        onTap: {
-                            var codedPhone: String = phone
-                            codedPhone.insert(
-                                contentsOf: selectedCountry.code,
-                                at: phone.startIndex)
-                            viewModel.register(
-                                firstName: firstName,
-                                lastName: lastName,
-                                email: email,
-                                phone: codedPhone,
-                                password: password
-                            )
+                //fistName
+                VStack(alignment: .leading) {
+                    Text("First name")
+                        .font(.title2)
+                    CustomTextField(
+                        placeholder: "Enter your first name",
+                        onChange: { val in
+                            firstName = val
                         },
-                        isButtonEnabled: $isFormValid
+                        prefix: { Image(systemName: "person") },
+                        validationType: .name,
+                        isValid: { valid in
+                            firstNameValid = valid
+                        }
                     )
-                    .onChange(of: firstNameValid, { oldValue, newValue in
-                        updateFormValidity()
-                    })
-                    .onChange(of: lastNameValid, { oldValue, newValue in
-                        updateFormValidity()
-                    })
-                    .onChange(of: emailValid, { oldValue, newValue in
-                        updateFormValidity()
-                    })
-                    .onChange(of: phoneValid, { oldValue, newValue in
-                        updateFormValidity()
-                    })
-                    .onChange(of: passwordValid, { oldValue, newValue in
-                        updateFormValidity()
-                    })
-                    
-                    NavigationLink(destination: LoginView()) {
-                        Text("Already have an account? Sign In")
-                            .font(.footnote)
-                            .foregroundColor(.blue)
-                    }.padding(.top,10)
+                }.padding(.bottom, 10)
 
-                }.padding(20)
-            }
-            .navigationTitle("Create account")
-            
+                //lastName
+                VStack(alignment: .leading) {
+                    Text("Last name")
+                        .font(.title2)
+                    CustomTextField(
+                        placeholder: "Enter your last name",
+                        onChange: { val in
+                            lastName = val
+                        },
+                        prefix: { Image(systemName: "person") },
+                        validationType: .name,
+                        isValid: { valid in
+                            lastNameValid = valid
+                        }
+                    )
+                }.padding(.bottom, 10)
+
+                //Email
+                VStack(alignment: .leading) {
+                    Text("Email")
+                        .font(.title2)
+                    CustomTextField(
+                        placeholder: "Enter your email",
+                        onChange: { val in
+                            email = val
+                        },
+                        prefix: { Image(systemName: "envelope") },
+                        validationType: .email,
+                        isValid: { valid in
+                            emailValid = valid
+                        }
+                    )
+                }.padding(.bottom, 10)
+
+                //phone
+
+                VStack(alignment: .leading) {
+                    Text("phone")
+                        .font(.title2)
+                    CustomTextField(
+                        placeholder: "Enter your phone number",
+                        onChange: { val in
+                            phone = val
+                        },
+                        prefix: {
+                            Picker(
+                                "Select Country",
+                                selection: $selectedCountry
+                            ) {
+                                ForEach(Constants.countries, id: \.self) {
+                                    country in
+                                    Text(
+                                        "\(country.flag) \(country.name) (\(country.code))"
+                                    )
+                                    .tag(country)
+                                }
+                            }
+                            .pickerStyle(MenuPickerStyle())
+
+                        },
+                        validationType: .phoneNumber,
+                        characterLimit: 10,
+                        isValid: { valid in
+                            phoneValid = valid
+                        }
+                    )
+                }.padding(.bottom, 10)
+
+                //Password
+                VStack(alignment: .leading) {
+                    Text("Password")
+                        .font(.title2)
+                    CustomSecureField(
+                        placeholder: "Enter your password",
+                        onChange: { val in
+                            password = val
+                        },
+                        prefix: { Image(systemName: "lock") },
+                        validationType: .password,
+                        isValid: { valid in
+                            passwordValid = valid
+                        }
+                    )
+                }.padding(.bottom, 30)
+
+                CustomRoundedButtonView(
+                    text: "Create Account", width: 50,
+                    onTap: {
+                        var codedPhone: String = phone
+                        codedPhone.insert(
+                            contentsOf: selectedCountry.code,
+                            at: phone.startIndex)
+                        viewModel.register(
+                            firstName: firstName,
+                            lastName: lastName,
+                            email: email,
+                            phone: codedPhone,
+                            password: password
+                        )
+                    },
+                    isButtonEnabled: $isFormValid
+                )
+                .onChange(
+                    of: firstNameValid,
+                    { oldValue, newValue in
+                        updateFormValidity()
+                    }
+                )
+                .onChange(
+                    of: lastNameValid,
+                    { oldValue, newValue in
+                        updateFormValidity()
+                    }
+                )
+                .onChange(
+                    of: emailValid,
+                    { oldValue, newValue in
+                        updateFormValidity()
+                    }
+                )
+                .onChange(
+                    of: phoneValid,
+                    { oldValue, newValue in
+                        updateFormValidity()
+                    }
+                )
+                .onChange(
+                    of: passwordValid,
+                    { oldValue, newValue in
+                        updateFormValidity()
+                    })
+
+                NavigationLink(destination: LoginView()) {
+                    Text("Already have an account? Sign In")
+                        .font(.footnote)
+                        .foregroundColor(.blue)
+                }.padding(.top, 10)
+
+            }.padding(20)
         }
+        .navigationTitle("Create account")
+
     }
     func updateFormValidity() {
-        isFormValid = [firstNameValid, lastNameValid, emailValid, phoneValid, passwordValid].allSatisfy { $0 }
+        isFormValid = [
+            firstNameValid, lastNameValid, emailValid, phoneValid,
+            passwordValid,
+        ].allSatisfy { $0 }
     }
 }
 
