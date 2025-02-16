@@ -17,7 +17,7 @@ struct Settings: View {
     @State var confirmNewPassword : String = " "
     var body: some View {
         
-        NavigationStack {
+        NavigationView {
             List{
                 Section(header:  Text("General").foregroundStyle(ThemeManager.darkPuble).font(.headline)){
                     NavigationLink {
@@ -43,7 +43,7 @@ struct Settings: View {
                 }
   
             }.listRowSpacing(15)
-           
+                .navigationTitle("Settings")
         }
     }
 }

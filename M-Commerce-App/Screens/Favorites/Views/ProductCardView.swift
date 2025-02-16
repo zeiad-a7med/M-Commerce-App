@@ -20,7 +20,7 @@ struct ProductCardView: View {
         NavigationLink(destination: {
             ProductInfoView(productId: product.id)
         }) {
-            VStack {
+            LazyVStack {
                 //                CustomNetworkImageView(
                 //                    url: URL(
                 //                        string:

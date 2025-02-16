@@ -20,6 +20,10 @@ struct ContentView: View {
                 .tabItem {
                     Label("Categories", systemImage: "square.stack.3d.up.fill")
                 }
+            Settings()
+                .tabItem {
+                    Label("Settings", systemImage: "person.fill")
+                }
         }
         .onAppear {
             FavoritesManager.shared.setContext(modelContext) // Now modelContext is available

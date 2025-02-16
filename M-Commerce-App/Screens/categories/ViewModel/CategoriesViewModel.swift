@@ -19,7 +19,6 @@ final class CategoriesViewModel: ObservableObject {
     
     func fetchCategories(first: GraphQLNullable<Int>, after: GraphQLNullable<String>, query: GraphQLNullable<String>) {
         self.isLoading = true
-        self.categories.categoryProducts = [Product]()
         ApolloNetwokService.shared.apollo.fetch(query: GetFilteredProductsQuery(first: first, after: after, query: query)){ result in
             switch result {
             case .success(let graphQLResult):
