@@ -19,7 +19,7 @@ class LoginViewModel: ObservableObject {
         password: String!
     ) {
         isLoading = true
-        LoginService.loginCustomer(
+        AuthService.loginCustomer(
             email: email,
             password: password
         ) { (result) in

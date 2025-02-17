@@ -10,7 +10,7 @@ import SwiftUI
 struct EditProfile: View {
     @State var profilePic: String =
         "https://static.wikia.nocookie.net/dreamworks/images/3/3e/Tai_Lung_Profile.jpg/revision/latest?cb=20240210212257"
-    @State var user: ApplicationUser?
+    @StateObject var viewModel = SettingsViewModel()
     @State private var selectedCountry: Country = Constants.countries.first!
 
     @State var firstName: String = ""
@@ -27,6 +27,7 @@ struct EditProfile: View {
 
     @State private var showingAlert: Bool = false
     @State private var isFormValid = false
+    @State private var sureToUpdate = false
     var body: some View {
         VStack {
             ProfileImage(profilePic: profilePic)
@@ -37,7 +38,7 @@ struct EditProfile: View {
                 CustomTextField(
                     placeholder: "First name",
                     onChange: { val in
-
+                        firstName = val
                     },
                     prefix: {
                         Image(systemName: "person.fill")
@@ -56,7 +57,7 @@ struct EditProfile: View {
                 CustomTextField(
                     placeholder: "Last name",
                     onChange: { val in
-
+                        lastName = val
                     },
                     prefix: {
                         Image(systemName: "person.fill")
@@ -75,7 +76,7 @@ struct EditProfile: View {
                 CustomTextField(
                     placeholder: "Email",
                     onChange: { val in
-
+                        email = val
                     },
                     prefix: {
                         Image(systemName: "envelope.fill")
@@ -126,6 +127,9 @@ struct EditProfile: View {
             CustomRoundedButtonView(
                 text: "Save Changes",
                 width: 80,
+                onTap: {
+                    sureToUpdate.toggle()
+                },
                 isButtonEnabled: $isFormValid
             )
             .onChange(
@@ -155,11 +159,40 @@ struct EditProfile: View {
 
         }.padding()
             .onAppear {
-                user = AuthManager.shared.applicationUser!
-                email = user?.email ?? ""
-                firstName = user?.firstName ?? ""
-                lastName = user?.lastName ?? ""
-                phone = String(user?.phone?.suffix(10) ?? "")
+                email = viewModel.user?.email ?? ""
+                firstName = viewModel.user?.firstName ?? ""
+                lastName = viewModel.user?.lastName ?? ""
+                phone = String(viewModel.user?.phone?.suffix(10) ?? "")
+            }
+            .alert(
+                "are you sure you want to update your profile?",
+                isPresented: $sureToUpdate
+            ) {
+                Button(
+                    role: .destructive,
+                    action: {
+                        var codedPhone: String = phone
+                        codedPhone.insert(
+                            contentsOf: selectedCountry.code,
+                            at: phone.startIndex)
+                        viewModel.updateProfile(
+                            firstName: firstName,
+                            lastName: lastName,
+                            email: email,
+                            phone: codedPhone
+                        )
+                    },
+                    label: {
+                        Text("Update")
+                            .foregroundStyle(.red)
+                            .bold()
+
+                    })
+
+            } message: {
+                Text(
+                    "once you logout you will lose all your favorites"
+                )
             }
 
     }

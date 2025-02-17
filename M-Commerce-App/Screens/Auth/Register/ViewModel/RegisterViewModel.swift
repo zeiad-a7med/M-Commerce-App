@@ -22,7 +22,7 @@ class RegisterViewModel: ObservableObject {
         password: String!
     ) {
         isLoading = true
-        RegisterService.registerCustomer(
+        AuthService.registerCustomer(
             firstName: firstName,
             lastName: lastName,
             email: email,

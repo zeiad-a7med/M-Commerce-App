@@ -41,11 +41,10 @@ class AuthManager: ObservableObject {
         guard let modelContext = modelContext else { return }
 
         if applicationUser != nil {
-            applicationUser = updatedUser
-        } else {
-            modelContext.insert(updatedUser)
-            applicationUser = updatedUser  // Ensure it's assigned
+            logoutUser()
         }
+        modelContext.insert(updatedUser)
+        applicationUser = updatedUser
 
         do {
             try modelContext.save()
@@ -62,7 +61,6 @@ class AuthManager: ObservableObject {
             return
         }
         do {
-            print("Logging out user: \(user.email ?? "Unknown")")
             modelContext.delete(user)
             try modelContext.save()
             DispatchQueue.main.async {
