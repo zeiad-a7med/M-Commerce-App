@@ -12,7 +12,6 @@ import SwiftUI
 
 struct SnackbarView: View {
     @EnvironmentObject var snackbarManager: SnackbarManager
-
     var body: some View {
         VStack {
             Spacer()

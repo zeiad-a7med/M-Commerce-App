@@ -8,92 +8,134 @@
 import SwiftUI
 
 struct ShoppingView: View {
-    @State var swipeDeleteFlag : Bool = false
-    @State var confirmZeroItemDeleteFlag : Bool = false
-    @State var cartItem : CartItem?
-    @State var indexSet:IndexSet?
-    @State var totalPrice : Double = 0.0
-    @State var showCheckOut : Bool = false
+    @State var swipeDeleteFlag: Bool = false
+    @State var confirmZeroItemDeleteFlag: Bool = false
+    @State var cartItem: CartItem?
+    @State var indexSet: IndexSet?
+    @State var totalPrice: Double = 0.0
+    @State var showCheckOut: Bool = false
+    @State var isLoggedIn: Bool = false
     @StateObject var viewModel = ShoppingCartViewModel()
     var body: some View {
-        List {
-            if let tempViewModel = viewModel.CartResult?.itemList{
-                ForEach(tempViewModel,id:\.self){ Item in
-                        RowCard(item: Item){number , sign in
-                            cartItem = Item
-                            if(number == 1 && !sign){
-                               confirmZeroItemDeleteFlag = true
-                            }else{
-                               // checkDataAvailability(data:)
-                              
-                                if let myIndex = self.viewModel.CartResult?.itemList!.firstIndex(of: cartItem!){
-                                    if sign{
-                                        self.viewModel.CartResult?.itemList![myIndex].count! += 1
-                                    }else{
-                                        self.viewModel.CartResult?.itemList![myIndex].count! -= 1
+        VStack {
+            if(isLoggedIn){
+                List {
+                    if let tempViewModel = viewModel.CartResult?.itemList {
+                        ForEach(tempViewModel, id: \.self) { Item in
+                            RowCard(item: Item) { number, sign in
+                                cartItem = Item
+                                if number == 1 && !sign {
+                                    confirmZeroItemDeleteFlag = true
+                                } else {
+                                    // checkDataAvailability(data:)
+
+                                    if let myIndex = self.viewModel.CartResult?
+                                        .itemList!.firstIndex(of: cartItem!)
+                                    {
+                                        if sign {
+                                            self.viewModel.CartResult?.itemList![
+                                                myIndex
+                                            ].count! += 1
+                                        } else {
+                                            self.viewModel.CartResult?.itemList![
+                                                myIndex
+                                            ].count! -= 1
+                                        }
                                     }
+
                                 }
-                             
+
                             }
-                         
-                           
-                        }
-                    
-                  
-                }.onDelete { index in
-                    indexSet = index
-                    swipeDeleteFlag = true
-                }.confirmationDialog("Do you really wish to remove your item from the cart?", isPresented: $swipeDeleteFlag) {
-                    Button("Delete" , role:.destructive){
-                        viewModel.CartResult?.itemList?.remove(atOffsets: indexSet!)
-                        swipeDeleteFlag = false
-                      
+
+                        }.onDelete { index in
+                            indexSet = index
+                            swipeDeleteFlag = true
+                        }.confirmationDialog(
+                            "Do you really wish to remove your item from the cart?",
+                            isPresented: $swipeDeleteFlag
+                        ) {
+                            Button("Delete", role: .destructive) {
+                                viewModel.CartResult?.itemList?.remove(
+                                    atOffsets: indexSet!)
+                                swipeDeleteFlag = false
+
+                            }
+                            Button("Cancel", role: .cancel) {
+                                swipeDeleteFlag = false
+
+                            }
+
+                        }  //confirmation if Swipe
+                        .confirmationDialog(
+                            "Do you really wish to remove your item from the cart?",
+                            isPresented: $confirmZeroItemDeleteFlag
+                        ) {
+                            Button("Delete", role: .destructive) {
+                                confirmZeroItemDeleteFlag = false
+                                if let index = self.viewModel.CartResult?.itemList!
+                                    .firstIndex(of: cartItem!)
+                                {
+                                    self.viewModel.CartResult?.itemList!.remove(
+                                        at: index)
+                                }
+                            }
+                            Button("Cancel", role: .cancel) {
+
+                                confirmZeroItemDeleteFlag = false
+                            }
+                        }  //confiramtion if less than 1
                     }
-                    Button("Cancel" , role:.cancel){
-                        swipeDeleteFlag = false
-                        
+
+                }.buttonStyle(.borderless)
+
+                CustomRoundedButtonView(
+                    text: "Proceed to checkout",
+                    width: 60,
+                    onTap: {
+                        totalPrice = 0.0
+                        CalculateTotalPrice()
+                        showCheckOut.toggle()
+                    }, isButtonEnabled: .constant(true)
+                )
+                .sheet(
+                    isPresented: $showCheckOut,
+                    content: {
+                        CheckOutComponent(totalPrice: $totalPrice)
+                            .presentationDetents([.medium])
+                    })
+            }else{
+                VStack {
+                    ContentUnavailableView(
+                        "You are not logged in", systemImage: "person.slash",
+                        description: Text(
+                            "to view your favorites please sign in")
+                    ).frame(height: 300)
+                    NavigationLink(destination: LoginView()) {
+                        CustomRoundedButtonView(
+                            text: "Sign In",
+                            width: 100,
+                            onTap: {},
+                            isButtonEnabled: .constant(true)
+                        )
+                        .allowsHitTesting(false)
                     }
-                   
-                   
-                }//confirmation if Swipe
-                .confirmationDialog("Do you really wish to remove your item from the cart?", isPresented: $confirmZeroItemDeleteFlag) {
-                    Button("Delete" , role:.destructive){
-                        confirmZeroItemDeleteFlag=false
-                        if let index = self.viewModel.CartResult?.itemList!.firstIndex(of: cartItem!) {
-                            self.viewModel.CartResult?.itemList!.remove(at: index)
-                       }
-                    }
-                    Button("Cancel" , role:.cancel){
-                      
-                        confirmZeroItemDeleteFlag=false
-                    }
-                }//confiramtion if less than 1
+                }
             }
-          
-        }.buttonStyle(.borderless)
-        
-        CustomRoundedButtonView(
-            text:"Proceed to checkout",
-            width:60,
-            onTap: {
-                totalPrice = 0.0
-                CalculateTotalPrice()
-                showCheckOut.toggle()
-            },isButtonEnabled: .constant(true)
-        )
-        .sheet(isPresented: $showCheckOut, content: {
-            CheckOutComponent(totalPrice: $totalPrice)
-                .presentationDetents([.medium])
-        })
             
+        }.onAppear {
+            isLoggedIn = AuthManager.shared.isLoggedIn()
+        }
+
+        
+        
+
     }
-    func CalculateTotalPrice(){
-        for i in (viewModel.CartResult?.itemList)!{
+    func CalculateTotalPrice() {
+        for i in (viewModel.CartResult?.itemList)! {
             totalPrice += Double(i.count!) * i.price!
         }
         print(totalPrice)
     }
- 
 
 }
 

@@ -10,7 +10,7 @@ extension RegisterMutation {
     static func parse(
         from userDTO: RegisterMutation.Data.CustomerCreate.Customer
     )
-        -> ApplicationUser
+    -> ApplicationUser
     {
         var user = ApplicationUser(
             id: userDTO.id,

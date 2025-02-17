@@ -26,12 +26,17 @@ struct ContentView: View {
                 }
         }
         .onAppear {
-            FavoritesManager.shared.setContext(modelContext) // Now modelContext is available
+            FavoritesManager.shared.setContext(modelContext)
+            AuthManager.shared.setContext(modelContext)
         }
     }
 }
 
 #Preview {
-    ContentView()
-        .modelContainer(for: Product.self, inMemory: true)
+    ZStack {
+        ContentView()
+        SnackbarView()
+            .environmentObject(SnackbarManager.shared)
+    }
+    .modelContainer(for: [Product.self,ApplicationUser.self], inMemory: true)
 }

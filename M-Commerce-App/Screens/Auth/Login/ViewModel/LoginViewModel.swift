@@ -19,21 +19,24 @@ class LoginViewModel: ObservableObject {
         password: String!
     ) {
         isLoading = true
-        LoginService.registerCustomer(
+        LoginService.loginCustomer(
             email: email,
             password: password
         ) { (result) in
+
             DispatchQueue.main.async {
                 self.isLoading = false
                 self.loginResponse = result
-                if(result.success){
-                    SnackbarManager.shared.show(message: "Signed in successfully 🤝🏻!")
-                    print(result.accessToken ?? "")
-                }else{
-                    SnackbarManager.shared.show(message: "\(result.messages.first ?? "")!")
+                if result.success {
+                    SnackbarManager.shared.show(
+                        message: "Signed in successfully 🤝🏻!")
+                    print(result.applicationUser?.email ?? "")
+                    AuthManager.shared.updateUser(updatedUser: result.applicationUser!)
+                } else {
+                    SnackbarManager.shared.show(
+                        message: "\(result.messages.first ?? "")!")
                 }
             }
-            
         }
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 struct RegisterResponse{
-    var customer:ApplicationUser?
+    var applicationUser:ApplicationUser?
     var success:Bool
     var messages:[String]
 }

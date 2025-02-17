@@ -26,7 +26,8 @@ struct HomePageView: View {
                             },
                             prefix: {
                                 Image(systemName: "magnifyingglass")
-                            }
+                            },
+                            initialText: .constant("")
                         )
                         .padding([.leading,.trailing],20)
                         AdCardView(
