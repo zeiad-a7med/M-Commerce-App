@@ -8,64 +8,86 @@
 import SwiftUI
 
 struct EditProfile: View {
-    @State var profilePic : String = "https://static.wikia.nocookie.net/dreamworks/images/3/3e/Tai_Lung_Profile.jpg/revision/latest?cb=20240210212257"
-    @State var user : ApplicationUser?
+    @State var profilePic: String =
+        "https://static.wikia.nocookie.net/dreamworks/images/3/3e/Tai_Lung_Profile.jpg/revision/latest?cb=20240210212257"
+    @State var user: ApplicationUser?
     @State private var selectedCountry: Country = Constants.countries.first!
-    @State var firstName : String = ""
-    @State var lastName : String = ""
-    @State var email : String = ""
-    @State var phone : String = ""
-    @State private var showingAlert : Bool = false
+
+    @State var firstName: String = ""
+    @State private var firstNameValid: Bool = false
+
+    @State var lastName: String = ""
+    @State private var lastNameValid: Bool = false
+
+    @State var email: String = ""
+    @State private var emailValid: Bool = false
+
+    @State var phone: String = ""
+    @State private var phoneValid: Bool = false
+
+    @State private var showingAlert: Bool = false
+    @State private var isFormValid = false
     var body: some View {
-        VStack{
+        VStack {
             ProfileImage(profilePic: profilePic)
-             
-            VStack(alignment: .leading){
+
+            VStack(alignment: .leading) {
                 Text("First name")
-                    .font(.title2)                
+                    .font(.title2)
                 CustomTextField(
                     placeholder: "First name",
                     onChange: { val in
-                        
+
                     },
-                
                     prefix: {
-                        Image(systemName:"person.fill")
+                        Image(systemName: "person.fill")
+                    },
+                    validationType: .text,
+                    isValid: { valid in
+                        firstNameValid = valid
                     },
                     initialText: $firstName
-                    
+
                 )
-                
+
                 Text("Last name")
                     .font(.title2)
-                    
+
                 CustomTextField(
                     placeholder: "Last name",
                     onChange: { val in
-                        
+
                     },
                     prefix: {
-                        Image(systemName:"person.fill")
+                        Image(systemName: "person.fill")
+                    },
+                    validationType: .text,
+                    isValid: { valid in
+                        lastNameValid = valid
                     },
                     initialText: $lastName
-                    
+
                 )
-                
+
                 Text("Email")
                     .font(.title2)
-                    
+
                 CustomTextField(
                     placeholder: "Email",
                     onChange: { val in
-                        
+
                     },
                     prefix: {
-                        Image(systemName:"envelope.fill")
+                        Image(systemName: "envelope.fill")
+                    },
+                    validationType: .email,
+                    isValid: { valid in
+                        emailValid = valid
                     },
                     initialText: $email
-                    
+
                 )
-                
+
                 Text("phone")
                     .font(.title2)
                 CustomTextField(
@@ -92,26 +114,59 @@ struct EditProfile: View {
                     validationType: .phoneNumber,
                     characterLimit: 10,
                     isValid: { valid in
-//                        phoneValid = valid
+                        phoneValid = valid
                     },
                     initialText: $phone
                 )
-                
+
                 Spacer()
-             
+
             }.padding()
-            
-            CustomRoundedButtonView(text: "Save Changes",width: 80,isButtonEnabled: .constant(true)) 
-        }  .padding()
-            .onAppear{
+
+            CustomRoundedButtonView(
+                text: "Save Changes",
+                width: 80,
+                isButtonEnabled: $isFormValid
+            )
+            .onChange(
+                of: firstNameValid,
+                { oldValue, newValue in
+                    updateFormValidity()
+                }
+            )
+            .onChange(
+                of: lastNameValid,
+                { oldValue, newValue in
+                    updateFormValidity()
+                }
+            )
+            .onChange(
+                of: emailValid,
+                { oldValue, newValue in
+                    updateFormValidity()
+                }
+            )
+            .onChange(
+                of: phoneValid,
+                { oldValue, newValue in
+                    updateFormValidity()
+                }
+            )
+
+        }.padding()
+            .onAppear {
                 user = AuthManager.shared.applicationUser!
                 email = user?.email ?? ""
                 firstName = user?.firstName ?? ""
                 lastName = user?.lastName ?? ""
                 phone = String(user?.phone?.suffix(10) ?? "")
             }
-    
-        
+
+    }
+    func updateFormValidity() {
+        isFormValid = [
+            firstNameValid, lastNameValid, emailValid, phoneValid,
+        ].allSatisfy { $0 }
     }
 }
 
