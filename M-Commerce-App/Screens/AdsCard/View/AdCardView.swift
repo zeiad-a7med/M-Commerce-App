@@ -49,16 +49,8 @@ struct AdCardView: View {
                                             UIPasteboard.general.string =
                                                 discount.code
                                             withAnimation(.snappy) {
-                                                copyToClipboard?()
+                                                SnackbarManager.shared.show(message: "Copied to clipboard!")
                                             }
-                                            DispatchQueue.main.asyncAfter(
-                                                deadline: .now() + 1
-                                            ) {
-                                                withAnimation(.snappy) {
-                                                    copyToClipboard?()
-                                                }
-                                            }
-
                                         }
 
                                     Text("\(discount.code)")

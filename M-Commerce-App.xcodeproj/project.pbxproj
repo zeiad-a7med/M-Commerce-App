@@ -822,6 +822,20 @@
 			path = Constanst;
 			sourceTree = "<group>";
 		};
+		89C4A6342D63CBA100716CB1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		89C4A6352D63CBB500716CB1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		89CAF3162D6007AE003984FA /* SubView */ = {
 			isa = PBXGroup;
 			children = (
@@ -846,6 +860,8 @@
 		89CAF31B2D6007AE003984FA /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				89C4A6352D63CBB500716CB1 /* ViewModel */,
+				89C4A6342D63CBA100716CB1 /* Model */,
 				89CAF31A2D6007AE003984FA /* View */,
 			);
 			path = Settings;
