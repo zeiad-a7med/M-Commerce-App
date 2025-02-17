@@ -33,7 +33,8 @@ struct LoginView: View {
                     validationType: .email,
                     isValid: { valid in
                         emailValid = valid
-                    }
+                    },
+                    initialText: .constant("")
                 )
             }.padding(.bottom, 10)
 

@@ -28,12 +28,14 @@ struct RegisterView: View {
     @State private var passwordValid: Bool = false
 
     @State private var isFormValid = false
-
+    @State var disabeld : Bool = true
     var body: some View {
 
         ScrollView {
             VStack {
-
+                Button("edit"){
+                    disabeld = false
+                }
                 //fistName
                 VStack(alignment: .leading) {
                     Text("First name")
@@ -47,7 +49,8 @@ struct RegisterView: View {
                         validationType: .name,
                         isValid: { valid in
                             firstNameValid = valid
-                        }
+                        },
+                        initialText: .constant("")
                     )
                 }.padding(.bottom, 10)
 
@@ -64,7 +67,8 @@ struct RegisterView: View {
                         validationType: .name,
                         isValid: { valid in
                             lastNameValid = valid
-                        }
+                        },
+                        initialText: .constant("")
                     )
                 }.padding(.bottom, 10)
 
@@ -81,7 +85,8 @@ struct RegisterView: View {
                         validationType: .email,
                         isValid: { valid in
                             emailValid = valid
-                        }
+                        },
+                        initialText: .constant("")
                     )
                 }.padding(.bottom, 10)
 
@@ -115,7 +120,8 @@ struct RegisterView: View {
                         characterLimit: 10,
                         isValid: { valid in
                             phoneValid = valid
-                        }
+                        },
+                        initialText: .constant("")
                     )
                 }.padding(.bottom, 10)
 

@@ -36,7 +36,8 @@ struct FavoritesView: View {
                                 },
                                 prefix: {
                                     Image(systemName: "magnifyingglass")
-                                }
+                                },
+                                initialText: .constant("")
                             )
                             .padding()
 

@@ -15,11 +15,13 @@ struct CustomTextField: View {
     var validationType: ValidationType?
     var characterLimit: Int?
     var isValid: ((Bool) -> Void)?
-
+    @State private var defaultSet : Bool = false
+    @Binding var initialText: String
     @State private var text: String = ""
     @FocusState private var isFocused: Bool
     @State private var errorMessage: String?
     var hasError: Bool { errorMessage != nil }
+    
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -111,7 +113,14 @@ struct CustomTextField: View {
             }
 
         }
-        .animation(.easeInOut(duration: 0.3), value: errorMessage)  // Ensure smooth updates
+        .animation(.easeInOut(duration: 0.3), value: errorMessage)
+        .onAppear{
+            if(!defaultSet){
+                defaultSet = true
+                print(initialText ?? "")
+                text = initialText ?? ""
+            }
+        }
     }
 }
 
@@ -121,18 +130,20 @@ struct CustomTextField: View {
         onChange: { text in
             print("Search text: \(text)")
         },
-//        prefix: {
-//            Image(systemName: "magnifyingglass")
-//
-//        },
-//        suffix: {
-//            Button(action: {
-//                print("Cleared")
-//            }) {
-//                Image(systemName: "heart")
-//            }
-//        },
-        characterLimit: 5
+        //        prefix: {
+        //            Image(systemName: "magnifyingglass")
+        //
+        //        },
+        //        suffix: {
+        //            Button(action: {
+        //                print("Cleared")
+        //            }) {
+        //                Image(systemName: "heart")
+        //            }
+        //        },
+        characterLimit: 5,
+        initialText: .constant("assa")
+        
 
     )
     .padding()

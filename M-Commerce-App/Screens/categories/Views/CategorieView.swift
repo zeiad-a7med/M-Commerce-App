@@ -27,7 +27,8 @@ struct CategorieView: View {
                             placeholder: "search for a product...",
                             onChange: { text in
                                 print(text)
-                            }
+                            },
+                            initialText: .constant("")
                         ).padding(10)
                         FilterBar(filterItems: ["All","Men","Women","Kid"], willFilter: { filterRes in
                             filterType = filterRes

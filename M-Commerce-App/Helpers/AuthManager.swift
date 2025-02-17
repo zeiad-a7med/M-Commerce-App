@@ -37,20 +37,32 @@ class AuthManager: ObservableObject {
     }
 
     /// Update user details (name, email, etc.)
-    func updateUser(updatedUser : ApplicationUser) {
-        guard modelContext != nil else{
-            return
+    func updateUser(updatedUser: ApplicationUser) {
+        guard let modelContext = modelContext else { return }
+
+        if applicationUser != nil {
+            applicationUser = updatedUser
+        } else {
+            modelContext.insert(updatedUser)
+            applicationUser = updatedUser  // Ensure it's assigned
         }
-        applicationUser = updatedUser
-        saveContext()
+
+        do {
+            try modelContext.save()
+            loadApplicationUser()  // Refresh after saving
+        } catch {
+            print("Error saving user: \(error)")
+        }
     }
 
     /// Logout: Remove the user and reset the session
     func logoutUser() {
         guard let modelContext = modelContext, let user = applicationUser else {
+            print("Logout failed: No user found.")
             return
         }
         do {
+            print("Logging out user: \(user.email ?? "Unknown")")
             modelContext.delete(user)
             try modelContext.save()
             DispatchQueue.main.async {
@@ -60,20 +72,9 @@ class AuthManager: ObservableObject {
             print("Error logging out user: \(error)")
         }
     }
+    
     func isLoggedIn() -> Bool {
-        return applicationUser != nil
+        return applicationUser != nil && !(applicationUser!.accessToken!.isEmpty)
     }
 
-    /// Save changes to the database
-    private func saveContext() {
-        guard let modelContext = modelContext else { return }
-        do {
-            try modelContext.save()
-            DispatchQueue.main.async {
-                self.objectWillChange.send()  // Notify views to update
-            }
-        } catch {
-            print("Error saving application user: \(error)")
-        }
-    }
 }
