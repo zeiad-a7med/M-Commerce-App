@@ -7,8 +7,7 @@
 
 import Foundation
 struct LoginResponse{
-    var accessToken: String?
-    var accessTokenExpiresAt: String?
+    var applicationUser: ApplicationUser?
     var success:Bool
     var messages:[String]
 }

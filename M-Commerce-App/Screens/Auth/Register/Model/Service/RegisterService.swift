@@ -56,7 +56,7 @@ class RegisterService: RegisterServiceProtocol {
                 let customer = RegisterMutation.parse(from: customerDTO)
                 complitionHandler(
                     RegisterResponse(
-                        customer: customer,
+                        applicationUser: customer,
                         success: true,
                         messages:userErrors ?? [requestError ?? ""]
                     ))
