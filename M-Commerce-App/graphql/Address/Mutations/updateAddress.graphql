@@ -1,0 +1,43 @@
+mutation AddressUpdate ($customerAccessToken: String! , $id: ID!,$zip: String!,$phone: String! ,$firstName: String!,$lastName: String!,$country: String!,$city: String!,$address1: String!,$address2: String!) {
+    customerAddressUpdate(
+        customerAccessToken: $customerAccessToken
+        id: $id
+        address: {
+            zip: $zip
+            phone: $phone
+            lastName: $lastName
+            firstName: $firstName
+            country: $country
+            city: $city
+            address2: $address2
+            address1: $address1
+        }
+    ) {
+        customerAddress {
+            address1
+            address2
+            city
+            company
+            country
+            countryCode
+            countryCodeV2
+            firstName
+            formatted
+            formattedArea
+            id
+            lastName
+            latitude
+            longitude
+            name
+            phone
+            province
+            provinceCode
+            zip
+        }
+        customerUserErrors {
+            code
+            field
+            message
+        }
+    }
+}

@@ -9,6 +9,7 @@ import Foundation
 
 struct AddressResponse{
     var listOfAddress = [Address]()
+    var defaultAddress : Address?
     var success:Bool?
     var messages:[String]?
 }

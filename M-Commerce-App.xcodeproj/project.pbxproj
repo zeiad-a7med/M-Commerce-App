@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		48A3368F2D645B2300F64F2A /* Address.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 48A3368E2D645B2300F64F2A /* Address.graphql */; };
+		48A336912D645FE200F64F2A /* defaultAddresCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A336902D645FE200F64F2A /* defaultAddresCard.swift */; };
+		48A336942D647C7200F64F2A /* updateAddress.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 48A336932D647C7200F64F2A /* updateAddress.graphql */; };
+		48A336962D64ADD400F64F2A /* updateDefaultAddress.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 48A336952D64ADD400F64F2A /* updateDefaultAddress.graphql */; };
+		48A336982D64B94700F64F2A /* deleteAddress.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 48A336972D64B94700F64F2A /* deleteAddress.graphql */; };
+		48A3369A2D64BF2100F64F2A /* createAddress.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 48A336992D64BF2100F64F2A /* createAddress.graphql */; };
 		48B1F89C2D637EA9004D13AC /* AddressComponentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B1F89B2D637EA9004D13AC /* AddressComponentViewModel.swift */; };
 		48B1F89E2D637EC9004D13AC /* AddressesDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B1F89D2D637EC9004D13AC /* AddressesDisplayView.swift */; };
 		48B1F8A12D637EEF004D13AC /* AddressAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B1F8A02D637EEF004D13AC /* AddressAddView.swift */; };
@@ -145,6 +151,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		48A3368E2D645B2300F64F2A /* Address.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Address.graphql; sourceTree = "<group>"; };
+		48A336902D645FE200F64F2A /* defaultAddresCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = defaultAddresCard.swift; sourceTree = "<group>"; };
+		48A336932D647C7200F64F2A /* updateAddress.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = updateAddress.graphql; sourceTree = "<group>"; };
+		48A336952D64ADD400F64F2A /* updateDefaultAddress.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = updateDefaultAddress.graphql; sourceTree = "<group>"; };
+		48A336972D64B94700F64F2A /* deleteAddress.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = deleteAddress.graphql; sourceTree = "<group>"; };
+		48A336992D64BF2100F64F2A /* createAddress.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = createAddress.graphql; sourceTree = "<group>"; };
 		48B1F89B2D637EA9004D13AC /* AddressComponentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressComponentViewModel.swift; sourceTree = "<group>"; };
 		48B1F89D2D637EC9004D13AC /* AddressesDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressesDisplayView.swift; sourceTree = "<group>"; };
 		48B1F8A02D637EEF004D13AC /* AddressAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressAddView.swift; sourceTree = "<group>"; };
@@ -293,6 +305,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		48A3368A2D64585B00F64F2A /* Address */ = {
+			isa = PBXGroup;
+			children = (
+				48A336922D647C3E00F64F2A /* Mutations */,
+				48A3368D2D64598D00F64F2A /* Queries */,
+			);
+			path = Address;
+			sourceTree = "<group>";
+		};
+		48A3368D2D64598D00F64F2A /* Queries */ = {
+			isa = PBXGroup;
+			children = (
+				48A3368E2D645B2300F64F2A /* Address.graphql */,
+			);
+			path = Queries;
+			sourceTree = "<group>";
+		};
+		48A336922D647C3E00F64F2A /* Mutations */ = {
+			isa = PBXGroup;
+			children = (
+				48A336932D647C7200F64F2A /* updateAddress.graphql */,
+				48A336952D64ADD400F64F2A /* updateDefaultAddress.graphql */,
+				48A336972D64B94700F64F2A /* deleteAddress.graphql */,
+				48A336992D64BF2100F64F2A /* createAddress.graphql */,
+			);
+			path = Mutations;
+			sourceTree = "<group>";
+		};
 		48B1F8982D636EB2004D13AC /* AddressComponent */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,6 +376,7 @@
 			children = (
 				48B1F8AA2D63A99C004D13AC /* addressCard.swift */,
 				48B1F8AE2D63BD68004D13AC /* RadioList.swift */,
+				48A336902D645FE200F64F2A /* defaultAddresCard.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -416,6 +457,7 @@
 		890D86C32D5CD4B90062E8D1 /* graphql */ = {
 			isa = PBXGroup;
 			children = (
+				48A3368A2D64585B00F64F2A /* Address */,
 				89B00B692D610BC000AF1FB7 /* Auth */,
 				C4F3FC6D2D5E6750005151E9 /* Categories */,
 				890D86DA2D5CF5D80062E8D1 /* Products */,
@@ -1182,6 +1224,7 @@
 				890D86E12D5CF63A0062E8D1 /* GetCollections.graphql in Resources */,
 				890D86D72D5CF07D0062E8D1 /* GetCollection.graphql in Resources */,
 				89B00B752D6119C600AF1FB7 /* Profile.graphql in Resources */,
+				48A3368F2D645B2300F64F2A /* Address.graphql in Resources */,
 				48F009F62D5C94FF002A016E /* Assets.xcassets in Resources */,
 				C4F3FC732D5E6812005151E9 /* GetProductsTags.graphql in Resources */,
 			);
@@ -1240,6 +1283,7 @@
 				890D87C02D5DF66C0062E8D1 /* Testing.swift in Sources */,
 				C4BC56162D5F8EF400F9D42A /* ProductsViewModel.swift in Sources */,
 				890D87C12D5DF66C0062E8D1 /* favoritesService.swift in Sources */,
+				48A3369A2D64BF2100F64F2A /* createAddress.graphql in Sources */,
 				C4BC561E2D5F96DC00F9D42A /* FlatFilterButton.swift in Sources */,
 				890D87C22D5DF66C0062E8D1 /* RowCard.swift in Sources */,
 				890D87C32D5DF66C0062E8D1 /* AdViewModel.swift in Sources */,
@@ -1259,7 +1303,9 @@
 				48B1F8A32D637F31004D13AC /* AddressEditView.swift in Sources */,
 				C4BC560C2D5F631B00F9D42A /* GetFilteredProducts.swift in Sources */,
 				890D87CA2D5DF66C0062E8D1 /* FavoritesView.swift in Sources */,
+				48A336982D64B94700F64F2A /* deleteAddress.graphql in Sources */,
 				890D87CB2D5DF66C0062E8D1 /* CheckOutComponent.swift in Sources */,
+				48A336942D647C7200F64F2A /* updateAddress.graphql in Sources */,
 				8952A6792D61FB260003ACF4 /* LoginView.swift in Sources */,
 				89EE56E32D5E322700B05457 /* GetProductQuery.swift in Sources */,
 				890D87CC2D5DF66C0062E8D1 /* NumberOfItems.swift in Sources */,
@@ -1274,6 +1320,7 @@
 				890D87D32D5DF66C0062E8D1 /* HomePageView.swift in Sources */,
 				8952A6892D621F340003ACF4 /* LoginViewModel.swift in Sources */,
 				8952A68A2D621F340003ACF4 /* LoginResponse.swift in Sources */,
+				48A336962D64ADD400F64F2A /* updateDefaultAddress.graphql in Sources */,
 				8952A68B2D621F340003ACF4 /* LoginService.swift in Sources */,
 				890D87D42D5DF66C0062E8D1 /* imageCard.swift in Sources */,
 				890D87D52D5DF66C0062E8D1 /* ProductViewModel.swift in Sources */,
@@ -1292,6 +1339,7 @@
 				890D87402D5D40A30062E8D1 /* CustomRoundedButtonView.swift in Sources */,
 				C4BC561A2D5F8F2F00F9D42A /* ProductsView.swift in Sources */,
 				890D873C2D5D2BC20062E8D1 /* FavoriteButtonView.swift in Sources */,
+				48A336912D645FE200F64F2A /* defaultAddresCard.swift in Sources */,
 				890D86E42D5CFF220062E8D1 /* PageInfo.swift in Sources */,
 				89D5084B2D5C10C600046FA9 /* CustomTextField.swift in Sources */,
 				890D870F2D5D25500062E8D1 /* StarRatingView.swift in Sources */,

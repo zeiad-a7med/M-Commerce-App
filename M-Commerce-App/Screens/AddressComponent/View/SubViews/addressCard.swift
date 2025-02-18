@@ -8,20 +8,26 @@
 import SwiftUI
 
 struct addressCard: View {
-    @State var isSelected : Bool = true
+    
+    @State var isSelected :Bool = false
     @ObservedObject var addressModel = AddressComponentViewModel(id: "03c27d8e9f3f22fddb10010462ef36d3")
     @State var cardColor = ColoredPins.generateRandomColoredPin()
     @State var index : Int?
     var body: some View {
         HStack{
             VStack(alignment: .leading){
-                if let index = index{
-                    Text(addressModel.addressPackage.listOfAddress[index].city ?? "Cairo")
-                        .font(.headline)
-                        .padding(.bottom,5)
-                    Text(addressModel.addressPackage.listOfAddress[index].address1 ?? "tahrir")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                if  !isEmpty() {
+                    if let tempIndex = index{
+                        Text(addressModel.addressPackage.listOfAddress[tempIndex].city ?? "Cairo" )
+                            .font(.headline)
+                            .padding(.bottom,5)
+                        Text(addressModel.addressPackage.listOfAddress[tempIndex].address1 ?? "Egypt")
+                            .font(.subheadline)
+                            .multilineTextAlignment(.leading)
+                            .foregroundStyle(.secondary)
+                          
+                    }
+               
                 }
              
              
@@ -47,11 +53,20 @@ struct addressCard: View {
             }.padding()
             .onAppear(){
                 if let index = index{
-                   // radioController.boolArray[index].toggle()
+                    if  addressModel.addressPackage.listOfAddress.count != 0{
+                        addressModel.radioController.generateArray(count: addressModel.addressPackage.listOfAddress.count)
+                        addressModel.radioController.boolArray[index].toggle()
+                    }
                 }
                 
             }
             
+    }
+    func isEmpty() ->Bool{
+        if addressModel.addressPackage.listOfAddress.count == 0{
+            return true
+        }
+        return false
     }
 }
 

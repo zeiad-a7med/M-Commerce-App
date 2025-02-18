@@ -14,19 +14,31 @@ struct AddressesDisplayView: View {
           
             
             NavigationStack {
+                if addressModel.addressPackage.defaultAddress != nil{
+                    defaultAddresCard()
+                }
+                Text("Choose your Location")
+                    .bold()
+                    .padding(.trailing,150)
+                    .padding(.bottom,5)
+                    .font(.title2)
                 ScrollView {
-                    ForEach(Array(addressModel.addressPackage.listOfAddress.enumerated()),id: \.offset) { index,element in
-                        NavigationLink {
-                          
-                        } label: {
-                            addressCard(index:index)
-                                .foregroundStyle(.black)
-                    }
+                    
+                    if  addressModel.addressPackage.listOfAddress.count != 0 {
+                        ForEach(Array(addressModel.addressPackage.listOfAddress.enumerated()),id: \.offset) { index,element in
+                            NavigationLink {
+                                AddressEditView(index: index)
+               
+                            } label: {
+                                addressCard(index:index)
+                                    .foregroundStyle(.black)
+                        }
+                        }
                     }
                    
                 }.toolbar{
                     NavigationLink {
-                       // AddAddress()
+                       AddressAddView()
                         
                     } label: {
                         Image(systemName: "plus")
@@ -43,6 +55,7 @@ struct AddressesDisplayView: View {
             }
             
         }
+  
 
     }
 }
