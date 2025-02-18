@@ -28,8 +28,10 @@ final class Product{
     var images: [ImgModel]?
     var encodedVariantExistence: String?
     var encodedVariantAvailability: String?
+    var variants: [ProductVariant]?
+    var variantsCount : VariantsCount?
     
-    init(availableForSale: Bool? = nil, desc: String? = nil, handle: String? = nil, id: String, isGiftCard: Bool? = nil, productType: String? = nil, tags: [String]? = nil, title: String, totalInventory: Int? = nil, updatedAt: String? = nil, vendor: String? = nil, category: String? = nil, priceRange: PriceRange? = nil, featuredImage: ImgModel? = nil, images: [ImgModel]? = nil, encodedVariantExistence: String? = nil, encodedVariantAvailability: String? = nil) {
+    init(availableForSale: Bool? = nil, desc: String? = nil, handle: String? = nil, id: String, isGiftCard: Bool? = nil, productType: String? = nil, tags: [String]? = nil, title: String, totalInventory: Int? = nil, updatedAt: String? = nil, vendor: String? = nil, category: String? = nil, priceRange: PriceRange? = nil, featuredImage: ImgModel? = nil, images: [ImgModel]? = nil, encodedVariantExistence: String? = nil, encodedVariantAvailability: String? = nil, variants: [ProductVariant]? = nil, variantsCount: VariantsCount? = nil) {
         self.availableForSale = availableForSale
         self.desc = desc
         self.handle = handle
@@ -47,31 +49,22 @@ final class Product{
         self.images = images
         self.encodedVariantExistence = encodedVariantExistence
         self.encodedVariantAvailability = encodedVariantAvailability
+        self.variants = variants
+        self.variantsCount = variantsCount
     }
     //Getters
-    var price: Double {
-        get {
-            return Double(priceRange?.minVariantPrice.amount ?? "0") ?? 0
-        }
-    }
     var formattedPrice: String {
         get {
-            return String(format: "%.1f", price)
+            if(priceRange?.minVariantPrice.amount == priceRange?.maxVariantPrice.amount){
+                return priceRange?.minVariantPrice.amount ?? ""
+            }else{
+                return "\(priceRange?.minVariantPrice.amount ?? "") - \(priceRange?.maxVariantPrice.amount ?? "")"
+            }
         }
     }
     var currency: String? {
         get {
             return priceRange?.minVariantPrice.currencyCode
         }
-    }
-    
-    
-    static func toSaveProduct(_ product: Product) -> Product {
-        return Product(
-            id: product.id,
-            title: product.title,
-            vendor: product.vendor
-//            featuredImage: product.featuredImage
-        )
     }
 }

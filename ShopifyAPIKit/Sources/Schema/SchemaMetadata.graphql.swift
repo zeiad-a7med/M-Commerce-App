@@ -33,6 +33,7 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "CompanyContact": return ShopifyAPIKit.Objects.CompanyContact
     case "CompanyLocation": return ShopifyAPIKit.Objects.CompanyLocation
     case "ComponentizableCartLine": return ShopifyAPIKit.Objects.ComponentizableCartLine
+    case "Count": return ShopifyAPIKit.Objects.Count
     case "Customer": return ShopifyAPIKit.Objects.Customer
     case "CustomerAccessToken": return ShopifyAPIKit.Objects.CustomerAccessToken
     case "CustomerAccessTokenCreatePayload": return ShopifyAPIKit.Objects.CustomerAccessTokenCreatePayload
@@ -75,6 +76,8 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "ProductOptionValue": return ShopifyAPIKit.Objects.ProductOptionValue
     case "ProductPriceRange": return ShopifyAPIKit.Objects.ProductPriceRange
     case "ProductVariant": return ShopifyAPIKit.Objects.ProductVariant
+    case "ProductVariantConnection": return ShopifyAPIKit.Objects.ProductVariantConnection
+    case "QuantityRule": return ShopifyAPIKit.Objects.QuantityRule
     case "QueryRoot": return ShopifyAPIKit.Objects.QueryRoot
     case "SearchQuerySuggestion": return ShopifyAPIKit.Objects.SearchQuerySuggestion
     case "SellingPlan": return ShopifyAPIKit.Objects.SellingPlan

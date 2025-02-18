@@ -72,6 +72,10 @@
 		890D87D92D5DF66C0062E8D1 /* BrandCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890D87B52D5DF66C0062E8D1 /* BrandCard.swift */; };
 		890D87DA2D5DF66C0062E8D1 /* ProductInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890D87952D5DF66C0062E8D1 /* ProductInfoView.swift */; };
 		890D87DB2D5DF66C0062E8D1 /* PopupCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890D87B32D5DF66C0062E8D1 /* PopupCircleView.swift */; };
+		892967BD2D64B399007191DC /* Variant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892967BC2D64B399007191DC /* Variant.swift */; };
+		892967BF2D64B432007191DC /* QuantityRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892967BE2D64B432007191DC /* QuantityRule.swift */; };
+		892967C12D64B4BB007191DC /* VariantsCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892967C02D64B4BB007191DC /* VariantsCount.swift */; };
+		892967C32D654016007191DC /* CustomChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892967C22D654016007191DC /* CustomChip.swift */; };
 		8952A6792D61FB260003ACF4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952A6762D61FB260003ACF4 /* LoginView.swift */; };
 		8952A67B2D6201A80003ACF4 /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952A67A2D6201A80003ACF4 /* RegisterResponse.swift */; };
 		8952A67E2D6202340003ACF4 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952A67D2D6202340003ACF4 /* AuthService.swift */; };
@@ -220,6 +224,10 @@
 		890D87B62D5DF66C0062E8D1 /* BrandsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsView.swift; sourceTree = "<group>"; };
 		890D87B72D5DF66C0062E8D1 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		890D87B92D5DF66C0062E8D1 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
+		892967BC2D64B399007191DC /* Variant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variant.swift; sourceTree = "<group>"; };
+		892967BE2D64B432007191DC /* QuantityRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityRule.swift; sourceTree = "<group>"; };
+		892967C02D64B4BB007191DC /* VariantsCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantsCount.swift; sourceTree = "<group>"; };
+		892967C22D654016007191DC /* CustomChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChip.swift; sourceTree = "<group>"; };
 		8952A6762D61FB260003ACF4 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		8952A67A2D6201A80003ACF4 /* RegisterResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterResponse.swift; sourceTree = "<group>"; };
 		8952A67D2D6202340003ACF4 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
@@ -537,6 +545,9 @@
 				89B00B7A2D6127C300AF1FB7 /* Address.swift */,
 				89B00B7C2D612A8900AF1FB7 /* Order.swift */,
 				89B00B852D61392700AF1FB7 /* Country.swift */,
+				892967BC2D64B399007191DC /* Variant.swift */,
+				892967BE2D64B432007191DC /* QuantityRule.swift */,
+				892967C02D64B4BB007191DC /* VariantsCount.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -971,6 +982,7 @@
 				89CAF3222D602432003984FA /* RoundedCornerShape.swift */,
 				89CAF3282D60666B003984FA /* SnakeBar.swift */,
 				89B00B8C2D6148CF00AF1FB7 /* CustomSecureField.swift */,
+				892967C22D654016007191DC /* CustomChip.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1259,6 +1271,7 @@
 				8952A6912D6284870003ACF4 /* ApplicationUser.swift in Sources */,
 				89B00B6E2D610C0200AF1FB7 /* Login.graphql in Sources */,
 				C44BEDB02D5D1FC80022B603 /* Price.swift in Sources */,
+				892967C32D654016007191DC /* CustomChip.swift in Sources */,
 				C44BEDAE2D5D1F540022B603 /* Product.swift in Sources */,
 				C44BEDA32D5D17E10022B603 /* Collection.swift in Sources */,
 				C4BC561C2D5F937C00F9D42A /* FlatFilterBar.swift in Sources */,
@@ -1290,11 +1303,13 @@
 				C4BC561E2D5F96DC00F9D42A /* FlatFilterButton.swift in Sources */,
 				890D87C22D5DF66C0062E8D1 /* RowCard.swift in Sources */,
 				890D87C32D5DF66C0062E8D1 /* AdViewModel.swift in Sources */,
+				892967C12D64B4BB007191DC /* VariantsCount.swift in Sources */,
 				48B1F8AF2D63BD68004D13AC /* RadioList.swift in Sources */,
 				890D87C42D5DF66C0062E8D1 /* ShoppingCartViewModel.swift in Sources */,
 				89B00B862D61392700AF1FB7 /* Country.swift in Sources */,
 				890D87C52D5DF66C0062E8D1 /* Cart.swift in Sources */,
 				8952A6802D6206960003ACF4 /* RegisterMutation.swift in Sources */,
+				892967BD2D64B399007191DC /* Variant.swift in Sources */,
 				890D87C62D5DF66C0062E8D1 /* FilterBar.swift in Sources */,
 				89B00B722D61178900AF1FB7 /* Logout.graphql in Sources */,
 				890D87C72D5DF66C0062E8D1 /* BrandsModel.swift in Sources */,
@@ -1336,6 +1351,7 @@
 				8952A67E2D6202340003ACF4 /* AuthService.swift in Sources */,
 				890D87D82D5DF66C0062E8D1 /* DeleteButton.swift in Sources */,
 				890D87D92D5DF66C0062E8D1 /* BrandCard.swift in Sources */,
+				892967BF2D64B432007191DC /* QuantityRule.swift in Sources */,
 				890D87DA2D5DF66C0062E8D1 /* ProductInfoView.swift in Sources */,
 				890D87DB2D5DF66C0062E8D1 /* PopupCircleView.swift in Sources */,
 				C4BC56202D5FD70300F9D42A /* BrandsGrid.swift in Sources */,
