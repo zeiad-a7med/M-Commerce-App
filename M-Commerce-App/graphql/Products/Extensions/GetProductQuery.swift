@@ -5,7 +5,8 @@
 //  Created by Zeiad on 13/02/2025.
 //
 import ShopifyAPIKit
-extension GetProductQuery{
+
+extension GetProductQuery {
     static func parse(from productDTO: GetProductQuery.Data.Product)
         -> Product
     {
@@ -16,6 +17,40 @@ extension GetProductQuery{
                     altText: img.altText, height: img.height,
                     originalSrc: img.originalSrc, url: img.url,
                     width: img.width, id: img.id))
+        }
+        var variants: [ProductVariant] = []
+        productDTO.variants.nodes.forEach { variant in
+            variants.append(
+                ProductVariant(
+                    availableForSale: variant.availableForSale,
+                    barcode: variant.barcode,
+                    currentlyNotInStock: variant.currentlyNotInStock,
+                    id: variant.id,
+                    quantityAvailable: variant.quantityAvailable,
+                    requiresComponents: variant.requiresComponents,
+                    requiresShipping: variant.requiresShipping,
+                    sku: variant.sku,
+                    taxable: variant.taxable,
+                    title: variant.title,
+                    weight: variant.weight,
+                    weightUnit: variant.weightUnit.rawValue,
+                    image: ImgModel(
+                        altText: variant.image?.altText,
+                        height: variant.image?.height,
+                        originalSrc: variant.image?.originalSrc,
+                        url: variant.image?.url,
+                        width: variant.image?.width,
+                        id: variant.image?.id
+                    ),
+                    price: Price(amount: variant.price.amount, currencyCode: variant.price.currencyCode.rawValue),
+                    priceV2: Price(amount: variant.priceV2.amount, currencyCode: variant.priceV2.currencyCode.rawValue),
+                    quantityRule: QuantityRule(
+                        increment: variant.quantityRule.increment,
+                        maximum: variant.quantityRule.maximum,
+                        minimum: variant.quantityRule.minimum
+                    )
+                )
+            )
         }
         let product = Product(
             availableForSale: productDTO.availableForSale,
@@ -57,7 +92,12 @@ extension GetProductQuery{
             encodedVariantExistence: productDTO.encodedVariantExistence
                 ?? "",
             encodedVariantAvailability: productDTO
-                .encodedVariantAvailability ?? ""
+                .encodedVariantAvailability ?? "",
+            variants: variants,
+            variantsCount: VariantsCount(
+                count: productDTO.variantsCount?.count ?? nil,
+                precision: productDTO.variantsCount?.precision.rawValue
+            )
         )
         return product
     }

@@ -11,6 +11,13 @@ struct ProductInfoView: View {
     var productId: String
     @StateObject var viewModel: ProductViewModel
     @ObservedObject private var favoritesManager = FavoritesManager.shared  // Singleton instance
+    @State var selectedVariant: ProductVariant?
+    let columns: [GridItem] = [
+        GridItem(.flexible(), spacing: 5),
+        GridItem(.flexible(), spacing: 5),
+        GridItem(.flexible(), spacing: 5),
+        GridItem(.flexible(), spacing: 5),
+    ]
     init(productId: String) {
         self.productId = productId
         _viewModel = StateObject(
@@ -33,29 +40,47 @@ struct ProductInfoView: View {
                     VStack {
                         ScrollView(.horizontal, showsIndicators: false) {
                             VStack {
-                                LazyHStack {
-                                    ForEach(
-                                        Array(
-                                            (viewModel.productRes?.product?
-                                                .images ?? [])
-                                                .enumerated()), id: \.offset
-                                    ) {
-                                        index, discount in
-                                        CustomNetworkImageView(
-                                            url: URL(
-                                                string: viewModel.productRes?
-                                                    .product?.images?[
-                                                        index
-                                                    ].url ?? ""
+                                if selectedVariant != nil {
+                                    CustomNetworkImageView(
+                                        url: URL(
+                                            string: selectedVariant?.image?.url
+                                                ?? ""
 
-                                            )!
-                                        )
-                                        .frame(
-                                            width: UIScreen.main.bounds.width,
-                                            height: UIScreen.main.bounds.width
-                                                + 70
-                                        )
+                                        )!
+                                    )
+                                    .frame(
+                                        width: UIScreen.main.bounds.width,
+                                        height: UIScreen.main.bounds.width
+                                            + 70
+                                    )
+                                } else {
+                                    LazyHStack {
+                                        ForEach(
+                                            Array(
+                                                (viewModel.productRes?.product?
+                                                    .images ?? [])
+                                                    .enumerated()), id: \.offset
+                                        ) {
+                                            index, discount in
+                                            CustomNetworkImageView(
+                                                url: URL(
+                                                    string: viewModel
+                                                        .productRes?
+                                                        .product?.images?[
+                                                            index
+                                                        ].url ?? ""
 
+                                                )!
+                                            )
+                                            .frame(
+                                                width: UIScreen.main.bounds
+                                                    .width,
+                                                height: UIScreen.main.bounds
+                                                    .width
+                                                    + 70
+                                            )
+
+                                        }
                                     }
                                 }
 
@@ -64,7 +89,7 @@ struct ProductInfoView: View {
                         }
                         .frame(
                             width: UIScreen.main.bounds.width,
-                            height: UIScreen.main.bounds.width + 70
+                            height: UIScreen.main.bounds.width
                         )
                         .ignoresSafeArea(.all)
                         .scrollTargetLayout()
@@ -75,29 +100,78 @@ struct ProductInfoView: View {
                         Spacer()
                         VStack(alignment: .leading) {
 
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text(
-                                        viewModel.productRes?.product?.title
-                                            ?? ""
-                                    )
-                                    .font(.title2)
-                                    .multilineTextAlignment(.leading)
-                                    .bold(true)
-                                    .padding(.bottom, 10)
-                                    StarRatingView(
-                                        rating: Double.random(in: 2...5))
-                                }.frame(
-                                    width: UIScreen.main.bounds.width * 2 / 3,
-                                    alignment: .leading)
-                                Spacer()
-                                FavoriteButtonView(
-                                    product: viewModel.productRes!.product!,
-                                    size: 30
-                                )
-                            }.padding(.bottom, 20)
-
                             ScrollView {
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text(
+                                            viewModel.productRes?.product?.title
+                                                ?? ""
+                                        )
+                                        .font(.title2)
+                                        .multilineTextAlignment(.leading)
+                                        .bold(true)
+                                        .padding(.bottom, 10)
+                                        StarRatingView(
+                                            rating: Double.random(in: 2...5))
+                                    }.frame(
+                                        width: UIScreen.main.bounds.width * 2
+                                            / 3,
+                                        alignment: .leading)
+                                    Spacer()
+                                    FavoriteButtonView(
+                                        product: viewModel.productRes!.product!,
+                                        size: 30
+                                    ).padding(.trailing, 5)
+                                }.padding(.bottom, 20)
+                                if viewModel.productRes?.product?.variants?
+                                    .isEmpty == false
+                                {
+                                    ScrollView(
+                                        .horizontal, showsIndicators: false
+                                    ) {
+                                        HStack {
+                                            ForEach(
+                                                0..<(viewModel.productRes?
+                                                    .product?
+                                                    .variants ?? []).count
+                                            ) { index in
+                                                CustomChip(
+                                                    isSelected: selectedVariant
+                                                        == viewModel
+                                                        .productRes?
+                                                        .product?
+                                                        .variants?[index],
+                                                    text: viewModel.productRes?
+                                                        .product?
+                                                        .variants?[index]
+                                                        .title ?? "",
+                                                    onSelected: {
+                                                        if selectedVariant
+                                                            == viewModel
+                                                            .productRes?
+                                                            .product?
+                                                            .variants?[index]
+                                                        {
+
+                                                            selectedVariant =
+                                                                nil
+                                                        } else {
+                                                            selectedVariant =
+                                                                viewModel
+                                                                .productRes?
+                                                                .product?
+                                                                .variants?[
+                                                                    index]
+                                                        }
+                                                    }
+                                                )
+                                            }.padding([.leading, .trailing],5)
+                                                .padding([.top, .bottom],10)
+                                        }
+                                    }
+                                    .padding(.bottom, 15)
+                                }
+
                                 ReadMoreTextView(
                                     text: viewModel.productRes?.product?.desc
                                         ?? "",
@@ -125,8 +199,9 @@ struct ProductInfoView: View {
                                 .foregroundStyle(ThemeManager.darkPuble)
                                 .font(.title)
                                 Text(
-                                    viewModel.productRes?.product?
-                                        .formattedPrice ?? ""
+                                    (selectedVariant?.price?.amount
+                                        ?? viewModel.productRes?.product?
+                                        .formattedPrice) ?? ""
                                 )
                                 .font(.title)
                                 Spacer()
@@ -135,16 +210,17 @@ struct ProductInfoView: View {
                                     systemIconName: "handbag",
                                     onTap: {
                                         print("Tapped")
-                                    },isButtonEnabled: .constant(true)
+                                    },
+                                    isButtonEnabled: .constant(
+                                        selectedVariant != nil)
                                 )
 
                             }
-
                         }
                         .padding(30)
                         .frame(
                             width: UIScreen.main.bounds.width,
-                            height: UIScreen.main.bounds.height / 2
+                            height: UIScreen.main.bounds.height / 2 + 60
                         )
                         .background(.thickMaterial)
                         .clipShape(

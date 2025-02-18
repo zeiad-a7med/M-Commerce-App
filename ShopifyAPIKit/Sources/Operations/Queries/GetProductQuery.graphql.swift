@@ -7,7 +7,7 @@ public class GetProductQuery: GraphQLQuery {
   public static let operationName: String = "GetProduct"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query GetProduct($id: ID!) { product(id: $id) { __typename id title availableForSale description encodedVariantAvailability encodedVariantExistence handle isGiftCard productType tags totalInventory vendor updatedAt images(first: 10) { __typename nodes { __typename id url originalSrc altText width height } } featuredImage { __typename id url originalSrc altText width height } adjacentVariants { __typename availableForSale barcode currentlyNotInStock id quantityAvailable requiresComponents requiresShipping sku taxable title weight } category { __typename id name } priceRange { __typename maxVariantPrice { __typename amount currencyCode } minVariantPrice { __typename amount currencyCode } } } }"#
+      #"query GetProduct($id: ID!) { product(id: $id) { __typename id title availableForSale description encodedVariantAvailability encodedVariantExistence handle isGiftCard productType tags totalInventory vendor updatedAt images(first: 10) { __typename nodes { __typename id url originalSrc altText width height } } featuredImage { __typename id url originalSrc altText width height } category { __typename id name } priceRange { __typename maxVariantPrice { __typename amount currencyCode } minVariantPrice { __typename amount currencyCode } } variants(first: 30) { __typename nodes { __typename availableForSale barcode currentlyNotInStock id quantityAvailable requiresComponents requiresShipping sku taxable title weight weightUnit image { __typename altText height id originalSrc src transformedSrc url width } price { __typename amount currencyCode } priceV2 { __typename amount currencyCode } quantityRule { __typename increment maximum minimum } } } variantsCount { __typename count precision } } }"#
     ))
 
   public var id: ID
@@ -55,9 +55,10 @@ public class GetProductQuery: GraphQLQuery {
         .field("updatedAt", ShopifyAPIKit.DateTime.self),
         .field("images", Images.self, arguments: ["first": 10]),
         .field("featuredImage", FeaturedImage?.self),
-        .field("adjacentVariants", [AdjacentVariant].self),
         .field("category", Category?.self),
         .field("priceRange", PriceRange.self),
+        .field("variants", Variants.self, arguments: ["first": 30]),
+        .field("variantsCount", VariantsCount?.self),
       ] }
 
       /// A globally-unique ID.
@@ -154,22 +155,16 @@ public class GetProductQuery: GraphQLQuery {
       ///
       /// This field is functionally equivalent to `images(first: 1)`.
       public var featuredImage: FeaturedImage? { __data["featuredImage"] }
-      /// A list of variants whose selected options differ with the provided selected options by one, ordered by variant id.
-      /// If selected options are not provided, adjacent variants to the first available variant is returned.
-      ///
-      /// Note that this field returns an array of variants. In most cases, the number of variants in this array will be low.
-      /// However, with a low number of options and a high number of values per option, the number of variants returned
-      /// here can be high. In such cases, it recommended to avoid using this field.
-      ///
-      /// This list of variants can be used in combination with the `options` field to build a rich variant picker that
-      /// includes variant availability or other variant information.
-      public var adjacentVariants: [AdjacentVariant] { __data["adjacentVariants"] }
       /// The category of a product from [Shopify's Standard Product Taxonomy](https://shopify.github.io/product-taxonomy/releases/unstable/?categoryId=sg-4-17-2-17).
       public var category: Category? { __data["category"] }
       /// The minimum and maximum prices of a product, expressed in decimal numbers.
       /// For example, if the product is priced between $10.00 and $50.00,
       /// then the price range is $10.00 - $50.00.
       public var priceRange: PriceRange { __data["priceRange"] }
+      /// A list of [variants](/docs/api/storefront/latest/objects/ProductVariant) that are associated with the product.
+      public var variants: Variants { __data["variants"] }
+      /// The number of [variants](/docs/api/storefront/latest/objects/ProductVariant) that are associated with the product.
+      public var variantsCount: VariantsCount? { __data["variantsCount"] }
 
       /// Product.Images
       ///
@@ -270,54 +265,6 @@ public class GetProductQuery: GraphQLQuery {
         public var height: Int? { __data["height"] }
       }
 
-      /// Product.AdjacentVariant
-      ///
-      /// Parent Type: `ProductVariant`
-      public struct AdjacentVariant: ShopifyAPIKit.SelectionSet {
-        public let __data: DataDict
-        public init(_dataDict: DataDict) { __data = _dataDict }
-
-        public static var __parentType: any ApolloAPI.ParentType { ShopifyAPIKit.Objects.ProductVariant }
-        public static var __selections: [ApolloAPI.Selection] { [
-          .field("__typename", String.self),
-          .field("availableForSale", Bool.self),
-          .field("barcode", String?.self),
-          .field("currentlyNotInStock", Bool.self),
-          .field("id", ShopifyAPIKit.ID.self),
-          .field("quantityAvailable", Int?.self),
-          .field("requiresComponents", Bool.self),
-          .field("requiresShipping", Bool.self),
-          .field("sku", String?.self),
-          .field("taxable", Bool.self),
-          .field("title", String.self),
-          .field("weight", Double?.self),
-        ] }
-
-        /// Indicates if the product variant is available for sale.
-        public var availableForSale: Bool { __data["availableForSale"] }
-        /// The barcode (for example, ISBN, UPC, or GTIN) associated with the variant.
-        public var barcode: String? { __data["barcode"] }
-        /// Whether a product is out of stock but still available for purchase (used for backorders).
-        public var currentlyNotInStock: Bool { __data["currentlyNotInStock"] }
-        /// A globally-unique ID.
-        public var id: ShopifyAPIKit.ID { __data["id"] }
-        /// The total sellable quantity of the variant for online sales channels.
-        public var quantityAvailable: Int? { __data["quantityAvailable"] }
-        /// Whether a product variant requires components. The default value is `false`.
-        /// If `true`, then the product variant can only be purchased as a parent bundle with components.
-        public var requiresComponents: Bool { __data["requiresComponents"] }
-        /// Whether a customer needs to provide a shipping address when placing an order for the product variant.
-        public var requiresShipping: Bool { __data["requiresShipping"] }
-        /// The SKU (stock keeping unit) associated with the variant.
-        public var sku: String? { __data["sku"] }
-        /// Whether tax is charged when the product variant is sold.
-        public var taxable: Bool { __data["taxable"] }
-        /// The product variant’s title.
-        public var title: String { __data["title"] }
-        /// The weight of the product variant in the unit system specified with `weight_unit`.
-        public var weight: Double? { __data["weight"] }
-      }
-
       /// Product.Category
       ///
       /// Parent Type: `TaxonomyCategory`
@@ -396,6 +343,228 @@ public class GetProductQuery: GraphQLQuery {
           /// Currency of the money.
           public var currencyCode: GraphQLEnum<ShopifyAPIKit.CurrencyCode> { __data["currencyCode"] }
         }
+      }
+
+      /// Product.Variants
+      ///
+      /// Parent Type: `ProductVariantConnection`
+      public struct Variants: ShopifyAPIKit.SelectionSet {
+        public let __data: DataDict
+        public init(_dataDict: DataDict) { __data = _dataDict }
+
+        public static var __parentType: any ApolloAPI.ParentType { ShopifyAPIKit.Objects.ProductVariantConnection }
+        public static var __selections: [ApolloAPI.Selection] { [
+          .field("__typename", String.self),
+          .field("nodes", [Node].self),
+        ] }
+
+        /// A list of the nodes contained in ProductVariantEdge.
+        public var nodes: [Node] { __data["nodes"] }
+
+        /// Product.Variants.Node
+        ///
+        /// Parent Type: `ProductVariant`
+        public struct Node: ShopifyAPIKit.SelectionSet {
+          public let __data: DataDict
+          public init(_dataDict: DataDict) { __data = _dataDict }
+
+          public static var __parentType: any ApolloAPI.ParentType { ShopifyAPIKit.Objects.ProductVariant }
+          public static var __selections: [ApolloAPI.Selection] { [
+            .field("__typename", String.self),
+            .field("availableForSale", Bool.self),
+            .field("barcode", String?.self),
+            .field("currentlyNotInStock", Bool.self),
+            .field("id", ShopifyAPIKit.ID.self),
+            .field("quantityAvailable", Int?.self),
+            .field("requiresComponents", Bool.self),
+            .field("requiresShipping", Bool.self),
+            .field("sku", String?.self),
+            .field("taxable", Bool.self),
+            .field("title", String.self),
+            .field("weight", Double?.self),
+            .field("weightUnit", GraphQLEnum<ShopifyAPIKit.WeightUnit>.self),
+            .field("image", Image?.self),
+            .field("price", Price.self),
+            .field("priceV2", PriceV2.self),
+            .field("quantityRule", QuantityRule.self),
+          ] }
+
+          /// Indicates if the product variant is available for sale.
+          public var availableForSale: Bool { __data["availableForSale"] }
+          /// The barcode (for example, ISBN, UPC, or GTIN) associated with the variant.
+          public var barcode: String? { __data["barcode"] }
+          /// Whether a product is out of stock but still available for purchase (used for backorders).
+          public var currentlyNotInStock: Bool { __data["currentlyNotInStock"] }
+          /// A globally-unique ID.
+          public var id: ShopifyAPIKit.ID { __data["id"] }
+          /// The total sellable quantity of the variant for online sales channels.
+          public var quantityAvailable: Int? { __data["quantityAvailable"] }
+          /// Whether a product variant requires components. The default value is `false`.
+          /// If `true`, then the product variant can only be purchased as a parent bundle with components.
+          public var requiresComponents: Bool { __data["requiresComponents"] }
+          /// Whether a customer needs to provide a shipping address when placing an order for the product variant.
+          public var requiresShipping: Bool { __data["requiresShipping"] }
+          /// The SKU (stock keeping unit) associated with the variant.
+          public var sku: String? { __data["sku"] }
+          /// Whether tax is charged when the product variant is sold.
+          public var taxable: Bool { __data["taxable"] }
+          /// The product variant’s title.
+          public var title: String { __data["title"] }
+          /// The weight of the product variant in the unit system specified with `weight_unit`.
+          public var weight: Double? { __data["weight"] }
+          /// Unit of measurement for weight.
+          public var weightUnit: GraphQLEnum<ShopifyAPIKit.WeightUnit> { __data["weightUnit"] }
+          /// Image associated with the product variant. This field falls back to the product image if no image is available.
+          public var image: Image? { __data["image"] }
+          /// The product variant’s price.
+          public var price: Price { __data["price"] }
+          /// The product variant’s price.
+          @available(*, deprecated, message: "Use `price` instead.")
+          public var priceV2: PriceV2 { __data["priceV2"] }
+          /// The quantity rule for the product variant in a given context.
+          public var quantityRule: QuantityRule { __data["quantityRule"] }
+
+          /// Product.Variants.Node.Image
+          ///
+          /// Parent Type: `Image`
+          public struct Image: ShopifyAPIKit.SelectionSet {
+            public let __data: DataDict
+            public init(_dataDict: DataDict) { __data = _dataDict }
+
+            public static var __parentType: any ApolloAPI.ParentType { ShopifyAPIKit.Objects.Image }
+            public static var __selections: [ApolloAPI.Selection] { [
+              .field("__typename", String.self),
+              .field("altText", String?.self),
+              .field("height", Int?.self),
+              .field("id", ShopifyAPIKit.ID?.self),
+              .field("originalSrc", ShopifyAPIKit.URL.self),
+              .field("src", ShopifyAPIKit.URL.self),
+              .field("transformedSrc", ShopifyAPIKit.URL.self),
+              .field("url", ShopifyAPIKit.URL.self),
+              .field("width", Int?.self),
+            ] }
+
+            /// A word or phrase to share the nature or contents of an image.
+            public var altText: String? { __data["altText"] }
+            /// The original height of the image in pixels. Returns `null` if the image isn't hosted by Shopify.
+            public var height: Int? { __data["height"] }
+            /// A unique ID for the image.
+            public var id: ShopifyAPIKit.ID? { __data["id"] }
+            /// The location of the original image as a URL.
+            ///
+            /// If there are any existing transformations in the original source URL, they will remain and not be stripped.
+            @available(*, deprecated, message: "Use `url` instead.")
+            public var originalSrc: ShopifyAPIKit.URL { __data["originalSrc"] }
+            /// The location of the image as a URL.
+            @available(*, deprecated, message: "Use `url` instead.")
+            public var src: ShopifyAPIKit.URL { __data["src"] }
+            /// The location of the transformed image as a URL.
+            ///
+            /// All transformation arguments are considered "best-effort". If they can be applied to an image, they will be.
+            /// Otherwise any transformations which an image type doesn't support will be ignored.
+            @available(*, deprecated, message: "Use `url(transform:)` instead")
+            public var transformedSrc: ShopifyAPIKit.URL { __data["transformedSrc"] }
+            /// The location of the image as a URL.
+            ///
+            /// If no transform options are specified, then the original image will be preserved including any pre-applied transforms.
+            ///
+            /// All transformation options are considered "best-effort". Any transformation that the original image type doesn't support will be ignored.
+            ///
+            /// If you need multiple variations of the same image, then you can use [GraphQL aliases](https://graphql.org/learn/queries/#aliases).
+            public var url: ShopifyAPIKit.URL { __data["url"] }
+            /// The original width of the image in pixels. Returns `null` if the image isn't hosted by Shopify.
+            public var width: Int? { __data["width"] }
+          }
+
+          /// Product.Variants.Node.Price
+          ///
+          /// Parent Type: `MoneyV2`
+          public struct Price: ShopifyAPIKit.SelectionSet {
+            public let __data: DataDict
+            public init(_dataDict: DataDict) { __data = _dataDict }
+
+            public static var __parentType: any ApolloAPI.ParentType { ShopifyAPIKit.Objects.MoneyV2 }
+            public static var __selections: [ApolloAPI.Selection] { [
+              .field("__typename", String.self),
+              .field("amount", ShopifyAPIKit.Decimal.self),
+              .field("currencyCode", GraphQLEnum<ShopifyAPIKit.CurrencyCode>.self),
+            ] }
+
+            /// Decimal money amount.
+            public var amount: ShopifyAPIKit.Decimal { __data["amount"] }
+            /// Currency of the money.
+            public var currencyCode: GraphQLEnum<ShopifyAPIKit.CurrencyCode> { __data["currencyCode"] }
+          }
+
+          /// Product.Variants.Node.PriceV2
+          ///
+          /// Parent Type: `MoneyV2`
+          public struct PriceV2: ShopifyAPIKit.SelectionSet {
+            public let __data: DataDict
+            public init(_dataDict: DataDict) { __data = _dataDict }
+
+            public static var __parentType: any ApolloAPI.ParentType { ShopifyAPIKit.Objects.MoneyV2 }
+            public static var __selections: [ApolloAPI.Selection] { [
+              .field("__typename", String.self),
+              .field("amount", ShopifyAPIKit.Decimal.self),
+              .field("currencyCode", GraphQLEnum<ShopifyAPIKit.CurrencyCode>.self),
+            ] }
+
+            /// Decimal money amount.
+            public var amount: ShopifyAPIKit.Decimal { __data["amount"] }
+            /// Currency of the money.
+            public var currencyCode: GraphQLEnum<ShopifyAPIKit.CurrencyCode> { __data["currencyCode"] }
+          }
+
+          /// Product.Variants.Node.QuantityRule
+          ///
+          /// Parent Type: `QuantityRule`
+          public struct QuantityRule: ShopifyAPIKit.SelectionSet {
+            public let __data: DataDict
+            public init(_dataDict: DataDict) { __data = _dataDict }
+
+            public static var __parentType: any ApolloAPI.ParentType { ShopifyAPIKit.Objects.QuantityRule }
+            public static var __selections: [ApolloAPI.Selection] { [
+              .field("__typename", String.self),
+              .field("increment", Int.self),
+              .field("maximum", Int?.self),
+              .field("minimum", Int.self),
+            ] }
+
+            /// The value that specifies the quantity increment between minimum and maximum of the rule.
+            /// Only quantities divisible by this value will be considered valid.
+            ///
+            /// The increment must be lower than or equal to the minimum and the maximum, and both minimum and maximum
+            /// must be divisible by this value.
+            public var increment: Int { __data["increment"] }
+            /// An optional value that defines the highest allowed quantity purchased by the customer.
+            /// If defined, maximum must be lower than or equal to the minimum and must be a multiple of the increment.
+            public var maximum: Int? { __data["maximum"] }
+            /// The value that defines the lowest allowed quantity purchased by the customer.
+            /// The minimum must be a multiple of the quantity rule's increment.
+            public var minimum: Int { __data["minimum"] }
+          }
+        }
+      }
+
+      /// Product.VariantsCount
+      ///
+      /// Parent Type: `Count`
+      public struct VariantsCount: ShopifyAPIKit.SelectionSet {
+        public let __data: DataDict
+        public init(_dataDict: DataDict) { __data = _dataDict }
+
+        public static var __parentType: any ApolloAPI.ParentType { ShopifyAPIKit.Objects.Count }
+        public static var __selections: [ApolloAPI.Selection] { [
+          .field("__typename", String.self),
+          .field("count", Int.self),
+          .field("precision", GraphQLEnum<ShopifyAPIKit.CountPrecision>.self),
+        ] }
+
+        /// Count of elements.
+        public var count: Int { __data["count"] }
+        /// Precision of count, how exact is the value.
+        public var precision: GraphQLEnum<ShopifyAPIKit.CountPrecision> { __data["precision"] }
       }
     }
   }
