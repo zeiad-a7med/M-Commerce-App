@@ -20,6 +20,8 @@ class TextValidation {
             return validator.validatePassword(input)
         case .phoneNumber:
             return validator.validatePhoneNumber(input)
+        case .numeric:
+            return validator.validateNumeric(input)
         default:
             return validator.validateLength(input)
         }
@@ -82,4 +84,5 @@ enum ValidationType {
     case phoneNumber
     case text
     case name
+    case numeric
 }

@@ -28,14 +28,10 @@ struct RegisterView: View {
     @State private var passwordValid: Bool = false
 
     @State private var isFormValid = false
-    @State var disabeld : Bool = true
     var body: some View {
 
         ScrollView {
             VStack {
-                Button("edit"){
-                    disabeld = false
-                }
                 //fistName
                 VStack(alignment: .leading) {
                     Text("First name")

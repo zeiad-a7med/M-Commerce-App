@@ -37,7 +37,11 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "CustomerAccessToken": return ShopifyAPIKit.Objects.CustomerAccessToken
     case "CustomerAccessTokenCreatePayload": return ShopifyAPIKit.Objects.CustomerAccessTokenCreatePayload
     case "CustomerAccessTokenDeletePayload": return ShopifyAPIKit.Objects.CustomerAccessTokenDeletePayload
+    case "CustomerAddressCreatePayload": return ShopifyAPIKit.Objects.CustomerAddressCreatePayload
+    case "CustomerAddressDeletePayload": return ShopifyAPIKit.Objects.CustomerAddressDeletePayload
+    case "CustomerAddressUpdatePayload": return ShopifyAPIKit.Objects.CustomerAddressUpdatePayload
     case "CustomerCreatePayload": return ShopifyAPIKit.Objects.CustomerCreatePayload
+    case "CustomerDefaultAddressUpdatePayload": return ShopifyAPIKit.Objects.CustomerDefaultAddressUpdatePayload
     case "CustomerUpdatePayload": return ShopifyAPIKit.Objects.CustomerUpdatePayload
     case "CustomerUserError": return ShopifyAPIKit.Objects.CustomerUserError
     case "ExternalVideo": return ShopifyAPIKit.Objects.ExternalVideo

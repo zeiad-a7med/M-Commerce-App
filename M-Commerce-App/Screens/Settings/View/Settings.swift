@@ -52,6 +52,16 @@ struct Settings: View {
                         ) {
                             Currency()
 
+                            NavigationLink(destination: {
+                                AddressesDisplayView()
+                            }, label: {
+                                SettingsListRow(
+                                    imageName:
+                                        "location",
+                                    RowName: "Addresses"
+                                )
+                            })
+                            
                             Button(
                                 action: {
                                     isAlertVisible.toggle()
