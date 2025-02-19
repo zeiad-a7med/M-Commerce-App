@@ -21,6 +21,11 @@ protocol AuthServiceProtocol {
         email: String,
         password: String,
         complitionHandler: @escaping (LoginResponse) -> Void)
+    
+    static func logOutCustomer(
+        customerAccessToken: String,
+        complitionHandler: @escaping (LogOutResponse) -> Void)
+    
     static func getCustomerData(
         accessToken: String,
         accessTokenExpiresAt: String?,
@@ -40,6 +45,8 @@ protocol AuthServiceProtocol {
 }
 
 class AuthService: AuthServiceProtocol {
+    
+    
     static func registerCustomer(
         firstName: String,
         lastName: String,
@@ -140,6 +147,48 @@ class AuthService: AuthServiceProtocol {
             }
         }
     }
+    static func logOutCustomer(customerAccessToken: String, complitionHandler: @escaping (LogOutResponse) -> Void) {
+        ApolloNetwokService.shared.apollo.perform(
+            mutation: LogoutMutation(
+                customerAccessToken: customerAccessToken
+            )
+        ) { result in
+            switch result {
+            case .success(let graphQLResult):
+                let loginDTO = graphQLResult.data?.customerAccessTokenDelete?
+                    .deletedAccessToken
+                let userErrors = graphQLResult.data?.customerAccessTokenDelete?
+                    .userErrors.map { $0.message }
+                let requestError = graphQLResult.errors?.first?.message
+                guard let loginDTO else {
+                    complitionHandler(
+                        LogOutResponse(
+                            success: false,
+                            messages: userErrors ?? [requestError ?? ""]
+                        )
+                    )
+                    return
+                }
+
+                complitionHandler(
+                    LogOutResponse(
+                        success: true,
+                        messages: userErrors ?? [requestError ?? ""]
+                    )
+                )
+                return
+
+            case .failure(let error):
+                complitionHandler(
+                    LogOutResponse(
+                        success: false,
+                        messages: [error.localizedDescription]
+                    )
+                )
+                print("Failure! Error: \(error.localizedDescription)")
+            }
+        }
+    }
     static func getCustomerData(
         accessToken: String,
         accessTokenExpiresAt: String?,
@@ -226,7 +275,6 @@ class AuthService: AuthServiceProtocol {
                     return
                 }
 
-                
                 let customer = UpdateProfileMutation.parse(
                     from: customerDTO, accessToken: customerAccessToken,
                     accessTokenExpiresAt: accessTokenExpiresAt)

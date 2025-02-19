@@ -148,7 +148,7 @@ struct AddressEditView: View {
                         isPresented: $isDeleteAlertShown
                     ) {
                         Button("Yes", role: .destructive) {
-                            var addressModel = AddressComponentViewModel()
+                            let addressModel = AddressComponentViewModel()
                             addressModel.deleteAddress(
                                 AccessToken: "03c27d8e9f3f22fddb10010462ef36d3",
                                 selectedAddressId: address.id ?? ""

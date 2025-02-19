@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import FirebaseAuth
 struct LoginView: View {
     @StateObject var viewModel = LoginViewModel()
     @State private var email: String = ""
@@ -79,8 +79,25 @@ struct LoginView: View {
                     .font(.footnote)
                     .foregroundColor(.blue)
             }.padding(.top, 10)
+                .padding(.bottom,10)
+            if(viewModel.resendVerficationMailVisible && Auth.auth().currentUser != nil){
+                Button(action: {
+                    viewModel.resendEmailVerification()
+                },label: {
+                    Text("Resend verfication mail")
+                        .font(.footnote)
+                        .foregroundColor(.blue)
+                }).padding(.top, 10)
+            }
+            
 
             Spacer()
+            
+//            NavigationLink(
+//                destination: ContentView(), isActive: .constant(viewModel.successLogin)
+//            ) {
+//                EmptyView()
+//            }
 
         }.padding(20)
             .navigationTitle("Sign In")
