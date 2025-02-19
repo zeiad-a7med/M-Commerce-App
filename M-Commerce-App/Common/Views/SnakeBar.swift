@@ -17,6 +17,7 @@ struct SnackbarView: View {
             Spacer()
             if snackbarManager.isVisible {
                 Text(snackbarManager.message)
+                    .multilineTextAlignment(.center)
                     .foregroundColor(.white)
                     .padding()
                     .background(Color.black.opacity(0.8))

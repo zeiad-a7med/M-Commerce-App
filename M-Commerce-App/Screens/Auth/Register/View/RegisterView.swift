@@ -192,6 +192,12 @@ struct RegisterView: View {
                 }.padding(.top, 10)
 
             }.padding(20)
+            // Navigation link outside the alert to handle navigation properly
+            NavigationLink(
+                destination: SendingVerificationView(email: email), isActive: .constant(viewModel.successRegister)
+            ) {
+                EmptyView()
+            }
         }
         .navigationTitle("Create account")
 

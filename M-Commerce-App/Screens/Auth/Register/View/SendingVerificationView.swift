@@ -1,0 +1,37 @@
+//
+//  SendingVerificationView.swift
+//  M-Commerce-App
+//
+//  Created by Zeiad on 19/02/2025.
+//
+
+import SwiftUI
+
+struct SendingVerificationView: View {
+    var email : String
+    var body: some View {
+        VStack {
+            ContentUnavailableView(
+                "Verification mail sent to \(email)",
+                systemImage: "envelope.open",
+                description: Text(
+                    "Check your inbox 📥 then Sign In")
+            ).frame(height: 300)
+            NavigationLink(destination: LoginView()) {
+                CustomRoundedButtonView(
+                    text: "Sign In",
+                    width: 100,
+                    onTap: {},
+                    isButtonEnabled: .constant(true)
+                )
+                .allowsHitTesting(false)
+            }
+        }
+    }
+}
+
+#Preview {
+    SendingVerificationView(
+        email: "zeiadahmed194@gmail.com"
+    )
+}

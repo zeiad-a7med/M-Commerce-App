@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftData
-
+import FirebaseAuth
 class AuthManager: ObservableObject {
     static let shared = AuthManager()  // Singleton instance
     @Published var applicationUser: ApplicationUser?
@@ -57,17 +57,18 @@ class AuthManager: ObservableObject {
     /// Logout: Remove the user and reset the session
     func logoutUser() {
         guard let modelContext = modelContext, let user = applicationUser else {
-            print("Logout failed: No user found.")
+            SnackbarManager.shared.show(message: "Logout failed: No user found.")
             return
         }
         do {
             modelContext.delete(user)
+            try Auth.auth().signOut()
             try modelContext.save()
             DispatchQueue.main.async {
                 self.applicationUser = nil
             }
         } catch {
-            print("Error logging out user: \(error)")
+            SnackbarManager.shared.show(message: "Error logging out user: \(error).")
         }
     }
     

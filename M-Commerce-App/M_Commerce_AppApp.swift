@@ -4,24 +4,14 @@
 //
 //  Created by Andrew Emad on 12/02/2025.
 //
-//
-//  M_Commerce_AppApp.swift
-//  M-Commerce-App
-//
-//  Created by Andrew Emad on 12/02/2025.
-//
-//
-//  M_Commerce_AppApp.swift
-//  M-Commerce-App
-//
-//  Created by Andrew Emad on 12/02/2025.
-//
 
 import SwiftData
 import SwiftUI
+import Firebase
 
 @main
 struct M_Commerce_AppApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
             let isSimulator = TARGET_OS_SIMULATOR != 0
@@ -45,6 +35,13 @@ struct M_Commerce_AppApp: App {
             }
             .applyModelContainer(sharedModelContainer)
         }
+    }
+}
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
+        print("configured")
+        return true
     }
 }
 
