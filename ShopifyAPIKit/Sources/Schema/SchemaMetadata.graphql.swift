@@ -75,6 +75,8 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "Mutation": return ShopifyAPIKit.Objects.Mutation
     case "Order": return ShopifyAPIKit.Objects.Order
     case "OrderConnection": return ShopifyAPIKit.Objects.OrderConnection
+    case "OrderLineItem": return ShopifyAPIKit.Objects.OrderLineItem
+    case "OrderLineItemConnection": return ShopifyAPIKit.Objects.OrderLineItemConnection
     case "Page": return ShopifyAPIKit.Objects.Page
     case "PageInfo": return ShopifyAPIKit.Objects.PageInfo
     case "Product": return ShopifyAPIKit.Objects.Product

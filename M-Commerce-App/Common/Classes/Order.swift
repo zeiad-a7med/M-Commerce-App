@@ -19,4 +19,7 @@ struct Order: Codable {
     var fulfillmentStatus: String?
     var orderNumber: Int?
     var processedAt: String?
+    var lineItems: LineItemList?
+    var currentSubtotalPrice: Price?
+    var currentTotalPrice: Price?
 }

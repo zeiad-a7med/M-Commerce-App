@@ -19,3 +19,4 @@ class Line : Codable{
         self.lineCost = lineCost
     }
 }
+
