@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CheckOutComponent: View {
+    @Environment(\.dismiss) var dismiss
     @State var promoCode : String = ""
     @Binding var totalPrice : Double
     var body: some View {

@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4845C2492D65F386005A8CB4 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4845C2482D65F386005A8CB4 /* PaymentView.swift */; };
+		4845C24C2D65FC9C005A8CB4 /* productRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4845C24B2D65FC9B005A8CB4 /* productRow.swift */; };
+		4845C24E2D65FF49005A8CB4 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4845C24D2D65FF49005A8CB4 /* ImageView.swift */; };
+		4845C2502D660377005A8CB4 /* paymentMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4845C24F2D660377005A8CB4 /* paymentMethodView.swift */; };
+		4845C2522D660BFB005A8CB4 /* PaymentMethodComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4845C2512D660BFB005A8CB4 /* PaymentMethodComponent.swift */; };
+		4845C2542D6613BC005A8CB4 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4845C2532D6613BC005A8CB4 /* RadioButton.swift */; };
+		4845C25E2D665343005A8CB4 /* PaymentButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4845C25D2D665343005A8CB4 /* PaymentButtonView.swift */; };
+		4845C2602D667716005A8CB4 /* TrialPaymentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4845C25F2D667716005A8CB4 /* TrialPaymentButton.swift */; };
+		4845C2632D667CC0005A8CB4 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4845C2612D667CC0005A8CB4 /* Configuration.swift */; };
+		4845C2642D667CC0005A8CB4 /* PaymentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4845C2622D667CC0005A8CB4 /* PaymentHandler.swift */; };
 		48A3368F2D645B2300F64F2A /* GetAddresses.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 48A3368E2D645B2300F64F2A /* GetAddresses.graphql */; };
 		48A336912D645FE200F64F2A /* defaultAddresCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A336902D645FE200F64F2A /* defaultAddresCard.swift */; };
 		48A336942D647C7200F64F2A /* updateAddress.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 48A336932D647C7200F64F2A /* updateAddress.graphql */; };
@@ -21,6 +31,8 @@
 		48B1F8AB2D63A99C004D13AC /* addressCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B1F8AA2D63A99C004D13AC /* addressCard.swift */; };
 		48B1F8AD2D63B2E9004D13AC /* ColoredPins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B1F8AC2D63B2E9004D13AC /* ColoredPins.swift */; };
 		48B1F8AF2D63BD68004D13AC /* RadioList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B1F8AE2D63BD68004D13AC /* RadioList.swift */; };
+		48DE6CF02D67B0F000EC137F /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE6CEF2D67B0F000EC137F /* PaymentViewController.swift */; };
+		48DE6CF22D67B11B00EC137F /* PaymentViewControllerRepresntable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE6CF12D67B11B00EC137F /* PaymentViewControllerRepresntable.swift */; };
 		48F009F02D5C94F9002A016E /* M_Commerce_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F009EF2D5C94F9002A016E /* M_Commerce_AppApp.swift */; };
 		48F009F42D5C94F9002A016E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F009F32D5C94F9002A016E /* Item.swift */; };
 		48F009F62D5C94FF002A016E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48F009F52D5C94FF002A016E /* Assets.xcassets */; };
@@ -158,6 +170,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4845C2482D65F386005A8CB4 /* PaymentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
+		4845C24B2D65FC9B005A8CB4 /* productRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = productRow.swift; path = ../../../../../../productRow.swift; sourceTree = "<group>"; };
+		4845C24D2D65FF49005A8CB4 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImageView.swift; path = ../../../../../../ImageView.swift; sourceTree = "<group>"; };
+		4845C24F2D660377005A8CB4 /* paymentMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = paymentMethodView.swift; path = ../../../../../../paymentMethodView.swift; sourceTree = "<group>"; };
+		4845C2512D660BFB005A8CB4 /* PaymentMethodComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentMethodComponent.swift; path = ../../../../../../PaymentMethodComponent.swift; sourceTree = "<group>"; };
+		4845C2532D6613BC005A8CB4 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RadioButton.swift; path = ../../../../../../RadioButton.swift; sourceTree = "<group>"; };
+		4845C25D2D665343005A8CB4 /* PaymentButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentButtonView.swift; sourceTree = "<group>"; };
+		4845C25F2D667716005A8CB4 /* TrialPaymentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrialPaymentButton.swift; path = ../../../../../../TrialPaymentButton.swift; sourceTree = "<group>"; };
+		4845C2612D667CC0005A8CB4 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		4845C2622D667CC0005A8CB4 /* PaymentHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentHandler.swift; sourceTree = "<group>"; };
 		48A3368E2D645B2300F64F2A /* GetAddresses.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GetAddresses.graphql; sourceTree = "<group>"; };
 		48A336902D645FE200F64F2A /* defaultAddresCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = defaultAddresCard.swift; sourceTree = "<group>"; };
 		48A336932D647C7200F64F2A /* updateAddress.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = updateAddress.graphql; sourceTree = "<group>"; };
@@ -172,6 +194,8 @@
 		48B1F8AA2D63A99C004D13AC /* addressCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addressCard.swift; sourceTree = "<group>"; };
 		48B1F8AC2D63B2E9004D13AC /* ColoredPins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredPins.swift; sourceTree = "<group>"; };
 		48B1F8AE2D63BD68004D13AC /* RadioList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioList.swift; sourceTree = "<group>"; };
+		48DE6CEF2D67B0F000EC137F /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
+		48DE6CF12D67B11B00EC137F /* PaymentViewControllerRepresntable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewControllerRepresntable.swift; sourceTree = "<group>"; };
 		48F009EC2D5C94F9002A016E /* M-Commerce-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "M-Commerce-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F009EF2D5C94F9002A016E /* M_Commerce_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M_Commerce_AppApp.swift; sourceTree = "<group>"; };
 		48F009F32D5C94F9002A016E /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -319,6 +343,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4845C2462D65F335005A8CB4 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				4845C2582D664E4D005A8CB4 /* Model */,
+				4845C2472D65F335005A8CB4 /* View */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		4845C2472D65F335005A8CB4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				48DE6CEE2D67B0D300EC137F /* UIKitView */,
+				4845C24A2D65FC7A005A8CB4 /* SubView */,
+				4845C2482D65F386005A8CB4 /* PaymentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4845C24A2D65FC7A005A8CB4 /* SubView */ = {
+			isa = PBXGroup;
+			children = (
+				4845C25D2D665343005A8CB4 /* PaymentButtonView.swift */,
+				4845C24B2D65FC9B005A8CB4 /* productRow.swift */,
+				4845C24D2D65FF49005A8CB4 /* ImageView.swift */,
+				4845C24F2D660377005A8CB4 /* paymentMethodView.swift */,
+				4845C2512D660BFB005A8CB4 /* PaymentMethodComponent.swift */,
+				4845C2532D6613BC005A8CB4 /* RadioButton.swift */,
+				4845C25F2D667716005A8CB4 /* TrialPaymentButton.swift */,
+			);
+			path = SubView;
+			sourceTree = "<group>";
+		};
+		4845C2582D664E4D005A8CB4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4845C2612D667CC0005A8CB4 /* Configuration.swift */,
+				4845C2622D667CC0005A8CB4 /* PaymentHandler.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		48A3368A2D64585B00F64F2A /* Address */ = {
 			isa = PBXGroup;
 			children = (
@@ -393,6 +459,15 @@
 				48A336902D645FE200F64F2A /* defaultAddresCard.swift */,
 			);
 			path = SubViews;
+			sourceTree = "<group>";
+		};
+		48DE6CEE2D67B0D300EC137F /* UIKitView */ = {
+			isa = PBXGroup;
+			children = (
+				48DE6CEF2D67B0F000EC137F /* PaymentViewController.swift */,
+				48DE6CF12D67B11B00EC137F /* PaymentViewControllerRepresntable.swift */,
+			);
+			path = UIKitView;
 			sourceTree = "<group>";
 		};
 		48F009E32D5C94F9002A016E = {
@@ -1011,6 +1086,7 @@
 		89D508622D5C10CE00046FA9 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				4845C2462D65F335005A8CB4 /* Payment */,
 				89B00B7E2D61304200AF1FB7 /* Auth */,
 				89CAF31B2D6007AE003984FA /* Settings */,
 				C4BC560D2D5F8E2400F9D42A /* Products */,
@@ -1268,6 +1344,8 @@
 				48F009F42D5C94F9002A016E /* Item.swift in Sources */,
 				89D5084A2D5C10C600046FA9 /* CustomNetworkImageView.swift in Sources */,
 				C44BEDA72D5D198F0022B603 /* ImgModel.swift in Sources */,
+				4845C2642D667CC0005A8CB4 /* PaymentHandler.swift in Sources */,
+				4845C2522D660BFB005A8CB4 /* PaymentMethodComponent.swift in Sources */,
 				8952A6912D6284870003ACF4 /* ApplicationUser.swift in Sources */,
 				89B00B6E2D610C0200AF1FB7 /* Login.graphql in Sources */,
 				C44BEDB02D5D1FC80022B603 /* Price.swift in Sources */,
@@ -1295,8 +1373,10 @@
 				89CAF3212D6007AE003984FA /* ProfileImage.swift in Sources */,
 				48B1F8A82D6384E1004D13AC /* AddressResponse.swift in Sources */,
 				890D87BF2D5DF66C0062E8D1 /* ProductsSubView.swift in Sources */,
+				4845C2502D660377005A8CB4 /* paymentMethodView.swift in Sources */,
 				89B00B7B2D6127C300AF1FB7 /* Address.swift in Sources */,
 				890D87C02D5DF66C0062E8D1 /* Testing.swift in Sources */,
+				4845C24C2D65FC9C005A8CB4 /* productRow.swift in Sources */,
 				C4BC56162D5F8EF400F9D42A /* ProductsViewModel.swift in Sources */,
 				890D87C12D5DF66C0062E8D1 /* favoritesService.swift in Sources */,
 				48A3369A2D64BF2100F64F2A /* createAddress.graphql in Sources */,
@@ -1305,6 +1385,7 @@
 				890D87C32D5DF66C0062E8D1 /* AdViewModel.swift in Sources */,
 				892967C12D64B4BB007191DC /* VariantsCount.swift in Sources */,
 				48B1F8AF2D63BD68004D13AC /* RadioList.swift in Sources */,
+				4845C2602D667716005A8CB4 /* TrialPaymentButton.swift in Sources */,
 				890D87C42D5DF66C0062E8D1 /* ShoppingCartViewModel.swift in Sources */,
 				89B00B862D61392700AF1FB7 /* Country.swift in Sources */,
 				890D87C52D5DF66C0062E8D1 /* Cart.swift in Sources */,
@@ -1329,10 +1410,12 @@
 				89EE56E32D5E322700B05457 /* GetProductQuery.swift in Sources */,
 				890D87CC2D5DF66C0062E8D1 /* NumberOfItems.swift in Sources */,
 				48B1F8AB2D63A99C004D13AC /* addressCard.swift in Sources */,
+				4845C25E2D665343005A8CB4 /* PaymentButtonView.swift in Sources */,
 				890D87CD2D5DF66C0062E8D1 /* ProductResponse.swift in Sources */,
 				890D87CE2D5DF66C0062E8D1 /* ProductService.swift in Sources */,
 				890D87CF2D5DF66C0062E8D1 /* BrandsView.swift in Sources */,
 				890D87D02D5DF66C0062E8D1 /* ShoppingView.swift in Sources */,
+				4845C24E2D65FF49005A8CB4 /* ImageView.swift in Sources */,
 				8952A68D2D62698D0003ACF4 /* ProfileQuery.swift in Sources */,
 				890D87D12D5DF66C0062E8D1 /* ButtonView.swift in Sources */,
 				890D87D22D5DF66C0062E8D1 /* ViewModelTest.swift in Sources */,
@@ -1340,6 +1423,7 @@
 				8952A6892D621F340003ACF4 /* LoginViewModel.swift in Sources */,
 				8952A68A2D621F340003ACF4 /* LoginResponse.swift in Sources */,
 				48A336962D64ADD400F64F2A /* updateDefaultAddress.graphql in Sources */,
+				4845C2632D667CC0005A8CB4 /* Configuration.swift in Sources */,
 				890D87D42D5DF66C0062E8D1 /* imageCard.swift in Sources */,
 				890D87D52D5DF66C0062E8D1 /* ProductViewModel.swift in Sources */,
 				C4BC56142D5F8EE600F9D42A /* ProductsModel.swift in Sources */,
@@ -1348,6 +1432,7 @@
 				890D87D62D5DF66C0062E8D1 /* AdCardView.swift in Sources */,
 				89B00B8D2D6148CF00AF1FB7 /* CustomSecureField.swift in Sources */,
 				890D87D72D5DF66C0062E8D1 /* AdModel.swift in Sources */,
+				4845C2542D6613BC005A8CB4 /* RadioButton.swift in Sources */,
 				8952A67E2D6202340003ACF4 /* AuthService.swift in Sources */,
 				890D87D82D5DF66C0062E8D1 /* DeleteButton.swift in Sources */,
 				890D87D92D5DF66C0062E8D1 /* BrandCard.swift in Sources */,
@@ -1358,6 +1443,7 @@
 				89C4A6402D63E70600716CB1 /* ProfileUpdateMutation.swift in Sources */,
 				890D87402D5D40A30062E8D1 /* CustomRoundedButtonView.swift in Sources */,
 				C4BC561A2D5F8F2F00F9D42A /* ProductsView.swift in Sources */,
+				4845C2492D65F386005A8CB4 /* PaymentView.swift in Sources */,
 				890D873C2D5D2BC20062E8D1 /* FavoriteButtonView.swift in Sources */,
 				48A336912D645FE200F64F2A /* defaultAddresCard.swift in Sources */,
 				890D86E42D5CFF220062E8D1 /* PageInfo.swift in Sources */,
@@ -1372,6 +1458,8 @@
 				890D87552D5D55C00062E8D1 /* ReadMoreText.swift in Sources */,
 				89D5084C2D5C10C600046FA9 /* ShimmerView.swift in Sources */,
 				89D5084F2D5C10CA00046FA9 /* ThemeManager.swift in Sources */,
+				48DE6CF02D67B0F000EC137F /* PaymentViewController.swift in Sources */,
+				48DE6CF22D67B11B00EC137F /* PaymentViewControllerRepresntable.swift in Sources */,
 				48B1F8A12D637EEF004D13AC /* AddressAddView.swift in Sources */,
 				890D87572D5D5DF60062E8D1 /* GetProduct.graphql in Sources */,
 				89D508432D5C0CD400046FA9 /* ContentView.swift in Sources */,
@@ -1539,9 +1627,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "M-Commerce-App/M-Commerce-App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"M-Commerce-App/Preview Content\"";
+				DEVELOPMENT_TEAM = G6W8CG9H49;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -1567,9 +1657,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "M-Commerce-App/M-Commerce-App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"M-Commerce-App/Preview Content\"";
+				DEVELOPMENT_TEAM = G6W8CG9H49;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
