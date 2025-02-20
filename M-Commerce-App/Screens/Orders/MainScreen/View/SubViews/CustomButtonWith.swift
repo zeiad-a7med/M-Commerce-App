@@ -1,0 +1,40 @@
+//
+//  CustomButtonWithColorAndBorder.swift
+//  M-Commerce-App
+//
+//  Created by Usef on 19/02/2025.
+//
+
+import SwiftUI
+
+struct CustomButtonWith: View {
+    var color:Color
+    var borderColor:Color
+    var text:String
+    var textColor:Color
+    let destination: AnyView
+    var body: some View {
+        NavigationLink(destination: {
+            destination
+        }, label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 30)
+                        .foregroundStyle(color)
+                    RoundedRectangle(cornerRadius: 25)
+                        .stroke(borderColor
+                                , lineWidth: 0.5)
+                    Text(text)
+                        .font(.system(size: 13).bold())
+                        .foregroundStyle(textColor)
+                }.frame(width: 160, height: 45)
+                    .shadow(radius: 0.5)
+        })
+    }
+}
+
+#Preview {
+    NavigationView {
+        CustomButtonWith(color: .red, borderColor: .red, text: "Details", textColor: .white
+                         , destination: AnyView(Text("Hello")))
+    }
+}
