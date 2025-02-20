@@ -9,20 +9,20 @@ import SwiftUI
 
 struct PaymentView: View {
     @StateObject var paymentViewModel = PaymentViewModel()
-    @State var numberofProducts : Int = 3
-    @State var paymentDisplay : String = "Cash on delivery"
+    @State var numberofProducts: Int = 3
+    @State var paymentDisplay: String = "Cash on delivery"
     @State var showCheckOut: Bool = false
     var body: some View {
         NavigationStack {
-            VStack(alignment: .leading){
+            VStack(alignment: .leading) {
                 HStack {
                     Text("Address")
-                      
+
                         .bold()
-                    .font(.title2)
+                        .font(.title2)
                     Spacer()
                     NavigationLink {
-                      AddressesDisplayView()
+                        AddressesDisplayView()
                     } label: {
                         Image(systemName: "pencil")
                             .padding(5)
@@ -32,46 +32,44 @@ struct PaymentView: View {
                             .clipShape(Circle())
                     }
                 }.padding()
-                
-                 PaymentAddress()
+
+                PaymentAddress()
                 Text("Products(\(numberofProducts))")
                     .bold()
                     .font(.title2)
                     .padding()
                 ScrollView {
-                    ForEach((1...10), id: \.self) {_ in
-                            productRow()
+                    ForEach((1...10), id: \.self) { _ in
+                        productRow()
                     }
-                }.frame(height: 230)
+                }.frame(height: 300)
                 Text("PaymentMethod")
                     .bold()
                     .font(.title2)
                     .padding()
-            
-                HStack(){
+
+                HStack {
                     Text("Total amount")
                         .padding()
                     Spacer()
                     Text("100")
                         .bold()
                     Text("$")
-                        .padding(.trailing,20)
+                        .padding(.trailing, 20)
                         .bold()
                 }
                 Spacer()
-                CustomRoundedButtonView(text: "Checkout Now",width: 80,onTap:{
-                    showCheckOut.toggle()
-                }, isButtonEnabled: .constant(true))
-                    .padding(.leading,45) .sheet(
-                        isPresented: $showCheckOut,
-                        content: {
-                            PaymentMethodComponent(
-                            ).presentationDetents([.medium])
-                        })
-
-                
-                
-                Spacer()
+                CustomRoundedButtonView(
+                    text: "Checkout Now", width: 80,
+                    onTap: {
+                        showCheckOut.toggle()
+                    }, isButtonEnabled: .constant(true)
+                )
+                .padding(.leading, 45).sheet(
+                    isPresented: $showCheckOut,
+                    content: {
+                        PaymentMethodComponent().presentationDetents([.medium])
+                    })
             }
         }
     }
@@ -80,12 +78,3 @@ struct PaymentView: View {
 #Preview {
     PaymentView()
 }
-
-
-
-
-
-
-
-
-

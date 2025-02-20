@@ -413,7 +413,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		485A11302D68601800046F29 /* Payment1.0 */ = {
+		485A11302D68601800046F29 /* Payment */ = {
 			isa = PBXGroup;
 			children = (
 				485A11342D68601800046F29 /* Model */,
@@ -421,7 +421,7 @@
 				485A11312D68601800046F29 /* UIKitView */,
 				485A11372D68601800046F29 /* View */,
 			);
-			path = Payment1.0;
+			path = Payment;
 			sourceTree = "<group>";
 		};
 		485A11312D68601800046F29 /* UIKitView */ = {
@@ -1221,7 +1221,7 @@
 		89D508622D5C10CE00046FA9 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				485A11302D68601800046F29 /* Payment1.0 */,
+				485A11302D68601800046F29 /* Payment */,
 				C46287F72D65063A004372B1 /* Orders */,
 				89B00B7E2D61304200AF1FB7 /* Auth */,
 				89CAF31B2D6007AE003984FA /* Settings */,

@@ -15,11 +15,12 @@ struct ShoppingView: View {
     @State var totalPrice: Double = 0.0
     @State var showCheckOut: Bool = false
     @State var isLoggedIn: Bool = false
+    @State var navigateToPayment: Bool = false
     @State var currentDeletion: Line?
     @StateObject var viewModel = ShoppingCartViewModel()
     var body: some View {
         VStack {
-            if(isLoggedIn){
+            if(!isLoggedIn){
                 List {
                     if let tempViewModel = viewModel.cartResult?.cart?.lines {
                         ForEach(Array(
@@ -87,9 +88,19 @@ struct ShoppingView: View {
                 .sheet(
                     isPresented: $showCheckOut,
                     content: {
-                        CheckOutComponent(totalPrice: $totalPrice)
+                        CheckOutComponent(onClick:{ isClicked in
+                            showCheckOut = false
+                            navigateToPayment = isClicked
+                        },totalPrice: $totalPrice)
                             .presentationDetents([.medium])
                     })
+
+                NavigationLink(
+                    destination: PaymentView(), isActive: $navigateToPayment
+                ) {
+                    EmptyView()
+                }
+                
             }else{
                 VStack {
                     ContentUnavailableView(
