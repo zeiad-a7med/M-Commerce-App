@@ -14,6 +14,8 @@ struct OrderedProductCard: View {
     var address: String
     var orderNo: String
     var orderPrice: String
+    var date:String
+    var noOfProducts:Int
     var isMyOrder: Bool
     let detailsDest: AnyView
     let secondDest: AnyView
@@ -23,7 +25,7 @@ struct OrderedProductCard: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .frame(height: 220)
+                .frame(height: 240)
                 .foregroundStyle(.WILDID)
                 .cornerRadius(20)
                 .padding(.top, 5)
@@ -32,11 +34,11 @@ struct OrderedProductCard: View {
             VStack {
                 HStack {
                     VStack(alignment: .leading, spacing: 5) {
-                        ImageAndTextView(img: "person.fill", txt: name)
                         ImageAndTextView(img: "phone.fill", txt: phone)
                         ImageAndTextView(img: "mail", txt: email)
                         ImageAndTextView(img: "mappin.and.ellipse", txt: address)
-                        ImageAndTextView(img: "number.circle", txt: orderNo)
+                        Text("Processed at: \(formateDate(date: date))").font(.system(size: 11))
+                        Text("no. of produts: \(noOfProducts)").font(.system(size: 11))
                         KeyAndValueSmall(key: "Total Price:", value: orderPrice)
                     }.frame(width: 230, height: 150)
                     VStack(alignment: .trailing) {
@@ -65,7 +67,7 @@ struct OrderedProductCard: View {
                         }
                         .frame(width: width, height: height)
                         .cornerRadius(12)
-
+                        ImageAndTextView(img: "number.circle", txt: orderNo)
                     }
                     .frame(height: 90)
 
@@ -75,19 +77,30 @@ struct OrderedProductCard: View {
                 .padding(.horizontal, 10)
                 HStack(spacing: 20) {
                     CustomButtonWith(
-                        color: .clear , borderColor: .secondary.opacity(0.3),
+                        width: 200, color: .clear , borderColor: .secondary.opacity(0.3),
                         text: "Details", textColor: .BILWID,
                         destination: detailsDest)
-                    CustomButtonWith(
-                        color: ThemeManager.darkPuble, borderColor: .secondary.opacity(0.3),
-                        text: isMyOrder ? "Tracking" : "Received Order", textColor: .white,
-                        destination:isMyOrder ? detailsDest : secondDest)
                 }
                 .padding(7)
             }
             Spacer()
         }
         .padding(.horizontal)
+    }
+    func formateDate(date:String) -> String {
+        let dateFormatter = ISO8601DateFormatter()
+        if let date = dateFormatter.date(from: date) {
+            let displayFormatter = DateFormatter()
+            displayFormatter.dateFormat = "MMM d, yyyy - h:mm a"
+            displayFormatter.locale = Locale(identifier: "en_US")
+            displayFormatter.timeZone = TimeZone.current
+            let formattedDate = displayFormatter.string(from: date)
+            print("Formatted Date: \(formattedDate)")
+            return formattedDate
+        } else {
+            print("Invalid date format")
+        }
+        return ""
     }
 }
 
@@ -96,7 +109,11 @@ struct OrderedProductCard: View {
         name: "John Doe",
         phone: "+201012345678",
         email: "john.doe@example.com",
-        address: "123 Street, City, Country", orderNo: "1024", orderPrice: "1040 EGP",
+        address: "123 Street, City, Country",
+        orderNo: "1024",
+        orderPrice: "1040 EGP",
+        date: "2025-02-19T19:00:19Z",
+        noOfProducts: 3,
         isMyOrder: true,
         detailsDest: AnyView(Text("Hello1")), secondDest: AnyView(Text("f"))
     )
@@ -109,7 +126,7 @@ struct ImageAndTextView: View {
         HStack {
             Image(systemName: img)
             Text(txt)
-                .font(.caption)
+                .font(.system(size: 12))
             Spacer()
         }
     }
@@ -121,7 +138,7 @@ struct KeyAndValueSmall: View {
     var body: some View {
         HStack {
             Text(key)
-                .font(.caption)
+                .font(.system(size: 12))
                 .frame(maxWidth: 70)
             Text(value)
                 .font(.caption)

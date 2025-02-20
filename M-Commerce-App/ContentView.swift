@@ -24,6 +24,10 @@ struct ContentView: View {
                 .tabItem {
                     Label("Settings", systemImage: "person.fill")
                 }
+                MyOrdersView()
+                .tabItem {
+                    Label("Orders", systemImage: "car")
+                }
         }
         .onAppear {
             FavoritesManager.shared.setContext(modelContext)

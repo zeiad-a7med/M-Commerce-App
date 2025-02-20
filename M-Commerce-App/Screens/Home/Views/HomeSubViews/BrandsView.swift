@@ -15,8 +15,8 @@ struct BrandsView: View {
         GridItem(.flexible(minimum: 100, maximum: 200), spacing: 0, alignment: nil)
     ]
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false){
-            LazyHGrid(rows: rows, content: {
+        ScrollView(.vertical, showsIndicators: false){
+            LazyVGrid(columns: rows, content: {
                 ForEach(brandsDetails, id: \.id, content: { brand in
                     if isValid(title: brand.title ?? ""){
                         NavigationLink(destination: {

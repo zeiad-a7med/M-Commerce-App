@@ -9,6 +9,8 @@ import Foundation
 
 struct OrderModel {
     var customer: Customer?
+    var success : Bool?
+    var message : String?
 }
 
 struct Customer {
@@ -18,6 +20,7 @@ struct Customer {
     var orders: OrderList?
     var displayName: String?
     var addresses: [Address]?
+    var numberOfOrders:String?
 }
 struct OrderList {
     var totalCount: String?
@@ -33,13 +36,16 @@ struct LineItem : Codable {
     var quantity: Int?
     var currentQuantity: Int?
     var variant: OrderProductVariant?
+    var price:Price?
+    var product:OrderedProduct?
 }
 
-struct OrderProductVariant: Codable {
+
+
+struct OrderedProduct: Codable {
     var id: String?
+    var productType: String?
     var title: String?
-    var currentlyNotInStock: Bool?
-    var quantityAvailable: Int?
-    var requiresShipping: Bool?
-    var image: ImgModel?
+    var totalInventory:Int?
+    var vendor: String?
 }
