@@ -9,36 +9,38 @@ import SwiftUI
 
 struct DetailsView: View {
     @StateObject var detailsViewModel = DetailsViewModel(customerAccessTaken: "e43f5e2e26fe3059f5b4ca16e53b588f")
+    var numberOfOrder:Int
     var body: some View {
         ScrollView {
             VStack {
-//                if !detailsViewModel.isLoading {
-//                    if let dvm = detailsViewModel.detailsModel.customer {
-//                        ForEach(dvm.orders?.nodes?.first?.lineItems?.nodes ?? [], id: \.quantity) { order in
-//                            var separatedText: [String] {
-//                                order.variant?.title?.split(separator: "/").map { $0.trimmingCharacters(in: .whitespaces) } ?? []
-//                                }
-//                            OrderCard(imgUrl: order.variant?.img?.url ?? "",
-//                            prodTitle: order.title ?? "",
-//                            prodClr: "Black",
-//                                      prodPrice: separatedText[1],
-//                                      prodQty: Int(separatedText[0]) ?? 0,
-//                            isMyOrder: true,
-//                            detailsDest: AnyView(Text("first detail")))
-//                        }
-//                    }
-//                }else{
-//                    CustomProgressView()
-//                }
+                if !detailsViewModel.isLoading {
+                    if let dvm = detailsViewModel.detailsModel.customer {
+                        ForEach(dvm.orders?.nodes?[numberOfOrder].lineItems?.nodes ?? [], id: \.quantity) { order in
+                            var separatedText: [String] {
+                                order.variant?.title?.split(separator: "/").map { $0.trimmingCharacters(in: .whitespaces) } ?? []
+                                }
+                            OrderCard(imgUrl: order.variant?.image?.url ?? "",
+                            prodTitle: order.title ?? "",
+                                      vendor: order.product?.vendor ?? "",
+                                      prodVarient: order.variant?.title ?? "",
+                                      prodPrice: "\(order.price?.amount ?? "0") EGP" ,
+                                      prodQty: order.currentQuantity ?? 0,
+                            isMyOrder: true,
+                                      detailsDest: AnyView(ProductInfoView(productId: order.variant?.product?.id ?? "")))
+                        }
+                    }
+                }else{
+                    CustomProgressView()
+                }
                 Spacer()
-            }.navigationTitle(Text("Order Details"))
+            }.navigationTitle(Text("Ordered Products"))
         }
     }
 }
 
 #Preview {
     NavigationView {
-        DetailsView()
+        DetailsView( numberOfOrder: 0)
     }
 }
 

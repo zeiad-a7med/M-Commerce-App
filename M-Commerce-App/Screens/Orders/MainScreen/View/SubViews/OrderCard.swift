@@ -10,7 +10,8 @@ import SwiftUI
 struct OrderCard: View  {
     var imgUrl:String
     var prodTitle:String
-    var prodClr:String
+    var vendor:String
+    var prodVarient:String
     var prodPrice:String
     var prodQty:Int
     var isMyOrder:Bool
@@ -33,14 +34,14 @@ struct OrderCard: View  {
                             .bold()
                             .frame(maxHeight: 55)
                             
-                        KeyAndValueTextView(key: "Color: ", value: prodClr)
-                        KeyAndValueTextView(key: "Qty: ", value: "\(prodQty)")
+                        Text(vendor).font(.caption).foregroundColor(.secondary)
+                        KeyAndValueTextView(key: "Qty: ", value: "\(prodQty)       varient: \(prodVarient)")
                         KeyAndValueTextView(key: "price: ", value: "\(prodPrice)")
                     }
                     .frame(maxWidth: UIScreen.main.bounds.width/1.7)
                 }
                 HStack (spacing: 20){
-                    CustomButtonWith(color: .WILDID, borderColor: .secondary.opacity(0.3), text: "Details", textColor: .primary, destination: detailsDest)
+                    CustomButtonWith(width: 250, color: .WILDID, borderColor: .secondary.opacity(0.3), text: "View Product", textColor: .primary, destination: detailsDest)
                 }.padding(7)
             }
             Spacer()
@@ -51,6 +52,6 @@ struct OrderCard: View  {
 
 #Preview {
     NavigationView {
-        OrderCard(imgUrl: "https://devwear.co/cdn/shop/files/HOODIE-74.2.png?v=1706656782", prodTitle: "Abo Sami Hoodie", prodClr: "Brown", prodPrice: "$234", prodQty: 12, isMyOrder: true, detailsDest: AnyView(Text("Details")))
+        OrderCard(imgUrl: "https://devwear.co/cdn/shop/files/HOODIE-74.2.png?v=1706656782", prodTitle: "Abo Sami Hoodie", vendor: "Adidas", prodVarient: "Brown", prodPrice: "$234", prodQty: 12, isMyOrder: true, detailsDest: AnyView(Text("Details")))
     }
 }

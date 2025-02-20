@@ -16,6 +16,17 @@ query GetProductsOfOrderByID ($CustomerAT: String!) {
                                 id
                                 url
                             }
+                            price {
+                                amount
+                                currencyCode
+                            }
+                            product {
+                                id
+                                productType
+                                title
+                                totalInventory
+                                vendor
+                            }
                         }
                     }
                 }
@@ -30,6 +41,7 @@ query GetProductsOfOrderByID ($CustomerAT: String!) {
             }
         }
         displayName
+        id
+        numberOfOrders
     }
 }
-

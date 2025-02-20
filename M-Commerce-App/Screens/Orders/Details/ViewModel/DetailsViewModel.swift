@@ -44,13 +44,23 @@ final class DetailsViewModel: ObservableObject {
                                 image: ImgModel(
                                     url: item.variant?.image?.url,
                                     id: item.variant?.image?.id
-                                )
+                                ),
+                                product: OrderedProduct(id: item.variant?.product.id, productType: item.variant?.product.productType,
+                                    title: item.variant?.product.title,
+                                    totalInventory: item.variant?.product.totalInventory,
+                                    vendor: item.variant?.product.vendor)
                             )
                             let lineItem = LineItem(
                                 title: item.title,
                                 quantity: item.quantity,
                                 currentQuantity: item.currentQuantity,
-                                variant: variant
+                                variant: variant,
+                                price: Price(amount: item.variant?.price.amount, currencyCode: item.variant?.price.currencyCode.rawValue),
+                                product: OrderedProduct(id: item.variant?.product.id,
+                                productType: item.variant?.product.productType,
+                                title: item.variant?.product.title,
+                                totalInventory: item.variant?.product.totalInventory,
+                                vendor: item.variant?.product.vendor)
                             )
                             lineItems.append(lineItem)
                         }
@@ -58,22 +68,24 @@ final class DetailsViewModel: ObservableObject {
                         let order = Order(
                             lineItems: LineItemList(nodes: lineItems),
                             currentSubtotalPrice: Price(
-                                amount: orderNode.currentSubtotalPrice.amount ?? "0.0",
-                                currencyCode: orderNode.currentSubtotalPrice.currencyCode.rawValue ?? "USD"
+                                amount: orderNode.currentSubtotalPrice.amount,
+                                currencyCode: orderNode.currentSubtotalPrice.currencyCode.rawValue
                             ),
                             currentTotalPrice: Price(
-                                amount: orderNode.currentTotalPrice.amount ?? "0.0",
-                                currencyCode: orderNode.currentTotalPrice.currencyCode.rawValue ?? "USD"
+                                amount: orderNode.currentTotalPrice.amount,
+                                currencyCode: orderNode.currentTotalPrice.currencyCode.rawValue
                             )
                         )
                         orders.append(order)
                     }
                     
                     self?.detailsModel.customer = Customer(
-                        orders: OrderList(nodes: orders), displayName: customer.displayName
+                        id: customer.id, 
+                        orders: OrderList(nodes: orders),
+                        displayName: customer.displayName,
+                        numberOfOrders: customer.numberOfOrders
                     )
                     
-                    print("Parsed Customer: \(String(describing: self?.detailsModel.customer))")
                 }
                 self?.isLoading = false
             case .failure(let error):

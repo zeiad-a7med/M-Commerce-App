@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CustomButtonWith: View {
+    var width:CGFloat
     var color:Color
     var borderColor:Color
     var text:String
@@ -26,7 +27,7 @@ struct CustomButtonWith: View {
                     Text(text)
                         .font(.system(size: 13).bold())
                         .foregroundStyle(textColor)
-                }.frame(width: 160, height: 45)
+                }.frame(width: width, height: 45)
                     .shadow(radius: 0.5)
         })
     }
@@ -34,7 +35,7 @@ struct CustomButtonWith: View {
 
 #Preview {
     NavigationView {
-        CustomButtonWith(color: .red, borderColor: .red, text: "Details", textColor: .white
+        CustomButtonWith(width: 180, color: .red, borderColor: .red, text: "Details", textColor: .white
                          , destination: AnyView(Text("Hello")))
     }
 }
