@@ -8,27 +8,31 @@
 import SwiftUI
 
 struct RowCard: View {
-    @State var item : CartItem?
-    @State var changeNumberOfItemInRow : ((Int,Bool)->(Void))?
+    @State var line : Line?
+    @State var changeNumberOfItemInRow : ((Int)->(Void))?
     
    
     var body: some View {
         VStack{
             ZStack {
-                imageCard(img: item?.image ?? "")
-                NumberOfItems(numberOfItem: item?.count ?? 1){ number , sign in
-                    changeNumberOfItemInRow?(number,sign)
-                    
-                }.offset(x:-117,y:33)
+                imageCard(img: line?.variant?.image?.url ?? "")
+                    .overlay(alignment: .bottomLeading){
+                        NumberOfItems(numberOfItem: line?.quantity ?? 0){ count in
+                            changeNumberOfItemInRow?(count)
+                        }
+                        .padding(.leading,50)
+                        .padding(.bottom,20)
+                    }
+                
                 //DeleteButton().offset(x:140,y:-33)
             }
             VStack(alignment: .leading){
                 HStack {
-                    Text(item?.name ?? "aaa")
+                    Text(line?.variant?.productTitle ?? "")
                         .font(.title)
                     .padding(.leading)
                     Spacer()
-                    Text(String(item?.price ?? 0.0))
+                    Text(line?.lineCost?.totalAmount?.amount ?? "")
                         .padding(.trailing)
                         .font(.largeTitle)
                 }
@@ -47,6 +51,6 @@ struct RowCard: View {
      
 }
 
-#Preview {
-    RowCard()
-}
+//#Preview {
+//    RowCard()
+//}

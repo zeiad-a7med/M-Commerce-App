@@ -22,18 +22,8 @@ extension GetProductQuery {
         productDTO.variants.nodes.forEach { variant in
             variants.append(
                 ProductVariant(
-                    availableForSale: variant.availableForSale,
-                    barcode: variant.barcode,
-                    currentlyNotInStock: variant.currentlyNotInStock,
                     id: variant.id,
-                    quantityAvailable: variant.quantityAvailable,
-                    requiresComponents: variant.requiresComponents,
-                    requiresShipping: variant.requiresShipping,
-                    sku: variant.sku,
-                    taxable: variant.taxable,
                     title: variant.title,
-                    weight: variant.weight,
-                    weightUnit: variant.weightUnit.rawValue,
                     image: ImgModel(
                         altText: variant.image?.altText,
                         height: variant.image?.height,
@@ -42,8 +32,22 @@ extension GetProductQuery {
                         width: variant.image?.width,
                         id: variant.image?.id
                     ),
-                    price: Price(amount: variant.price.amount, currencyCode: variant.price.currencyCode.rawValue),
-                    priceV2: Price(amount: variant.priceV2.amount, currencyCode: variant.priceV2.currencyCode.rawValue),
+                    barcode: variant.barcode,
+                    availableForSale: variant.availableForSale,
+                    currentlyNotInStock: variant.currentlyNotInStock,
+                    quantityAvailable: variant.quantityAvailable,
+                    requiresComponents: variant.requiresComponents,
+                    requiresShipping: variant.requiresShipping,
+                    sku: variant.sku,
+                    taxable: variant.taxable,
+                    weight: variant.weight,
+                    weightUnit: variant.weightUnit.rawValue,
+                    price: Price(
+                        amount: variant.price.amount,
+                        currencyCode: variant.price.currencyCode.rawValue),
+                    priceV2: Price(
+                        amount: variant.priceV2.amount,
+                        currencyCode: variant.priceV2.currencyCode.rawValue),
                     quantityRule: QuantityRule(
                         increment: variant.quantityRule.increment,
                         maximum: variant.quantityRule.maximum,

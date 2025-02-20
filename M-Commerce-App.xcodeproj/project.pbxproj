@@ -49,7 +49,7 @@
 		890D87C22D5DF66C0062E8D1 /* RowCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890D87892D5DF66C0062E8D1 /* RowCard.swift */; };
 		890D87C32D5DF66C0062E8D1 /* AdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890D87A22D5DF66C0062E8D1 /* AdViewModel.swift */; };
 		890D87C42D5DF66C0062E8D1 /* ShoppingCartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890D87842D5DF66C0062E8D1 /* ShoppingCartViewModel.swift */; };
-		890D87C52D5DF66C0062E8D1 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890D87822D5DF66C0062E8D1 /* Cart.swift */; };
+		890D87C52D5DF66C0062E8D1 /* CartResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890D87822D5DF66C0062E8D1 /* CartResult.swift */; };
 		890D87C62D5DF66C0062E8D1 /* FilterBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890D879B2D5DF66C0062E8D1 /* FilterBar.swift */; };
 		890D87C72D5DF66C0062E8D1 /* BrandsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890D87B02D5DF66C0062E8D1 /* BrandsModel.swift */; };
 		890D87C82D5DF66C0062E8D1 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890D87B72D5DF66C0062E8D1 /* HeaderView.swift */; };
@@ -107,6 +107,17 @@
 		89C82A292D6628560018898E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 89C82A282D6628560018898E /* FirebaseAuth */; };
 		89C82A2B2D663B430018898E /* SendingVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C82A2A2D663B430018898E /* SendingVerificationView.swift */; };
 		89C82A2D2D664D950018898E /* LogOutResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C82A2C2D664D950018898E /* LogOutResponse.swift */; };
+		89C82A332D667E7C0018898E /* GetCart.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 89C82A322D667E7C0018898E /* GetCart.graphql */; };
+		89C82A352D667F320018898E /* CreateCart.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 89C82A342D667F320018898E /* CreateCart.graphql */; };
+		89C82A372D667FBD0018898E /* CartLineAdd.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 89C82A362D667FBD0018898E /* CartLineAdd.graphql */; };
+		89C82A392D6680560018898E /* CartLineUpdate.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 89C82A382D6680560018898E /* CartLineUpdate.graphql */; };
+		89C82A3B2D6680FE0018898E /* CartLineRemove.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 89C82A3A2D6680FE0018898E /* CartLineRemove.graphql */; };
+		89C82A3D2D6688590018898E /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C82A3C2D6688590018898E /* Cart.swift */; };
+		89C82A3F2D66899A0018898E /* Cost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C82A3E2D66899A0018898E /* Cost.swift */; };
+		89C82A412D6689C40018898E /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C82A402D6689C40018898E /* Line.swift */; };
+		89C82A432D668A730018898E /* LineCost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C82A422D668A730018898E /* LineCost.swift */; };
+		89C82A452D668D7F0018898E /* GetCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C82A442D668D7F0018898E /* GetCart.swift */; };
+		89C82A482D6697980018898E /* CartService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C82A462D6697980018898E /* CartService.swift */; };
 		89CAF31C2D6007AE003984FA /* SettingsListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAF3152D6007AE003984FA /* SettingsListRow.swift */; };
 		89CAF31D2D6007AE003984FA /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAF3192D6007AE003984FA /* Settings.swift */; };
 		89CAF31E2D6007AE003984FA /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAF3182D6007AE003984FA /* EditProfile.swift */; };
@@ -199,7 +210,7 @@
 		890D87412D5D43F70062E8D1 /* CustomStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStepper.swift; sourceTree = "<group>"; };
 		890D87542D5D55C00062E8D1 /* ReadMoreText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadMoreText.swift; sourceTree = "<group>"; };
 		890D87562D5D5DEE0062E8D1 /* GetProduct.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetProduct.graphql; sourceTree = "<group>"; };
-		890D87822D5DF66C0062E8D1 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
+		890D87822D5DF66C0062E8D1 /* CartResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartResult.swift; sourceTree = "<group>"; };
 		890D87842D5DF66C0062E8D1 /* ShoppingCartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewModel.swift; sourceTree = "<group>"; };
 		890D87862D5DF66C0062E8D1 /* CheckOutComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutComponent.swift; sourceTree = "<group>"; };
 		890D87872D5DF66C0062E8D1 /* NumberOfItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfItems.swift; sourceTree = "<group>"; };
@@ -262,6 +273,17 @@
 		89C82A212D66279C0018898E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		89C82A2A2D663B430018898E /* SendingVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendingVerificationView.swift; sourceTree = "<group>"; };
 		89C82A2C2D664D950018898E /* LogOutResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutResponse.swift; sourceTree = "<group>"; };
+		89C82A322D667E7C0018898E /* GetCart.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetCart.graphql; sourceTree = "<group>"; };
+		89C82A342D667F320018898E /* CreateCart.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = CreateCart.graphql; sourceTree = "<group>"; };
+		89C82A362D667FBD0018898E /* CartLineAdd.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = CartLineAdd.graphql; sourceTree = "<group>"; };
+		89C82A382D6680560018898E /* CartLineUpdate.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = CartLineUpdate.graphql; sourceTree = "<group>"; };
+		89C82A3A2D6680FE0018898E /* CartLineRemove.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = CartLineRemove.graphql; sourceTree = "<group>"; };
+		89C82A3C2D6688590018898E /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
+		89C82A3E2D66899A0018898E /* Cost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cost.swift; sourceTree = "<group>"; };
+		89C82A402D6689C40018898E /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		89C82A422D668A730018898E /* LineCost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineCost.swift; sourceTree = "<group>"; };
+		89C82A442D668D7F0018898E /* GetCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCart.swift; sourceTree = "<group>"; };
+		89C82A462D6697980018898E /* CartService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartService.swift; sourceTree = "<group>"; };
 		89CAF3132D6007AE003984FA /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		89CAF3142D6007AE003984FA /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
 		89CAF3152D6007AE003984FA /* SettingsListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListRow.swift; sourceTree = "<group>"; };
@@ -484,6 +506,7 @@
 		890D86C32D5CD4B90062E8D1 /* graphql */ = {
 			isa = PBXGroup;
 			children = (
+				89C82A2E2D667E470018898E /* Cart */,
 				48A3368A2D64585B00F64F2A /* Address */,
 				89B00B692D610BC000AF1FB7 /* Auth */,
 				C4F3FC6D2D5E6750005151E9 /* Categories */,
@@ -522,18 +545,10 @@
 		890D86DA2D5CF5D80062E8D1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				890D86DB2D5CF5E20062E8D1 /* Mutations */,
 				890D86DD2D5CF5E20062E8D1 /* Queries */,
 				89EE56E12D5E320600B05457 /* Extensions */,
 			);
 			path = Products;
-			sourceTree = "<group>";
-		};
-		890D86DB2D5CF5E20062E8D1 /* Mutations */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Mutations;
 			sourceTree = "<group>";
 		};
 		890D86DD2D5CF5E20062E8D1 /* Queries */ = {
@@ -561,6 +576,10 @@
 				892967BC2D64B399007191DC /* Variant.swift */,
 				892967BE2D64B432007191DC /* QuantityRule.swift */,
 				892967C02D64B4BB007191DC /* VariantsCount.swift */,
+				89C82A3C2D6688590018898E /* Cart.swift */,
+				89C82A3E2D66899A0018898E /* Cost.swift */,
+				89C82A402D6689C40018898E /* Line.swift */,
+				89C82A422D668A730018898E /* LineCost.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -568,7 +587,8 @@
 		890D87832D5DF66C0062E8D1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				890D87822D5DF66C0062E8D1 /* Cart.swift */,
+				89C82A472D6697980018898E /* CartService */,
+				890D87822D5DF66C0062E8D1 /* CartResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -953,6 +973,51 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		89C82A2E2D667E470018898E /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				89C82A2F2D667E4F0018898E /* Queries */,
+				89C82A302D667E580018898E /* Mutations */,
+				89C82A312D667E5E0018898E /* Extensions */,
+			);
+			path = Cart;
+			sourceTree = "<group>";
+		};
+		89C82A2F2D667E4F0018898E /* Queries */ = {
+			isa = PBXGroup;
+			children = (
+				89C82A322D667E7C0018898E /* GetCart.graphql */,
+			);
+			path = Queries;
+			sourceTree = "<group>";
+		};
+		89C82A302D667E580018898E /* Mutations */ = {
+			isa = PBXGroup;
+			children = (
+				89C82A342D667F320018898E /* CreateCart.graphql */,
+				89C82A362D667FBD0018898E /* CartLineAdd.graphql */,
+				89C82A382D6680560018898E /* CartLineUpdate.graphql */,
+				89C82A3A2D6680FE0018898E /* CartLineRemove.graphql */,
+			);
+			path = Mutations;
+			sourceTree = "<group>";
+		};
+		89C82A312D667E5E0018898E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				89C82A442D668D7F0018898E /* GetCart.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		89C82A472D6697980018898E /* CartService */ = {
+			isa = PBXGroup;
+			children = (
+				89C82A462D6697980018898E /* CartService.swift */,
+			);
+			path = CartService;
+			sourceTree = "<group>";
+		};
 		89CAF3162D6007AE003984FA /* SubView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1245,11 +1310,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89C82A3B2D6680FE0018898E /* CartLineRemove.graphql in Resources */,
+				89C82A332D667E7C0018898E /* GetCart.graphql in Resources */,
+				89C82A372D667FBD0018898E /* CartLineAdd.graphql in Resources */,
 				89C82A222D66279C0018898E /* GoogleService-Info.plist in Resources */,
 				48F009F92D5C94FF002A016E /* Preview Assets.xcassets in Resources */,
 				C44BEDDC2D5D2F9B0022B603 /* GetAllTheProducts.graphql in Resources */,
 				C4F3FC7F2D5EA788005151E9 /* GetFilteredProducts.graphql in Resources */,
 				890D86C62D5CD4B90062E8D1 /* schema.graphqls in Resources */,
+				89C82A352D667F320018898E /* CreateCart.graphql in Resources */,
 				C4F3FC712D5E679A005151E9 /* GetProductsTypes.graphql in Resources */,
 				89C4A63E2D63E1B300716CB1 /* UpdateProfile.graphql in Resources */,
 				890D86E12D5CF63A0062E8D1 /* GetCollections.graphql in Resources */,
@@ -1258,6 +1327,7 @@
 				48A3368F2D645B2300F64F2A /* GetAddresses.graphql in Resources */,
 				48F009F62D5C94FF002A016E /* Assets.xcassets in Resources */,
 				C4F3FC732D5E6812005151E9 /* GetProductsTags.graphql in Resources */,
+				89C82A392D6680560018898E /* CartLineUpdate.graphql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1301,12 +1371,14 @@
 				8952A6822D620F870003ACF4 /* RegisterViewModel.swift in Sources */,
 				89CAF31C2D6007AE003984FA /* SettingsListRow.swift in Sources */,
 				89CAF31D2D6007AE003984FA /* Settings.swift in Sources */,
+				89C82A412D6689C40018898E /* Line.swift in Sources */,
 				89CAF31E2D6007AE003984FA /* EditProfile.swift in Sources */,
 				89CAF31F2D6007AE003984FA /* ChangePassword.swift in Sources */,
 				89C4A6372D63CD0500716CB1 /* SettingsViewModel.swift in Sources */,
 				8952A6972D629E010003ACF4 /* Constants.swift in Sources */,
 				89CAF3252D60288F003984FA /* AlertContent.swift in Sources */,
 				C401B5D12D6108CD004BCB2F /* FloatingButtonView.swift in Sources */,
+				89C82A432D668A730018898E /* LineCost.swift in Sources */,
 				8952A6932D62865F0003ACF4 /* AuthManager.swift in Sources */,
 				89CAF3202D6007AE003984FA /* Currency.swift in Sources */,
 				89CAF3212D6007AE003984FA /* ProfileImage.swift in Sources */,
@@ -1324,10 +1396,11 @@
 				48B1F8AF2D63BD68004D13AC /* RadioList.swift in Sources */,
 				890D87C42D5DF66C0062E8D1 /* ShoppingCartViewModel.swift in Sources */,
 				89B00B862D61392700AF1FB7 /* Country.swift in Sources */,
-				890D87C52D5DF66C0062E8D1 /* Cart.swift in Sources */,
+				890D87C52D5DF66C0062E8D1 /* CartResult.swift in Sources */,
 				89C82A2B2D663B430018898E /* SendingVerificationView.swift in Sources */,
 				8952A6802D6206960003ACF4 /* RegisterMutation.swift in Sources */,
 				892967BD2D64B399007191DC /* Variant.swift in Sources */,
+				89C82A452D668D7F0018898E /* GetCart.swift in Sources */,
 				890D87C62D5DF66C0062E8D1 /* FilterBar.swift in Sources */,
 				89B00B722D61178900AF1FB7 /* Logout.graphql in Sources */,
 				890D87C72D5DF66C0062E8D1 /* BrandsModel.swift in Sources */,
@@ -1337,6 +1410,7 @@
 				89CAF3272D603C01003984FA /* FavoritesManager.swift in Sources */,
 				89B00B7D2D612A8900AF1FB7 /* Order.swift in Sources */,
 				48B1F8A32D637F31004D13AC /* AddressEditView.swift in Sources */,
+				89C82A3D2D6688590018898E /* Cart.swift in Sources */,
 				C4BC560C2D5F631B00F9D42A /* GetFilteredProducts.swift in Sources */,
 				890D87CA2D5DF66C0062E8D1 /* FavoritesView.swift in Sources */,
 				48A336982D64B94700F64F2A /* deleteAddress.graphql in Sources */,
@@ -1367,8 +1441,10 @@
 				89B00B8D2D6148CF00AF1FB7 /* CustomSecureField.swift in Sources */,
 				890D87D72D5DF66C0062E8D1 /* AdModel.swift in Sources */,
 				8952A67E2D6202340003ACF4 /* AuthService.swift in Sources */,
+				89C82A482D6697980018898E /* CartService.swift in Sources */,
 				890D87D82D5DF66C0062E8D1 /* DeleteButton.swift in Sources */,
 				890D87D92D5DF66C0062E8D1 /* BrandCard.swift in Sources */,
+				89C82A3F2D66899A0018898E /* Cost.swift in Sources */,
 				892967BF2D64B432007191DC /* QuantityRule.swift in Sources */,
 				890D87DA2D5DF66C0062E8D1 /* ProductInfoView.swift in Sources */,
 				890D87DB2D5DF66C0062E8D1 /* PopupCircleView.swift in Sources */,

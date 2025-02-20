@@ -8,40 +8,40 @@
 import Foundation
 import ShopifyAPIKit
 
-protocol ProductServiceProtocol {
-    static func getProductFromApi(
-        productId: String,
-        complitionHandler: @escaping (ProductResponse?) -> Void)
+protocol CartServiceProtocol {
+    static func getCartFromApi(
+        cartId: String,
+        complitionHandler: @escaping (CartResponse?) -> Void)
 }
 
-class ProductService: ProductServiceProtocol {
-    static func getProductFromApi(
-        productId: String,
-        complitionHandler: @escaping (ProductResponse?) -> Void
+class CartService: CartServiceProtocol {
+    static func getCartFromApi(
+        cartId: String,
+        complitionHandler: @escaping (CartResponse?) -> Void
     ) {
         ApolloNetwokService.shared.apollo.fetch(
-            query: GetProductQuery(id: productId)
+            query: GetCartQuery(cartId: cartId)
         ) { result in
             switch result {
             case .success(let graphQLResult):
-                let productDTO = graphQLResult.data?.product
-                guard let productDTO else {
+                let cartDTO = graphQLResult.data?.cart
+                guard let cartDTO else {
                     complitionHandler(
-                        ProductResponse(
+                        CartResponse(
                             success: false,
                             message: graphQLResult.errors?.first?.message ?? "No data"
                         ))
                     return
                 }
-                let product = GetProductQuery.parse(from: productDTO)
+                let cart = GetCartQuery.parse(from: cartDTO)
                 complitionHandler(
-                    ProductResponse(
-                        product: product,
+                    CartResponse(
+                        cart: cart,
                         success: true
                     ))
             case .failure(let error):
                 complitionHandler(
-                    ProductResponse(
+                    CartResponse(
                         success: false,
                         message: error.localizedDescription
                     ))

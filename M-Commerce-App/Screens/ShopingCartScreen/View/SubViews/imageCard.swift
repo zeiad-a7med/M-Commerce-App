@@ -13,8 +13,7 @@ struct imageCard: View {
         AsyncImage(url: URL(string: img)) { phase in
                 switch phase {
                 case .empty:
-                    ShimmerView(width: 325, height: 100)
-                        .frame(width: 325 , height: 100)
+                    ShimmerView(width: 350, height: 150)
                         .clipShape(RoundedRectangle(cornerRadius: 15))
                         .containerRelativeFrame(.horizontal, alignment: .center)
                         
@@ -22,7 +21,7 @@ struct imageCard: View {
                 
                         image
                            .resizable()
-                           .frame(width: 350 , height: 120)
+                           .frame(width: 350 , height: 150)
                            .clipShape(RoundedRectangle(cornerRadius: 15))
                            .containerRelativeFrame(.horizontal, alignment: .center)
                            .aspectRatio(contentMode: .fit)

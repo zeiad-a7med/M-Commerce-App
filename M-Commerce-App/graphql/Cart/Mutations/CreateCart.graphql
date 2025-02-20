@@ -1,0 +1,26 @@
+mutation CreateCart(
+    $email: String,
+    $customerAccessToken : String,
+    $phone: String
+) {
+    cartCreate(
+    input: {
+        buyerIdentity: {
+            email: $email
+            customerAccessToken: $customerAccessToken
+            phone: $phone
+        }
+    }
+    ) {
+        cart {
+            id
+            createdAt
+            updatedAt
+        }
+        userErrors {
+            code
+            field
+            message
+        }
+    }
+}

@@ -10,41 +10,26 @@ import SwiftUI
 struct ShoppingView: View {
     @State var swipeDeleteFlag: Bool = false
     @State var confirmZeroItemDeleteFlag: Bool = false
-    @State var cartItem: CartItem?
+//    @State var cartItem: CartItem?
     @State var indexSet: IndexSet?
     @State var totalPrice: Double = 0.0
     @State var showCheckOut: Bool = false
     @State var isLoggedIn: Bool = false
+    @State var currentDeletion: Line?
     @StateObject var viewModel = ShoppingCartViewModel()
     var body: some View {
         VStack {
             if(isLoggedIn){
                 List {
-                    if let tempViewModel = viewModel.CartResult?.itemList {
-                        ForEach(tempViewModel, id: \.self) { Item in
-                            RowCard(item: Item) { number, sign in
-                                cartItem = Item
-                                if number == 1 && !sign {
-                                    confirmZeroItemDeleteFlag = true
-                                } else {
-                                    // checkDataAvailability(data:)
-
-                                    if let myIndex = self.viewModel.CartResult?
-                                        .itemList!.firstIndex(of: cartItem!)
-                                    {
-                                        if sign {
-                                            self.viewModel.CartResult?.itemList![
-                                                myIndex
-                                            ].count! += 1
-                                        } else {
-                                            self.viewModel.CartResult?.itemList![
-                                                myIndex
-                                            ].count! -= 1
-                                        }
+                    if let tempViewModel = viewModel.cartResult?.cart?.lines {
+                        ForEach(Array(
+                            (tempViewModel)
+                                .enumerated()), id: \.offset) { line in
+                                    RowCard(line:line.element) { count in
+                                    if(count == 0){
+                                        confirmZeroItemDeleteFlag = true
+                                        currentDeletion = line.element
                                     }
-
-                                }
-
                             }
 
                         }.onDelete { index in
@@ -55,9 +40,9 @@ struct ShoppingView: View {
                             isPresented: $swipeDeleteFlag
                         ) {
                             Button("Delete", role: .destructive) {
-                                viewModel.CartResult?.itemList?.remove(
-                                    atOffsets: indexSet!)
-                                swipeDeleteFlag = false
+//                                viewModel.CartResult?.itemList?.remove(
+//                                    atOffsets: indexSet!)
+//                                swipeDeleteFlag = false
 
                             }
                             Button("Cancel", role: .cancel) {
@@ -71,17 +56,19 @@ struct ShoppingView: View {
                             isPresented: $confirmZeroItemDeleteFlag
                         ) {
                             Button("Delete", role: .destructive) {
-                                confirmZeroItemDeleteFlag = false
-                                if let index = self.viewModel.CartResult?.itemList!
-                                    .firstIndex(of: cartItem!)
-                                {
-                                    self.viewModel.CartResult?.itemList!.remove(
-                                        at: index)
-                                }
+//                                confirmZeroItemDeleteFlag = false
+//                                if let index = self.viewModel.CartResult?.itemList!
+//                                    .firstIndex(of: cartItem!)
+//                                {
+//                                    self.viewModel.CartResult?.itemList!.remove(
+//                                        at: index)
+//                                }
                             }
                             Button("Cancel", role: .cancel) {
 
                                 confirmZeroItemDeleteFlag = false
+                                viewModel.updateLine(line: currentDeletion!)
+                                currentDeletion = nil
                             }
                         }  //confiramtion if less than 1
                     }
@@ -131,10 +118,10 @@ struct ShoppingView: View {
 
     }
     func CalculateTotalPrice() {
-        for i in (viewModel.CartResult?.itemList)! {
-            totalPrice += Double(i.count!) * i.price!
-        }
-        print(totalPrice)
+//        for i in (viewModel.CartResult?.itemList)! {
+//            totalPrice += Double(i.count!) * i.price!
+//        }
+//        print(totalPrice)
     }
 
 }
