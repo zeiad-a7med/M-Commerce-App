@@ -165,8 +165,8 @@ struct ProductInfoView: View {
                                                         }
                                                     }
                                                 )
-                                            }.padding([.leading, .trailing],5)
-                                                .padding([.top, .bottom],10)
+                                            }.padding([.leading, .trailing], 5)
+                                                .padding([.top, .bottom], 10)
                                         }
                                     }
                                     .padding(.bottom, 15)
@@ -197,13 +197,13 @@ struct ProductInfoView: View {
                                         ?? ""
                                 )
                                 .foregroundStyle(ThemeManager.darkPuble)
-                                .font(.title)
+                                .font(.title3)
                                 Text(
                                     (selectedVariant?.price?.amount
                                         ?? viewModel.productRes?.product?
                                         .formattedPrice) ?? ""
                                 )
-                                .font(.title)
+                                .font(.title3)
                                 Spacer()
                                 CustomRoundedButtonView(
                                     text: "Add to Cart",

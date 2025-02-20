@@ -9,18 +9,48 @@ import Foundation
 
 
 class ShoppingCartViewModel : ObservableObject{
-    @Published var CartResult : Cart?
+    @Published var cartResult : CartResponse?
+    @Published var isLoading : Bool = false
     init(){
-        getData()
+        getCartData()
     }
-    func getData(){
-        
-        let tempItem = CartItem(count:1 ,image:"https://images.pexels.com/photos/19090/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=400" ,price:35.0 ,name: "Adidas Sneakers")
-        let tempItem1 = CartItem(count:1 ,image:"https://images.pexels.com/photos/1598508/pexels-photo-1598508.jpeg?auto=compress&cs=tinysrgb&w=400" ,price:60 ,name: "puma Sneakers")
-        let tempItem2 = CartItem(count:1 ,image:"https://images.pexels.com/photos/267301/pexels-photo-267301.jpeg?auto=compress&cs=tinysrgb&w=400" ,price:100 ,name: "TimberLand Sneakers")
-        let tempItem3 = CartItem(count:1 ,image:"https://images.pexels.com/photos/1240892/pexels-photo-1240892.jpeg?auto=compress&cs=tinysrgb&w=400" ,price:10 ,name: "Active Sneakers")
-        CartResult = Cart(itemList: [tempItem,tempItem1,tempItem2,tempItem3])
-   
-        
+    func getCartData(){
+        isLoading = true
+        CartService.getCartFromApi(cartId: "gid://shopify/Cart/Z2NwLWV1cm9wZS13ZXN0MTowMUpNRlhFOE5ZUFpWTjc0MTZZWEhWUVpBMQ?key=a64ceb3ee3c33d49e49572c4025d9524") { result in
+            guard let result = result else { return }
+            DispatchQueue.main.async {
+                self.isLoading = false
+                self.cartResult = result
+            }
+        }
+    }
+    func updateLine(line:Line){
+        let tempLines = cartResult?.cart?.lines
+        var updatedLines: [Line] = []
+        tempLines?.forEach({ oldLine in
+            if(oldLine.id == line.id){
+                oldLine.quantity = 1
+                updatedLines.append(oldLine)
+            }else{
+                updatedLines.append(oldLine)
+            }
+        })
+        DispatchQueue.main.async {
+            self.cartResult?.cart?.lines = updatedLines
+//            self.cartResult = CartResponse(
+//                cart: Cart(
+//                    id: self.cartResult?.cart?.id,
+//                    checkoutUrl: self.cartResult?.cart?.checkoutUrl,
+//                    note: self.cartResult?.cart?.note,
+//                    totalQuantity: self.cartResult?.cart?.totalQuantity,
+//                    lines: updatedLines,
+//                    cost: self.cartResult?.cart?.cost,
+//                    createdAt: self.cartResult?.cart?.createdAt,
+//                    updatedAt: self.cartResult?.cart?.updatedAt
+//                ),
+//                success: self.cartResult?.success,
+//                message: self.cartResult?.message
+//            )
+        }
     }
 }

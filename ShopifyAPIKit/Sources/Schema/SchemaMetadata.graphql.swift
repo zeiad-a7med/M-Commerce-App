@@ -22,9 +22,16 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     switch typename {
     case "AppliedGiftCard": return ShopifyAPIKit.Objects.AppliedGiftCard
     case "Article": return ShopifyAPIKit.Objects.Article
+    case "BaseCartLineConnection": return ShopifyAPIKit.Objects.BaseCartLineConnection
     case "Blog": return ShopifyAPIKit.Objects.Blog
     case "Cart": return ShopifyAPIKit.Objects.Cart
+    case "CartCost": return ShopifyAPIKit.Objects.CartCost
+    case "CartCreatePayload": return ShopifyAPIKit.Objects.CartCreatePayload
     case "CartLine": return ShopifyAPIKit.Objects.CartLine
+    case "CartLineCost": return ShopifyAPIKit.Objects.CartLineCost
+    case "CartLinesAddPayload": return ShopifyAPIKit.Objects.CartLinesAddPayload
+    case "CartLinesRemovePayload": return ShopifyAPIKit.Objects.CartLinesRemovePayload
+    case "CartLinesUpdatePayload": return ShopifyAPIKit.Objects.CartLinesUpdatePayload
     case "CartUserError": return ShopifyAPIKit.Objects.CartUserError
     case "Collection": return ShopifyAPIKit.Objects.Collection
     case "CollectionConnection": return ShopifyAPIKit.Objects.CollectionConnection
