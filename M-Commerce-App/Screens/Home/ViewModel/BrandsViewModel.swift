@@ -16,6 +16,7 @@ final class BrandsViewModel: ObservableObject {
     var countity:GraphQLNullable<Int> = 13
     
     init() {
+        CurrencyManager.shared.getCurrencyExchangeRate(targetCurrency: "TRY")
         fetchBrands()
     }
     
