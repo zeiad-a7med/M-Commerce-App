@@ -9,6 +9,7 @@ import SwiftUI
 
 struct addressCard: View {
     @State var address : Address
+    @State var defaultAddress:Address
     @State var isSelected :Bool = false
     @State var cardColor = ColoredPins.generateRandomColoredPin()
     var body: some View {
@@ -42,6 +43,13 @@ struct addressCard: View {
                     .foregroundStyle(isSelected ? ThemeManager.darkPuble : Color(#colorLiteral(red: 0.9071035385, green: 0.9071035385, blue: 0.9071035385, alpha: 1)))
                 
             }.padding()
+            .onAppear(){
+                if address.id == defaultAddress.id{
+                    isSelected = true
+                }else{
+                    isSelected = false
+                }
+            }
             
     }
 }

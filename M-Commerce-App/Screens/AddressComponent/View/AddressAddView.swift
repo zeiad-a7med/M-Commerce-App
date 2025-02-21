@@ -10,10 +10,7 @@ import SwiftUI
 struct AddressAddView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var selectedCountry: Country = Constants.countries.first!
-    @ObservedObject var addressModel = AddressComponentViewModel()
     @State var newAddress = Address()
-    
-    
     @State private var firstNameValid: Bool = false
     @State private var lastNameValid: Bool = false
     @State private var address1Valid: Bool = false
@@ -27,11 +24,12 @@ struct AddressAddView: View {
     
     var body: some View {
 
-        NavigationStack {
+       // NavigationStack {
             VStack {
 
                 VStack {
                     HStack {
+                      
                         CustomTextField(
                             placeholder: "First name",
                             onChange: { FirstName in
@@ -41,10 +39,12 @@ struct AddressAddView: View {
                             isValid: { valid in
                                 firstNameValid = valid
                                 updateFormValidity()
+                                
                             },
                             initialText: .constant("")
                         )
                         .padding(.leading, 25)
+                        .disabled(false)
                         CustomTextField(
                             placeholder: "Last name",
                             onChange: { LastName in
@@ -59,6 +59,7 @@ struct AddressAddView: View {
                             },
                             initialText: .constant("")
                         ).padding(.trailing, 25)
+                        .disabled(false)
 
                     }
                     CustomTextField(
@@ -181,11 +182,11 @@ struct AddressAddView: View {
                 CustomRoundedButtonView(
                     text: "Save address",
                     onTap: {
-
-                        addressModel.createAddresses(
-                            AccessToken: "03c27d8e9f3f22fddb10010462ef36d3",
+                        let addressModel = AddressComponentViewModel()
+                        addressModel.createAddresses(                     
+                            AccessToken: AuthManager.shared.applicationUser?.accessToken ?? "",
                             selectedAddress: newAddress)
-
+                        SnackbarManager.shared.show(message: "Successfully Saved")
                         dismiss()
 
                     }, isButtonEnabled: $isFormValid
@@ -194,7 +195,7 @@ struct AddressAddView: View {
 
             }
 
-        }
+       // }
 
     }
     func updateFormValidity() {

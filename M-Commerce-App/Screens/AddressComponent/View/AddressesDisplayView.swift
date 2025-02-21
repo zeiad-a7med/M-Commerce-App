@@ -9,11 +9,12 @@ import SwiftUI
 
 struct AddressesDisplayView: View {
     @StateObject var addressModel = AddressComponentViewModel()
+    
     var body: some View {
         VStack{
           
             
-//            NavigationStack {
+    //        NavigationStack {
                 if addressModel.addressPackage.defaultAddress != nil{
                     defaultAddresCard(address:addressModel.addressPackage.defaultAddress!)
                 }
@@ -25,12 +26,12 @@ struct AddressesDisplayView: View {
                 ScrollView {
                     
                     if  addressModel.addressPackage.listOfAddress.count != 0 {
-                        ForEach(Array(addressModel.addressPackage.listOfAddress.enumerated()),id: \.offset) { index,element in
+                        ForEach(addressModel.addressPackage.listOfAddress,id: \.id) {element in
                             NavigationLink {
-                                AddressEditView(address: element)
+                                AddressEditView(address: element,defaultAddress: addressModel.addressPackage.defaultAddress )
                
                             } label: {
-                                addressCard(address:element)
+                                addressCard(address:element,defaultAddress: addressModel.addressPackage.defaultAddress ?? Address())
                                     .foregroundStyle(.black)
                         }
                         }
@@ -52,13 +53,19 @@ struct AddressesDisplayView: View {
 
                 }
                 .navigationTitle("Address")
-//            }
+         //   }
             
         }
         .onAppear{
             DispatchQueue.main.asyncAfter(deadline: .now()+1, execute: {
-                addressModel.fetchAddresses(AccessToken: "03c27d8e9f3f22fddb10010462ef36d3")
+               
+                addressModel.fetchAddresses(AccessToken: AuthManager.shared.applicationUser?.accessToken ?? " ")
             })
+        }
+        .onDisappear(){
+            AuthManager.shared.applicationUser?.addresses = addressModel.addressPackage.listOfAddress
+            AuthManager.shared.applicationUser?.defaultAddress = addressModel.addressPackage.defaultAddress
+           
         }
   
 

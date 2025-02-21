@@ -20,13 +20,15 @@ final class AddressComponentViewModel : ObservableObject {
                     
                 }
                 if let data = graphQlResult.data?.customer?.addresses.nodes{
-                    self.addressPackage.listOfAddress = []
+                    var tempList = [Address]()
                     data.forEach { result in
                         let tempAddress = Address(id: result.id, address1: result.address1, address2: result.address2, name: result.name, phone: result.phone, city: result.city, company: result.company, country: result.country,  firstName: result.firstName, lastName: result.lastName, latitude: result.latitude, longitude: result.longitude, province: result.province, provinceCode: result.provinceCode, zip: result.zip)
-                        self.addressPackage.listOfAddress.append(tempAddress)
+                        tempList.append(tempAddress)
+                
                     }
+                    self.addressPackage.listOfAddress = tempList
                     self.addressPackage.success=true
-//                    self.radioController.generateArray(count:self.addressPackage.listOfAddress.count)
+                    AuthManager.shared.applicationUser?.addresses = tempList
                 }
             case .failure(let error):
                 self.addressPackage.success = false
@@ -35,11 +37,27 @@ final class AddressComponentViewModel : ObservableObject {
             
         }
     }
-    func updateAddresses(accessToken: String ,selectedAddress: Address){
+    func updateAddresses(accessToken: String ,selectedAddress: Address ){
         ApolloNetwokService.shared.apollo.perform(mutation: UpdateAddressMutation(customerAccessToken: accessToken, id: selectedAddress.id ?? " ", zip: selectedAddress.zip ?? " ", phone: selectedAddress.phone ?? " ", firstName: selectedAddress.firstName ?? "", lastName: selectedAddress.lastName ?? "", country: selectedAddress.country ?? "", city: selectedAddress.city ?? "", address1: selectedAddress.address1 ?? "", address2: selectedAddress.address2 ?? "")){result in
             switch result {
-            case .success(_):
-               print("success")
+            case .success(let graphQlResult):
+                if let result = graphQlResult.data?.customerAddressUpdate?.customerAddress{
+                    let tempAddress = Address(id: result.id, address1: result.address1, address2: result.address2, name: result.name, phone: result.phone, city: result.city, company: result.company, country: result.country,  firstName: result.firstName, lastName: result.lastName, zip: result.zip)
+                   
+               
+                    if let indexOfTheUpdated = self.addressPackage.listOfAddress.firstIndex(where: {$0.id == selectedAddress.id}){
+                        self.addressPackage.listOfAddress[indexOfTheUpdated] = tempAddress
+                        print("newAddress = \(self.addressPackage.listOfAddress[indexOfTheUpdated])")
+                        AuthManager.shared.applicationUser?.addresses = self.addressPackage.listOfAddress
+                    }else{
+                        for i in self.addressPackage.listOfAddress{
+                           // print("ViewModeladdress ID : \(String(describing: i.id))")
+                        }
+                        print("Selectedaddress ID : \(String(describing: selectedAddress.id))")
+                      
+                    }
+                   
+                }
                 self.addressPackage.success = true
             case .failure(let error):
                 self.addressPackage.success = false
@@ -57,6 +75,7 @@ final class AddressComponentViewModel : ObservableObject {
                 if let result = graphQlResult.data?.customerDefaultAddressUpdate?.customer?.defaultAddress{
                     let tempAddress = Address(id: result.id, address1: result.address1, address2: result.address2, name: result.name, phone: result.phone, city: result.city, company: result.company, country: result.country,  firstName: result.firstName, lastName: result.lastName, zip: result.zip)
                     self.addressPackage.defaultAddress = tempAddress
+                    AuthManager.shared.applicationUser?.defaultAddress = self.addressPackage.defaultAddress
                     
                 }
                 self.addressPackage.success = true
@@ -73,9 +92,12 @@ final class AddressComponentViewModel : ObservableObject {
             switch result {
             case .success(let graphQlResult):
                 if let result = graphQlResult.data?.customerAddressDelete?.deletedCustomerAddressId{
+                    self.fetchAddresses(AccessToken: AuthManager.shared.applicationUser?.accessToken ?? " ")
                     self.addressPackage.listOfAddress.removeAll { Address in
                         return Address.id == result
                     }
+                    AuthManager.shared.applicationUser?.addresses = self.addressPackage.listOfAddress
+                   
                 }
                print("success")
                 self.addressPackage.success = true
@@ -95,6 +117,7 @@ final class AddressComponentViewModel : ObservableObject {
                 if let result = graphQlResult.data?.customerAddressCreate?.customerAddress{
                     let tempAddress = Address(id: result.id, address1: result.address1, address2: result.address2,  phone: result.phone, city: result.city, country: result.country,  firstName: result.firstName, lastName: result.lastName, zip: result.zip)
                     self.addressPackage.listOfAddress.append(tempAddress)
+                    AuthManager.shared.applicationUser?.addresses = self.addressPackage.listOfAddress
                 }
                 self.addressPackage.success = true
             case .failure(let error):
@@ -103,6 +126,13 @@ final class AddressComponentViewModel : ObservableObject {
                 print(error.localizedDescription)
             }
             
+        }
+    }
+    func checkIfSelectedIsDefaultAddress(selectedAddressId: String, defaultAddressId: String) throws{
+        
+       
+        if defaultAddressId == selectedAddressId{
+            throw AddressError.addressIsDefault
         }
     }
 
