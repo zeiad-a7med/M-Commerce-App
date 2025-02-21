@@ -10,6 +10,7 @@ import SwiftUI
 struct AddressEditView: View {
     @Environment(\.dismiss) private var dismiss
     @State var address: Address
+    @State var defaultAddress : Address?
     @State var isEditEnabled: Bool = false
     @State var isDeleteAlertShown: Bool = false
     var body: some View {
@@ -100,12 +101,12 @@ struct AddressEditView: View {
                     CustomRoundedButtonView(
                         text: "Save address",
                         onTap: {
-                            var addressModel = AddressComponentViewModel()
+                            let addressModel = AddressComponentViewModel()
                             addressModel.updateAddresses(
                                 accessToken:
-                                    "03c27d8e9f3f22fddb10010462ef36d3",
+                                    AuthManager.shared.applicationUser?.accessToken ?? "",
                                 selectedAddress: address)
-                             ()
+                         dismiss()
 
                         }, isButtonEnabled: .constant(true)
                     )
@@ -114,10 +115,10 @@ struct AddressEditView: View {
                     CustomRoundedButtonView(
                         text: "MakeDefault Address",
                         onTap: {
-                            var addressModel = AddressComponentViewModel()
+                            let addressModel = AddressComponentViewModel()
                             addressModel.updateDefaulteAddress(
                                 AccessToken:
-                                    "03c27d8e9f3f22fddb10010462ef36d3",
+                                    AuthManager.shared.applicationUser?.accessToken ?? "",
                                 selectedAddressId: address.id ?? "")
                             dismiss()
 
@@ -131,9 +132,19 @@ struct AddressEditView: View {
             .toolbar {
                 if isEditEnabled {
                     Button {
-                        withAnimation {
-                            isDeleteAlertShown.toggle()
+                        do{
+                            let addressModel = AddressComponentViewModel()
+                            if let temp = defaultAddress{
+                                try addressModel.checkIfSelectedIsDefaultAddress(selectedAddressId: address.id ?? "" , defaultAddressId: temp.id ?? "")
+                            }
+                           
+                            withAnimation {
+                                isDeleteAlertShown.toggle()
+                            }
+                        }catch{
+                            SnackbarManager.shared.show(message: error.localizedDescription)
                         }
+                        
                     } label: {
                         Image(systemName: "xmark.bin")
                             .padding(5)
@@ -150,7 +161,7 @@ struct AddressEditView: View {
                         Button("Yes", role: .destructive) {
                             let addressModel = AddressComponentViewModel()
                             addressModel.deleteAddress(
-                                AccessToken: "03c27d8e9f3f22fddb10010462ef36d3",
+                                AccessToken: AuthManager.shared.applicationUser?.accessToken ?? "",
                                 selectedAddressId: address.id ?? ""
                             )
                             dismiss()

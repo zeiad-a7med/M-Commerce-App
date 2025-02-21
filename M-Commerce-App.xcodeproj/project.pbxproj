@@ -20,6 +20,7 @@
 		485A11552D6865F900046F29 /* CartService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485A11542D6865F900046F29 /* CartService.swift */; };
 		485A11572D6866BD00046F29 /* CartResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485A11562D6866BD00046F29 /* CartResult.swift */; };
 		485A11592D6868FE00046F29 /* PaymentAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485A11582D6868FE00046F29 /* PaymentAddress.swift */; };
+		485A115B2D68B0E700046F29 /* AddressError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485A115A2D68B0E700046F29 /* AddressError.swift */; };
 		48A3368F2D645B2300F64F2A /* GetAddresses.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 48A3368E2D645B2300F64F2A /* GetAddresses.graphql */; };
 		48A336912D645FE200F64F2A /* defaultAddresCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A336902D645FE200F64F2A /* defaultAddresCard.swift */; };
 		48A336942D647C7200F64F2A /* updateAddress.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 48A336932D647C7200F64F2A /* updateAddress.graphql */; };
@@ -33,7 +34,6 @@
 		48B1F8A82D6384E1004D13AC /* AddressResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B1F8A72D6384E1004D13AC /* AddressResponse.swift */; };
 		48B1F8AB2D63A99C004D13AC /* addressCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B1F8AA2D63A99C004D13AC /* addressCard.swift */; };
 		48B1F8AD2D63B2E9004D13AC /* ColoredPins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B1F8AC2D63B2E9004D13AC /* ColoredPins.swift */; };
-		48B1F8AF2D63BD68004D13AC /* RadioList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B1F8AE2D63BD68004D13AC /* RadioList.swift */; };
 		48F009F02D5C94F9002A016E /* M_Commerce_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F009EF2D5C94F9002A016E /* M_Commerce_AppApp.swift */; };
 		48F009F42D5C94F9002A016E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F009F32D5C94F9002A016E /* Item.swift */; };
 		48F009F62D5C94FF002A016E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48F009F52D5C94FF002A016E /* Assets.xcassets */; };
@@ -218,6 +218,7 @@
 		485A11542D6865F900046F29 /* CartService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartService.swift; sourceTree = "<group>"; };
 		485A11562D6866BD00046F29 /* CartResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartResult.swift; sourceTree = "<group>"; };
 		485A11582D6868FE00046F29 /* PaymentAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentAddress.swift; sourceTree = "<group>"; };
+		485A115A2D68B0E700046F29 /* AddressError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressError.swift; sourceTree = "<group>"; };
 		48A3368E2D645B2300F64F2A /* GetAddresses.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GetAddresses.graphql; sourceTree = "<group>"; };
 		48A336902D645FE200F64F2A /* defaultAddresCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = defaultAddresCard.swift; sourceTree = "<group>"; };
 		48A336932D647C7200F64F2A /* updateAddress.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = updateAddress.graphql; sourceTree = "<group>"; };
@@ -231,7 +232,6 @@
 		48B1F8A72D6384E1004D13AC /* AddressResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressResponse.swift; sourceTree = "<group>"; };
 		48B1F8AA2D63A99C004D13AC /* addressCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addressCard.swift; sourceTree = "<group>"; };
 		48B1F8AC2D63B2E9004D13AC /* ColoredPins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredPins.swift; sourceTree = "<group>"; };
-		48B1F8AE2D63BD68004D13AC /* RadioList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioList.swift; sourceTree = "<group>"; };
 		48F009EC2D5C94F9002A016E /* M-Commerce-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "M-Commerce-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F009EF2D5C94F9002A016E /* M_Commerce_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M_Commerce_AppApp.swift; sourceTree = "<group>"; };
 		48F009F32D5C94F9002A016E /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -549,6 +549,7 @@
 			children = (
 				48B1F8A72D6384E1004D13AC /* AddressResponse.swift */,
 				48B1F8AC2D63B2E9004D13AC /* ColoredPins.swift */,
+				485A115A2D68B0E700046F29 /* AddressError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -557,7 +558,6 @@
 			isa = PBXGroup;
 			children = (
 				48B1F8AA2D63A99C004D13AC /* addressCard.swift */,
-				48B1F8AE2D63BD68004D13AC /* RadioList.swift */,
 				48A336902D645FE200F64F2A /* defaultAddresCard.swift */,
 			);
 			path = SubViews;
@@ -595,7 +595,6 @@
 				89D508352D5C0CD400046FA9 /* ContentView.swift */,
 				48F009EF2D5C94F9002A016E /* M_Commerce_AppApp.swift */,
 				48F009F32D5C94F9002A016E /* Item.swift */,
-				48B1F8982D636EB2004D13AC /* AddressComponent */,
 				89C82A212D66279C0018898E /* GoogleService-Info.plist */,
 				48F009F52D5C94FF002A016E /* Assets.xcassets */,
 				48F009F72D5C94FF002A016E /* Preview Content */,
@@ -1221,6 +1220,7 @@
 		89D508622D5C10CE00046FA9 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				48B1F8982D636EB2004D13AC /* AddressComponent */,
 				485A11302D68601800046F29 /* Payment */,
 				C46287F72D65063A004372B1 /* Orders */,
 				89B00B7E2D61304200AF1FB7 /* Auth */,
@@ -1658,7 +1658,6 @@
 				890D87C22D5DF66C0062E8D1 /* RowCard.swift in Sources */,
 				890D87C32D5DF66C0062E8D1 /* AdViewModel.swift in Sources */,
 				892967C12D64B4BB007191DC /* VariantsCount.swift in Sources */,
-				48B1F8AF2D63BD68004D13AC /* RadioList.swift in Sources */,
 				890D87C42D5DF66C0062E8D1 /* ShoppingCartViewModel.swift in Sources */,
 				C42E3FB82D664E32006DF7A3 /* OrderModel.swift in Sources */,
 				C42E3FCE2D66A216006DF7A3 /* OrderedProductCard.swift in Sources */,
@@ -1684,6 +1683,7 @@
 				890D87CA2D5DF66C0062E8D1 /* FavoritesView.swift in Sources */,
 				48A336982D64B94700F64F2A /* deleteAddress.graphql in Sources */,
 				890D87CB2D5DF66C0062E8D1 /* CheckOutComponent.swift in Sources */,
+				485A115B2D68B0E700046F29 /* AddressError.swift in Sources */,
 				48A336942D647C7200F64F2A /* updateAddress.graphql in Sources */,
 				8952A6792D61FB260003ACF4 /* LoginView.swift in Sources */,
 				485A11552D6865F900046F29 /* CartService.swift in Sources */,
