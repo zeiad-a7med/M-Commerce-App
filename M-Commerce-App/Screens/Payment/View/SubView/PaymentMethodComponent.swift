@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-import SwiftUI
+import PassKit
 
 struct PaymentMethodComponent: View {
     @Environment(\.dismiss) var dismiss
@@ -36,12 +36,21 @@ struct PaymentMethodComponent: View {
                     Spacer()
                     if let selectedOption = selectedOption {
                         if selectedOption == 0{
-                            CustomRoundedButtonView(text: "Confirm payment",width: 60,  onTap: {
-                            },isButtonEnabled: .constant(true))
-                                .padding(.top,100)
-                                .padding(.leading,40)
+                            Button {
+                                dismiss()
+                            } label: {
+                                Text("Checkout")
+                            }.padding(20)
+                             .padding(.horizontal,200)
+                              .background( ThemeManager.darkPuble )
+                              .cornerRadius(30)
+
                         }else if selectedOption == 1{
-                            ApplePayView()
+                            PayWithApplePayButton(.checkout) {
+                                dismiss()
+                            }.padding(20)
+                             .padding(.horizontal,200)
+                             .cornerRadius(30)
                                
                             
                         }

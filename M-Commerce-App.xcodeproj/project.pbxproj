@@ -13,13 +13,14 @@
 		485A11442D68601800046F29 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485A11362D68601800046F29 /* Configuration.swift */; };
 		485A11452D68601800046F29 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485A11382D68601800046F29 /* PaymentView.swift */; };
 		485A11462D68601800046F29 /* PaymentMethodComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485A113A2D68601800046F29 /* PaymentMethodComponent.swift */; };
-		485A11482D68601800046F29 /* ProductRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485A113C2D68601800046F29 /* ProductRow.swift */; };
 		485A114B2D68601800046F29 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485A113F2D68601800046F29 /* RadioButton.swift */; };
 		485A114C2D68601800046F29 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485A11402D68601800046F29 /* ImageView.swift */; };
 		485A11522D68624100046F29 /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485A11512D68624100046F29 /* PaymentViewModel.swift */; };
 		485A11552D6865F900046F29 /* CartService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485A11542D6865F900046F29 /* CartService.swift */; };
 		485A11572D6866BD00046F29 /* CartResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485A11562D6866BD00046F29 /* CartResult.swift */; };
 		485A11592D6868FE00046F29 /* PaymentAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485A11582D6868FE00046F29 /* PaymentAddress.swift */; };
+		485A115D2D690AB500046F29 /* PaymentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485A115C2D690AB500046F29 /* PaymentService.swift */; };
+		485A115F2D692C9900046F29 /* PaymentProductRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485A115E2D692C9900046F29 /* PaymentProductRow.swift */; };
 		48A3368F2D645B2300F64F2A /* GetAddresses.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 48A3368E2D645B2300F64F2A /* GetAddresses.graphql */; };
 		48A336912D645FE200F64F2A /* defaultAddresCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A336902D645FE200F64F2A /* defaultAddresCard.swift */; };
 		48A336942D647C7200F64F2A /* updateAddress.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 48A336932D647C7200F64F2A /* updateAddress.graphql */; };
@@ -211,13 +212,14 @@
 		485A11362D68601800046F29 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		485A11382D68601800046F29 /* PaymentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		485A113A2D68601800046F29 /* PaymentMethodComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodComponent.swift; sourceTree = "<group>"; };
-		485A113C2D68601800046F29 /* ProductRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductRow.swift; sourceTree = "<group>"; };
 		485A113F2D68601800046F29 /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		485A11402D68601800046F29 /* ImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		485A11512D68624100046F29 /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		485A11542D6865F900046F29 /* CartService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartService.swift; sourceTree = "<group>"; };
 		485A11562D6866BD00046F29 /* CartResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartResult.swift; sourceTree = "<group>"; };
 		485A11582D6868FE00046F29 /* PaymentAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentAddress.swift; sourceTree = "<group>"; };
+		485A115C2D690AB500046F29 /* PaymentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentService.swift; sourceTree = "<group>"; };
+		485A115E2D692C9900046F29 /* PaymentProductRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentProductRow.swift; sourceTree = "<group>"; };
 		48A3368E2D645B2300F64F2A /* GetAddresses.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GetAddresses.graphql; sourceTree = "<group>"; };
 		48A336902D645FE200F64F2A /* defaultAddresCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = defaultAddresCard.swift; sourceTree = "<group>"; };
 		48A336932D647C7200F64F2A /* updateAddress.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = updateAddress.graphql; sourceTree = "<group>"; };
@@ -454,10 +456,10 @@
 			isa = PBXGroup;
 			children = (
 				485A113A2D68601800046F29 /* PaymentMethodComponent.swift */,
-				485A113C2D68601800046F29 /* ProductRow.swift */,
 				485A113F2D68601800046F29 /* RadioButton.swift */,
 				485A11402D68601800046F29 /* ImageView.swift */,
 				485A11582D6868FE00046F29 /* PaymentAddress.swift */,
+				485A115E2D692C9900046F29 /* PaymentProductRow.swift */,
 			);
 			path = SubView;
 			sourceTree = "<group>";
@@ -467,6 +469,7 @@
 			children = (
 				485A11362D68601800046F29 /* Configuration.swift */,
 				485A11352D68601800046F29 /* PaymentHandler.swift */,
+				485A115C2D690AB500046F29 /* PaymentService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1618,6 +1621,7 @@
 				8952A6912D6284870003ACF4 /* ApplicationUser.swift in Sources */,
 				89B00B6E2D610C0200AF1FB7 /* Login.graphql in Sources */,
 				C44BEDB02D5D1FC80022B603 /* Price.swift in Sources */,
+				485A115F2D692C9900046F29 /* PaymentProductRow.swift in Sources */,
 				892967C32D654016007191DC /* CustomChip.swift in Sources */,
 				C44BEDAE2D5D1F540022B603 /* Product.swift in Sources */,
 				C44BEDA32D5D17E10022B603 /* Collection.swift in Sources */,
@@ -1672,6 +1676,7 @@
 				890D87C62D5DF66C0062E8D1 /* FilterBar.swift in Sources */,
 				89B00B722D61178900AF1FB7 /* Logout.graphql in Sources */,
 				890D87C72D5DF66C0062E8D1 /* BrandsModel.swift in Sources */,
+				485A115D2D690AB500046F29 /* PaymentService.swift in Sources */,
 				890D87C82D5DF66C0062E8D1 /* HeaderView.swift in Sources */,
 				890D87C92D5DF66C0062E8D1 /* BrandsViewModel.swift in Sources */,
 				48B1F89C2D637EA9004D13AC /* AddressComponentViewModel.swift in Sources */,
@@ -1688,7 +1693,6 @@
 				8952A6792D61FB260003ACF4 /* LoginView.swift in Sources */,
 				485A11552D6865F900046F29 /* CartService.swift in Sources */,
 				89C4A63C2D63CD0E00716CB1 /* UpdateProfileResponse.swift in Sources */,
-				485A11482D68601800046F29 /* ProductRow.swift in Sources */,
 				89EE56E32D5E322700B05457 /* GetProductQuery.swift in Sources */,
 				890D87CC2D5DF66C0062E8D1 /* NumberOfItems.swift in Sources */,
 				48B1F8AB2D63A99C004D13AC /* addressCard.swift in Sources */,
