@@ -62,13 +62,6 @@ struct AddressesDisplayView: View {
                 addressModel.fetchAddresses(AccessToken: AuthManager.shared.applicationUser?.accessToken ?? " ")
             })
         }
-        .onDisappear(){
-            AuthManager.shared.applicationUser?.addresses = addressModel.addressPackage.listOfAddress
-            AuthManager.shared.applicationUser?.defaultAddress = addressModel.addressPackage.defaultAddress
-           
-        }
-  
-
     }
 }
 

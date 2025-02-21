@@ -17,7 +17,6 @@ final class AddressComponentViewModel : ObservableObject {
             case .success(let graphQlResult):
                 if let defaultAddress = graphQlResult.data?.customer?.defaultAddress{
                     self.addressPackage.defaultAddress = Address(id: defaultAddress.id, address1: defaultAddress.address1, address2: defaultAddress.address2, name: defaultAddress.name, phone: defaultAddress.phone, city: defaultAddress.city, company: defaultAddress.company, country: defaultAddress.country,  firstName: defaultAddress.firstName, lastName: defaultAddress.lastName, latitude: defaultAddress.latitude, longitude: defaultAddress.longitude, province: defaultAddress.province, provinceCode: defaultAddress.provinceCode, zip: defaultAddress.zip)
-                    
                 }
                 if let data = graphQlResult.data?.customer?.addresses.nodes{
                     var tempList = [Address]()
@@ -26,9 +25,14 @@ final class AddressComponentViewModel : ObservableObject {
                         tempList.append(tempAddress)
                 
                     }
-                    self.addressPackage.listOfAddress = tempList
+                    self.addressPackage.listOfAddress = tempList//updated lateast address
                     self.addressPackage.success=true
-                    AuthManager.shared.applicationUser?.addresses = tempList
+                    
+                    var user = AuthManager.shared.applicationUser
+                    user?.addresses = tempList
+                    user?.defaultAddress = self.addressPackage.defaultAddress
+                    AuthManager.shared.updateUser(updatedUser: user!)
+                    
                 }
             case .failure(let error):
                 self.addressPackage.success = false
@@ -48,7 +52,6 @@ final class AddressComponentViewModel : ObservableObject {
                     if let indexOfTheUpdated = self.addressPackage.listOfAddress.firstIndex(where: {$0.id == selectedAddress.id}){
                         self.addressPackage.listOfAddress[indexOfTheUpdated] = tempAddress
                         print("newAddress = \(self.addressPackage.listOfAddress[indexOfTheUpdated])")
-                        AuthManager.shared.applicationUser?.addresses = self.addressPackage.listOfAddress
                     }else{
                         for i in self.addressPackage.listOfAddress{
                            // print("ViewModeladdress ID : \(String(describing: i.id))")
@@ -75,7 +78,6 @@ final class AddressComponentViewModel : ObservableObject {
                 if let result = graphQlResult.data?.customerDefaultAddressUpdate?.customer?.defaultAddress{
                     let tempAddress = Address(id: result.id, address1: result.address1, address2: result.address2, name: result.name, phone: result.phone, city: result.city, company: result.company, country: result.country,  firstName: result.firstName, lastName: result.lastName, zip: result.zip)
                     self.addressPackage.defaultAddress = tempAddress
-                    AuthManager.shared.applicationUser?.defaultAddress = self.addressPackage.defaultAddress
                     
                 }
                 self.addressPackage.success = true
@@ -96,7 +98,6 @@ final class AddressComponentViewModel : ObservableObject {
                     self.addressPackage.listOfAddress.removeAll { Address in
                         return Address.id == result
                     }
-                    AuthManager.shared.applicationUser?.addresses = self.addressPackage.listOfAddress
                    
                 }
                print("success")
@@ -117,7 +118,6 @@ final class AddressComponentViewModel : ObservableObject {
                 if let result = graphQlResult.data?.customerAddressCreate?.customerAddress{
                     let tempAddress = Address(id: result.id, address1: result.address1, address2: result.address2,  phone: result.phone, city: result.city, country: result.country,  firstName: result.firstName, lastName: result.lastName, zip: result.zip)
                     self.addressPackage.listOfAddress.append(tempAddress)
-                    AuthManager.shared.applicationUser?.addresses = self.addressPackage.listOfAddress
                 }
                 self.addressPackage.success = true
             case .failure(let error):
@@ -129,8 +129,6 @@ final class AddressComponentViewModel : ObservableObject {
         }
     }
     func checkIfSelectedIsDefaultAddress(selectedAddressId: String, defaultAddressId: String) throws{
-        
-       
         if defaultAddressId == selectedAddressId{
             throw AddressError.addressIsDefault
         }
