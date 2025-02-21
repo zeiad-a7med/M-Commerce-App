@@ -176,6 +176,14 @@
 		C4BC561C2D5F937C00F9D42A /* FlatFilterBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC561B2D5F937C00F9D42A /* FlatFilterBar.swift */; };
 		C4BC561E2D5F96DC00F9D42A /* FlatFilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC561D2D5F96DB00F9D42A /* FlatFilterButton.swift */; };
 		C4BC56202D5FD70300F9D42A /* BrandsGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC561F2D5FD70300F9D42A /* BrandsGrid.swift */; };
+		C4DD10A12D68B6DD00FCD9E2 /* MoyaNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD10A02D68B6DD00FCD9E2 /* MoyaNetworkManager.swift */; };
+		C4DD10F22D68F1BD00FCD9E2 /* ApiHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD10F12D68F1BD00FCD9E2 /* ApiHandler.swift */; };
+		C4DD10F42D68F21A00FCD9E2 /* MoyaNetworkManagerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD10F32D68F21A00FCD9E2 /* MoyaNetworkManagerExtension.swift */; };
+		C4DD10F62D68F26500FCD9E2 /* CurrencyExchanger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD10F52D68F26500FCD9E2 /* CurrencyExchanger.swift */; };
+		C4DD10F82D68F29C00FCD9E2 /* ApiErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD10F72D68F29C00FCD9E2 /* ApiErrors.swift */; };
+		C4DD10FB2D68FAE000FCD9E2 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = C4DD10FA2D68FAE000FCD9E2 /* CombineMoya */; };
+		C4DD10FD2D68FAE000FCD9E2 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = C4DD10FC2D68FAE000FCD9E2 /* Moya */; };
+		C4DD10FF2D690B4500FCD9E2 /* CurrencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD10FE2D690B4500FCD9E2 /* CurrencyManager.swift */; };
 		C4E932A82D675C4500078C97 /* GetProductsOfOrderByID.graphql in Resources */ = {isa = PBXBuildFile; fileRef = C4E932A72D675C3E00078C97 /* GetProductsOfOrderByID.graphql */; };
 		C4E932AA2D6761F400078C97 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E932A92D6761F400078C97 /* DetailsViewModel.swift */; };
 		C4E932AC2D67636900078C97 /* DetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E932AB2D67636900078C97 /* DetailsModel.swift */; };
@@ -372,6 +380,12 @@
 		C4BC561B2D5F937C00F9D42A /* FlatFilterBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatFilterBar.swift; sourceTree = "<group>"; };
 		C4BC561D2D5F96DB00F9D42A /* FlatFilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatFilterButton.swift; sourceTree = "<group>"; };
 		C4BC561F2D5FD70300F9D42A /* BrandsGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsGrid.swift; sourceTree = "<group>"; };
+		C4DD10A02D68B6DD00FCD9E2 /* MoyaNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaNetworkManager.swift; sourceTree = "<group>"; };
+		C4DD10F12D68F1BD00FCD9E2 /* ApiHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiHandler.swift; sourceTree = "<group>"; };
+		C4DD10F32D68F21A00FCD9E2 /* MoyaNetworkManagerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaNetworkManagerExtension.swift; sourceTree = "<group>"; };
+		C4DD10F52D68F26500FCD9E2 /* CurrencyExchanger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyExchanger.swift; sourceTree = "<group>"; };
+		C4DD10F72D68F29C00FCD9E2 /* ApiErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrors.swift; sourceTree = "<group>"; };
+		C4DD10FE2D690B4500FCD9E2 /* CurrencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyManager.swift; sourceTree = "<group>"; };
 		C4E932A72D675C3E00078C97 /* GetProductsOfOrderByID.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetProductsOfOrderByID.graphql; sourceTree = "<group>"; };
 		C4E932A92D6761F400078C97 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
 		C4E932AB2D67636900078C97 /* DetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsModel.swift; sourceTree = "<group>"; };
@@ -390,8 +404,10 @@
 			files = (
 				89C82A272D6628560018898E /* FirebaseAppCheck in Frameworks */,
 				89C82A292D6628560018898E /* FirebaseAuth in Frameworks */,
+				C4DD10FB2D68FAE000FCD9E2 /* CombineMoya in Frameworks */,
 				890D86BE2D5CD3EF0062E8D1 /* Apollo in Frameworks */,
 				890D86C92D5CD5320062E8D1 /* ShopifyAPIKit in Frameworks */,
+				C4DD10FD2D68FAE000FCD9E2 /* Moya in Frameworks */,
 				89C82A252D6628560018898E /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -716,6 +732,7 @@
 				89C82A402D6689C40018898E /* Line.swift */,
 				89C82A422D668A730018898E /* LineCost.swift */,
 				C42E3FC92D666889006DF7A3 /* BillingAddress.swift */,
+				C4DD10F52D68F26500FCD9E2 /* CurrencyExchanger.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1208,11 +1225,13 @@
 		89D5084E2D5C10CA00046FA9 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				C4DD10EE2D68F16900FCD9E2 /* MoyaNetworkHandler */,
 				89D5084D2D5C10CA00046FA9 /* ThemeManager.swift */,
 				89CAF3262D603C01003984FA /* FavoritesManager.swift */,
 				8952A6922D62865F0003ACF4 /* AuthManager.swift */,
 				89CAF32A2D606813003984FA /* SnackbarManager.swift */,
 				89B00B8E2D6157DD00AF1FB7 /* TextValidation.swift */,
+				C4DD10FE2D690B4500FCD9E2 /* CurrencyManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1417,6 +1436,33 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		C4DD10EE2D68F16900FCD9E2 /* MoyaNetworkHandler */ = {
+			isa = PBXGroup;
+			children = (
+				C4DD10F02D68F1AA00FCD9E2 /* ApiHandler */,
+				C4DD10EF2D68F18E00FCD9E2 /* Extensions */,
+				C4DD10A02D68B6DD00FCD9E2 /* MoyaNetworkManager.swift */,
+			);
+			path = MoyaNetworkHandler;
+			sourceTree = "<group>";
+		};
+		C4DD10EF2D68F18E00FCD9E2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C4DD10F32D68F21A00FCD9E2 /* MoyaNetworkManagerExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C4DD10F02D68F1AA00FCD9E2 /* ApiHandler */ = {
+			isa = PBXGroup;
+			children = (
+				C4DD10F12D68F1BD00FCD9E2 /* ApiHandler.swift */,
+				C4DD10F72D68F29C00FCD9E2 /* ApiErrors.swift */,
+			);
+			path = ApiHandler;
+			sourceTree = "<group>";
+		};
 		C4F3FC6D2D5E6750005151E9 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -1551,6 +1597,7 @@
 				890D86BC2D5CD3EF0062E8D1 /* XCRemoteSwiftPackageReference "apollo-ios" */,
 				890D86C72D5CD5320062E8D1 /* XCLocalSwiftPackageReference "ShopifyAPIKit" */,
 				89C82A232D6628560018898E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				C4DD10F92D68FAE000FCD9E2 /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = 48F009ED2D5C94F9002A016E /* Products */;
 			projectDirPath = "";
@@ -1614,6 +1661,7 @@
 				48F009F42D5C94F9002A016E /* Item.swift in Sources */,
 				89D5084A2D5C10C600046FA9 /* CustomNetworkImageView.swift in Sources */,
 				C44BEDA72D5D198F0022B603 /* ImgModel.swift in Sources */,
+				C4DD10F42D68F21A00FCD9E2 /* MoyaNetworkManagerExtension.swift in Sources */,
 				485A11452D68601800046F29 /* PaymentView.swift in Sources */,
 				8952A6912D6284870003ACF4 /* ApplicationUser.swift in Sources */,
 				89B00B6E2D610C0200AF1FB7 /* Login.graphql in Sources */,
@@ -1638,6 +1686,7 @@
 				89C4A6372D63CD0500716CB1 /* SettingsViewModel.swift in Sources */,
 				8952A6972D629E010003ACF4 /* Constants.swift in Sources */,
 				C4E932AE2D6778C600078C97 /* CustomProgressView.swift in Sources */,
+				C4DD10A12D68B6DD00FCD9E2 /* MoyaNetworkManager.swift in Sources */,
 				89CAF3252D60288F003984FA /* AlertContent.swift in Sources */,
 				C4E932AA2D6761F400078C97 /* DetailsViewModel.swift in Sources */,
 				C401B5D12D6108CD004BCB2F /* FloatingButtonView.swift in Sources */,
@@ -1649,6 +1698,7 @@
 				48B1F8A82D6384E1004D13AC /* AddressResponse.swift in Sources */,
 				890D87BF2D5DF66C0062E8D1 /* ProductsSubView.swift in Sources */,
 				89B00B7B2D6127C300AF1FB7 /* Address.swift in Sources */,
+				C4DD10F22D68F1BD00FCD9E2 /* ApiHandler.swift in Sources */,
 				C4E932AC2D67636900078C97 /* DetailsModel.swift in Sources */,
 				890D87C02D5DF66C0062E8D1 /* Testing.swift in Sources */,
 				C4BC56162D5F8EF400F9D42A /* ProductsViewModel.swift in Sources */,
@@ -1668,6 +1718,7 @@
 				8952A6802D6206960003ACF4 /* RegisterMutation.swift in Sources */,
 				892967BD2D64B399007191DC /* Variant.swift in Sources */,
 				89C82A452D668D7F0018898E /* GetCart.swift in Sources */,
+				C4DD10F62D68F26500FCD9E2 /* CurrencyExchanger.swift in Sources */,
 				890D87C62D5DF66C0062E8D1 /* FilterBar.swift in Sources */,
 				89B00B722D61178900AF1FB7 /* Logout.graphql in Sources */,
 				890D87C72D5DF66C0062E8D1 /* BrandsModel.swift in Sources */,
@@ -1713,6 +1764,7 @@
 				89B00B8D2D6148CF00AF1FB7 /* CustomSecureField.swift in Sources */,
 				890D87D72D5DF66C0062E8D1 /* AdModel.swift in Sources */,
 				8952A67E2D6202340003ACF4 /* AuthService.swift in Sources */,
+				C4DD10FF2D690B4500FCD9E2 /* CurrencyManager.swift in Sources */,
 				C42E3FA82D660193006DF7A3 /* ProductDetailsView.swift in Sources */,
 				485A114C2D68601800046F29 /* ImageView.swift in Sources */,
 				C42E3FCC2D667065006DF7A3 /* OrderViewModel.swift in Sources */,
@@ -1727,6 +1779,7 @@
 				890D87DB2D5DF66C0062E8D1 /* PopupCircleView.swift in Sources */,
 				C4BC56202D5FD70300F9D42A /* BrandsGrid.swift in Sources */,
 				89C4A6402D63E70600716CB1 /* ProfileUpdateMutation.swift in Sources */,
+				C4DD10F82D68F29C00FCD9E2 /* ApiErrors.swift in Sources */,
 				890D87402D5D40A30062E8D1 /* CustomRoundedButtonView.swift in Sources */,
 				C4BC561A2D5F8F2F00F9D42A /* ProductsView.swift in Sources */,
 				485A114B2D68601800046F29 /* RadioButton.swift in Sources */,
@@ -2113,6 +2166,14 @@
 				minimumVersion = 11.8.1;
 			};
 		};
+		C4DD10F92D68FAE000FCD9E2 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2139,6 +2200,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 89C82A232D6628560018898E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		C4DD10FA2D68FAE000FCD9E2 /* CombineMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C4DD10F92D68FAE000FCD9E2 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = CombineMoya;
+		};
+		C4DD10FC2D68FAE000FCD9E2 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C4DD10F92D68FAE000FCD9E2 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
