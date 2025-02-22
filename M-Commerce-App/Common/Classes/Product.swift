@@ -55,16 +55,21 @@ final class Product{
     //Getters
     var formattedPrice: String {
         get {
+            let currencyRate = CurrencyManager.currentCurrencyRate.value ?? 1.0
+            guard let minValue = Double(priceRange?.minVariantPrice.amount ?? "") else { return "" }
+            let currentMinValue = currencyRate * minValue
             if(priceRange?.minVariantPrice.amount == priceRange?.maxVariantPrice.amount){
-                return priceRange?.minVariantPrice.amount ?? ""
+                return String(format: "%.2f", currentMinValue)
             }else{
-                return "\(priceRange?.minVariantPrice.amount ?? "") - \(priceRange?.maxVariantPrice.amount ?? "")"
+                guard let maxValue = Double(priceRange?.maxVariantPrice.amount ?? "") else { return "" }
+                let currentMinValue = currencyRate * maxValue
+                return "\(currentMinValue) - \(currentMinValue)"
             }
         }
     }
     var currency: String? {
         get {
-            return priceRange?.minVariantPrice.currencyCode
+            return CurrencyManager.currentCurrencyRate.code ?? priceRange?.minVariantPrice.currencyCode
         }
     }
 }

@@ -38,7 +38,7 @@ class CurrencyManager : ObservableObject {
                 if let currentCurrency = currentCurrency1.first {
                     CurrencyManager.currentCurrencyRate = currentCurrency
                 }
-                print("current currency rate fetched successfully")
+                print("current currency rate fetched successfully.. current currency rate is: \(CurrencyManager.currentCurrencyRate.value ?? 0.0)")
             }
         } catch {
             print("Error fetching current currency rate: \(error)")
@@ -80,15 +80,15 @@ class CurrencyManager : ObservableObject {
     
     func changeCurrentCurrencyRate(code: String) {
         guard let modelContext = modelContext else { return }
+        CurrencyManager.currentCurrencyRate = (self.currenciesData?[code]) ?? CurrencyRate(code: "EGP",value: 1.0)
         do {
             let request = FetchDescriptor<CurrencyRate>()
             let currentCurrency1 = try modelContext.fetch(request)
                 if let currentCurrency = currentCurrency1.first {
-                    CurrencyManager.currentCurrencyRate = currentCurrency
                     currentCurrency.value = self.currenciesData?[code]?.value ?? 1.0
                     currentCurrency.code =  self.currenciesData?[code]?.code ?? "EGP"
                     try modelContext.save()
-                    print("currentCurrencyRate changed successfully")
+                    print("currentCurrencyRate changed successfully to \( self.currenciesData?[code]?.value ?? 1.0) and \(self.currenciesData?[code]?.code ?? "EGP")")
                 }
         } catch {
             print("Error changing current currency rate: \(error)")
@@ -102,7 +102,6 @@ class CurrencyManager : ObservableObject {
                 case .success(let value):
                 if let currencies = value.data {
                     self.currenciesData = currencies
-//                    self.addToCurrentCurrencyRate(CurrencyRate(code: "EGP",value: 1.0))
                 }
             case .failure(let error):
                 print("Failure! Error: \(error.localizedDescription)")

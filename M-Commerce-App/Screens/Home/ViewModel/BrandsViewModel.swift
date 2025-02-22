@@ -13,7 +13,7 @@ final class BrandsViewModel: ObservableObject {
     
     @Published var brands: BrandsResponse = BrandsResponse()
     @Published var isLoading: Bool = true
-    var countity:GraphQLNullable<Int> = 13
+    var countity:GraphQLNullable<Int> = 20
     
     init() {
         fetchBrands()
