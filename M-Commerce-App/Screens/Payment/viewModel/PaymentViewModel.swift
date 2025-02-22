@@ -6,14 +6,13 @@
 //
 
 import Foundation
-
+import PassKit
 
 class PaymentViewModel : ObservableObject{
     @Published var cartResult : CartResponse?
     @Published var isLoading : Bool = false
-    init(){
-        getCartData()
-    }
+    @Published var PageDismiss : Bool = false
+    
     func getCartData(){
         isLoading = true
         CartService.getCart{ result in
@@ -24,6 +23,18 @@ class PaymentViewModel : ObservableObject{
             }
         }
     }
+    func emptyCart(){
+        var tempLineIdList = [String]()
+        AuthManager.shared.applicationUser?.cart?.lines?.forEach({ Line in
+            tempLineIdList.append(Line.id ?? " ")
+        })
+        isLoading = true
+        CartService.cartLinesRemove(lineIds: tempLineIdList) { result in
+            self.isLoading = false
+            self.cartResult = result
+        }
+    }
+   
     
     
 }

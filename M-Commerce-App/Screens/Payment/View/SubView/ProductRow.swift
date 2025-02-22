@@ -7,38 +7,55 @@
 
 import SwiftUI
 
-struct productRow: View {
+struct PaymentProductRow: View {
+    @State var line : Line?
+    @State var color : String?
+    @State var size : String?
     var body: some View {
         VStack(alignment: .leading) {
            
             HStack{
-                ImageView()
-                VStack(alignment:.leading) {
-                    Text("bigBox limited Edition").bold()
-                    HStack {
-                        Text("Size:").bold()
-                        Text("50")
+              
+                ImageView(url: line?.variant?.image?.url ?? "")
+                    VStack(alignment:.leading) {
+                        Text(line?.variant?.productTitle ?? "").bold()
+                        HStack {
+                            Text("Size:").bold()
+                            Text(size ?? " ")
+                        }
+                        HStack {
+                            Text("Color:").bold()
+                            Text(color ?? " ")
+                            Spacer()
+                            Text("TotalPrice:").bold()
+                            Text(line?.lineCost?.totalAmount?.amount ?? "")
+                            Text(line?.variant?.price?.currencyCode ?? "")
+                               
+                        }
                     }
-                    HStack {
-                        Text("Color:").bold()
-                        Text("Brown")
-                        Spacer()
-                        Text("TotalPrice:").bold()
-                        Text("500")
-                        Text("$")
-                           
+                    .onAppear(){
+//                        if let variantComponents = line?.variant?.title?.components(separatedBy: " / "){
+//                            if variantComponents.count >= 2{
+//                                size = variantComponents.first
+//                                color = variantComponents.last
+//                            }
+//
+//                        }
+                        
+                   
                     }
-                }
+                
 
             }.padding()
+              
         }
     }
 }
 
-#Preview {
-    productRow()
-}
-
+//#Preview {
+//    productRow()
+//}
+//
 
 
 

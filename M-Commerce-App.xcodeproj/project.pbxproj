@@ -33,6 +33,7 @@
 		48B1F8A82D6384E1004D13AC /* AddressResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B1F8A72D6384E1004D13AC /* AddressResponse.swift */; };
 		48B1F8AB2D63A99C004D13AC /* addressCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B1F8AA2D63A99C004D13AC /* addressCard.swift */; };
 		48B1F8AD2D63B2E9004D13AC /* ColoredPins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B1F8AC2D63B2E9004D13AC /* ColoredPins.swift */; };
+		48CAA4F22D6A88360075924D /* PaymentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CAA4F12D6A88360075924D /* PaymentService.swift */; };
 		48F009F02D5C94F9002A016E /* M_Commerce_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F009EF2D5C94F9002A016E /* M_Commerce_AppApp.swift */; };
 		48F009F42D5C94F9002A016E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F009F32D5C94F9002A016E /* Item.swift */; };
 		48F009F62D5C94FF002A016E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48F009F52D5C94FF002A016E /* Assets.xcassets */; };
@@ -246,6 +247,7 @@
 		48B1F8A72D6384E1004D13AC /* AddressResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressResponse.swift; sourceTree = "<group>"; };
 		48B1F8AA2D63A99C004D13AC /* addressCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addressCard.swift; sourceTree = "<group>"; };
 		48B1F8AC2D63B2E9004D13AC /* ColoredPins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredPins.swift; sourceTree = "<group>"; };
+		48CAA4F12D6A88360075924D /* PaymentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentService.swift; sourceTree = "<group>"; };
 		48F009EC2D5C94F9002A016E /* M-Commerce-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "M-Commerce-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F009EF2D5C94F9002A016E /* M_Commerce_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M_Commerce_AppApp.swift; sourceTree = "<group>"; };
 		48F009F32D5C94F9002A016E /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -497,6 +499,7 @@
 			children = (
 				485A11362D68601800046F29 /* Configuration.swift */,
 				485A11352D68601800046F29 /* PaymentHandler.swift */,
+				48CAA4F12D6A88360075924D /* PaymentService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1837,6 +1840,7 @@
 				C42E3FA42D660043006DF7A3 /* StatusAndPrice.swift in Sources */,
 				890D87572D5D5DF60062E8D1 /* GetProduct.graphql in Sources */,
 				89D508432D5C0CD400046FA9 /* ContentView.swift in Sources */,
+				48CAA4F22D6A88360075924D /* PaymentService.swift in Sources */,
 				C4F3FC7D2D5E9256005151E9 /* CategoriesViewModel.swift in Sources */,
 				C401B5CF2D61047F004BCB2F /* FloatingFilter.swift in Sources */,
 				485A11432D68601800046F29 /* PaymentHandler.swift in Sources */,

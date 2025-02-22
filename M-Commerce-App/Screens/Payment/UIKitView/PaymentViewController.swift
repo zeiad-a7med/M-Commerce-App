@@ -11,7 +11,7 @@ import PassKit
 class ViewController: UIViewController {
     let paymentHandler = PaymentHandler()
     var applePayButton: UIButton?
-
+    var paymentViewModel : PaymentViewModel? 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupApplePayButton()
@@ -27,15 +27,20 @@ class ViewController: UIViewController {
             applePayButton = PKPaymentButton(paymentButtonType: .setUp, paymentButtonStyle: .black)
             applePayButton?.addTarget(self, action: #selector(setupPressed), for: .touchUpInside)
         }
-        applePayButton?.frame = CGRect(x:150,y:200,width: 300, height: 75)
-        applePayButton?.layer.cornerRadius = 15
+      
+        applePayButton?.layer.cornerRadius = 30
+        
+        /*applePayButton?.transform = CGAffineTransform(scaleX: 1.4, y: 1) */ // Makes button 2x larger
         if let applePayButton = applePayButton {
             applePayButton.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(applePayButton)
 
             NSLayoutConstraint.activate([
                 applePayButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                applePayButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+             
+                applePayButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+                applePayButton.widthAnchor.constraint(equalToConstant: 250),
+                applePayButton.heightAnchor.constraint(equalToConstant: 50)
             ])
         }
         
@@ -44,8 +49,11 @@ class ViewController: UIViewController {
     @objc func payPressed(sender: AnyObject) {
         paymentHandler.startPayment { success in
             if success {
-                // Handle successful payment
+                self.paymentViewModel?.PageDismiss = true
                 print("Payment successful")
+            }else{
+                self.paymentViewModel?.PageDismiss = false
+                print("Payment Failed")
             }
         }
     }

@@ -7,12 +7,14 @@
 
 import SwiftUI
 
-import SwiftUI
+import PassKit
 
 struct PaymentMethodComponent: View {
     @Environment(\.dismiss) var dismiss
     @State private var selectedOption: Int?
-    @State var finalOption : Int?
+    @ObservedObject var paymentViewModel = PaymentViewModel()
+    @State var onClick : ((Bool) -> (Void))?
+   
     var body: some View {
         ZStack {
             Color(#colorLiteral(red: 0.9590087533, green: 0.9590087533, blue: 0.9590087533, alpha: 1))
@@ -36,13 +38,19 @@ struct PaymentMethodComponent: View {
                     Spacer()
                     if let selectedOption = selectedOption {
                         if selectedOption == 0{
+                        
                             CustomRoundedButtonView(text: "Confirm payment",width: 60,  onTap: {
+                                onClick?(true)
                             },isButtonEnabled: .constant(true))
                                 .padding(.top,100)
                                 .padding(.leading,40)
-                        }else if selectedOption == 1{
-                            ApplePayView()
+                           
                                
+
+                        }else if selectedOption == 1{
+                     
+                                ApplePayView(paymentViewModel: paymentViewModel)
+                  
                             
                         }
                                   
@@ -57,6 +65,14 @@ struct PaymentMethodComponent: View {
                 }
                 Spacer()
             }.padding()
+        }
+      
+        .onChange(of: paymentViewModel.PageDismiss) { oldValue, newValue in
+            if(paymentViewModel.PageDismiss){
+                onClick?(true)
+            }else{
+                dismiss()
+            }
         }
         
       

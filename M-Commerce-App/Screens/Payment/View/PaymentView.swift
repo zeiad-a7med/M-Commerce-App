@@ -9,11 +9,11 @@ import SwiftUI
 
 struct PaymentView: View {
     @StateObject var paymentViewModel = PaymentViewModel()
-    @State var numberofProducts: Int = 3
-    @State var paymentDisplay: String = "Cash on delivery"
     @State var showCheckOut: Bool = false
+    @State var navigateToOrders: Bool = false
+    @State var ableToCheckOut : Bool = false
     var body: some View {
-        NavigationStack {
+      
             VStack(alignment: .leading) {
                 HStack {
                     Text("Address")
@@ -21,40 +21,52 @@ struct PaymentView: View {
                         .bold()
                         .font(.title2)
                     Spacer()
-                    NavigationLink {
-                        AddressesDisplayView()
-                    } label: {
-                        Image(systemName: "pencil")
-                            .padding(5)
-                            .bold()
-                            .foregroundStyle(.white)
-                            .background(ThemeManager.darkPuble)
-                            .clipShape(Circle())
+                    if(AuthManager.shared.applicationUser?.defaultAddress != nil ){
+                        NavigationLink {
+                            AddressesDisplayView()
+                        } label: {
+                            Image(systemName: "pencil")
+                                .padding(5)
+                                .bold()
+                                .foregroundStyle(.white)
+                                .background(ThemeManager.darkPuble)
+                                .clipShape(Circle())
+                        }
+                        
+                        
                     }
+                  
                 }.padding()
 
                 PaymentAddress()
-                Text("Products(\(numberofProducts))")
-                    .bold()
-                    .font(.title2)
-                    .padding()
+                   
+                if let temp = paymentViewModel.cartResult?.cart?.totalQuantity{
+                    Text("Products(\(temp))")
+                        .bold()
+                        .font(.title2)
+                        .padding()
+                }else{
+                    Text("Products()")
+                        .bold()
+                        .font(.title2)
+                        .padding()
+                }
+
                 ScrollView {
-                    ForEach((1...10), id: \.self) { _ in
-                        productRow()
+                    if let temp = paymentViewModel.cartResult?.cart?.lines{
+                        ForEach(temp , id: \.id) { line in
+                            PaymentProductRow(line: line)
+                        }
                     }
                 }.frame(height: 300)
-                Text("PaymentMethod")
-                    .bold()
-                    .font(.title2)
-                    .padding()
-
+              
                 HStack {
                     Text("Total amount")
                         .padding()
                     Spacer()
-                    Text("100")
+                    Text(paymentViewModel.cartResult?.cart?.cost?.checkoutChargeAmount?.amount ?? "")
                         .bold()
-                    Text("$")
+                    Text(paymentViewModel.cartResult?.cart?.cost?.checkoutChargeAmount?.currencyCode ?? "")
                         .padding(.trailing, 20)
                         .bold()
                 }
@@ -63,15 +75,32 @@ struct PaymentView: View {
                     text: "Checkout Now", width: 80,
                     onTap: {
                         showCheckOut.toggle()
-                    }, isButtonEnabled: .constant(true)
+                    }, isButtonEnabled: .constant(ableToCheckOut)
                 )
                 .padding(.leading, 45).sheet(
                     isPresented: $showCheckOut,
                     content: {
-                        PaymentMethodComponent().presentationDetents([.medium])
+                        PaymentMethodComponent(){result in
+                            paymentViewModel.emptyCart()
+                            navigateToOrders.toggle()
+                            showCheckOut.toggle()
+                            
+                        }.presentationDetents([.medium])
                     })
+                Spacer()
             }
+        NavigationLink(
+            destination: MyOrdersView(), isActive: $navigateToOrders
+        ) {
+            EmptyView()
         }
+        .onAppear(){
+            if AuthManager.shared.applicationUser?.defaultAddress != nil{
+                ableToCheckOut.toggle()
+            }
+            paymentViewModel.getCartData()
+        }
+        
     }
 }
 

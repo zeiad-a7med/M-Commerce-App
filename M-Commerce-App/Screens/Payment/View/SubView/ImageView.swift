@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct ImageView: View {
+    @State var url : String
     var body: some View {
-        AsyncImage(url: URL(string: "https://images.pexels.com/photos/19090/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=400")) { phase in
+        AsyncImage(url: URL(string: url)) { phase in
                 switch phase {
                 case .empty:
                     ShimmerView(width: 70, height: 70)
@@ -41,9 +42,7 @@ struct ImageView: View {
     }
 }
 
-#Preview {
-    ImageView()
-}
+
 
 
 
