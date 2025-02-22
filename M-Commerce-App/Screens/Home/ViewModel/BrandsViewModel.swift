@@ -16,7 +16,6 @@ final class BrandsViewModel: ObservableObject {
     var countity:GraphQLNullable<Int> = 13
     
     init() {
-        CurrencyManager.shared.getCurrencyExchangeRate(targetCurrency: "TRY")
         fetchBrands()
     }
     
@@ -28,9 +27,7 @@ final class BrandsViewModel: ObservableObject {
             switch result {
             case .success(let graphQLResult):
                 self.brands.collectionCount = graphQLResult.data?.collections.totalCount
-                graphQLResult.data?.collections.nodes.forEach { node in
-                    print("title from ql:",node.title)
-                    
+                graphQLResult.data?.collections.nodes.forEach { node in                    
                     self.brands.collections?.append(Collection(
                         description: node.description,
                         handle: node.handle,
@@ -67,7 +64,6 @@ final class BrandsViewModel: ObservableObject {
             switch result {
             case .success(let graphQLResult):
                 graphQLResult.data?.collections.nodes.forEach { node in
-                    print("title from ql:",node.title)
                     self.brands.collections?.append(Collection(
                         description: node.description,
                         handle: node.handle,
