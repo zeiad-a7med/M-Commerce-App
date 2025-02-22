@@ -18,7 +18,7 @@ struct CategorieView: View {
 //    @State var currentFilter:String = ""
     var SubFiltersArray:[String] = ["ACCESSORIES","T-SHIRTS","SHOES",""]
     @StateObject var cViewModel: CategoriesViewModel = CategoriesViewModel(
-        first: 10, after: nil, filter: "")
+        first: 20, after: nil, filter: "")
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {

@@ -10,30 +10,23 @@ import SwiftUI
 struct ProductsSubView: View {
     var filteredProducts: [Product]
     var loadMore: () -> Void
-    
+
     private let columns = [GridItem(.flexible()), GridItem(.flexible())]
     @State private var lastItemID: String?
-    
+
     var body: some View {
-//        ScrollViewReader { proxy in
-//            ScrollView {
-                LazyVGrid(columns: columns, spacing: 10) {
-                    ForEach(filteredProducts, id: \.id) { product in
-                        ProductCardView(product: product)
-                            .id(product.id)
-                            .onAppear {
-                                checkIfNeedMoreData(currentProduct: product)
-                            }
+        LazyVGrid(columns: columns, spacing: 10) {
+            ForEach(filteredProducts, id: \.id) { product in
+                ProductCardView(product: product)
+                    .id(product.id)
+                    .onAppear {
+                        checkIfNeedMoreData(currentProduct: product)
                     }
-                }
-                .padding(5)
-//                .onChange(of: filteredProducts.count) { _ in
-//                    scrollToLastItem(proxy: proxy)
-//                }
-//            }
-//        }
+            }
+        }
+        .padding(5)
     }
-    
+
     private func checkIfNeedMoreData(currentProduct: Product) {
         guard let lastProduct = filteredProducts.last else { return }
         if currentProduct.id == lastProduct.id {
@@ -43,19 +36,12 @@ struct ProductsSubView: View {
             }
         }
     }
-    
-//    private func scrollToLastItem(proxy: ScrollViewProxy) {
-//        guard let lastID = lastItemID else { return }
-//        DispatchQueue.main.async {
-//            withAnimation (.spring){
-//                proxy.scrollTo(lastID, anchor: .bottom)
-//            }
-//        }
-//    }
 }
 
 #Preview {
-    ProductsSubView(filteredProducts: [Product](), loadMore: {
-        print("loading more.......!")
-    })
+    ProductsSubView(
+        filteredProducts: [Product](),
+        loadMore: {
+            print("loading more.......!")
+        })
 }
