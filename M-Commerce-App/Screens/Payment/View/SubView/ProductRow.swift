@@ -41,10 +41,7 @@ struct PaymentProductRow: View {
 //                            }
 //
 //                        }
-                        
-                   
                     }
-                
 
             }.padding()
               
