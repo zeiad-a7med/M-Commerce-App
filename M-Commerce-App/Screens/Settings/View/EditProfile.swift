@@ -19,9 +19,6 @@ struct EditProfile: View {
     @State var lastName: String = ""
     @State private var lastNameValid: Bool = false
 
-    @State var email: String = ""
-    @State private var emailValid: Bool = false
-
     @State var phone: String = ""
     @State private var phoneValid: Bool = false
 
@@ -67,25 +64,6 @@ struct EditProfile: View {
                         lastNameValid = valid
                     },
                     initialText: $lastName
-
-                )
-
-                Text("Email")
-                    .font(.title2)
-
-                CustomTextField(
-                    placeholder: "Email",
-                    onChange: { val in
-                        email = val
-                    },
-                    prefix: {
-                        Image(systemName: "envelope.fill")
-                    },
-                    validationType: .email,
-                    isValid: { valid in
-                        emailValid = valid
-                    },
-                    initialText: $email
 
                 )
 
@@ -145,12 +123,6 @@ struct EditProfile: View {
                 }
             )
             .onChange(
-                of: emailValid,
-                { oldValue, newValue in
-                    updateFormValidity()
-                }
-            )
-            .onChange(
                 of: phoneValid,
                 { oldValue, newValue in
                     updateFormValidity()
@@ -159,7 +131,6 @@ struct EditProfile: View {
 
         }.padding()
             .onAppear {
-                email = viewModel.user?.email ?? ""
                 firstName = viewModel.user?.firstName ?? ""
                 lastName = viewModel.user?.lastName ?? ""
                 phone = String(viewModel.user?.phone?.suffix(10) ?? "")
@@ -178,7 +149,7 @@ struct EditProfile: View {
                         viewModel.updateProfile(
                             firstName: firstName,
                             lastName: lastName,
-                            email: email,
+                            email: viewModel.user?.email ?? "",
                             phone: codedPhone
                         )
                     },
@@ -198,7 +169,7 @@ struct EditProfile: View {
     }
     func updateFormValidity() {
         isFormValid = [
-            firstNameValid, lastNameValid, emailValid, phoneValid,
+            firstNameValid, lastNameValid, phoneValid,
         ].allSatisfy { $0 }
     }
 }
