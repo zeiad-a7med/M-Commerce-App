@@ -21,10 +21,10 @@ struct imageCard: View {
                 
                         image
                            .resizable()
+                           .aspectRatio(contentMode: .fill)
                            .frame(width: 350 , height: 150)
                            .clipShape(RoundedRectangle(cornerRadius: 15))
                            .containerRelativeFrame(.horizontal, alignment: .center)
-                           .aspectRatio(contentMode: .fit)
                
                 case .failure:
                     ZStack{

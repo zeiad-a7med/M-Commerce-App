@@ -16,7 +16,7 @@ struct M_Commerce_AppApp: App {
         WindowGroup {
             let isSimulator = TARGET_OS_SIMULATOR != 0
             let sharedModelContainer: ModelContainer? = isSimulator ? {
-                let schema = Schema([Product.self,ApplicationUser.self])
+                let schema = Schema([Product.self,ApplicationUser.self,CurrencyRate.self])
                 let modelConfiguration = ModelConfiguration(
                     schema: schema, isStoredInMemoryOnly: false)
 
@@ -28,12 +28,16 @@ struct M_Commerce_AppApp: App {
                 }
             }() : nil
             
-            ZStack {
-                ContentView()
-                SnackbarView()
-                    .environmentObject(SnackbarManager.shared)
+            NavigationView{
+                ZStack {
+                    ContentView()
+                    SnackbarView()
+                        .environmentObject(SnackbarManager.shared)
+                    AlertView()
+                        .environmentObject(AlertManager.shared)
+                }
+                .applyModelContainer(sharedModelContainer)
             }
-            .applyModelContainer(sharedModelContainer)
         }
     }
 }

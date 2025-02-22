@@ -7,50 +7,108 @@
 
 import Foundation
 
-
-class ShoppingCartViewModel : ObservableObject{
-    @Published var cartResult : CartResponse?
-    @Published var isLoading : Bool = false
-    init(){
+class ShoppingCartViewModel: ObservableObject {
+    @Published var cartResult: CartResponse?
+    @Published var isLoading: Bool = false
+    @Published var linesToUpdate: [Line] = []
+    init() {
         getCartData()
     }
-    func getCartData(){
+    func getCartData() {
         isLoading = true
-        CartService.getCartFromApi(cartId: "gid://shopify/Cart/Z2NwLWV1cm9wZS13ZXN0MTowMUpNRlhFOE5ZUFpWTjc0MTZZWEhWUVpBMQ?key=a64ceb3ee3c33d49e49572c4025d9524") { result in
+        CartService.getCart { result in
             guard let result = result else { return }
             DispatchQueue.main.async {
                 self.isLoading = false
                 self.cartResult = result
             }
+            if self.cartResult?.success == false {
+                SnackbarManager.shared.show(
+                    message: self.cartResult?.message ?? "Something went wrong")
+            }
         }
     }
-    func updateLine(line:Line){
-        let tempLines = cartResult?.cart?.lines
+
+    func updateLineQuantity(
+        line: Line, quantity: Int
+    ) {
         var updatedLines: [Line] = []
-        tempLines?.forEach({ oldLine in
-            if(oldLine.id == line.id){
-                oldLine.quantity = 1
-                updatedLines.append(oldLine)
-            }else{
-                updatedLines.append(oldLine)
+        cartResult?.cart?.lines?.forEach({ oldLine in
+            if oldLine.id == line.id {
+                oldLine.quantity = quantity
+                let amountPerQuantity: Double =
+                    (Double(
+                        oldLine.lineCost?.amountPerQuantity?.amount ?? "0.0")
+                        ?? 0)
+                let currencyCode: String =
+                    oldLine.lineCost?.totalAmount?.currencyCode ?? ""
+                oldLine.lineCost?.totalAmount = Price(
+                    amount: String(Double(quantity) * amountPerQuantity),
+                    currencyCode: currencyCode
+                )
+                oldLine.lineCost?.subtotalAmount = Price(
+                    amount: String(Double(quantity) * amountPerQuantity),
+                    currencyCode: currencyCode
+                )
+                if let index = linesToUpdate.firstIndex(where: {
+                    $0.id == oldLine.id
+                }) {
+                    linesToUpdate[index] = oldLine
+                } else {
+                    linesToUpdate.append(oldLine)
+                }
             }
+            updatedLines.append(oldLine)
         })
-        DispatchQueue.main.async {
-            self.cartResult?.cart?.lines = updatedLines
-//            self.cartResult = CartResponse(
-//                cart: Cart(
-//                    id: self.cartResult?.cart?.id,
-//                    checkoutUrl: self.cartResult?.cart?.checkoutUrl,
-//                    note: self.cartResult?.cart?.note,
-//                    totalQuantity: self.cartResult?.cart?.totalQuantity,
-//                    lines: updatedLines,
-//                    cost: self.cartResult?.cart?.cost,
-//                    createdAt: self.cartResult?.cart?.createdAt,
-//                    updatedAt: self.cartResult?.cart?.updatedAt
-//                ),
-//                success: self.cartResult?.success,
-//                message: self.cartResult?.message
-//            )
+        cartResult?.cart?.lines = updatedLines
+    }
+
+    func deleteFromCart(deletedLine: Line) {
+        if let index = linesToUpdate.firstIndex(where: {
+            $0.id == deletedLine.id
+        }) {
+            linesToUpdate.remove(at: index)
         }
+        
+        CartService.cartLinesRemove(lineIds: [deletedLine.id ?? ""]) { result in
+            if result?.success == true {
+                SnackbarManager.shared.show(
+                    message: "Product removed from your cart 🛒")
+                var updatedLines: [Line] = []
+                self.cartResult?.cart?.lines?.forEach({ line in
+                    if line.variant?.id != deletedLine.variant?.id {
+                        updatedLines.append(line)
+                    }
+                })
+                self.cartResult?.cart?.lines = updatedLines
+            } else {
+                SnackbarManager.shared.show(message: "Some thing went wrong!")
+            }
+        }
+    }
+
+    func updateCart(finishingUpdates: @escaping (Bool) -> Void) {
+        var cartLinesInput: [CartLineInputValue] = []
+        linesToUpdate.forEach { line in
+            cartLinesInput.append(
+                CartLineInputValue(
+                    id: line.id,
+                    merchandiseId: line.variant?.id,
+                    quantity: line.quantity
+                )
+            )
+        }
+        CartService.cartLinesUpdate(lines: cartLinesInput) { result in
+            if result?.success == true {
+                self.cartResult?.cart = result?.cart
+                self.linesToUpdate = []
+                finishingUpdates(true)
+            } else {
+                SnackbarManager.shared.show(
+                    message: "Some thing went wrong while updating cart!")
+                finishingUpdates(false)
+            }
+        }
+
     }
 }

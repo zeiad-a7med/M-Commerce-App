@@ -31,7 +31,7 @@ struct StarRatingView: View {
                     .font(.caption)
                 Text("(\(Int(rating*10)) Review)")
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.primary)
             }.padding(.top,5)
         }
     }

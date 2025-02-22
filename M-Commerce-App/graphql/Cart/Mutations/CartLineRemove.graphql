@@ -7,25 +7,61 @@ mutation CartLinesRemove (
     lineIds: $lineIds
     ) {
         cart {
-            id
             checkoutUrl
+            createdAt
+            id
             note
             totalQuantity
+            updatedAt
             lines(first: 50) {
                 nodes {
                     id
                     merchandise {
                         ... on ProductVariant {
+                            availableForSale
+                            barcode
+                            currentlyNotInStock
                             id
+                            quantityAvailable
+                            requiresComponents
+                            requiresShipping
+                            sku
+                            taxable
                             title
+                            weight
+                            weightUnit
+                            image {
+                                altText
+                                height
+                                id
+                                originalSrc
+                                src
+                                transformedSrc
+                                url
+                                width
+                            }
+                            price {
+                                amount
+                                currencyCode
+                            }
+                            priceV2 {
+                                amount
+                                currencyCode
+                            }
+                            quantityRule {
+                                increment
+                                maximum
+                                minimum
+                            }
+                            product {
+                                id
+                                title
+                                vendor
+                            }
                         }
                     }
                     quantity
                     cost {
-                        amountPerQuantity {
-                            amount
-                            currencyCode
-                        }
                         totalAmount {
                             amount
                             currencyCode
@@ -34,7 +70,37 @@ mutation CartLinesRemove (
                             amount
                             currencyCode
                         }
+                        amountPerQuantity {
+                            amount
+                            currencyCode
+                        }
                     }
+                }
+            }
+            cost {
+                subtotalAmountEstimated
+                totalAmountEstimated
+                totalDutyAmountEstimated
+                totalTaxAmountEstimated
+                checkoutChargeAmount {
+                    amount
+                    currencyCode
+                }
+                totalAmount {
+                    amount
+                    currencyCode
+                }
+                subtotalAmount {
+                    amount
+                    currencyCode
+                }
+                totalDutyAmount {
+                    amount
+                    currencyCode
+                }
+                totalTaxAmount {
+                    amount
+                    currencyCode
                 }
             }
         }

@@ -63,6 +63,7 @@ class AuthManager: ObservableObject {
         do {
             modelContext.delete(user)
             try Auth.auth().signOut()
+            FavoritesManager.shared.removeAllFavorites()
             try modelContext.save()
             DispatchQueue.main.async {
                 self.applicationUser = nil

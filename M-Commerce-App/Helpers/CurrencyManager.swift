@@ -6,30 +6,104 @@
 //
 
 import Foundation
+import SwiftData
 
 class CurrencyManager : ObservableObject {
     static public let shared = CurrencyManager()
-    static public var currentCurrencyCode: String = "EGP"
-    static public var currentCurrencyValue: Double = 1.0
-    @Published var currenciesData: CurrencyRate?
+    
+    static public let defaultCurrencyCode: String = "EGP"
+    static public let defaultCurrencyValue: Double = 1.0
+    static public var currentCurrencyRate: CurrencyRate = CurrencyRate(code: defaultCurrencyCode
+                                                                       ,value: defaultCurrencyValue)
+    @Published var currenciesData: [String: CurrencyRate]?
     @Published var isLoadingCurrencyData: Bool = false
     
-    private init() {}
+    private var modelContext: ModelContext?
     
-    func getCurrencyExchangeRate(targetCurrency: String) {
+    private init() {
+        getAllCurrenciesExchangeRate()
+    }
+    
+    func setContext(_ context: ModelContext) {
+        self.modelContext = context
+        refreshCurrentCurrency()
+    }
+    
+    func refreshCurrentCurrency() {
+        guard let modelContext = modelContext else { return }
+        do {
+            let request = FetchDescriptor<CurrencyRate>()
+            let currentCurrency1 = try modelContext.fetch(request)
+            DispatchQueue.main.async {
+                if let currentCurrency = currentCurrency1.first {
+                    CurrencyManager.currentCurrencyRate = currentCurrency
+                }
+                print("current currency rate fetched successfully")
+            }
+        } catch {
+            print("Error fetching current currency rate: \(error)")
+        }
+    }
+    
+    func addToCurrentCurrencyRate(_ currentCurrentCurrencyRate: CurrencyRate) {
+        guard let modelContext = modelContext else { return }
+        do {
+            let request = FetchDescriptor<CurrencyRate>()
+            let currentCurrency1 = try modelContext.fetch(request)
+            if currentCurrency1.isEmpty {
+                modelContext.insert(currentCurrentCurrencyRate)
+                try modelContext.save()
+                refreshCurrentCurrency()
+                print("current currency rate added successfully")
+            }
+        } catch {
+            print("Error adding the current currency rate: \(error)")
+        }
+    }
+    
+    func restoreToDefault(_ currentCurrentCurrencyRate: CurrencyRate) {
+        guard let modelContext = modelContext else { return }
+        do {
+            let request = FetchDescriptor<CurrencyRate>()
+            let currentCurrency1 = try modelContext.fetch(request)
+                if let currentCurrency = currentCurrency1.first {
+                    CurrencyManager.currentCurrencyRate = currentCurrency
+                    currentCurrency.value = CurrencyManager.defaultCurrencyValue
+                    currentCurrency.code =  CurrencyManager.defaultCurrencyCode
+                    try modelContext.save()
+                    print("currentCurrency restored to the default")
+                }
+        } catch {
+            print("Error restoring to the default currency: \(error)")
+        }
+    }
+    
+    func changeCurrentCurrencyRate(code: String) {
+        guard let modelContext = modelContext else { return }
+        do {
+            let request = FetchDescriptor<CurrencyRate>()
+            let currentCurrency1 = try modelContext.fetch(request)
+                if let currentCurrency = currentCurrency1.first {
+                    CurrencyManager.currentCurrencyRate = currentCurrency
+                    currentCurrency.value = self.currenciesData?[code]?.value ?? 1.0
+                    currentCurrency.code =  self.currenciesData?[code]?.code ?? "EGP"
+                    try modelContext.save()
+                    print("currentCurrencyRate changed successfully")
+                }
+        } catch {
+            print("Error changing current currency rate: \(error)")
+        }
+    }
+    
+    func getAllCurrenciesExchangeRate() {
         isLoadingCurrencyData = true
         MoyaNetworkManager.shared.fetchCurrencyExchangeRates { result in
             switch result {
                 case .success(let value):
                 if let currencies = value.data {
-                    if let targetCurrency = currencies[targetCurrency] {
-                        self.currenciesData = targetCurrency
-                        CurrencyManager.currentCurrencyValue = targetCurrency.value ?? 0.0
-                        CurrencyManager.currentCurrencyCode = targetCurrency.code ?? ""
-                        print("---------------------\(targetCurrency)")
-                    }
+                    self.currenciesData = currencies
+//                    self.addToCurrentCurrencyRate(CurrencyRate(code: "EGP",value: 1.0))
                 }
-                print("---------------------",value.data?.count ?? 0.0)
             case .failure(let error):
                 print("Failure! Error: \(error.localizedDescription)")
             }

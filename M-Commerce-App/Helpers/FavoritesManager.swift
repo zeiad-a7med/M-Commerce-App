@@ -66,4 +66,17 @@ class FavoritesManager: ObservableObject {
     func isFavorite(_ product: Product) -> Bool {
         return favorites.contains { $0.id == product.id }
     }
+    
+    func removeAllFavorites() {
+        guard let modelContext = modelContext else { return }
+        do {
+            for favorite in favorites {
+                modelContext.delete(favorite)
+            }
+            try modelContext.save()
+            favorites.removeAll()
+        } catch {
+            print("Error removing all favorites: \(error)")
+        }
+    }
 }
