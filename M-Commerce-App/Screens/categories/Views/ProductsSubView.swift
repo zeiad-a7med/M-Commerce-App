@@ -15,8 +15,8 @@ struct ProductsSubView: View {
     @State private var lastItemID: String?
     
     var body: some View {
-        ScrollViewReader { proxy in
-            ScrollView {
+//        ScrollViewReader { proxy in
+//            ScrollView {
                 LazyVGrid(columns: columns, spacing: 10) {
                     ForEach(filteredProducts, id: \.id) { product in
                         ProductCardView(product: product)
@@ -27,11 +27,11 @@ struct ProductsSubView: View {
                     }
                 }
                 .padding(5)
-                .onChange(of: filteredProducts.count) { _ in
-                    scrollToLastItem(proxy: proxy)
-                }
-            }
-        }
+//                .onChange(of: filteredProducts.count) { _ in
+//                    scrollToLastItem(proxy: proxy)
+//                }
+//            }
+//        }
     }
     
     private func checkIfNeedMoreData(currentProduct: Product) {
@@ -44,14 +44,14 @@ struct ProductsSubView: View {
         }
     }
     
-    private func scrollToLastItem(proxy: ScrollViewProxy) {
-        guard let lastID = lastItemID else { return }
-        DispatchQueue.main.async {
-            withAnimation (.spring){
-                proxy.scrollTo(lastID, anchor: .bottom)
-            }
-        }
-    }
+//    private func scrollToLastItem(proxy: ScrollViewProxy) {
+//        guard let lastID = lastItemID else { return }
+//        DispatchQueue.main.async {
+//            withAnimation (.spring){
+//                proxy.scrollTo(lastID, anchor: .bottom)
+//            }
+//        }
+//    }
 }
 
 #Preview {
