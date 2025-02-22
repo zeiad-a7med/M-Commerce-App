@@ -12,7 +12,6 @@ struct FavoriteButtonView: View {
     var product: Product
     @Query private var products: [Product]
     @State var alertContent: AlertContent?
-    @State private var shouldNavigateToLogin = false
     @ObservedObject private var favoritesManager = FavoritesManager.shared  // Singleton instance
     var onFavorite: ((Bool) -> Void)?
     let size: Double
@@ -28,7 +27,7 @@ struct FavoriteButtonView: View {
                     isFavorite = true
                     SnackbarManager.shared.show(message: "Saved to favorites❤️!")
                 } else {
-                    requierLoginAlert()
+                    AlertManager.shared.showLoginAlert()
                 }
             }
         }) {
@@ -53,7 +52,7 @@ struct FavoriteButtonView: View {
                 set: { alertContent?.isVisible = $0 }
             )
         ) {
-            if isLoggedIn {
+            
                 if isFavorite {
 
                     Button("Remove", role: .destructive) {
@@ -65,23 +64,10 @@ struct FavoriteButtonView: View {
                     }
                     Button("Cancel") {}
                 }
-            } else {
-
-                Button("Sign In") {
-                    shouldNavigateToLogin = true
-                }
-
-                Button("Cancel") {}
-            }
+            
 
         } message: {
             Text(alertContent?.message ?? "")
-        }
-        // Navigation link outside the alert to handle navigation properly
-        NavigationLink(
-            destination: LoginView(), isActive: $shouldNavigateToLogin
-        ) {
-            EmptyView()
         }
     }
 
@@ -89,13 +75,6 @@ struct FavoriteButtonView: View {
         alertContent = AlertContent(
             title: "are you want to remove this product from your favorites?",
             message: "this product will be removed from your favorites",
-            isVisible: true
-        )
-    }
-    func requierLoginAlert() {
-        alertContent = AlertContent(
-            title: "You are not Signed In",
-            message: "to use favorites feature please Sign In",
             isVisible: true
         )
     }

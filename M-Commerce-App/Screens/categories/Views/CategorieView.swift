@@ -85,7 +85,7 @@ struct CategorieView: View {
                                 label: {
                                     ButtonView(
                                         imageSystemName: ThemeManager.cartImg,
-                                        itemCounter: 10)
+                                        itemCounter: AuthManager.shared.applicationUser?.cart?.totalQuantity ?? 0)
                                 })
                             NavigationLink(
                                 destination: FavoritesView(),

@@ -8,11 +8,10 @@
 import Foundation
 import ShopifyAPIKit
 
-extension GetCartQuery {
-    static func parse(from cartDTO: GetCartQuery.Data.Cart)
+extension CreateCartMutation {
+    static func parse(from cartDTO: CreateCartMutation.Data.CartCreate.Cart)
         -> Cart
     {
-
         let cart = Cart(
             id: cartDTO.id,
             checkoutUrl: cartDTO.checkoutUrl,
@@ -96,6 +95,7 @@ extension GetCartQuery {
             createdAt: cartDTO.createdAt,
             updatedAt: cartDTO.updatedAt
         )
+        
         return cart
     }
 }
