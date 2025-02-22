@@ -73,6 +73,49 @@ class PaymentService : OrderCreateService{
         return orderData
     }
     static func createOrder(complitionHandler: @escaping (OrderCreateResponse?) -> Void) {
+        guard let url = URL(string: "https://itp-newcapital-ios2.myshopify.com/admin/api/2025-01/orders.json") else{return}
+        let accessToken = "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"
+            guard let jsonData = try? JSONSerialization.data(withJSONObject: ParseOrder(), options: [])else{
+                complitionHandler(OrderCreateResponse(
+                    success:false,
+                    message: "Couldnt parse to json"
+                ))
+                return
+            }
+        var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue(accessToken, forHTTPHeaderField: "X-Shopify-Access-Token")
+            request.httpBody = jsonData
+           
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                        DispatchQueue.main.async {
+                       
+
+                            if let error = error {
+                                complitionHandler(OrderCreateResponse(success: false,message: error.localizedDescription))
+                                return
+                            }
+
+                            if let httpResponse = response as? HTTPURLResponse {
+                                if httpResponse.statusCode == 201 {
+                                    complitionHandler(OrderCreateResponse(
+                                        success: true,
+                                        message: nil
+                                    ))
+                                } else {
+                                    complitionHandler(OrderCreateResponse(
+                                        success: false,
+                                        message: "http Error Code :\(httpResponse.statusCode)"
+                                    ))
+                                    
+                                }
+                            }
+
+                           
+                        }
+                    }.resume()
+
  
     }
     
