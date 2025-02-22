@@ -84,7 +84,7 @@ struct PaymentView: View {
                             paymentViewModel.emptyCart()
                             navigateToOrders.toggle()
                             showCheckOut.toggle()
-                            
+                            paymentViewModel.createOrder()
                         }.presentationDetents([.medium])
                     })
                 Spacer()
