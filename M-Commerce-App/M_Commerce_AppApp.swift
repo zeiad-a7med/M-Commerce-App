@@ -28,12 +28,16 @@ struct M_Commerce_AppApp: App {
                 }
             }() : nil
             
-            ZStack {
-                ContentView()
-                SnackbarView()
-                    .environmentObject(SnackbarManager.shared)
+            NavigationView{
+                ZStack {
+                    ContentView()
+                    SnackbarView()
+                        .environmentObject(SnackbarManager.shared)
+                    AlertView()
+                        .environmentObject(AlertManager.shared)
+                }
+                .applyModelContainer(sharedModelContainer)
             }
-            .applyModelContainer(sharedModelContainer)
         }
     }
 }

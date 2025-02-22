@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Settings: View {
+    @StateObject var viewModel = SettingsViewModel()
     @State var currentCurrency: String = "USD"
     @State var oldPassword: String = "2424"
     @State var newPassword: String = " "
@@ -85,7 +86,7 @@ struct Settings: View {
                             Button(
                                 role: .destructive,
                                 action: {
-                                    AuthManager.shared.logoutUser()
+                                    viewModel.logout()
                                 },
                                 label: {
                                     Text("Logout")

@@ -12,18 +12,15 @@ struct ProductInfoView: View {
     @StateObject var viewModel: ProductViewModel
     @ObservedObject private var favoritesManager = FavoritesManager.shared  // Singleton instance
     @State var selectedVariant: ProductVariant?
-    let columns: [GridItem] = [
-        GridItem(.flexible(), spacing: 5),
-        GridItem(.flexible(), spacing: 5),
-        GridItem(.flexible(), spacing: 5),
-        GridItem(.flexible(), spacing: 5),
-    ]
+    @State var currentVariantSelectedQuantity: Int = 0
+    @State var totalPrice: Double = 0
+    @State var viewCart : Bool = false
+
     init(productId: String) {
         self.productId = productId
         _viewModel = StateObject(
             wrappedValue: ProductViewModel(productId: productId))
     }
-
     @State var val: Int = 0
     var body: some View {
         if viewModel.isLoading {
@@ -123,7 +120,7 @@ struct ProductInfoView: View {
                                         size: 30
                                     ).padding(.trailing, 5)
                                 }.padding(.bottom, 20)
-                                if viewModel.productRes?.product?.variants?
+                                if viewModel.variantsForCart
                                     .isEmpty == false
                                 {
                                     ScrollView(
@@ -131,20 +128,24 @@ struct ProductInfoView: View {
                                     ) {
                                         HStack {
                                             ForEach(
-                                                0..<(viewModel.productRes?
-                                                    .product?
-                                                    .variants ?? []).count
+                                                0..<(viewModel.variantsForCart)
+                                                    .count
                                             ) { index in
                                                 CustomChip(
-                                                    isSelected: selectedVariant
+                                                    isSelected: selectedVariant?
+                                                        .id
                                                         == viewModel
-                                                        .productRes?
-                                                        .product?
-                                                        .variants?[index],
-                                                    text: viewModel.productRes?
-                                                        .product?
-                                                        .variants?[index]
-                                                        .title ?? "",
+                                                        .variantsForCart[index]
+                                                        .variantId,
+                                                    text:
+                                                        viewModel
+                                                        .variantsForCart[index]
+                                                        .title,
+                                                    badgeNumber: .constant(
+                                                        viewModel
+                                                            .variantsForCart[
+                                                                index
+                                                            ].quantity),
                                                     onSelected: {
                                                         if selectedVariant
                                                             == viewModel
@@ -155,6 +156,8 @@ struct ProductInfoView: View {
 
                                                             selectedVariant =
                                                                 nil
+                                                            currentVariantSelectedQuantity =
+                                                                0
                                                         } else {
                                                             selectedVariant =
                                                                 viewModel
@@ -162,16 +165,46 @@ struct ProductInfoView: View {
                                                                 .product?
                                                                 .variants?[
                                                                     index]
+                                                            currentVariantSelectedQuantity =
+                                                                viewModel
+                                                                .variantsForCart
+                                                                .first(where: {
+                                                                    variant in
+                                                                    variant
+                                                                        .variantId
+                                                                        == selectedVariant?
+                                                                        .id
+                                                                })?.quantity
+                                                                ?? 0
                                                         }
                                                     }
                                                 )
+
                                             }.padding([.leading, .trailing], 5)
                                                 .padding([.top, .bottom], 10)
                                         }
                                     }
                                     .padding(.bottom, 15)
                                 }
-
+                                HStack {
+                                    Text("Choose amount:")
+                                        .bold(true)
+                                    Spacer()
+                                    NumberOfItems(
+                                        numberOfItem:
+                                            $currentVariantSelectedQuantity,
+                                        max: selectedVariant?.quantityAvailable
+                                            ?? 0
+                                    ) { quantity in
+                                        if selectedVariant != nil {
+                                            viewModel.updateQuantity(
+                                                variant: selectedVariant!,
+                                                quantity: quantity)
+                                            calculateTotalPrice()
+                                        }
+                                    }
+                                }.padding(.bottom, 10)
+                                    
                                 ReadMoreTextView(
                                     text: viewModel.productRes?.product?.desc
                                         ?? "",
@@ -180,40 +213,55 @@ struct ProductInfoView: View {
                                 .font(.system(size: 19))
                                 .foregroundColor(.primary)
                                 .padding(.bottom, 10)
-
-                                HStack {
-                                    Text("Choose amount:")
-                                        .bold(true)
-                                    Spacer()
-                                    CustomStepper(numberOfItem: 1) { count in
-                                        print(count)
-                                    }
-                                }
                             }
                             Spacer()
                             HStack {
-                                Text(
-                                    viewModel.productRes?.product?.currency
-                                        ?? ""
-                                )
-                                .foregroundStyle(ThemeManager.darkPuble)
-                                .font(.title3)
-                                Text(
-                                    (selectedVariant?.price?.amount
-                                        ?? viewModel.productRes?.product?
-                                        .formattedPrice) ?? ""
-                                )
-                                .font(.title3)
+                                if(totalPrice != 0){
+                                    Text(
+                                        viewModel.productRes?.product?.currency
+                                            ?? ""
+                                    )
+                                    .foregroundStyle(ThemeManager.darkPuble)
+                                    .font(.title3)
+                                    Text(String(format: "%.2f", totalPrice))
+                                        .font(.title3)
+                                }
                                 Spacer()
-                                CustomRoundedButtonView(
-                                    text: "Add to Cart",
-                                    systemIconName: "handbag",
-                                    onTap: {
-                                        print("Tapped")
-                                    },
-                                    isButtonEnabled: .constant(
-                                        selectedVariant != nil)
-                                )
+                                if(viewModel.productAddedToCart){
+                                    CustomRoundedButtonView(
+                                        text: "View Cart",
+                                        systemIconName: "cart",
+                                        onTap: {
+                                            if AuthManager.shared.isLoggedIn() {
+                                                viewModel.updateCart { success in
+                                                    viewCart = true
+                                                }
+                                            } else {
+                                                AlertManager.shared.showLoginAlert()
+                                            }
+                                        },
+                                        isButtonEnabled: .constant(true)
+                                    )
+                                    NavigationLink(
+                                        destination: ShoppingView(), isActive: $viewCart
+                                    ) {
+                                        EmptyView()
+                                    }
+                                }else{
+                                    CustomRoundedButtonView(
+                                        text: "Add to Cart",
+                                        systemIconName: "cart.badge.plus",
+                                        onTap: {
+                                            if AuthManager.shared.isLoggedIn() {
+                                                viewModel.addToCart()
+                                            } else {
+                                                AlertManager.shared.showLoginAlert()
+                                            }
+                                        },
+                                        isButtonEnabled: .constant(
+                                            totalPrice != 0)
+                                    )
+                                }
 
                             }
                         }
@@ -230,10 +278,48 @@ struct ProductInfoView: View {
                     }
                     .ignoresSafeArea(.all)
                 }
+                .toolbar(.hidden, for: .tabBar)
+                .onAppear{
+                    calculateTotalPrice()
+                }
+                .onDisappear{
+                    viewModel.updateCart { success in
+                    }
+                }
+                .alert(
+                    "Are you sure you want to delete this variant?",
+                    isPresented: Binding(
+                        get: { viewModel.deletionAlertVisible },
+                        set: { viewModel.deletionAlertVisible = $0 }
+                    )
+                ) {
+
+                    Button("Remove",role: .destructive) {
+                        viewModel.deleteFromCart()
+                    }
+
+                    Button("Cancel",role: .cancel) {
+                        if(viewModel.currentdeletionVariant != nil){
+                            viewModel.updateQuantity(variant: viewModel.currentdeletionVariant!, quantity: 1)
+                            currentVariantSelectedQuantity = 1
+                            calculateTotalPrice()
+                        }
+                    }
+
+                } message: {
+                    Text("Once you delete this variant, it cannot be restored in your cart.")
+                }
+                
             }
 
         }
-
+    }
+    func calculateTotalPrice() {
+        var total: Double = 0
+        viewModel.variantsForCart.forEach { variant in
+            total += variant.price * Double(variant.quantity)
+        }
+        totalPrice = total
     }
 }
 

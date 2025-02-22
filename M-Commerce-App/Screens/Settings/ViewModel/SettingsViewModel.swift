@@ -56,4 +56,17 @@ class SettingsViewModel: ObservableObject {
             }
         }
     }
+    
+    func logout() {
+        if(AuthManager.shared.isLoggedIn()){
+            isLoading = true
+            AuthService.logOutCustomer(customerAccessToken: AuthManager.shared.applicationUser!.accessToken!) { result in
+                if(result.success){
+                    AuthManager.shared.logoutUser()
+                }else{
+                    SnackbarManager.shared.show(message: "Logout Failed")
+                }
+            }
+        }
+    }
 }

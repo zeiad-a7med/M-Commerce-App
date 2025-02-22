@@ -38,10 +38,14 @@ struct ContentView: View {
 }
 
 #Preview {
-    ZStack {
-        ContentView()
-        SnackbarView()
-            .environmentObject(SnackbarManager.shared)
+    NavigationView {
+        ZStack {
+            ContentView()
+            SnackbarView()
+                .environmentObject(SnackbarManager.shared)
+            AlertView()
+                .environmentObject(AlertManager.shared)
+        }
+        .modelContainer(for: [Product.self,ApplicationUser.self,CurrencyRate.self], inMemory: true)
     }
-    .modelContainer(for: [Product.self,ApplicationUser.self,CurrencyRate.self], inMemory: true)
 }
