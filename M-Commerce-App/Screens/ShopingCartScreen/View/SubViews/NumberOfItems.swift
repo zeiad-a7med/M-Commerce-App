@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct NumberOfItems: View {
-    @State var numberOfItem : Int
+    @Binding var numberOfItem : Int
     var max : Int?
+    var min : Int?
     @State var changeNumberOfItem : ((Int)->(Void))?
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 25.0)
                 .opacity(0.8)
                 .frame(width: 90 ,height: 30)
-            .foregroundStyle(Color(#colorLiteral(red: 0.9364118576, green: 0.8771577477, blue: 0.8891954, alpha: 1)))
+            .foregroundStyle(Color(#colorLiteral(red: 0.9529411197, green: 0.9529412389, blue: 0.9529412389, alpha: 1)))
             .overlay{
                 Button(action: {
                     if(max != nil){
@@ -38,9 +39,17 @@ struct NumberOfItems: View {
                         .clipShape(Circle())
                 }).offset(x:30)
                 Button(action: {
-                    if numberOfItem >  0{
-                        numberOfItem -= 1
+                    if(min != nil){
+                        if(numberOfItem > min!){
+                            numberOfItem -= 1
+                            changeNumberOfItem?(numberOfItem)
+                        }
+                    }else{
+                        if numberOfItem >  0{
+                            numberOfItem -= 1
+                        }
                     }
+                    
                     changeNumberOfItem?(numberOfItem)
                 }, label: {
                     Image(systemName: "minus")
@@ -61,5 +70,5 @@ struct NumberOfItems: View {
 }
 
 #Preview {
-    NumberOfItems(numberOfItem: 1,max: 10)
+    NumberOfItems(numberOfItem: .constant(1),max: 10)
 }

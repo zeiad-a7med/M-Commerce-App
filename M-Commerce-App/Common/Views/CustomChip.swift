@@ -10,6 +10,7 @@ import SwiftUI
 struct CustomChip: View {
     var isSelected: Bool = false
     var text: String
+    @Binding var badgeNumber : Int?
     var onSelected: (() -> Void)?
     let unSelectedFilterColor = Color.white
     let selectedFilterColor = ThemeManager.darkPuble
@@ -35,11 +36,26 @@ struct CustomChip: View {
                 .cornerRadius(cornerRadius)
                 .shadow(radius: shadowRadius)
         })
+        .overlay(alignment: .topTrailing){
+            if(badgeNumber ?? 0 > 0){
+                Circle()
+                    .fill(isSelected ?
+                          unSelectedFilterColor : selectedFilterColor)
+                    .frame(width: 25,alignment: .topTrailing)
+                    .overlay{
+                        Text("\(badgeNumber ?? 0)")
+                            .foregroundStyle(isSelected ?
+                                             selectedFilterColor : unSelectedFilterColor)
+                    }
+                    .offset(x: 10, y: -10)
+            }
+        }
     }
 }
 
 #Preview {
     CustomChip(
-        isSelected: false, text: "2 / M"
+        isSelected: false, text: "2 / M",
+        badgeNumber: .constant(0)
     )
 }
