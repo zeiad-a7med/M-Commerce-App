@@ -15,7 +15,7 @@ struct M_Commerce_AppApp: App {
     var body: some Scene {
         WindowGroup {
             let isSimulator = TARGET_OS_SIMULATOR != 0
-            let sharedModelContainer: ModelContainer? = isSimulator ? {
+            let sharedModelContainer: ModelContainer? = {
                 let schema = Schema([Product.self,ApplicationUser.self,CurrencyRate.self])
                 let modelConfiguration = ModelConfiguration(
                     schema: schema, isStoredInMemoryOnly: false)
@@ -26,8 +26,7 @@ struct M_Commerce_AppApp: App {
                 } catch {
                     fatalError("Could not create ModelContainer: \(error)")
                 }
-            }() : nil
-            
+            }()
             NavigationView{
                 ZStack {
                     ContentView()
