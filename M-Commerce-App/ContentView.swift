@@ -32,6 +32,7 @@ struct ContentView: View {
         .onAppear {
             FavoritesManager.shared.setContext(modelContext)
             AuthManager.shared.setContext(modelContext)
+            CurrencyManager.shared.setContext(modelContext)
         }
     }
 }
@@ -42,5 +43,5 @@ struct ContentView: View {
         SnackbarView()
             .environmentObject(SnackbarManager.shared)
     }
-    .modelContainer(for: [Product.self,ApplicationUser.self], inMemory: true)
+    .modelContainer(for: [Product.self,ApplicationUser.self,CurrencyRate.self], inMemory: true)
 }
