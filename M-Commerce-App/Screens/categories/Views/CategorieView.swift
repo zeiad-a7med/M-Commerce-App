@@ -14,10 +14,11 @@ struct CategorieView: View {
     @State var filterString: String = ""
     @State var favoriteCount : Int = 0
     @State var isSubFilterSelected: Bool = false
+    @State var cE = CurrencyManager.currentCurrencyRate.value
 //    @State var currentFilter:String = ""
     var SubFiltersArray:[String] = ["ACCESSORIES","T-SHIRTS","SHOES",""]
     @StateObject var cViewModel: CategoriesViewModel = CategoriesViewModel(
-        first: 10, after: nil, filter: "")
+        first: 50, after: nil, filter: "")
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
@@ -66,7 +67,11 @@ struct CategorieView: View {
                         isSubFilterSelected.toggle()
                     })
                 }
-            }.overlay(content: {
+            }
+            .onAppear {
+                cE = CurrencyManager.currentCurrencyRate.value
+            }
+            .overlay(content: {
                 if cViewModel.categories.categoryProducts?.count ?? 0 == 0 && !cViewModel.isLoading {
                     let msg = "No Products Found"
                     let desc = Text("No  Products Found of type \"\(SubFiltersArray[subFilterIndex] == "" ? "" : "\(SubFiltersArray[subFilterIndex])")\" in \"\(filterType) category\", try using other filters")
@@ -111,22 +116,22 @@ struct CategorieView: View {
             filterString = "\(filterType) | \(SubFiltersArray[subFilterIndex])"
             print("1-\(filterString)")
             self.cViewModel.fetchCategoriesWithFilter(
-                first: 10, after: nil, filter: filterString)
+                first: 50, after: nil, filter: filterString)
         } else if filterType == "" && SubFiltersArray[subFilterIndex] != "" {
             filterString = "\(SubFiltersArray[subFilterIndex])"
             print("2-\(filterString)")
             self.cViewModel.fetchCategoriesWithFilter(
-                first: 10, after: nil, filter: filterString)
+                first: 50, after: nil, filter: filterString)
         } else if filterType != "" && SubFiltersArray[subFilterIndex] == "" {
             filterString = "\(filterType)"
             print("3-\(filterString)")
             self.cViewModel.fetchCategoriesWithFilter(
-                first: 10, after: nil, filter: filterString)
+                first: 50, after: nil, filter: filterString)
         } else if filterType == "" && SubFiltersArray[subFilterIndex] == "" {
             filterString = ""
             print("4-\(filterString)")
             self.cViewModel.fetchCategoriesWithFilter(
-                first: 10, after: nil, filter: filterString)
+                first: 50, after: nil, filter: filterString)
         } else {
             print("else")
             self.cViewModel.fetchCategoriesWithFilter(

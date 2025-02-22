@@ -13,7 +13,8 @@ struct ProductInfoView: View {
     @ObservedObject private var favoritesManager = FavoritesManager.shared  // Singleton instance
     @State var selectedVariant: ProductVariant?
     @State var currentVariantSelectedQuantity: Int = 0
-    @State var totalPrice: Double = 0
+    @State var totalPrice: Double = 0.0
+    @State var finalTotalPrice: Double = 0.0
     @State var viewCart : Bool = false
 
     init(productId: String) {
@@ -223,7 +224,7 @@ struct ProductInfoView: View {
                                     )
                                     .foregroundStyle(ThemeManager.darkPuble)
                                     .font(.title3)
-                                    Text(String(format: "%.2f", totalPrice))
+                                    Text(String(format: "%.2f", finalTotalPrice))
                                         .font(.title3)
                                 }
                                 Spacer()
@@ -278,6 +279,9 @@ struct ProductInfoView: View {
                     }
                     .ignoresSafeArea(.all)
                 }
+                .onChange(of: totalPrice, {
+                    finalTotalPrice = (totalPrice * (CurrencyManager.currentCurrencyRate.value ?? 1.0))
+                })
                 .toolbar(.hidden, for: .tabBar)
                 .onAppear{
                     calculateTotalPrice()
