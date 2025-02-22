@@ -8,17 +8,15 @@
 import SwiftUI
 
 struct HomePageView: View {
-    @StateObject var bViewModel: BrandsViewModel = BrandsViewModel()
     let screenTitle: String = "Home"
     let tempImageList = ImageList(id: "")
-    @State var isCopied: Bool = false
     @State var favoriteCount : Int = 0
     var body: some View {
 
         NavigationView {
             ZStack {  //start of: ZStack
                 ScrollView {
-                    LazyVStack {
+                    VStack {
                         CustomTextField(
                             placeholder: "search for brand ...",
                             onChange: { text in
@@ -37,27 +35,13 @@ struct HomePageView: View {
                                 DiscountCode(code: "areWeThereYet"),
                             ], pricesruleList: PriceRulesList(id: "")
                         ) {
-                            self.isCopied.toggle()
                         }
                         HeaderView(
                             title: ThemeManager.secondSectionTitle,
                             color: ThemeManager.titleColor)
-                        if let bv = bViewModel.brands.collections {
-                            BrandsView(
-                                brandsDetails: bv,
-                                reload: {
-                                    bViewModel.loadMore()
-                                })
-                        }
-                        Spacer()
+                        BrandsView()
+//                        Spacer()
                     }
-                }
-                if isCopied {
-                    Text("Copied to Clipboard")
-                        .foregroundStyle(.gray)
-                        .transition(.move(edge: .bottom))
-                        .frame(height: 50, alignment: .bottom)
-                        .offset(y: UIScreen.main.bounds.height / 3)
                 }
             }  //end of: ZStack
             .navigationTitle(screenTitle)
