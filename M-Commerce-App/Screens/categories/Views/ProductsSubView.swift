@@ -8,40 +8,108 @@
 import SwiftUI
 
 struct ProductsSubView: View {
-    var filteredProducts: [Product]
-    var loadMore: () -> Void
+    @StateObject var cViewModel: CategoriesViewModel = CategoriesViewModel(
+        first: 20, after: nil, filter: "")
+    @Binding var filterString : String
+    var SubFiltersArray:[String]
+    @Binding var subFilterIndex: Int
+    @Binding var filterType: String
 
     private let columns = [GridItem(.flexible()), GridItem(.flexible())]
     @State private var lastItemID: String?
 
     var body: some View {
-        LazyVGrid(columns: columns, spacing: 10) {
-            ForEach(filteredProducts, id: \.id) { product in
-                ProductCardView(product: product)
-                    .id(product.id)
-                    .onAppear {
-                        checkIfNeedMoreData(currentProduct: product)
+        
+        if !cViewModel.isLoading {
+            if let filteredProducts = cViewModel.categories
+                .categoryProducts
+            {
+                LazyVGrid(columns: columns, spacing: 10) {
+                    ForEach(filteredProducts, id: \.id) { product in
+                        ProductCardView(product: product)
+                            .id(product.id)
+                            .onAppear {
+                                checkIfNeedMoreData(currentProduct: product)
+                            }
                     }
+                }
+                .onChange(of: filterType, { oldValue, newValue in
+                    filter()
+                })
+                .onChange(of: subFilterIndex, { oldValue, newValue in
+                    filter()
+                })
+                
+                .padding(5)
+                .overlay(content: {
+                    if cViewModel.categories.categoryProducts?.count ?? 0 == 0 && !cViewModel.isLoading {
+                        let msg = "No Products Found"
+                        let desc = Text("No  Products Found of type \"\(SubFiltersArray[subFilterIndex] == "" ? "" : "\(SubFiltersArray[subFilterIndex])")\" in \"\(filterType) category\", try using other filters")
+                        let img = "square.3.layers.3d.slash"
+                        ContentUnavailableView(msg , systemImage: img, description: desc)
+                            }
+                        })
             }
+            
+        }else {
+            VStack {
+                Spacer()
+                ProgressView()
+                .progressViewStyle(CircularProgressViewStyle())
+                .scaleEffect(4)
+                Spacer()
+            }.padding(120)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .padding(5)
+        
     }
 
     private func checkIfNeedMoreData(currentProduct: Product) {
-        guard let lastProduct = filteredProducts.last else { return }
+        guard let lastProduct = cViewModel.categories
+            .categoryProducts?.last else { return }
         if currentProduct.id == lastProduct.id {
             lastItemID = lastProduct.id
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                loadMore()
+                cViewModel.loadMore(filter: filterString)
             }
+        }
+    }
+    func filter() {
+        if filterType == "All" {
+            filterType = ""
+        }
+        if filterType != "" && SubFiltersArray[subFilterIndex] != "" {
+            filterString = "\(filterType) | \(SubFiltersArray[subFilterIndex])"
+            print("1-\(filterString)")
+            self.cViewModel.fetchCategoriesWithFilter(
+                first: 50, after: nil, filter: filterString)
+        } else if filterType == "" && SubFiltersArray[subFilterIndex] != "" {
+            filterString = "\(SubFiltersArray[subFilterIndex])"
+            print("2-\(filterString)")
+            self.cViewModel.fetchCategoriesWithFilter(
+                first: 50, after: nil, filter: filterString)
+        } else if filterType != "" && SubFiltersArray[subFilterIndex] == "" {
+            filterString = "\(filterType)"
+            print("3-\(filterString)")
+            self.cViewModel.fetchCategoriesWithFilter(
+                first: 50, after: nil, filter: filterString)
+        } else if filterType == "" && SubFiltersArray[subFilterIndex] == "" {
+            filterString = ""
+            print("4-\(filterString)")
+            self.cViewModel.fetchCategoriesWithFilter(
+                first: 50, after: nil, filter: filterString)
+        } else {
+            print("else")
+            self.cViewModel.fetchCategoriesWithFilter(
+                first: 10, after: nil, filter: filterString)
         }
     }
 }
 
 #Preview {
-    ProductsSubView(
-        filteredProducts: [Product](),
-        loadMore: {
-            print("loading more.......!")
-        })
+//    ProductsSubView(
+//        filteredProducts: [Product](),
+//        loadMore: {
+//            print("loading more.......!")
+//        })
 }
