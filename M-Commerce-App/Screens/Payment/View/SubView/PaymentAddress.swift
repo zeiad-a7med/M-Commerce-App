@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PaymentAddress: View {
-    @State var x = AuthManager.shared.applicationUser?.defaultAddress
+ 
     var body: some View {
         HStack(){
             ZStack {

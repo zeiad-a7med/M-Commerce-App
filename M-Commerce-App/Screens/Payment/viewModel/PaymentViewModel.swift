@@ -6,11 +6,12 @@
 //
 
 import Foundation
-
+import PassKit
 
 class PaymentViewModel : ObservableObject{
     @Published var cartResult : CartResponse?
     @Published var isLoading : Bool = false
+    @Published var paymentHandler = PaymentHandler()
     init(){
         getCartData()
     }
@@ -23,6 +24,29 @@ class PaymentViewModel : ObservableObject{
                 self.cartResult = result
             }
         }
+    }
+    func checkPayments(){
+        let result = PaymentHandler.applePayStatus()
+        if result.canMakePayments {
+            payPressed()
+        } else if result.canSetupCards {
+            setupPressed()
+        }
+    }
+    func payPressed() {
+        paymentHandler.startPayment { success in
+            if success {
+                // Handle successful payment
+                print("Payment successful")
+            }else {
+                print("Payment Failed")
+            }
+        }
+    }
+
+     func setupPressed() {
+        let passLibrary = PKPassLibrary()
+        passLibrary.openPaymentSetup()
     }
     
     

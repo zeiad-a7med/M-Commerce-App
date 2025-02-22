@@ -9,11 +9,9 @@ import SwiftUI
 
 struct PaymentView: View {
     @StateObject var paymentViewModel = PaymentViewModel()
-    @State var numberofProducts: Int = 3
-    @State var paymentDisplay: String = "Cash on delivery"
     @State var showCheckOut: Bool = false
     var body: some View {
-        NavigationStack {
+      
             VStack(alignment: .leading) {
                 HStack {
                     Text("Address")
@@ -34,27 +32,33 @@ struct PaymentView: View {
                 }.padding()
 
                 PaymentAddress()
-                Text("Products(\(numberofProducts))")
-                    .bold()
-                    .font(.title2)
-                    .padding()
+                if let temp = paymentViewModel.cartResult?.cart?.totalQuantity{
+                    Text("Products(\(temp))")
+                        .bold()
+                        .font(.title2)
+                        .padding()
+                }else{
+                    Text("Products()")
+                        .bold()
+                        .font(.title2)
+                        .padding()
+                }
+
                 ScrollView {
-                    ForEach((1...10), id: \.self) { _ in
-                        productRow()
+                    if let temp = paymentViewModel.cartResult?.cart?.lines{
+                        ForEach(temp , id: \.id) { line in
+                            PaymentProductRow(line: line)
+                        }
                     }
                 }.frame(height: 300)
-                Text("PaymentMethod")
-                    .bold()
-                    .font(.title2)
-                    .padding()
-
+              
                 HStack {
                     Text("Total amount")
                         .padding()
                     Spacer()
-                    Text("100")
+                    Text(paymentViewModel.cartResult?.cart?.cost?.checkoutChargeAmount?.amount ?? "")
                         .bold()
-                    Text("$")
+                    Text(paymentViewModel.cartResult?.cart?.cost?.checkoutChargeAmount?.currencyCode ?? "")
                         .padding(.trailing, 20)
                         .bold()
                 }
@@ -70,8 +74,9 @@ struct PaymentView: View {
                     content: {
                         PaymentMethodComponent().presentationDetents([.medium])
                     })
+                Spacer()
             }
-        }
+        
     }
 }
 

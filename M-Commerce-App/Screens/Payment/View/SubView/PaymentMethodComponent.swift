@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-import SwiftUI
+import PassKit
 
 struct PaymentMethodComponent: View {
     @Environment(\.dismiss) var dismiss
@@ -40,8 +40,14 @@ struct PaymentMethodComponent: View {
                             },isButtonEnabled: .constant(true))
                                 .padding(.top,100)
                                 .padding(.leading,40)
+
                         }else if selectedOption == 1{
-                            ApplePayView()
+                            PayWithApplePayButton(.checkout) {
+                                let paymentViewModel = PaymentViewModel()
+                                paymentViewModel.checkPayments()
+                            }.frame(width: 300,height: 60)
+                                .clipShape(RoundedRectangle(cornerRadius: 30))
+                                .padding(.leading,35)
                                
                             
                         }
