@@ -48,15 +48,16 @@ class ProductViewModel: ObservableObject {
             guard let result = result else { return }
             DispatchQueue.main.async {
                 result.product?.variants?.forEach { variant in
-                    let quantity: Int = self.getVariantQuantityFromCart(
-                        variant: variant)
-                    let lineId : String? = self.getLineIdFromCart(variant: variant)
+//                    let quantity: Int = self.getVariantQuantityFromCart(
+//                        variant: variant)
+//                    let lineId : String? = self.getLineIdFromCart(variant: variant)
                     self.variantsForCart.append(
                         VariantForCart(
                             variantId: variant.id ?? "",
-                            lineId: lineId,
+//                            lineId: lineId,
                             title: variant.title ?? "",
-                            quantity: quantity,
+//                            quantity: quantity,
+                            quantity: 0,
                             totalQuantity: variant.quantityAvailable ?? 0,
                             price: Double(variant.price?.amount ?? "0") ?? 0
                         )
@@ -72,7 +73,7 @@ class ProductViewModel: ObservableObject {
         var quantity: Int = 0
         AuthManager.shared.applicationUser?.cart?.lines?.forEach { line in
             if line.variant?.id == variant.id {
-                self.productAddedToCart = true
+//                self.productAddedToCart = true
                 quantity = line.quantity ?? 0
             }
         }
@@ -83,7 +84,7 @@ class ProductViewModel: ObservableObject {
         var lineId: String?
         AuthManager.shared.applicationUser?.cart?.lines?.forEach { line in
             if line.variant?.id == variant.id {
-                self.productAddedToCart = true
+//                self.productAddedToCart = true
                 lineId = line.id
             }
         }

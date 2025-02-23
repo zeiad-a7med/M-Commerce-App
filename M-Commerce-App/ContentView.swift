@@ -41,6 +41,7 @@ struct ContentView: View {
             AuthManager.shared.setContext(modelContext)
             CurrencyManager.shared.setContext(modelContext)
         }
+        
     }
 }
 

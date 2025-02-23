@@ -282,13 +282,12 @@ struct ProductInfoView: View {
                 .onChange(of: totalPrice, {
                     finalTotalPrice = (totalPrice * (CurrencyManager.currentCurrencyRate.value ?? 1.0))
                 })
-                .toolbar(.hidden, for: .tabBar)
                 .onAppear{
                     calculateTotalPrice()
                 }
                 .onDisappear{
-                    viewModel.updateCart { success in
-                    }
+//                    viewModel.updateCart { success in
+//                    }
                 }
                 .alert(
                     "Are you sure you want to delete this variant?",
