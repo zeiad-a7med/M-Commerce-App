@@ -12,6 +12,7 @@ import Firebase
 @main
 struct M_Commerce_AppApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @State private var networkMonitor = NetworkMonitor()
     var body: some Scene {
         WindowGroup {
             let isSimulator = TARGET_OS_SIMULATOR != 0
@@ -31,6 +32,7 @@ struct M_Commerce_AppApp: App {
             NavigationView{
                 ZStack {
                     ContentView()
+                        .environment(networkMonitor)
                     SnackbarView()
                         .environmentObject(SnackbarManager.shared)
                     AlertView()

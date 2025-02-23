@@ -15,66 +15,17 @@ struct Currency: View {
                 HStack {
                     Image(systemName: "dollarsign.circle")
                     Picker("choose a currency", selection: $currentCurrency){
-                        Text("🇪🇬 EGP (EG Pound)")
-                            .tag("EGP")
-                            .foregroundStyle(ThemeManager.darkPuble)
-                        Text("🇺🇸 USD (US Dollar)")
-                            .tag("USD")
-                            .foregroundStyle(ThemeManager.darkPuble)
-                        Text("🇪🇺 EUR (Euro)")
-                            .tag("EUR")
-                            .foregroundStyle(ThemeManager.darkPuble)
-                        Text("🇸🇦 SAR (Saudi Riyal)")
-                            .tag("SAR")
-                            .foregroundStyle(ThemeManager.darkPuble)
-                        Text("🇦🇪 AED (UAE Dirham)")
-                            .tag("AED")
-                            .foregroundStyle(ThemeManager.darkPuble)
-                        Text("🇰🇼 KWD (Kuwaiti Dinar)")
-                            .tag("KWD")
-                            .foregroundStyle(ThemeManager.darkPuble)
-                        Text("🇶🇦 QAR (Qatari Riyal)")
-                            .tag("QAR")
-                            .foregroundStyle(ThemeManager.darkPuble)
-                        Text("🇴🇲 OMR (Omani Rial)")
-                            .tag("OMR")
-                            .foregroundStyle(ThemeManager.darkPuble)
-                        Text("🇧🇭 BHD (Bahraini Dinar)")
-                            .tag("BHD")
-                            .foregroundStyle(ThemeManager.darkPuble)
-                        Text("🇨🇦 CAD (Canadian Dollar)")
-                            .tag("CAD")
-                            .foregroundStyle(ThemeManager.darkPuble)
-                        Text("🇨🇳 CNY (Chinese Yuan)")
-                            .tag("CNY")
-                            .foregroundStyle(ThemeManager.darkPuble)
-                        Text("🇩🇿 DZD (Algerian Dinar)")
-                            .tag("DZD")
-                            .foregroundStyle(ThemeManager.darkPuble)
-                        Text("🇹🇳 TND (Tunisian Dinar)")
-                            .tag("TND")
-                            .foregroundStyle(ThemeManager.darkPuble)
-                        Text("🇯🇵 JPY (Japanese Yen)")
-                            .tag("JPY")
-                            .foregroundStyle(ThemeManager.darkPuble)
-                        Text("🇲🇦 MAD (Moroccan Dirham)")
-                            .tag("MAD")
-                            .foregroundStyle(ThemeManager.darkPuble)
-                        Text("🇹🇷 TRY (Turkish Lira)")
-                            .tag("MAD")
-                            .foregroundStyle(ThemeManager.darkPuble)
-                        Text("🇬🇧 GBP (British Pound)")
-                            .tag("GBP")
-                            .foregroundStyle(ThemeManager.darkPuble)
+                        ForEach(Constants.countries, id: \.name) { country in
+                            CurrencyFlagAndCode(flag: country.flag, code: country.currencyCode ?? "EG Pound", name: country.currencyName ?? "EGP")
+                        }
                     }
                 }.onChange(of: currentCurrency) { value in
                     CurrencyManager.currentCurrencyRate.code = currentCurrency
                     CurrencyManager.shared.changeCurrentCurrencyRate(code: currentCurrency)
                 }
                 .onAppear {
-                    currentCurrency = (CurrencyManager.currentCurrencyRate.code ?? "EGP")
-                    CurrencyManager.shared.getAllCurrenciesExchangeRate()
                     CurrencyManager.shared.refreshCurrentCurrency()
+                    currentCurrency = (CurrencyManager.currentCurrencyRate.code ?? "")
                 }
         }
     }
@@ -82,4 +33,15 @@ struct Currency: View {
 
 #Preview {
     Currency()
+}
+
+struct CurrencyFlagAndCode: View {
+    var flag:String
+    var code:String
+    var name:String
+    var body: some View {
+        Text("\(flag) \(code) (\(name)")
+            .tag(code)
+            .foregroundStyle(ThemeManager.darkPuble)
+    }
 }

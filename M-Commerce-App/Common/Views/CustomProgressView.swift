@@ -6,20 +6,16 @@
 //
 
 import SwiftUI
+import Lottie
 
 struct CustomProgressView: View {
     var body: some View {
         VStack {
-            Spacer()
-            ProgressView()
-            .progressViewStyle(CircularProgressViewStyle())
-            .scaleEffect(3)
-            Spacer()
-        }.padding(120)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            LottieView(animation: .named("loadingAnimation"))
+                .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
+        }
     }
 }
-
 #Preview {
     CustomProgressView()
 }

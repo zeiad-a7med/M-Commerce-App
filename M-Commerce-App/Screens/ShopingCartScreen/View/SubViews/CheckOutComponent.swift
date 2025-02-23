@@ -40,7 +40,7 @@ struct CheckOutComponent: View {
                         .foregroundStyle(.tertiary)
                     Spacer()
                     Text(
-                        "\(cartCost?.subtotalAmount?.currencyCode ?? "") \(cartCost?.subtotalAmount?.amount ?? "0")"
+                        "\(cartCost?.subtotalAmount?.formattedCurrecyCode ?? "EGP") \(cartCost?.subtotalAmount?.formattedPrice ?? "0.0")"
                     )
                 }.padding(.horizontal)
                     .padding(.bottom, 10)
@@ -50,7 +50,7 @@ struct CheckOutComponent: View {
                         .foregroundStyle(.tertiary)
                     Spacer()
                     Text(
-                        "\(cartCost?.checkoutChargeAmount?.currencyCode ?? "") \(cartCost?.checkoutChargeAmount?.amount ?? "0")"
+                        "\(cartCost?.checkoutChargeAmount?.formattedCurrecyCode ?? "EGP") \(cartCost?.checkoutChargeAmount?.formattedPrice ?? "0.0")"
                     )
                 }.padding(.horizontal)
                     .padding(.bottom, 10)
@@ -60,7 +60,7 @@ struct CheckOutComponent: View {
                         .foregroundStyle(.tertiary)
                     Spacer()
                     Text(
-                        "\(cartCost?.checkoutChargeAmount?.currencyCode ?? "") \("0")"
+                        "\(cartCost?.checkoutChargeAmount?.formattedCurrecyCode ?? "EGP") \("0.0")"
                     )
                 }.padding(.horizontal)
                     .padding(.bottom, 10)
@@ -70,7 +70,7 @@ struct CheckOutComponent: View {
                         .foregroundStyle(.tertiary)
                     Spacer()
                     Text(
-                        "\(cartCost?.totalAmount?.currencyCode ?? "") \(cartCost?.totalAmount?.amount ?? "0")"
+                        "\(cartCost?.totalAmount?.formattedCurrecyCode ?? "EGP") \(cartCost?.totalAmount?.formattedPrice ?? "0.0")"
                     )
                 }
                 .padding(.horizontal)
