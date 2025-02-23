@@ -36,7 +36,7 @@ struct OrderCard: View  {
                             
                         Text(vendor).font(.caption).foregroundColor(.secondary)
                         KeyAndValueTextView(key: "Qty: ", value: "\(prodQty)       varient: \(prodVarient)")
-                        KeyAndValueTextView(key: "price: ", value: "\(prodPrice)")
+                        KeyAndValueTextView(key: "Price per unit: ", value: "\(prodPrice)")
                     }
                     .frame(maxWidth: UIScreen.main.bounds.width/1.7)
                 }
@@ -51,7 +51,7 @@ struct OrderCard: View  {
 }
 
 #Preview {
-    NavigationView {
-        OrderCard(imgUrl: "https://devwear.co/cdn/shop/files/HOODIE-74.2.png?v=1706656782", prodTitle: "Abo Sami Hoodie", vendor: "Adidas", prodVarient: "Brown", prodPrice: "$234", prodQty: 12, isMyOrder: true, detailsDest: AnyView(Text("Details")))
-    }
+//    NavigationView {
+//        OrderCard(imgUrl: "https://devwear.co/cdn/shop/files/HOODIE-74.2.png?v=1706656782", prodTitle: "Abo Sami Hoodie", vendor: "Adidas", prodVarient: "Brown", prodPrice: "$234", prodQty: 12, isMyOrder: true, detailsDest: AnyView(Text("Details")))
+//    }
 }

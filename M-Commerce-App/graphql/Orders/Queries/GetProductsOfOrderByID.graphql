@@ -38,6 +38,7 @@ query GetProductsOfOrderByID ($CustomerAT: String!) {
                     amount
                     currencyCode
                 }
+                id
             }
         }
         displayName

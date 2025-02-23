@@ -26,7 +26,10 @@ class LoginViewModel: ObservableObject {
         Auth.auth().signIn(withEmail: email, password: password) {
             authResult, error in
             if let error = error {
-                print("Login failed: \(error.localizedDescription)")
+                SnackbarManager.shared.show(
+                    message:
+                        "The email or password is incorrect, please try again!"
+                )
             } else if let user = authResult?.user {
                 user.reload { reloadError in  // Refresh user info
                     if let reloadError = reloadError {

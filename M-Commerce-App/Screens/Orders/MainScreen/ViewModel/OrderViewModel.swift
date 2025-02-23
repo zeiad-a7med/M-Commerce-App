@@ -13,14 +13,11 @@ final class OrderViewModel: ObservableObject {
     @Published var orderModel: OrderModel = OrderModel()
     @Published var isLoading: Bool = true
     
-    init(customerAccessTaken: String) {
-        fetchOrders(customerAccessTaken: customerAccessTaken)
-    }
     
-    func fetchOrders(customerAccessTaken: String) {
+    func fetchOrders() {
         self.isLoading = true
         ApolloNetwokService.shared.apollo.fetch(
-            query: GetOrdersFromCustomerATQuery(customerAT: customerAccessTaken)
+            query: GetOrdersFromCustomerATQuery(customerAT:  AuthManager.shared.applicationUser?.accessToken ?? ""),cachePolicy: .fetchIgnoringCacheData
         ) { [weak self] res in
             switch res {
             case .success(let result):

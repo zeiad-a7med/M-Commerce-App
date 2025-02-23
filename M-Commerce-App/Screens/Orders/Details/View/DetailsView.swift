@@ -8,39 +8,55 @@
 import SwiftUI
 
 struct DetailsView: View {
-    @StateObject var detailsViewModel = DetailsViewModel(customerAccessTaken: "e43f5e2e26fe3059f5b4ca16e53b588f")
-    var numberOfOrder:Int
+    @StateObject var detailsViewModel = DetailsViewModel()
+    var orderId: String
     var body: some View {
         ScrollView {
             VStack {
                 if !detailsViewModel.isLoading {
                     if let dvm = detailsViewModel.detailsModel.customer {
-                        ForEach(dvm.orders?.nodes?[numberOfOrder].lineItems?.nodes ?? [], id: \.quantity) { order in
+                        ForEach(
+                            dvm.orders?.nodes?.first?.lineItems?.nodes ?? [],
+                            id: \.quantity
+                        ) { order in
                             var separatedText: [String] {
-                                order.variant?.title?.split(separator: "/").map { $0.trimmingCharacters(in: .whitespaces) } ?? []
-                                }
-                            OrderCard(imgUrl: order.variant?.image?.url ?? "",
-                            prodTitle: order.title ?? "",
-                                      vendor: order.product?.vendor ?? "",
-                                      prodVarient: order.variant?.title ?? "",
-                                      prodPrice: "\(order.price?.amount ?? "0") EGP" ,
-                                      prodQty: order.currentQuantity ?? 0,
-                            isMyOrder: true,
-                                      detailsDest: AnyView(ProductInfoView(productId: order.variant?.product?.id ?? "")))
+                                order.variant?.title?.split(separator: "/").map
+                                { $0.trimmingCharacters(in: .whitespaces) }
+                                    ?? []
+                            }
+                            OrderCard(
+                                imgUrl: order.variant?.image?.url ?? "",
+                                prodTitle: order.title ?? "",
+                                vendor: order.product?.vendor ?? "",
+                                prodVarient: order.variant?.title ?? "",
+                                prodPrice:"\(CurrencyManager.currentCurrencyRate.code ?? "0") \(String(format: "%.2f",(Double( order.price?.amount ?? "0") ?? 0) * (CurrencyManager.currentCurrencyRate.value ?? 1.0)))",
+
+                                prodQty: order.currentQuantity ?? 0,
+                                isMyOrder: true,
+                                detailsDest: AnyView(
+                                    ProductInfoView(
+                                        productId: order.variant?.product?.id
+                                            ?? "")))
                         }
                     }
-                }else{
+                } else {
                     CustomProgressView()
                 }
                 Spacer()
             }.navigationTitle(Text("Ordered Products"))
+                .onAppear {
+                    detailsViewModel.fetchProductsOfOrder(orderId: orderId)
+                    var p = ""
+                    var q = 1
+                    var str : String = "\(CurrencyManager.currentCurrencyRate.code ?? "0") \((Double( p ?? "0") ?? 0) * (Double(q) ?? 0) * (CurrencyManager.currentCurrencyRate.value ?? 1.0))"
+                    
+                }
         }
     }
 }
 
 #Preview {
-    NavigationView {
-        DetailsView( numberOfOrder: 0)
-    }
+    //    NavigationView {
+    //        DetailsView( numberOfOrder: 0)
+    //    }
 }
-

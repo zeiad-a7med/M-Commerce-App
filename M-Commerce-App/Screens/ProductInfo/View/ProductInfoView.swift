@@ -282,6 +282,7 @@ struct ProductInfoView: View {
                 .onChange(of: totalPrice, {
                     finalTotalPrice = (totalPrice * (CurrencyManager.currentCurrencyRate.value ?? 1.0))
                 })
+                .toolbar(.hidden,for: .tabBar)
                 .onAppear{
                     calculateTotalPrice()
                 }

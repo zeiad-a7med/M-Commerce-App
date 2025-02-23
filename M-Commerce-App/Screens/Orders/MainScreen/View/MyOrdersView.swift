@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct MyOrdersView: View {
-    @StateObject var orderViewModel = OrderViewModel(
-        customerAccessTaken: AuthManager.shared.applicationUser?.accessToken ?? "")
+    @StateObject var orderViewModel = OrderViewModel()
     @State var isMyOrdersSelected: Bool = true
     var body: some View {
         NavigationView {
@@ -41,23 +40,31 @@ struct MyOrdersView: View {
                                 {
                                     ForEach(cust.orders?.nodes ?? [], id: \.id)
                                     { ord in
-                                        OrderedProductCard(
-                                            name: cust.displayName ?? "",
-                                            phone:
-                                                "\(ord.phone ?? cust.phone ?? "")",
-                                            email: ord.email ?? "",
-                                            address: cust.addresses?.first?
-                                                .address1 ?? "",
-                                            orderNo: "\(ord.orderNumber ?? 0)",
-                                            orderPrice:
-                                                "\(ord.currentTotalPrice?.amount ?? "") \(ord.currentTotalPrice?.currencyCode ?? "")",
-                                            date: ord.processedAt ?? "",
-                                            noOfProducts: 2,
-                                            isMyOrder: isMyOrdersSelected,
-                                            detailsDest: AnyView(
-                                                DetailsView(numberOfOrder: 0)),
-                                            secondDest: AnyView(
-                                                Text("Coming Soon")))
+                                        NavigationLink {
+                                            DetailsView(orderId: ord.id ?? "")
+                                        } label: {
+                                            OrderedProductCard(
+                                                name: cust.displayName ?? "",
+                                                phone:
+                                                    "\(ord.phone ?? cust.phone ?? "")",
+                                                email: ord.email ?? "",
+                                                address: cust.addresses?.first?
+                                                    .address1 ?? "",
+                                                orderNo:
+                                                    "\(ord.orderNumber ?? 0)",
+                                                orderPrice:
+                                                    "\(CurrencyManager.currentCurrencyRate.code ?? "0") \(String(format: "%.2f",(Double( ord.currentTotalPrice?.amount ?? "0") ?? 0) * (CurrencyManager.currentCurrencyRate.value ?? 1.0)))",
+
+                                                date: ord.processedAt ?? "",
+                                                noOfProducts: 2,
+                                                isMyOrder: isMyOrdersSelected,
+                                                detailsDest: AnyView(
+                                                    DetailsView(
+                                                        orderId: ord.id ?? "")),
+                                                secondDest: AnyView(
+                                                    Text("Coming Soon")))
+                                        }
+
                                     }
                                 }
                             }
@@ -69,8 +76,9 @@ struct MyOrdersView: View {
                     Spacer()
                 }
             }.overlay(content: {
-                if(AuthManager.shared.isLoggedIn()){
-                    if orderViewModel.orderModel.customer?.orders?.nodes?.count ?? 0
+                if AuthManager.shared.isLoggedIn() {
+                    if orderViewModel.orderModel.customer?.orders?.nodes?.count
+                        ?? 0
                         == 0 && !orderViewModel.isLoading && isMyOrdersSelected
                     {
                         let msg = "No Orders Found"
@@ -94,6 +102,10 @@ struct MyOrdersView: View {
                 }
             })
             .navigationTitle(Text("Orders"))
+            .navigationBarBackButtonHidden(true) 
+        }
+        .onAppear {
+            orderViewModel.fetchOrders()
         }
     }
 }

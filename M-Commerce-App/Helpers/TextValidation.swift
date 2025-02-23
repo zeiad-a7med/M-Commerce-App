@@ -43,7 +43,7 @@ class TextValidation {
 
     // Function for email validation
     private func validateEmail(_ input: String) -> String? {
-        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{3,}"
         let isValid = NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: input)
         
         return isValid ? nil : "Invalid email"

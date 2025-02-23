@@ -7,7 +7,7 @@ public class GetProductsOfOrderByIDQuery: GraphQLQuery {
   public static let operationName: String = "GetProductsOfOrderByID"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query GetProductsOfOrderByID($CustomerAT: String!) { customer(customerAccessToken: $CustomerAT) { __typename orders(first: 10) { __typename totalCount nodes { __typename lineItems(first: 10) { __typename nodes { __typename currentQuantity quantity title variant { __typename currentlyNotInStock id title image { __typename id url } price { __typename amount currencyCode } product { __typename id productType title totalInventory vendor } } } } currentSubtotalPrice { __typename amount currencyCode } currentTotalPrice { __typename amount currencyCode } } } displayName id numberOfOrders } }"#
+      #"query GetProductsOfOrderByID($CustomerAT: String!) { customer(customerAccessToken: $CustomerAT) { __typename orders(first: 10) { __typename totalCount nodes { __typename lineItems(first: 10) { __typename nodes { __typename currentQuantity quantity title variant { __typename currentlyNotInStock id title image { __typename id url } price { __typename amount currencyCode } product { __typename id productType title totalInventory vendor } } } } currentSubtotalPrice { __typename amount currencyCode } currentTotalPrice { __typename amount currencyCode } id } } displayName id numberOfOrders } }"#
     ))
 
   public var customerAT: String
@@ -88,6 +88,7 @@ public class GetProductsOfOrderByIDQuery: GraphQLQuery {
             .field("lineItems", LineItems.self, arguments: ["first": 10]),
             .field("currentSubtotalPrice", CurrentSubtotalPrice.self),
             .field("currentTotalPrice", CurrentTotalPrice.self),
+            .field("id", ShopifyAPIKit.ID.self),
           ] }
 
           /// List of the order’s line items.
@@ -96,6 +97,8 @@ public class GetProductsOfOrderByIDQuery: GraphQLQuery {
           public var currentSubtotalPrice: CurrentSubtotalPrice { __data["currentSubtotalPrice"] }
           /// The total amount of the order, including duties, taxes and discounts, minus amounts for line items that have been removed.
           public var currentTotalPrice: CurrentTotalPrice { __data["currentTotalPrice"] }
+          /// A globally-unique ID.
+          public var id: ShopifyAPIKit.ID { __data["id"] }
 
           /// Customer.Orders.Node.LineItems
           ///

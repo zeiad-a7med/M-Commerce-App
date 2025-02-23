@@ -20,16 +20,15 @@ struct PaymentProductRow: View {
                     VStack(alignment:.leading) {
                         Text(line?.variant?.productTitle ?? "").bold()
                         HStack {
-                            Text("Size:").bold()
-                            Text(size ?? " ")
-                        }
-                        HStack {
-                            Text("Color:").bold()
-                            Text(color ?? " ")
+                            Text("Variant: ").bold()
+                            Text(line?.variant?.title ?? " ")
                             Spacer()
                             Text("TotalPrice:").bold()
-                            Text(line?.lineCost?.totalAmount?.amount ?? "")
-                            Text(line?.variant?.price?.currencyCode ?? "")
+                            
+                            Text(String(format: "%.2f", (Double(
+                                line?.lineCost?.totalAmount?.amount ?? "0") ?? 0)
+                            * (CurrencyManager.currentCurrencyRate.value ?? 1.0)))
+                            Text(CurrencyManager.currentCurrencyRate.code ?? "EGP")
                                
                         }
                     }

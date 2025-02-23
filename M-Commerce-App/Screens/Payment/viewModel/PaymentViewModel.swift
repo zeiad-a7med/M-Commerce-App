@@ -23,25 +23,13 @@ class PaymentViewModel : ObservableObject{
             }
         }
     }
-    func emptyCart(){
-        var tempLineIdList = [String]()
-        AuthManager.shared.applicationUser?.cart?.lines?.forEach({ Line in
-            tempLineIdList.append(Line.id ?? " ")
-        })
-        isLoading = true
-        CartService.cartLinesRemove(lineIds: tempLineIdList) { result in
-            self.isLoading = false
-            self.cartResult = result
-            let user = AuthManager.shared.applicationUser!
-            user.cart = nil
-            AuthManager.shared.updateUser(updatedUser: user)
-        }
-    }
     func createOrder(){
-        PaymentService.createOrder{ result in
-            print("success \(result?.success)" )
-            print ("message\(result?.message)")
-            OrderCreateResponse(success: result?.success,message: result?.message)
+        if(cartResult?.cart != nil){
+            PaymentService.createOrder(){ result in
+                print("success \(String(describing: result?.success))" )
+                print ("message\(result?.message ?? "")")
+                OrderCreateResponse(success: result?.success,message: result?.message)
+            }
         }
     }
     

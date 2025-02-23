@@ -139,10 +139,17 @@ class CartService: CartServiceProtocol {
     
     static func cartLinesAdd(lines: [CartLineInputValue], complitionHandler: @escaping (CartResponse?) -> Void) {
         if AuthManager.shared.isLoggedIn() {
-            guard let cartID = AuthManager.shared.applicationUser?.cart?.id else {
+            var cartID : String?
+            if(AuthManager.shared.applicationUser?.cart?.id != nil){
+                cartID = AuthManager.shared.applicationUser?.cart?.id
+                
+            }else{
                 createCart (lines: lines){ result in
-                    complitionHandler(result)
+                    cartID = result?.cart?.id
                 }
+            }
+            
+            guard let cartID = cartID else {
                 return
             }
             
