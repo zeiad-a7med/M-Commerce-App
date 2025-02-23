@@ -70,7 +70,7 @@ struct ProductCardView: View {
                     .foregroundStyle(.gray)
                     .multilineTextAlignment(.center)
                     .fontWeight(.bold)
-                Text("\(product.currency ?? "")\(product.formattedPrice)")
+                Text("\(product.currency ?? "") \(product.formattedPrice)")
                     .font(.subheadline)
                     .foregroundStyle(.black)
                     .multilineTextAlignment(.center)

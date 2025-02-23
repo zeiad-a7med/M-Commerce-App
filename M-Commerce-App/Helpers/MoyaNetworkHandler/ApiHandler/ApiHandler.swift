@@ -24,7 +24,7 @@ extension ApiHandler : TargetType {
     var apiKey: String {
         switch self {
         case .getLatestCurrency:
-            return "cur_live_WxAuo7xlBF0ZsSSxC42ftAcsDT3FVvec7QELytdR"
+            return "cur_live_hCtT6RsVCG93RDlxIiNl596NTHXGKEi1N3VaLeov"
         }
     }
     var path: String {
@@ -44,7 +44,7 @@ extension ApiHandler : TargetType {
     var task: Moya.Task {
         switch self {
         case .getLatestCurrency:
-            return .requestParameters(parameters: ["apikey":"\(apiKey)","currencies": "CNY,JPY,GBP,TRY,TND,MAD,DZD,EUR,USD,CAD,SAR,AED,KWD,QAR,OMR,BHD",
+            return .requestParameters(parameters: ["apikey":"\(apiKey)","currencies": "EGP,SAR,AED,QAR,KWD,BHD,OMR,LBP,JOD,IQD,MAD,DZD,TND,SDG,SYP,ILS,LYD,MRU,YER,USD,CAD,GBP,AUD,INR,EUR,EUR,EUR,EUR,BRL",
                 "base_currency": "EGP"], encoding: URLEncoding.queryString)
         }
     }

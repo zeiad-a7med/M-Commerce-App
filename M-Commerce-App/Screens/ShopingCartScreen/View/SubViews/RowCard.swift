@@ -84,7 +84,7 @@ struct RowCard: View {
                 }
                 Spacer()
                 Text(
-                    "\(line?.lineCost?.totalAmount?.currencyCode ?? "") \(line?.lineCost?.totalAmount?.amount ?? "")"
+                    "\(line?.lineCost?.totalAmount?.formattedCurrecyCode ?? "EGP") \(line?.lineCost?.totalAmount?.formattedPrice ?? "1.0")"
                 )
                 .padding(.trailing)
                 .font(.title2)
