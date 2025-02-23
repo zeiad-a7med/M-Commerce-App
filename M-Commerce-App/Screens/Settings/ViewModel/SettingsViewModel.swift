@@ -63,6 +63,8 @@ class SettingsViewModel: ObservableObject {
             AuthService.logOutCustomer(customerAccessToken: AuthManager.shared.applicationUser!.accessToken!) { result in
                 if(result.success){
                     AuthManager.shared.logoutUser()
+                    NavigationManager.shared.push(.home)
+                    SnackbarManager.shared.show(message: "Logged out Successfully")
                 }else{
                     SnackbarManager.shared.show(message: "Logout Failed")
                 }

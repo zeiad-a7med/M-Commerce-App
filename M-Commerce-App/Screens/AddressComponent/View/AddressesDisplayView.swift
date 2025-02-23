@@ -52,7 +52,7 @@ struct AddressesDisplayView: View {
                     
 
                 }
-                .navigationTitle("Address")
+                
          //   }
             
         }
@@ -62,6 +62,8 @@ struct AddressesDisplayView: View {
                 addressModel.fetchAddresses(AccessToken: AuthManager.shared.applicationUser?.accessToken ?? " ")
             })
         }
+        .navigationTitle("Address")
+        .toolbar(.hidden,for: .tabBar)
     }
 }
 

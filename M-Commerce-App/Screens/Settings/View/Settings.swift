@@ -18,7 +18,6 @@ struct Settings: View {
     var body: some View {
 
         NavigationView {
-
             VStack {
                 if isLoggedIn {
                     List {
@@ -53,16 +52,18 @@ struct Settings: View {
                         ) {
                             Currency()
 
-                            NavigationLink(destination: {
-                                AddressesDisplayView()
-                            }, label: {
-                                SettingsListRow(
-                                    imageName:
-                                        "location",
-                                    RowName: "Addresses"
-                                )
-                            })
-                            
+                            NavigationLink(
+                                destination: {
+                                    AddressesDisplayView()
+                                },
+                                label: {
+                                    SettingsListRow(
+                                        imageName:
+                                            "location",
+                                        RowName: "Addresses"
+                                    )
+                                })
+
                             Button(
                                 action: {
                                     isAlertVisible.toggle()
@@ -101,23 +102,7 @@ struct Settings: View {
                             )
                         }
                 } else {
-                    VStack {
-                        ContentUnavailableView(
-                            "You are not logged in",
-                            systemImage: "person.slash",
-                            description: Text(
-                                "to view your favorites please sign in")
-                        ).frame(height: 300)
-                        NavigationLink(destination: LoginView()) {
-                            CustomRoundedButtonView(
-                                text: "Sign In",
-                                width: 100,
-                                onTap: {},
-                                isButtonEnabled: .constant(true)
-                            )
-                            .allowsHitTesting(false)
-                        }
-                    }
+                    RequireLoginView()
                 }
             }
             .onAppear {

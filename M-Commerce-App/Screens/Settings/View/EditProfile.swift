@@ -130,6 +130,8 @@ struct EditProfile: View {
             )
 
         }.padding()
+            .navigationTitle("Edit profile")
+            .toolbar(.hidden,for: .tabBar)
             .onAppear {
                 firstName = viewModel.user?.firstName ?? ""
                 lastName = viewModel.user?.lastName ?? ""

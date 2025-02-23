@@ -19,87 +19,92 @@ struct LoginView: View {
 
     var body: some View {
 
-        VStack {
-            //Email
-            VStack(alignment: .leading) {
-                Text("Email")
-                    .font(.title2)
-                CustomTextField(
-                    placeholder: "Enter your email",
-                    onChange: { val in
-                        email = val
-                    },
-                    prefix: { Image(systemName: "envelope") },
-                    validationType: .email,
-                    isValid: { valid in
-                        emailValid = valid
-                    },
-                    initialText: .constant("")
-                )
-            }.padding(.bottom, 10)
+        ScrollView{
+            VStack {
+                //Email
+                VStack(alignment: .leading) {
+                    Text("Email")
+                        .font(.title2)
+                    CustomTextField(
+                        placeholder: "Enter your email",
+                        onChange: { val in
+                            email = val
+                        },
+                        prefix: { Image(systemName: "envelope") },
+                        validationType: .email,
+                        isValid: { valid in
+                            emailValid = valid
+                        },
+                        initialText: .constant("")
+                    )
+                }.padding(.bottom, 10)
 
-            //Password
-            VStack(alignment: .leading) {
-                Text("Password")
-                    .font(.title2)
-                CustomSecureField(
-                    placeholder: "Enter your password",
-                    onChange: { val in
-                        password = val
+                //Password
+                VStack(alignment: .leading) {
+                    Text("Password")
+                        .font(.title2)
+                    CustomSecureField(
+                        placeholder: "Enter your password",
+                        onChange: { val in
+                            password = val
+                        },
+                        prefix: { Image(systemName: "lock") },
+                        validationType: .password,
+                        isValid: { valid in
+                            passwordValid = valid
+                        }
+                    )
+                }.padding(.bottom, 30)
+
+                CustomRoundedButtonView(
+                    text: "Sign In", width: 50,
+                    onTap: {
+                        viewModel.login(email: email, password: password)
                     },
-                    prefix: { Image(systemName: "lock") },
-                    validationType: .password,
-                    isValid: { valid in
-                        passwordValid = valid
+                    isButtonEnabled: $isFormValid
+                )
+                .onChange(
+                    of: emailValid,
+                    { oldValue, newValue in
+                        updateFormValidity()
                     }
                 )
-            }.padding(.bottom, 30)
+                .onChange(
+                    of: passwordValid,
+                    { oldValue, newValue in
+                        updateFormValidity()
+                    })
 
-            CustomRoundedButtonView(
-                text: "Sign In", width: 50,
-                onTap: {
-                    viewModel.login(email: email, password: password)
-                },
-                isButtonEnabled: $isFormValid
-            )
-            .onChange(
-                of: emailValid,
-                { oldValue, newValue in
-                    updateFormValidity()
-                }
-            )
-            .onChange(
-                of: passwordValid,
-                { oldValue, newValue in
-                    updateFormValidity()
-                })
-
-            NavigationLink(destination: RegisterView()) {
-                Text("Don't have an account? Create account")
-                    .font(.footnote)
-                    .foregroundColor(.blue)
-            }.padding(.top, 10)
-                .padding(.bottom,10)
-            if(viewModel.resendVerficationMailVisible && Auth.auth().currentUser != nil){
-                Button(action: {
-                    viewModel.resendEmailVerification()
-                },label: {
-                    Text("Resend verfication mail")
+                
+                    Text("Don't have an account? Create account")
                         .font(.footnote)
                         .foregroundColor(.blue)
-                }).padding(.top, 10)
-            }
-            
+                        .padding(.top, 10)
+                        .padding(.bottom,10)
+                        .onTapGesture {
+                            NavigationManager.shared.pushReplacement(.register)
+                        }
+                if(viewModel.resendVerficationMailVisible && Auth.auth().currentUser != nil){
+                    Button(action: {
+                        viewModel.resendEmailVerification()
+                    },label: {
+                        Text("Resend verfication mail")
+                            .font(.footnote)
+                            .foregroundColor(.blue)
+                    }).padding(.top, 10)
+                }
+                
 
-            Spacer()
-            
-//            NavigationLink(
-//                destination: ContentView(), isActive: .constant(viewModel.successLogin)
-//            ) {
-//                EmptyView()
-//            }
+                Spacer()
+                
+    //            NavigationLink(
+    //                destination: ContentView(), isActive: .constant(viewModel.successLogin)
+    //            ) {
+    //                EmptyView()
+    //            }
 
-        }.padding(20)
+            }.padding(20)
+        }
             .navigationTitle("Sign In")
 
     }

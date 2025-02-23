@@ -15,7 +15,6 @@ struct ProductInfoView: View {
     @State var currentVariantSelectedQuantity: Int = 0
     @State var totalPrice: Double = 0.0
     @State var finalTotalPrice: Double = 0.0
-    @State var viewCart : Bool = false
 
     init(productId: String) {
         self.productId = productId
@@ -235,7 +234,7 @@ struct ProductInfoView: View {
                                         onTap: {
                                             if AuthManager.shared.isLoggedIn() {
                                                 viewModel.updateCart { success in
-                                                    viewCart = true
+                                                    NavigationManager.shared.push(.cart)
                                                 }
                                             } else {
                                                 AlertManager.shared.showLoginAlert()
@@ -243,11 +242,6 @@ struct ProductInfoView: View {
                                         },
                                         isButtonEnabled: .constant(true)
                                     )
-                                    NavigationLink(
-                                        destination: ShoppingView(), isActive: $viewCart
-                                    ) {
-                                        EmptyView()
-                                    }
                                 }else{
                                     CustomRoundedButtonView(
                                         text: "Add to Cart",

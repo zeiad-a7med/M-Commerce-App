@@ -10,20 +10,22 @@ import SwiftUI
 struct ProductsSubView: View {
     @StateObject var cViewModel: CategoriesViewModel = CategoriesViewModel(
         first: 20, after: nil, filter: "")
-    @Binding var filterString : String
-    var SubFiltersArray:[String]
+    @Binding var filterString: String
+    var SubFiltersArray: [String]
     @Binding var subFilterIndex: Int
     @Binding var filterType: String
+    @State private var path: [Product] = []
 
     private let columns = [GridItem(.flexible()), GridItem(.flexible())]
     @State private var lastItemID: String?
 
     var body: some View {
-        
+
         if !cViewModel.isLoading {
             if let filteredProducts = cViewModel.categories
                 .categoryProducts
             {
+
                 LazyVGrid(columns: columns, spacing: 10) {
                     ForEach(filteredProducts, id: \.id) { product in
                         ProductCardView(product: product)
@@ -31,42 +33,60 @@ struct ProductsSubView: View {
                             .onAppear {
                                 checkIfNeedMoreData(currentProduct: product)
                             }
+                            .onTapGesture {
+                                NavigationManager.shared.push(
+                                    .product(id: product.id))
+                            }
                     }
+
                 }
-                .onChange(of: filterType, { oldValue, newValue in
-                    filter()
-                })
-                .onChange(of: subFilterIndex, { oldValue, newValue in
-                    filter()
-                })
-                
+                .onChange(
+                    of: filterType,
+                    { oldValue, newValue in
+                        filter()
+                    }
+                )
+                .onChange(
+                    of: subFilterIndex,
+                    { oldValue, newValue in
+                        filter()
+                    }
+                )
+
                 .padding(5)
                 .overlay(content: {
-                    if cViewModel.categories.categoryProducts?.count ?? 0 == 0 && !cViewModel.isLoading {
+                    if cViewModel.categories.categoryProducts?.count ?? 0 == 0
+                        && !cViewModel.isLoading
+                    {
                         let msg = "No Products Found"
-                        let desc = Text("No  Products Found of type \"\(SubFiltersArray[subFilterIndex] == "" ? "" : "\(SubFiltersArray[subFilterIndex])")\" in \"\(filterType) category\", try using other filters")
+                        let desc = Text(
+                            "No  Products Found of type \"\(SubFiltersArray[subFilterIndex] == "" ? "" : "\(SubFiltersArray[subFilterIndex])")\" in \"\(filterType) category\", try using other filters"
+                        )
                         let img = "square.3.layers.3d.slash"
-                        ContentUnavailableView(msg , systemImage: img, description: desc)
-                            }
-                        })
+                        ContentUnavailableView(
+                            msg, systemImage: img, description: desc)
+                    }
+                })
             }
-            
-        }else {
+
+        } else {
             VStack {
                 Spacer()
                 ProgressView()
-                .progressViewStyle(CircularProgressViewStyle())
-                .scaleEffect(4)
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .scaleEffect(4)
                 Spacer()
             }.padding(120)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        
+
     }
 
     private func checkIfNeedMoreData(currentProduct: Product) {
-        guard let lastProduct = cViewModel.categories
-            .categoryProducts?.last else { return }
+        guard
+            let lastProduct = cViewModel.categories
+                .categoryProducts?.last
+        else { return }
         if currentProduct.id == lastProduct.id {
             lastItemID = lastProduct.id
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -107,9 +127,9 @@ struct ProductsSubView: View {
 }
 
 #Preview {
-//    ProductsSubView(
-//        filteredProducts: [Product](),
-//        loadMore: {
-//            print("loading more.......!")
-//        })
+    //    ProductsSubView(
+    //        filteredProducts: [Product](),
+    //        loadMore: {
+    //            print("loading more.......!")
+    //        })
 }

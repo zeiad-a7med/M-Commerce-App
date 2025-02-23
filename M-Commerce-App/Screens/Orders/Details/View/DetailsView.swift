@@ -44,6 +44,7 @@ struct DetailsView: View {
                 }
                 Spacer()
             }.navigationTitle(Text("Ordered Products"))
+                .toolbar(.hidden,for: .tabBar)
                 .onAppear {
                     detailsViewModel.fetchProductsOfOrder(orderId: orderId)
                     var p = ""

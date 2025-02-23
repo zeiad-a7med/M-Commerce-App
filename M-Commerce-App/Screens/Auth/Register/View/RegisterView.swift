@@ -185,19 +185,15 @@ struct RegisterView: View {
                         updateFormValidity()
                     })
 
-                NavigationLink(destination: LoginView()) {
-                    Text("Already have an account? Sign In")
-                        .font(.footnote)
-                        .foregroundColor(.blue)
-                }.padding(.top, 10)
+                Text("Already have an account? Sign In")
+                    .font(.footnote)
+                    .foregroundColor(.blue)
+                    .padding(.top, 10)
+                    .onTapGesture {
+                        NavigationManager.shared.pushReplacement(.login)
+                    }
 
             }.padding(20)
-            // Navigation link outside the alert to handle navigation properly
-            NavigationLink(
-                destination: SendingVerificationView(email: email), isActive: .constant(viewModel.successRegister)
-            ) {
-                EmptyView()
-            }
         }
         .navigationTitle("Create account")
 

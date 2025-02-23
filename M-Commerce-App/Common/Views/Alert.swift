@@ -10,15 +10,8 @@ import SwiftUI
 
 struct AlertView: View {
     @EnvironmentObject var alertManager: AlertManager
-    @State private var shouldNavigateToLogin = false
     var body: some View {
         VStack {
-            // Navigation link outside the alert to handle navigation properly
-            NavigationLink(
-                destination: LoginView(), isActive: $shouldNavigateToLogin
-            ) {
-                EmptyView()
-            }
         }
         .frame(maxWidth: .infinity)
         .zIndex(2)
@@ -31,8 +24,7 @@ struct AlertView: View {
         ) {
 
             Button("Sign In") {
-                shouldNavigateToLogin = true
-                
+                NavigationManager.shared.push(.login)
             }
 
             Button("Cancel") {}

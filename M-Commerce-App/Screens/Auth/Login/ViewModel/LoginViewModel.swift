@@ -75,6 +75,7 @@ class LoginViewModel: ObservableObject {
                         message: "Signed in successfully 🤝🏻!")
                     AuthManager.shared.updateUser(
                         updatedUser: result.applicationUser!)
+                    NavigationManager.shared.pop()
                     self.successLogin = true
                 } else {
                     SnackbarManager.shared.show(

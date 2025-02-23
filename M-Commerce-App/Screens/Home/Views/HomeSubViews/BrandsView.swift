@@ -22,25 +22,23 @@ struct BrandsView: View {
                 ForEach(
                     bViewModel.brands.collections ?? [], id: \.id,
                     content: { brand in
-                        NavigationLink(
-                            destination: {
-                                ProductsView(brandTitle: brand.title ?? "")
-                            },
-                            label: {
-                                BrandCard(
-                                    title: brand.title ?? "",
-                                    imageUrl: brand.img?.url ?? ""
-                                )
-                                .onAppear {
-                                    print("s")
+                        Button(action:{
+                            NavigationManager.shared.push(.brand(title: brand.title ?? ""))
+                        },label: {
+                            BrandCard(
+                                title: brand.title ?? "",
+                                imageUrl: brand.img?.url ?? ""
+                            )
+                            .onAppear {
+                                print("s")
 
-                                    if brand.title ?? "" == bViewModel.brands
-                                        .collections?.last?.title ?? ""
-                                    {
-                                        bViewModel.loadMore()
-                                    }
+                                if brand.title ?? "" == bViewModel.brands
+                                    .collections?.last?.title ?? ""
+                                {
+                                    bViewModel.loadMore()
                                 }
-                            })
+                            }
+                        })
                     })
             })
     }

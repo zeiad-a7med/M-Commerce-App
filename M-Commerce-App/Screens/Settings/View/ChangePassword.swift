@@ -69,6 +69,8 @@ struct ChangePassword: View {
             }.padding()
             CustomRoundedButtonView(text: "Save Changes",width: 80,isButtonEnabled: .constant(true))
         }
+        .navigationTitle("Change password")
+        .toolbar(.hidden,for: .tabBar)
     }
 }
 

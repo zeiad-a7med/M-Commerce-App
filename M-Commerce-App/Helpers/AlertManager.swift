@@ -17,7 +17,7 @@ class AlertManager: ObservableObject {
 
     func showLoginAlert() {
         self.title = "You are not Signed In"
-        self.message = "to use favorites feature please Sign In"
+        self.message = "Sign in now to access more features"
         self.isVisible = true
     }
 }

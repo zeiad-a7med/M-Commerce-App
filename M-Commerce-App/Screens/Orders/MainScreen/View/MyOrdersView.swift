@@ -14,23 +14,7 @@ struct MyOrdersView: View {
         NavigationView {
             VStack {
                 if !AuthManager.shared.isLoggedIn() {
-                    VStack {
-                        ContentUnavailableView(
-                            "You are not logged in",
-                            systemImage: "person.slash",
-                            description: Text(
-                                "to view your favorites please sign in")
-                        ).frame(height: 300)
-                        NavigationLink(destination: LoginView()) {
-                            CustomRoundedButtonView(
-                                text: "Sign In",
-                                width: 100,
-                                onTap: {},
-                                isButtonEnabled: .constant(true)
-                            )
-                            .allowsHitTesting(false)
-                        }
-                    }
+                    RequireLoginView()
                 } else {
                     SwitchScreensBar(isMyOrdersSelected: $isMyOrdersSelected)
                     ScrollView {

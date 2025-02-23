@@ -20,7 +20,8 @@ class ProductService: ProductServiceProtocol {
         complitionHandler: @escaping (ProductResponse?) -> Void
     ) {
         ApolloNetwokService.shared.apollo.fetch(
-            query: GetProductQuery(id: productId)
+            query: GetProductQuery(id: productId),
+            cachePolicy: .fetchIgnoringCacheData
         ) { result in
             switch result {
             case .success(let graphQLResult):

@@ -10,28 +10,34 @@ import SwiftUI
 struct BrandsGrid: View {
     var columns: [GridItem]
     var products: [Product]
-    var loadMore: ()->Void
+    var loadMore: () -> Void
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns) {
                 ForEach(products, id: \.id) { product in
                     ProductCardView(product: product)
-                        .padding(.top,20)
-                        .onAppear() {
+                        .padding(.top, 20)
+                        .onAppear {
                             if product.id == products.last?.id {
                                 print("loading more...!")
                                 loadMore()
                             }
                         }
+                        .onTapGesture {
+                            NavigationManager.shared.push(
+                                .product(id: product.id))
+                        }
                 }
             }
-            
+
         }
     }
 }
 
 #Preview {
-    BrandsGrid(columns: [], products: [], loadMore: {
-        print("loading more...!")
-    })
+    BrandsGrid(
+        columns: [], products: [],
+        loadMore: {
+            print("loading more...!")
+        })
 }

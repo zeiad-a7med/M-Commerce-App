@@ -8,70 +8,39 @@
 import SwiftUI
 
 struct HomePageView: View {
-    let screenTitle: String = "Home"
     let tempImageList = ImageList(id: "")
-    @State var favoriteCount : Int = 0
+    @State var favoriteCount: Int = 0
     var body: some View {
-
-        NavigationView {
-            ZStack {  //start of: ZStack
-                ScrollView {
-                    VStack {
-                        CustomTextField(
-                            placeholder: "search for brand ...",
-                            onChange: { text in
-                                print("Search text: \(text)")
-                            },
-                            prefix: {
-                                Image(systemName: "magnifyingglass")
-                            },
-                            initialText: .constant("")
-                        )
-                        .padding([.leading,.trailing],20)
-                        AdCardView(
-                            imageList: tempImageList,
-                            discountCode: [
-                                DiscountCode(), DiscountCode(code: "ByeBye"),
-                                DiscountCode(code: "areWeThereYet"),
-                            ], pricesruleList: PriceRulesList(id: "")
-                        ) {
-                        }
-                        HeaderView(
-                            title: ThemeManager.secondSectionTitle,
-                            color: ThemeManager.titleColor)
-                        BrandsView()
-//                        Spacer()
+        ZStack {  //start of: ZStack
+            ScrollView {
+                VStack {
+                    CustomTextField(
+                        placeholder: "search for brand ...",
+                        onChange: { text in
+                            print("Search text: \(text)")
+                        },
+                        prefix: {
+                            Image(systemName: "magnifyingglass")
+                        },
+                        initialText: .constant("")
+                    )
+                    .padding([.leading, .trailing], 20)
+                    AdCardView(
+                        imageList: tempImageList,
+                        discountCode: [
+                            DiscountCode(), DiscountCode(code: "ByeBye"),
+                            DiscountCode(code: "areWeThereYet"),
+                        ], pricesruleList: PriceRulesList(id: "")
+                    ) {
                     }
+                    HeaderView(
+                        title: ThemeManager.secondSectionTitle,
+                        color: ThemeManager.titleColor)
+                    BrandsView()
+                    //                        Spacer()
                 }
-            }  //end of: ZStack
-            .navigationTitle(screenTitle)
-            .toolbar {  //start of: toolbar
-                ToolbarItem(
-                    placement: .topBarTrailing,
-                    content: {
-                        LazyHStack {
-                            NavigationLink(
-                                destination: ShoppingView(),
-                                label: {
-                                    ButtonView(
-                                        imageSystemName: ThemeManager.cartImg,
-                                        itemCounter: AuthManager.shared.applicationUser?.cart?.totalQuantity ?? 0)
-                                })
-                            NavigationLink(
-                                destination: FavoritesView(),
-                                label: {
-                                    ButtonView(
-                                        imageSystemName: ThemeManager
-                                            .favouriteImg,
-                                        itemCounter: favoriteCount)
-                                })
-                            .onAppear {
-                                favoriteCount = FavoritesManager.shared.favorites.count
-                            }
-                        }
-                    })
             }
-        }  //end of: toolbar
+        }  //end of: ZStack
     }
 }
 
