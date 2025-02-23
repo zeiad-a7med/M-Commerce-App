@@ -38,7 +38,7 @@ class CurrencyManager : ObservableObject {
                 if let currentCurrency = currentCurrency1.first {
                     CurrencyManager.currentCurrencyRate = currentCurrency
                 }
-                print("current currency rate fetched successfully.. current currency rate is: \(CurrencyManager.currentCurrencyRate.value ?? 0.0)")
+                print("current currency rate fetched successfully.. current currency rate is: \(CurrencyManager.currentCurrencyRate.value ?? 0.0) and code: \(CurrencyManager.currentCurrencyRate.code ?? "no data")")
             }
         } catch {
             print("Error fetching current currency rate: \(error)")
@@ -79,21 +79,24 @@ class CurrencyManager : ObservableObject {
     }
     
     func changeCurrentCurrencyRate(code: String) {
-        guard let modelContext = modelContext else { return }
-        CurrencyManager.currentCurrencyRate = (self.currenciesData?[code]) ?? CurrencyRate(code: "EGP",value: 1.0)
-        do {
-            let request = FetchDescriptor<CurrencyRate>()
-            let currentCurrency1 = try modelContext.fetch(request)
-                if let currentCurrency = currentCurrency1.first {
-                    currentCurrency.value = self.currenciesData?[code]?.value ?? 1.0
-                    currentCurrency.code =  self.currenciesData?[code]?.code ?? "EGP"
-                    try modelContext.save()
-                    print("currentCurrencyRate changed successfully to \( self.currenciesData?[code]?.value ?? 1.0) and \(self.currenciesData?[code]?.code ?? "EGP")")
-                }
-        } catch {
-            print("Error changing current currency rate: \(error)")
+            guard let modelContext = modelContext else { return }
+            CurrencyManager.currentCurrencyRate = (self.currenciesData?[code]) ?? CurrencyRate(code: "EGP",value: 1.0)
+            do {
+                let request = FetchDescriptor<CurrencyRate>()
+                let currentCurrency1 = try modelContext.fetch(request)
+                    if let currentCurrency = currentCurrency1.first {
+                        currentCurrency.value = self.currenciesData?[code]?.value ?? 1.0
+                        currentCurrency.code =  self.currenciesData?[code]?.code ?? "EGP"
+                        try modelContext.save()
+                        print("currentCurrencyRate changed successfully to \( self.currenciesData?[code]?.value ?? 1.0) and \(self.currenciesData?[code]?.code ?? "EGP")")
+                    }else{
+                        modelContext.insert(CurrencyRate(code: self.currenciesData?[code]?.code ,value: self.currenciesData?[code]?.value))
+                        print("error getting currentCurrency")
+                    }
+            } catch {
+                print("Error changing current currency rate: \(error)")
+            }
         }
-    }
     
     func getAllCurrenciesExchangeRate() {
         isLoadingCurrencyData = true

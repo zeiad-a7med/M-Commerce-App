@@ -21,8 +21,8 @@ extension MoyaNetworkManager {
                     break
                 }
             }, receiveValue: { decodedData in
-//                print("MoyaNetworkManagerExtension fetchCurrencyExchangeRatesFromApi::::\n",decodedData)
-//                print("=================================================================")
+                print("MoyaNetworkManagerExtension fetchCurrencyExchangeRatesFromApi::::\n",decodedData)
+                print("=================================================================")
                 complition(.success(decodedData))
             })
             .store(in: &cancellables)

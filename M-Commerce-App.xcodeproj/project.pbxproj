@@ -177,7 +177,11 @@
 		C44BEDB02D5D1FC80022B603 /* Price.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44BEDAF2D5D1FC80022B603 /* Price.swift */; };
 		C44BEDB22D5D1FD70022B603 /* PriceRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44BEDB12D5D1FD70022B603 /* PriceRange.swift */; };
 		C44BEDDC2D5D2F9B0022B603 /* GetAllTheProducts.graphql in Resources */ = {isa = PBXBuildFile; fileRef = C44BEDDB2D5D2F870022B603 /* GetAllTheProducts.graphql */; };
+		C458D8BC2D6A940000A77408 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C458D8BB2D6A940000A77408 /* NetworkMonitor.swift */; };
+		C458D8C52D6A9DB700A77408 /* noConnectionAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = C458D8C42D6A9DB700A77408 /* noConnectionAnimation.json */; };
+		C45B8C872D6AA500008D990B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = C45B8C862D6AA500008D990B /* Lottie */; };
 		C46288012D6506F6004372B1 /* MyOrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46288002D6506F6004372B1 /* MyOrdersView.swift */; };
+		C4BC38D22D6B1ADB00BC307E /* loadingAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = C4BC38D12D6B1ADB00BC307E /* loadingAnimation.json */; };
 		C4BC560C2D5F631B00F9D42A /* GetFilteredProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC560B2D5F631B00F9D42A /* GetFilteredProducts.swift */; };
 		C4BC56142D5F8EE600F9D42A /* ProductsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC56132D5F8EE600F9D42A /* ProductsModel.swift */; };
 		C4BC56162D5F8EF400F9D42A /* ProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC56152D5F8EF400F9D42A /* ProductsViewModel.swift */; };
@@ -390,7 +394,10 @@
 		C44BEDAF2D5D1FC80022B603 /* Price.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Price.swift; sourceTree = "<group>"; };
 		C44BEDB12D5D1FD70022B603 /* PriceRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceRange.swift; sourceTree = "<group>"; };
 		C44BEDDB2D5D2F870022B603 /* GetAllTheProducts.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetAllTheProducts.graphql; sourceTree = "<group>"; };
+		C458D8BB2D6A940000A77408 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		C458D8C42D6A9DB700A77408 /* noConnectionAnimation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = noConnectionAnimation.json; sourceTree = "<group>"; };
 		C46288002D6506F6004372B1 /* MyOrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrdersView.swift; sourceTree = "<group>"; };
+		C4BC38D12D6B1ADB00BC307E /* loadingAnimation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = loadingAnimation.json; sourceTree = "<group>"; };
 		C4BC560B2D5F631B00F9D42A /* GetFilteredProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFilteredProducts.swift; sourceTree = "<group>"; };
 		C4BC56132D5F8EE600F9D42A /* ProductsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsModel.swift; sourceTree = "<group>"; };
 		C4BC56152D5F8EF400F9D42A /* ProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewModel.swift; sourceTree = "<group>"; };
@@ -427,6 +434,7 @@
 				890D86C92D5CD5320062E8D1 /* ShopifyAPIKit in Frameworks */,
 				C4DD10FD2D68FAE000FCD9E2 /* Moya in Frameworks */,
 				89C82A252D6628560018898E /* FirebaseAnalytics in Frameworks */,
+				C45B8C872D6AA500008D990B /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,6 +633,8 @@
 				48F009F32D5C94F9002A016E /* Item.swift */,
 				89C82A212D66279C0018898E /* GoogleService-Info.plist */,
 				48F009F52D5C94FF002A016E /* Assets.xcassets */,
+				C458D8C42D6A9DB700A77408 /* noConnectionAnimation.json */,
+				C4BC38D12D6B1ADB00BC307E /* loadingAnimation.json */,
 				48F009F72D5C94FF002A016E /* Preview Content */,
 			);
 			path = "M-Commerce-App";
@@ -1259,6 +1269,7 @@
 				89424EA02D67C34900B5F736 /* AlertManager.swift */,
 				89B00B8E2D6157DD00AF1FB7 /* TextValidation.swift */,
 				C4DD10FE2D690B4500FCD9E2 /* CurrencyManager.swift */,
+				C458D8BB2D6A940000A77408 /* NetworkMonitor.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1625,6 +1636,7 @@
 				890D86C72D5CD5320062E8D1 /* XCLocalSwiftPackageReference "ShopifyAPIKit" */,
 				89C82A232D6628560018898E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				C4DD10F92D68FAE000FCD9E2 /* XCRemoteSwiftPackageReference "Moya" */,
+				C45B8C852D6AA500008D990B /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 48F009ED2D5C94F9002A016E /* Products */;
 			projectDirPath = "";
@@ -1654,6 +1666,7 @@
 				89C82A352D667F320018898E /* CreateCart.graphql in Resources */,
 				C4F3FC712D5E679A005151E9 /* GetProductsTypes.graphql in Resources */,
 				89C4A63E2D63E1B300716CB1 /* UpdateProfile.graphql in Resources */,
+				C4BC38D22D6B1ADB00BC307E /* loadingAnimation.json in Resources */,
 				890D86E12D5CF63A0062E8D1 /* GetCollections.graphql in Resources */,
 				890D86D72D5CF07D0062E8D1 /* GetCollection.graphql in Resources */,
 				89B00B752D6119C600AF1FB7 /* Profile.graphql in Resources */,
@@ -1661,6 +1674,7 @@
 				48F009F62D5C94FF002A016E /* Assets.xcassets in Resources */,
 				C4F3FC732D5E6812005151E9 /* GetProductsTags.graphql in Resources */,
 				89C82A392D6680560018898E /* CartLineUpdate.graphql in Resources */,
+				C458D8C52D6A9DB700A77408 /* noConnectionAnimation.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1689,6 +1703,7 @@
 				89D5084A2D5C10C600046FA9 /* CustomNetworkImageView.swift in Sources */,
 				C44BEDA72D5D198F0022B603 /* ImgModel.swift in Sources */,
 				C4DD10F42D68F21A00FCD9E2 /* MoyaNetworkManagerExtension.swift in Sources */,
+				C458D8BC2D6A940000A77408 /* NetworkMonitor.swift in Sources */,
 				485A11452D68601800046F29 /* PaymentView.swift in Sources */,
 				89935D332D6A76D8001752A6 /* Configuration.swift in Sources */,
 				89935D342D6A76D8001752A6 /* PaymentHandler.swift in Sources */,
@@ -2015,7 +2030,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"M-Commerce-App/Preview Content\"";
-				DEVELOPMENT_TEAM = RY8QUA6KKV;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -2044,7 +2059,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"M-Commerce-App/Preview Content\"";
-				DEVELOPMENT_TEAM = RY8QUA6KKV;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -2202,6 +2217,14 @@
 				minimumVersion = 11.8.1;
 			};
 		};
+		C45B8C852D6AA500008D990B /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.1;
+			};
+		};
 		C4DD10F92D68FAE000FCD9E2 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya.git";
@@ -2236,6 +2259,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 89C82A232D6628560018898E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		C45B8C862D6AA500008D990B /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C45B8C852D6AA500008D990B /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 		C4DD10FA2D68FAE000FCD9E2 /* CombineMoya */ = {
 			isa = XCSwiftPackageProductDependency;
