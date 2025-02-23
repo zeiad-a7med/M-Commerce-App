@@ -58,13 +58,14 @@ struct OrderedProductCard: View {
                                             isMyOrder ? .blue : .green)
                                 }
                             )
-                        let url = URL(string: "")
-                        AsyncImage(url: url) { image in
-                            image.resizable()
-                                .scaledToFill()
-                        } placeholder: {
-                            ShimmerView(width: width, height: height)
-                        }
+//                        let url = URL(string: "")
+//                        AsyncImage(url: url) { image in
+//                            image.resizable()
+//                                .scaledToFill()
+//                        } placeholder: {
+//                            ShimmerView(width: width, height: height)
+//                        }
+                        Image("mapBackground")
                         .frame(width: width, height: height)
                         .cornerRadius(12)
                         ImageAndTextView(img: "number.circle", txt: orderNo)

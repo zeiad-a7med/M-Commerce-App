@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MyOrdersView: View {
     @StateObject var orderViewModel = OrderViewModel(
-        customerAccessTaken: "e43f5e2e26fe3059f5b4ca16e53b588f")
+        customerAccessTaken: AuthManager.shared.applicationUser?.accessToken ?? "")
     @State var isMyOrdersSelected: Bool = true
     var body: some View {
         NavigationView {
