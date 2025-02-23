@@ -11,10 +11,8 @@ import PassKit
 class PaymentViewModel : ObservableObject{
     @Published var cartResult : CartResponse?
     @Published var isLoading : Bool = false
-    @Published var paymentHandler = PaymentHandler()
-    init(){
-        getCartData()
-    }
+    @Published var PageDismiss : Bool = false
+    
     func getCartData(){
         isLoading = true
         CartService.getCart{ result in
@@ -25,29 +23,18 @@ class PaymentViewModel : ObservableObject{
             }
         }
     }
-    func checkPayments(){
-        let result = PaymentHandler.applePayStatus()
-        if result.canMakePayments {
-            payPressed()
-        } else if result.canSetupCards {
-            setupPressed()
+    func emptyCart(){
+        var tempLineIdList = [String]()
+        AuthManager.shared.applicationUser?.cart?.lines?.forEach({ Line in
+            tempLineIdList.append(Line.id ?? " ")
+        })
+        isLoading = true
+        CartService.cartLinesRemove(lineIds: tempLineIdList) { result in
+            self.isLoading = false
+            self.cartResult = result
         }
     }
-    func payPressed() {
-        paymentHandler.startPayment { success in
-            if success {
-                // Handle successful payment
-                print("Payment successful")
-            }else {
-                print("Payment Failed")
-            }
-        }
-    }
-
-     func setupPressed() {
-        let passLibrary = PKPassLibrary()
-        passLibrary.openPaymentSetup()
-    }
+   
     
     
 }
