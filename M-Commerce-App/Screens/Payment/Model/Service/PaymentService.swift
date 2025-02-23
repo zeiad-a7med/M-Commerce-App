@@ -16,7 +16,7 @@ class PaymentService : OrderCreateService{
             let components = id.components(separatedBy: "/")
             return components.last
     }
-    static func ParseOrder() -> [[String: Any]]{
+    static func ParseOrder() -> [String: Any]{
         var lineItems: [[String: Any]] = []
         AuthManager.shared.applicationUser?.cart?.lines?.forEach {line in
             let lineItem: [String: Any] = [
@@ -25,49 +25,49 @@ class PaymentService : OrderCreateService{
             ]
             lineItems.append(lineItem)
         }
+        let firstName : String = AuthManager.shared.applicationUser?.defaultAddress?.firstName ?? ""
+        let lastName : String = AuthManager.shared.applicationUser?.defaultAddress?.lastName ?? ""
+        let address1 : String = AuthManager.shared.applicationUser?.defaultAddress?.address1 ?? ""
+        let phone : String = AuthManager.shared.applicationUser?.defaultAddress?.phone ?? ""
+        let city : String  = AuthManager.shared.applicationUser?.defaultAddress?.city ?? ""
+        let province : String = AuthManager.shared.applicationUser?.defaultAddress?.province ?? "province"
+        let country : String = AuthManager.shared.applicationUser?.defaultAddress?.country ?? ""
+        let zip : String = AuthManager.shared.applicationUser?.defaultAddress?.zip ?? ""
+        let amount : String = AuthManager.shared.applicationUser?.cart?.cost?.totalAmount?.amount ?? ""
         let billingAddress = [
-            "first_name": AuthManager.shared.applicationUser?.defaultAddress?.firstName,
-            "last_name": AuthManager.shared.applicationUser?.defaultAddress?.lastName,
-            "address1": AuthManager.shared.applicationUser?.defaultAddress?.address1,
-            "phone":AuthManager.shared.applicationUser?.defaultAddress?.phone,
-            "city": AuthManager.shared.applicationUser?.defaultAddress?.city,
-            "province": AuthManager.shared.applicationUser?.defaultAddress?.province,
-            "country": AuthManager.shared.applicationUser?.defaultAddress?.country,
-          "zip":AuthManager.shared.applicationUser?.defaultAddress?.zip
+            "first_name": firstName,
+            "last_name": lastName,
+            "address1":  address1,
+            "phone": phone,
+            "city": city,
+            "province": province,
+            "country": country,
+          "zip":zip
         ]
+        let email = AuthManager.shared.applicationUser?.email ?? ""
         let customer = [
-            "first_name": AuthManager.shared.applicationUser?.firstName,
-          "last_name": AuthManager.shared.applicationUser?.lastName,
-            "email": AuthManager.shared.applicationUser?.email
+            "first_name":firstName,
+          "last_name": lastName,
+            "email": email
         ]
-        let shippingAddress = [
-            "first_name": AuthManager.shared.applicationUser?.defaultAddress?.firstName,
-            "last_name": AuthManager.shared.applicationUser?.defaultAddress?.lastName,
-            "address1": AuthManager.shared.applicationUser?.defaultAddress?.address1,
-            "phone":AuthManager.shared.applicationUser?.defaultAddress?.phone,
-            "city": AuthManager.shared.applicationUser?.defaultAddress?.city,
-            "province": AuthManager.shared.applicationUser?.defaultAddress?.province,
-            "country": AuthManager.shared.applicationUser?.defaultAddress?.country,
-          "zip":AuthManager.shared.applicationUser?.defaultAddress?.zip
-        ]
-        var orderData: [[String: Any]] = [
-            [
+        var orderData: [String: Any] = [
+            
                 "order": [
                     "line_items": lineItems,
                     "customer": customer,
                     "billing_address": billingAddress,
-                    "shipping_address": shippingAddress,
-                    "email": AuthManager.shared.applicationUser?.email ?? "",
+                    "shipping_address": billingAddress,
+                    "email": email,
                     "transactions": [
                         [
                             "kind": "authorization",
                             "status": "success",
-                            "amount": AuthManager.shared.applicationUser?.cart?.cost?.totalAmount?.amount ?? ""
+                            "amount": Double(amount)
                         ]
                     ],
                     "financial_status": "paid"
                 ]
-            ]
+            
         ]
        
         return orderData
@@ -95,6 +95,10 @@ class PaymentService : OrderCreateService{
                             if let error = error {
                                 complitionHandler(OrderCreateResponse(success: false,message: error.localizedDescription))
                                 return
+                            }
+                            if let data = data {
+                                               let responseString = String(data: data, encoding: .utf8)
+                                               print("📨 Response: \(responseString ?? "No response")")
                             }
 
                             if let httpResponse = response as? HTTPURLResponse {
