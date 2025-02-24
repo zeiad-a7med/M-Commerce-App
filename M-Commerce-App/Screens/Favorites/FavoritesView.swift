@@ -10,6 +10,16 @@ import SwiftUI
 
 struct FavoritesView: View {
     @Query private var products: [Product]
+    @State var searchText: String = ""
+    var filteredProducts: [Product] {
+        if searchText.isEmpty {
+            return products
+        } else {
+            return products.filter {
+                $0.title.localizedStandardContains(searchText)
+            }
+        }
+    }
     @State private var isLoggedIn: Bool = false
 
     let columns: [GridItem] = [
@@ -21,7 +31,20 @@ struct FavoritesView: View {
         VStack {
             if isLoggedIn {
                 VStack {
-                    if products.isEmpty {
+                    if(!products.isEmpty){
+                        CustomTextField(
+                            placeholder: "search in favorites.....",
+                            onChange: { text in
+                                searchText = text
+                            },
+                            prefix: {
+                                Image(systemName: "magnifyingglass")
+                            },
+                            initialText: .constant("")
+                        )
+                        .padding()
+                    }
+                    if filteredProducts.isEmpty {
                         ContentUnavailableView(
                             "There is no favorites", systemImage: "heart.slash",
                             description: Text(
@@ -29,25 +52,12 @@ struct FavoritesView: View {
                             ))
                     } else {
                         ScrollView {
-                            CustomTextField(
-                                placeholder: "search in favorites.....",
-                                onChange: { text in
-
-                                },
-                                prefix: {
-                                    Image(systemName: "magnifyingglass")
-                                },
-                                initialText: .constant("")
-                            )
-                            .padding()
-
-                            // Use LazyVGrid for grid layout
                             LazyVGrid(columns: columns, spacing: 16) {
-                                ForEach(products) { product in
+                                ForEach(filteredProducts) { product in
                                     ProductCardView(product: product)
                                 }
                             }
-                            .padding(.horizontal)
+                            .padding()
 
                         }
                     }
@@ -62,7 +72,7 @@ struct FavoritesView: View {
         }
 
         .navigationTitle("My favorites")
-        .toolbar(.hidden,for: .tabBar)
+        .toolbar(.hidden, for: .tabBar)
     }
 }
 
