@@ -7,7 +7,7 @@ public class GetOrdersFromCustomerATQuery: GraphQLQuery {
   public static let operationName: String = "GetOrdersFromCustomerAT"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query GetOrdersFromCustomerAT($CustomerAT: String!) { customer(customerAccessToken: $CustomerAT) { __typename id phone email orders(first: 10) { __typename totalCount nodes { __typename currencyCode edited email financialStatus fulfillmentStatus id name orderNumber processedAt statusUrl currentSubtotalPrice { __typename amount currencyCode } currentTotalPrice { __typename amount currencyCode } } } addresses(first: 1) { __typename nodes { __typename address1 city country countryCode firstName id lastName latitude longitude name phone } } displayName } }"#
+      #"query GetOrdersFromCustomerAT($CustomerAT: String!) { customer(customerAccessToken: $CustomerAT) { __typename id phone email orders(first: 100) { __typename totalCount nodes { __typename currencyCode edited email financialStatus fulfillmentStatus id name orderNumber processedAt statusUrl currentSubtotalPrice { __typename amount currencyCode } currentTotalPrice { __typename amount currencyCode } } } addresses(first: 1) { __typename nodes { __typename address1 city country countryCode firstName id lastName latitude longitude name phone } } displayName } }"#
     ))
 
   public var customerAT: String
@@ -44,7 +44,7 @@ public class GetOrdersFromCustomerATQuery: GraphQLQuery {
         .field("id", ShopifyAPIKit.ID.self),
         .field("phone", String?.self),
         .field("email", String?.self),
-        .field("orders", Orders.self, arguments: ["first": 10]),
+        .field("orders", Orders.self, arguments: ["first": 100]),
         .field("addresses", Addresses.self, arguments: ["first": 1]),
         .field("displayName", String.self),
       ] }

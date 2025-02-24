@@ -6,11 +6,55 @@
 //
 
 import SwiftUI
+import Combine
+class PromoCodeViewModel: ObservableObject {
+    var totalPrice : Double = 0
+    var discountAmount : Double = 0
+    @Published var promoCode: String = ""
+    @Published var coupon: Coupon?
+    private var cancellables = Set<AnyCancellable>()
 
+    func setUp(totalPrice : Double){
+        self.totalPrice = totalPrice
+    }
+    init() {
+        $promoCode
+            .debounce(for: .seconds(0.8), scheduler: RunLoop.main)
+            .sink { newValue in
+                if !newValue.isEmpty {
+                    var coupon: Coupon?
+                    for item in Constants.coupons {
+                        if item.code == newValue {
+                            coupon = item
+                            break
+                        }
+                    }
+                    self.coupon = coupon
+                    self.calculateDiscount()
+                }
+            }
+            .store(in: &cancellables)
+    }
+    func calculateDiscount(){
+
+        if(coupon == nil){
+            discountAmount = 0
+        }else{
+            if(coupon?.type == .percentage){
+                discountAmount = totalPrice * ((coupon?.value ?? 0) / 100)
+            }else{
+                discountAmount = totalPrice - (coupon?.value ?? 0)
+            }
+        }
+        
+        
+    }
+}
 struct CheckOutComponent: View {
     @State var cartCost: Cost?
     var onClick: ((Bool) -> Void)?
-    @State var promoCode: String = ""
+    @StateObject private var viewModel = PromoCodeViewModel()
+    @State var discount: Double = 0
     var body: some View {
 
         VStack {
@@ -28,7 +72,7 @@ struct CheckOutComponent: View {
                             .foregroundStyle(.quaternary)
                             .padding(.leading, 10)
                         TextField(
-                            "Enter your promo code here", text: $promoCode)
+                            "Enter your promo code here", text: $viewModel.promoCode)
                     }
                 }
                 .padding(.top, 10)
@@ -60,7 +104,7 @@ struct CheckOutComponent: View {
                         .foregroundStyle(.tertiary)
                     Spacer()
                     Text(
-                        "\(cartCost?.checkoutChargeAmount?.formattedCurrecyCode ?? "EGP") \("0.0")"
+                        "\(cartCost?.checkoutChargeAmount?.formattedCurrecyCode ?? "EGP") \(String(format: "%.2f", viewModel.discountAmount))"
                     )
                 }.padding(.horizontal)
                     .padding(.bottom, 10)
@@ -87,6 +131,9 @@ struct CheckOutComponent: View {
 
             Spacer()
 
+        }
+        .onAppear{
+            viewModel.setUp(totalPrice: Double(cartCost?.totalAmount?.formattedPrice ?? "0.0") ?? 0.0)
         }
 
     }

@@ -33,16 +33,16 @@ struct Settings: View {
                                     imageName: "person", RowName: "Edit Profile"
                                 )
                             }
-                            NavigationLink {
-                                ChangePassword(
-                                    oldPassword: $oldPassword,
-                                    newPassword: $newPassword,
-                                    confirmPassword: $confirmNewPassword)
-                            } label: {
-                                SettingsListRow(
-                                    imageName: "lock",
-                                    RowName: "Change Password")
-                            }
+//                            NavigationLink {
+//                                ChangePassword(
+//                                    oldPassword: $oldPassword,
+//                                    newPassword: $newPassword,
+//                                    confirmPassword: $confirmNewPassword)
+//                            } label: {
+//                                SettingsListRow(
+//                                    imageName: "lock",
+//                                    RowName: "Change Password")
+//                            }
 
                         }
                         Section(
