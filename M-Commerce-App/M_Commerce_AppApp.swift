@@ -15,7 +15,6 @@ struct M_Commerce_AppApp: App {
     @State private var networkMonitor = NetworkMonitor()
     var body: some Scene {
         WindowGroup {
-            let isSimulator = TARGET_OS_SIMULATOR != 0
             let sharedModelContainer: ModelContainer? = {
                 let schema = Schema([Product.self,ApplicationUser.self,CurrencyRate.self])
                 let modelConfiguration = ModelConfiguration(
