@@ -12,7 +12,7 @@ struct CustomSearchView: View {
     private let columns = [GridItem(.flexible()), GridItem(.flexible())]
     @StateObject var modelView: SearchViewModel = SearchViewModel(filterProduct: "")
     @Binding var searchText: String
-    @State var mainFilter: String?
+    @Binding var mainFilter: String?
 //    @State var subFilter: String?
     var body: some View {
         LazyVGrid(columns: columns, spacing: 10) {

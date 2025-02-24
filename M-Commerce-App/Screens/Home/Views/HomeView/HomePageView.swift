@@ -12,7 +12,7 @@ struct HomePageView: View {
     @State var favoriteCount: Int = 0
     @State var searchText: String = ""
     @State var isSearchActive: Bool = false
-//    @StateObject var searchViewModel = SearchViewModel(filterProduct: "m")
+    //    @StateObject var searchViewModel = SearchViewModel(filterProduct: "m")
     var body: some View {
         ZStack {  //start of: ZStack
             ScrollView {
@@ -25,19 +25,21 @@ struct HomePageView: View {
                         prefix: {
                             Image(systemName: "magnifyingglass")
                         },
-                        initialText: .constant(""),
+                        disActiveWhenCancel: true, initialText: .constant(""),
                         onActive: { active in
                             if active {
                                 isSearchActive = true
-                            }else {
+                            } else {
                                 isSearchActive = false
                             }
                         }
+
                     )
                     .padding([.leading, .trailing], 20)
                     if isSearchActive {
-                        CustomSearchView(searchText: $searchText)
-                    }else{
+                        CustomSearchView(
+                            searchText: $searchText, mainFilter: .constant(""))
+                    } else {
                         AdCardView(
                             imageList: tempImageList,
                             discountCode: [
@@ -51,7 +53,6 @@ struct HomePageView: View {
                             color: ThemeManager.titleColor)
                         BrandsView()
                     }
-                    //                        Spacer()
                 }
             }
         }  //end of: ZStack
