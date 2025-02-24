@@ -22,21 +22,19 @@ struct ShoppingView: View {
                         if let tempViewModel = viewModel.cartResult?.cart?.lines
                         {
                             ForEach(tempViewModel, id: \.id) { line in
-                                NavigationLink(destination: ProductInfoView(productId: line.variant?.productId ?? "")) {
-                                    RowCard(
-                                        line: line,
-                                        changeNumberOfItemInRow: { count in
-                                            viewModel.updateLineQuantity(
-                                                line: line, quantity: count)
-                                        },
-                                        onDelete: { _ in
-                                            currentDeletion = line
-                                            deleteAlertVisible = true
-                                        },
-                                        minimumNumberOfItems: 1,
-                                        numberOfItems: line.quantity ?? 0
-                                    )
-                                }
+                                RowCard(
+                                    line: line,
+                                    changeNumberOfItemInRow: { count in
+                                        viewModel.updateLineQuantity(
+                                            line: line, quantity: count)
+                                    },
+                                    onDelete: { _ in
+                                        currentDeletion = line
+                                        deleteAlertVisible = true
+                                    },
+                                    minimumNumberOfItems: 1,
+                                    numberOfItems: line.quantity ?? 0
+                                )
                             }
                             
                             .onDelete(perform: deleteLineWithOffset)

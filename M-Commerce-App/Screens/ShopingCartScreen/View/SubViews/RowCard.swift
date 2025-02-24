@@ -88,6 +88,8 @@ struct RowCard: View {
                 )
                 .padding(.trailing)
                 .font(.title2)
+            }.onTapGesture{
+                NavigationManager.shared.push(.productInfo(productId: line?.variant?.productId ?? ""))
             }
 
         }
