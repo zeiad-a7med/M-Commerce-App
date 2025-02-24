@@ -17,11 +17,13 @@ struct ProductsSubView: View {
     private let columns = [GridItem(.flexible()), GridItem(.flexible())]
     @State private var lastItemID: String?
     @Binding var isSearchActive: Bool
+    @Binding var searchText: String
+    @State var mainFilter:String?
     var body: some View {
 
         if isSearchActive {
-            CustomSearchView(searchText: $filterString ,
-                             mainFilter: filterString)
+            CustomSearchView(searchText: $searchText ,
+                             mainFilter: $mainFilter)
         }else {
             if !cViewModel.isLoading {
                 if let filteredProducts = cViewModel.categories

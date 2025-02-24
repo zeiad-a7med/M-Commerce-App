@@ -32,6 +32,7 @@ struct CategorieView: View {
                         prefix: {
                             Image(systemName: "magnifyingglass")
                         },
+                        disActiveWhenCancel: true,
                         initialText: .constant(""),
                         onActive: { active in
                             if active {
@@ -51,7 +52,7 @@ struct CategorieView: View {
                         filterString: $filterString,
                         SubFiltersArray: SubFiltersArray,
                         subFilterIndex: $subFilterIndex,
-                        filterType: $filterType, isSearchActive: $isSearchActive
+                        filterType: $filterType, isSearchActive: $isSearchActive ,searchText: $searchText
                     )
                 }
 

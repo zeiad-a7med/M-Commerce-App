@@ -12,6 +12,7 @@ struct CustomTextField: View {
     var prefix: (() -> any View)?
     var suffix: (() -> any View)?
     var enableClearButton: Bool = true
+    var disActiveWhenCancel: Bool = false
     var validationType: ValidationType?
     var characterLimit: Int?
     var isValid: ((Bool) -> Void)?
@@ -21,7 +22,9 @@ struct CustomTextField: View {
     @FocusState private var isFocused: Bool
     @State private var errorMessage: String?
     var hasError: Bool { errorMessage != nil }
+    
     var onActive: ((Bool) -> Void)?
+    
     
 
     var body: some View {
@@ -67,6 +70,9 @@ struct CustomTextField: View {
                 if !text.isEmpty && enableClearButton {
                     Button(action: {
                         text.removeAll()
+                        if disActiveWhenCancel {
+                            isFocused = false
+                        }
                     }) {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(
