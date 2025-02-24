@@ -10,7 +10,6 @@ import SwiftUI
 struct PaymentView: View {
     @StateObject var paymentViewModel = PaymentViewModel()
     @State var showCheckOut: Bool = false
-    @State var navigateToOrders: Bool = false
     @State var ableToCheckOut: Bool = false
     var body: some View {
 
@@ -89,17 +88,15 @@ struct PaymentView: View {
                 isPresented: $showCheckOut,
                 content: {
                     PaymentMethodComponent { result in
-                        navigateToOrders.toggle()
+                        
                         showCheckOut.toggle()
                         paymentViewModel.createOrder()
+                        DispatchQueue.main.asyncAfter(deadline: .now()+1){
+                            NavigationManager.shared.push(.orders)
+                        }
                     }.presentationDetents([.medium])
                 })
             Spacer()
-        }
-        NavigationLink(
-            destination: MyOrdersView(), isActive: $navigateToOrders
-        ) {
-            EmptyView()
         }
         .onAppear {
             if AuthManager.shared.applicationUser?.defaultAddress != nil {

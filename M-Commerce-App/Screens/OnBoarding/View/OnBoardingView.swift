@@ -8,24 +8,29 @@
 import SwiftUI
 
 struct BoardingTabView: View {
+    @State var navigateToHome : Bool = false
     var body: some View {
         VStack {
             pagingSubView()
             CustomRoundedButtonView(
-                text: "Create Account", width: 80,
+                text: "Register", width: 80,
                 onTap: {
-                    // nav
-                    print("register!!")
+                    navigateToHome = true
                 }, isButtonEnabled: .constant(true))
-            Text("Already have an Account")
+            Text("Continue as Guest")
                 .foregroundStyle(ThemeManager.darkPuble)
                 .bold()
                 .padding()
                 .onTapGesture {
-                    // nav to sign in
-                    print("sign in!")
+                    navigateToHome = true
                 }
+            NavigationLink(
+                destination: ContentView(), isActive: $navigateToHome
+            ) {
+                EmptyView()
+            }
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

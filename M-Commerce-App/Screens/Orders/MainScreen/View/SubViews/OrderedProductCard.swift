@@ -17,8 +17,6 @@ struct OrderedProductCard: View {
     var date:String
     var noOfProducts:Int
     var isMyOrder: Bool
-    let detailsDest: AnyView
-    let secondDest: AnyView
     let width: CGFloat = UIScreen.main.bounds.width / 4.3
     let height: CGFloat = 80
 
@@ -79,8 +77,7 @@ struct OrderedProductCard: View {
                 HStack(spacing: 20) {
                     CustomButtonWith(
                         width: 200, color: .clear , borderColor: .secondary.opacity(0.3),
-                        text: "Details", textColor: .BILWID,
-                        destination: detailsDest)
+                        text: "Details", textColor: .BILWID)
                 }
                 .padding(7)
             }
@@ -115,8 +112,7 @@ struct OrderedProductCard: View {
         orderPrice: "1040 EGP",
         date: "2025-02-19T19:00:19Z",
         noOfProducts: 3,
-        isMyOrder: true,
-        detailsDest: AnyView(Text("Hello1")), secondDest: AnyView(Text("f"))
+        isMyOrder: true
     )
 }
 

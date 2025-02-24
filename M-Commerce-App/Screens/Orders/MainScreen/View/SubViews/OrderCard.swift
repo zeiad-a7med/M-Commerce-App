@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct OrderCard: View  {
+    var productId: String
     var imgUrl:String
     var prodTitle:String
     var vendor:String
@@ -15,7 +16,6 @@ struct OrderCard: View  {
     var prodPrice:String
     var prodQty:Int
     var isMyOrder:Bool
-    let detailsDest: AnyView
     var body: some View {
         ZStack {
             Rectangle()
@@ -41,7 +41,10 @@ struct OrderCard: View  {
                     .frame(maxWidth: UIScreen.main.bounds.width/1.7)
                 }
                 HStack (spacing: 20){
-                    CustomButtonWith(width: 250, color: .WILDID, borderColor: .secondary.opacity(0.3), text: "View Product", textColor: .primary, destination: detailsDest)
+                    CustomButtonWith(width: 250, color: .WILDID, borderColor: .secondary.opacity(0.3), text: "View Product", textColor: .primary)
+                        .onTapGesture {
+                            NavigationManager.shared.push(.productInfo(productId: productId))
+                        }
                 }.padding(7)
             }
             Spacer()
