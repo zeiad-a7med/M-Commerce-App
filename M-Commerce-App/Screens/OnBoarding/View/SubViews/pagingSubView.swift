@@ -50,11 +50,12 @@ struct pagingSubView: View {
                                 index == currentIndex
                                     ? ThemeManager.darkPuble : .secondary
                             )
-                            .frame(width: 10, height: 10)
+                            .frame(width: currentIndex == index ? 25 : 10, height: 10)
+                            .animation(.easeInOut(duration: 0.3), value: currentIndex)
                     }
                 }.padding(
-                    .bottom,
-                    UIApplication.shared.windows.first?.safeAreaInsets.bottom),
+                .bottom,
+                UIApplication.shared.windows.first?.safeAreaInsets.bottom),
                 alignment: .bottom
             )
     }

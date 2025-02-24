@@ -40,14 +40,7 @@ struct ProductsView: View {
                     }
                 })
             if brandresponse.isLoading {
-                VStack {
-                    Spacer()
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle())
-                        .scaleEffect(4)
-                    Spacer()
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                CustomProgressView()
             } else {
                 BrandsGrid(
                     columns: columns,
