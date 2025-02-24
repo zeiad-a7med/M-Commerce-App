@@ -6,13 +6,15 @@
 //
 
 import SwiftUI
-import Lottie
+//import /*Lottie*/
 
 struct CustomProgressView: View {
     var body: some View {
         VStack {
-            LottieView(animation: .named("loadingAnimation"))
-                .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
+//            LottieView(animation: .named("loadingAnimation"))
+//                .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
+
+            ProgressView()
         }
     }
 }

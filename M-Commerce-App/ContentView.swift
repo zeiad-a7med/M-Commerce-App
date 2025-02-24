@@ -5,7 +5,7 @@
 //  Created by Zeiad on 09/02/2025.
 //
 
-import Lottie
+//import Lottie
 import SwiftData
 import SwiftUI
 

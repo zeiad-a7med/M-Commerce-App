@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
-import Lottie
+//import Lottie
 
 struct AnimationView: View {
     var name:String
     var body: some View {
-        LottieView(animation: .named(name))
-            .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
+//        LottieView(animation: .named(name))
+//            .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
+        ProgressView()
     }
 }
 

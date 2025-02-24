@@ -182,7 +182,6 @@
 		C44BEDDC2D5D2F9B0022B603 /* GetAllTheProducts.graphql in Resources */ = {isa = PBXBuildFile; fileRef = C44BEDDB2D5D2F870022B603 /* GetAllTheProducts.graphql */; };
 		C458D8BC2D6A940000A77408 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C458D8BB2D6A940000A77408 /* NetworkMonitor.swift */; };
 		C458D8C52D6A9DB700A77408 /* noConnectionAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = C458D8C42D6A9DB700A77408 /* noConnectionAnimation.json */; };
-		C45B8C872D6AA500008D990B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = C45B8C862D6AA500008D990B /* Lottie */; };
 		C46288012D6506F6004372B1 /* MyOrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46288002D6506F6004372B1 /* MyOrdersView.swift */; };
 		C4B324AF2D6BD924002D1DA5 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B324AE2D6BD924002D1DA5 /* OnBoardingView.swift */; };
 		C4B324B22D6BF018002D1DA5 /* BoardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B324B12D6BF018002D1DA5 /* BoardingPage.swift */; };
@@ -452,7 +451,6 @@
 				890D86C92D5CD5320062E8D1 /* ShopifyAPIKit in Frameworks */,
 				C4DD10FD2D68FAE000FCD9E2 /* Moya in Frameworks */,
 				89C82A252D6628560018898E /* FirebaseAnalytics in Frameworks */,
-				C45B8C872D6AA500008D990B /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1703,7 +1701,6 @@
 				890D86C72D5CD5320062E8D1 /* XCLocalSwiftPackageReference "ShopifyAPIKit" */,
 				89C82A232D6628560018898E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				C4DD10F92D68FAE000FCD9E2 /* XCRemoteSwiftPackageReference "Moya" */,
-				C45B8C852D6AA500008D990B /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 48F009ED2D5C94F9002A016E /* Products */;
 			projectDirPath = "";
@@ -2295,14 +2292,6 @@
 				minimumVersion = 11.8.1;
 			};
 		};
-		C45B8C852D6AA500008D990B /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/lottie-ios";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.5.1;
-			};
-		};
 		C4DD10F92D68FAE000FCD9E2 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya.git";
@@ -2337,11 +2326,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 89C82A232D6628560018898E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
-		};
-		C45B8C862D6AA500008D990B /* Lottie */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C45B8C852D6AA500008D990B /* XCRemoteSwiftPackageReference "lottie-ios" */;
-			productName = Lottie;
 		};
 		C4DD10FA2D68FAE000FCD9E2 /* CombineMoya */ = {
 			isa = XCSwiftPackageProductDependency;
