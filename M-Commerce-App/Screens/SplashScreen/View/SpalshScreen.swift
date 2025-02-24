@@ -44,7 +44,6 @@ struct SpalshScreen: View {
             }
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    
                     navigateToOnBoarding = true
                 }
             }

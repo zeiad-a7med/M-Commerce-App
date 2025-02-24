@@ -8,34 +8,30 @@
 import SwiftUI
 
 struct CustomButtonWith: View {
-    var width:CGFloat
-    var color:Color
-    var borderColor:Color
-    var text:String
-    var textColor:Color
-    let destination: AnyView
+    var width: CGFloat
+    var color: Color
+    var borderColor: Color
+    var text: String
+    var textColor: Color
     var body: some View {
-        NavigationLink(destination: {
-            destination
-        }, label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 30)
-                        .foregroundStyle(color)
-                    RoundedRectangle(cornerRadius: 25)
-                        .stroke(borderColor
-                                , lineWidth: 0.5)
-                    Text(text)
-                        .font(.system(size: 13).bold())
-                        .foregroundStyle(textColor)
-                }.frame(width: width, height: 45)
-                    .shadow(radius: 0.5)
-        })
+        ZStack {
+            RoundedRectangle(cornerRadius: 30)
+                .foregroundStyle(color)
+            RoundedRectangle(cornerRadius: 25)
+                .stroke(borderColor, lineWidth: 0.5)
+            Text(text)
+                .font(.system(size: 13).bold())
+                .foregroundStyle(textColor)
+        }.frame(width: width, height: 45)
+            .shadow(radius: 0.5)
     }
 }
 
 #Preview {
     NavigationView {
-        CustomButtonWith(width: 180, color: .red, borderColor: .red, text: "Details", textColor: .white
-                         , destination: AnyView(Text("Hello")))
+        CustomButtonWith(
+            width: 180, color: .red, borderColor: .red, text: "Details",
+            textColor: .white
+        )
     }
 }

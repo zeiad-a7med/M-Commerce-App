@@ -25,34 +25,29 @@ struct DetailsView: View {
                                     ?? []
                             }
                             OrderCard(
+                                productId: order.variant?.product?.id ?? "",
                                 imgUrl: order.variant?.image?.url ?? "",
                                 prodTitle: order.title ?? "",
                                 vendor: order.product?.vendor ?? "",
                                 prodVarient: order.variant?.title ?? "",
-                                prodPrice:"\(CurrencyManager.currentCurrencyRate.code ?? "0") \(String(format: "%.2f",(Double( order.price?.amount ?? "0") ?? 0) * (CurrencyManager.currentCurrencyRate.value ?? 1.0)))",
+                                prodPrice:
+                                    "\(CurrencyManager.currentCurrencyRate.code ?? "0") \(String(format: "%.2f",(Double( order.price?.amount ?? "0") ?? 0) * (CurrencyManager.currentCurrencyRate.value ?? 1.0)))",
 
                                 prodQty: order.currentQuantity ?? 0,
-                                isMyOrder: true,
-                                detailsDest: AnyView(
-                                    ProductInfoView(
-                                        productId: order.variant?.product?.id
-                                            ?? "")))
+                                isMyOrder: true
+                            )
                         }
                     }
                 } else {
                     CustomProgressView()
                 }
                 Spacer()
-            }.navigationTitle(Text("Ordered Products"))
-                .toolbar(.hidden,for: .tabBar)
+            }
                 .onAppear {
                     detailsViewModel.fetchProductsOfOrder(orderId: orderId)
-                    var p = ""
-                    var q = 1
-                    var str : String = "\(CurrencyManager.currentCurrencyRate.code ?? "0") \((Double( p ?? "0") ?? 0) * (Double(q) ?? 0) * (CurrencyManager.currentCurrencyRate.value ?? 1.0))"
-                    
                 }
         }
+        .navigationTitle(Text("Ordered Products"))
     }
 }
 

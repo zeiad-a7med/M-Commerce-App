@@ -62,6 +62,12 @@ class NavigationManager: ObservableObject {
             return AnyView(ProductsView(brandTitle: title))
         case .product(let id):
             return AnyView(ProductInfoView(productId: id))
+        case .payment:
+            return AnyView(PaymentView())
+        case .orderDetails(let orderId):
+            return AnyView(DetailsView(orderId: orderId))
+        case .productInfo(let productId):
+            return AnyView(ProductInfoView(productId: productId))
 
         //Auth
         case .login:
@@ -89,6 +95,9 @@ enum RouteTypes: Hashable {
     //subScreens
     case brand(title: String)
     case product(id: String)
+    case payment
+    case orderDetails(orderId: String)
+    case productInfo(productId: String)
 
     //Auth
     case login

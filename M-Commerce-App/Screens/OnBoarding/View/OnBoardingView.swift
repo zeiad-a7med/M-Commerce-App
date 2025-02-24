@@ -13,7 +13,7 @@ struct BoardingTabView: View {
         VStack {
             pagingSubView()
             CustomRoundedButtonView(
-                text: "Sign In", width: 80,
+                text: "Register", width: 80,
                 onTap: {
                     navigateToHome = true
                 }, isButtonEnabled: .constant(true))

@@ -13,7 +13,6 @@ struct ShoppingView: View {
     @State var showCheckOut: Bool = false
     @State var isLoggedIn: Bool = false
     @State var currentDeletion: Line?
-    @State var navigateToPayment: Bool = false
     @StateObject var viewModel = ShoppingCartViewModel()
     var body: some View {
         VStack {
@@ -61,18 +60,15 @@ struct ShoppingView: View {
                                 cartCost: viewModel.cartResult?.cart?.cost,
                                 onClick: { isClicked in
                                     showCheckOut = false
-                                    navigateToPayment = isClicked
+                                    if isClicked{
+                                        NavigationManager.shared.push(.payment)
+                                    }
                                 }
                             )
                             .presentationDetents([.medium])
 
                         }
                     )
-                    NavigationLink(
-                        destination: PaymentView(), isActive: $navigateToPayment
-                    ) {
-                        EmptyView()
-                    }
                     .alert(
                         "Do you really wish to remove your item from the cart?",
                         isPresented: $deleteAlertVisible
