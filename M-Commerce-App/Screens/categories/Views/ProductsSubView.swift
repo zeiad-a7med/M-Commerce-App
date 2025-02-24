@@ -70,14 +70,7 @@ struct ProductsSubView: View {
             }
 
         } else {
-            VStack {
-                Spacer()
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle())
-                    .scaleEffect(4)
-                Spacer()
-            }.padding(120)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            CustomProgressView()
         }
 
     }

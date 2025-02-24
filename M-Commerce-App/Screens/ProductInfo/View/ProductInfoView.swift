@@ -24,7 +24,7 @@ struct ProductInfoView: View {
     @State var val: Int = 0
     var body: some View {
         if viewModel.isLoading {
-            ProgressView()
+            CustomProgressView()
         } else {
             if viewModel.productRes?.success == false {
                 ContentUnavailableView(
