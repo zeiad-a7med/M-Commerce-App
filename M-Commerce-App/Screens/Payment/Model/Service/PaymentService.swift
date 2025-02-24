@@ -128,7 +128,7 @@ class PaymentService: OrderCreateService {
                 }
 
                 if let httpResponse = response as? HTTPURLResponse {
-                    if httpResponse.statusCode == 201 {
+                    if (httpResponse.statusCode == 201 || httpResponse.statusCode == 200) {
                         let user = AuthManager.shared.applicationUser
                         user?.cart = nil
                         AuthManager.shared.updateUser(updatedUser: user!)
