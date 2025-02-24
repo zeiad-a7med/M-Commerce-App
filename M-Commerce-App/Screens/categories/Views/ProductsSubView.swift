@@ -14,65 +14,67 @@ struct ProductsSubView: View {
     var SubFiltersArray: [String]
     @Binding var subFilterIndex: Int
     @Binding var filterType: String
-    @State private var path: [Product] = []
-
     private let columns = [GridItem(.flexible()), GridItem(.flexible())]
     @State private var lastItemID: String?
-
+    @Binding var isSearchActive: Bool
     var body: some View {
 
-        if !cViewModel.isLoading {
-            if let filteredProducts = cViewModel.categories
-                .categoryProducts
-            {
+        if isSearchActive {
+            CustomSearchView(searchText: $filterString ,
+                             mainFilter: filterString)
+        }else {
+            if !cViewModel.isLoading {
+                if let filteredProducts = cViewModel.categories
+                    .categoryProducts
+                {
 
-                LazyVGrid(columns: columns, spacing: 10) {
-                    ForEach(filteredProducts, id: \.id) { product in
-                        ProductCardView(product: product)
-                            .id(product.id)
-                            .onAppear {
-                                checkIfNeedMoreData(currentProduct: product)
-                            }
-                            .onTapGesture {
-                                NavigationManager.shared.push(
-                                    .product(id: product.id))
-                            }
+                    LazyVGrid(columns: columns, spacing: 10) {
+                        ForEach(filteredProducts, id: \.id) { product in
+                            ProductCardView(product: product)
+                                .id(product.id)
+                                .onAppear {
+                                    checkIfNeedMoreData(currentProduct: product)
+                                }
+                                .onTapGesture {
+                                    NavigationManager.shared.push(
+                                        .product(id: product.id))
+                                }
+                        }
                     }
+                    .onChange(
+                        of: filterType,
+                        { oldValue, newValue in
+                            filter()
+                        }
+                    )
+                    .onChange(
+                        of: subFilterIndex,
+                        { oldValue, newValue in
+                            filter()
+                        }
+                    )
 
+                    .padding(5)
+                    .overlay(content: {
+                        if cViewModel.categories.categoryProducts?.count ?? 0 == 0
+                            && !cViewModel.isLoading
+                        {
+                            let msg = "No Products Found"
+                            let desc = Text(
+                                "No  Products Found of type \"\(SubFiltersArray[subFilterIndex] == "" ? "" : "\(SubFiltersArray[subFilterIndex])")\" in \"\(filterType) category\", try using other filters"
+                            )
+                            let img = "square.3.layers.3d.slash"
+                            ContentUnavailableView(
+                                msg, systemImage: img, description: desc)
+                        }
+                    })
                 }
-                .onChange(
-                    of: filterType,
-                    { oldValue, newValue in
-                        filter()
-                    }
-                )
-                .onChange(
-                    of: subFilterIndex,
-                    { oldValue, newValue in
-                        filter()
-                    }
-                )
 
-                .padding(5)
-                .overlay(content: {
-                    if cViewModel.categories.categoryProducts?.count ?? 0 == 0
-                        && !cViewModel.isLoading
-                    {
-                        let msg = "No Products Found"
-                        let desc = Text(
-                            "No  Products Found of type \"\(SubFiltersArray[subFilterIndex] == "" ? "" : "\(SubFiltersArray[subFilterIndex])")\" in \"\(filterType) category\", try using other filters"
-                        )
-                        let img = "square.3.layers.3d.slash"
-                        ContentUnavailableView(
-                            msg, systemImage: img, description: desc)
-                    }
-                })
+            } else {
+                CustomProgressView()
             }
 
-        } else {
-            CustomProgressView()
         }
-
     }
 
     private func checkIfNeedMoreData(currentProduct: Product) {

@@ -10,6 +10,9 @@ import SwiftUI
 struct HomePageView: View {
     let tempImageList = ImageList(id: "")
     @State var favoriteCount: Int = 0
+    @State var searchText: String = ""
+    @State var isSearchActive: Bool = false
+//    @StateObject var searchViewModel = SearchViewModel(filterProduct: "m")
     var body: some View {
         ZStack {  //start of: ZStack
             ScrollView {
@@ -17,26 +20,37 @@ struct HomePageView: View {
                     CustomTextField(
                         placeholder: "search for brand ...",
                         onChange: { text in
-                            print("Search text: \(text)")
+                            self.searchText = text
                         },
                         prefix: {
                             Image(systemName: "magnifyingglass")
                         },
-                        initialText: .constant("")
+                        initialText: .constant(""),
+                        onActive: { active in
+                            if active {
+                                isSearchActive = true
+                            }else {
+                                isSearchActive = false
+                            }
+                        }
                     )
                     .padding([.leading, .trailing], 20)
-                    AdCardView(
-                        imageList: tempImageList,
-                        discountCode: [
-                            DiscountCode(), DiscountCode(code: "ByeBye"),
-                            DiscountCode(code: "areWeThereYet"),
-                        ], pricesruleList: PriceRulesList(id: "")
-                    ) {
+                    if isSearchActive {
+                        CustomSearchView(searchText: $searchText)
+                    }else{
+                        AdCardView(
+                            imageList: tempImageList,
+                            discountCode: [
+                                DiscountCode(), DiscountCode(code: "ByeBye"),
+                                DiscountCode(code: "areWeThereYet"),
+                            ], pricesruleList: PriceRulesList(id: "")
+                        ) {
+                        }
+                        HeaderView(
+                            title: ThemeManager.secondSectionTitle,
+                            color: ThemeManager.titleColor)
+                        BrandsView()
                     }
-                    HeaderView(
-                        title: ThemeManager.secondSectionTitle,
-                        color: ThemeManager.titleColor)
-                    BrandsView()
                     //                        Spacer()
                 }
             }
@@ -46,7 +60,7 @@ struct HomePageView: View {
 
 #Preview {
     //    NavigationView {
-    HomePageView()
+    HomePageView(searchText: "m")
     //    }
 }
 

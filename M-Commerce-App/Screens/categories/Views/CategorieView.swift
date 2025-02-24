@@ -17,18 +17,29 @@ struct CategorieView: View {
     @State var cE = CurrencyManager.currentCurrencyRate.value
     //    @State var currentFilter:String = ""
     var SubFiltersArray: [String] = ["ACCESSORIES", "T-SHIRTS", "SHOES", ""]
-
+    @State var isSearchActive:Bool = false
+    @State var searchText:String = ""
     var body: some View {
 
         ZStack(alignment: .bottomTrailing) {
             ScrollView {
                 LazyVStack {
                     CustomTextField(
-                        placeholder: "search for a product...",
+                        placeholder: "search for products ...",
                         onChange: { text in
-                            print(text)
+                            self.searchText = text
                         },
-                        initialText: .constant("")
+                        prefix: {
+                            Image(systemName: "magnifyingglass")
+                        },
+                        initialText: .constant(""),
+                        onActive: { active in
+                            if active {
+                                isSearchActive = true
+                            }else {
+                                isSearchActive = false
+                            }
+                        }
                     ).padding(10)
                     FilterBar(
                         filterItems: ["All", "Men", "Women", "Kid"],
@@ -40,7 +51,7 @@ struct CategorieView: View {
                         filterString: $filterString,
                         SubFiltersArray: SubFiltersArray,
                         subFilterIndex: $subFilterIndex,
-                        filterType: $filterType
+                        filterType: $filterType, isSearchActive: $isSearchActive
                     )
                 }
 

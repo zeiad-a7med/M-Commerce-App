@@ -184,6 +184,11 @@
 		C458D8C52D6A9DB700A77408 /* noConnectionAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = C458D8C42D6A9DB700A77408 /* noConnectionAnimation.json */; };
 		C45B8C872D6AA500008D990B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = C45B8C862D6AA500008D990B /* Lottie */; };
 		C46288012D6506F6004372B1 /* MyOrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46288002D6506F6004372B1 /* MyOrdersView.swift */; };
+		C48BCB8C2D6C5E1300173855 /* SearchProducts.graphql in Sources */ = {isa = PBXBuildFile; fileRef = C48BCB8B2D6C5DD400173855 /* SearchProducts.graphql */; };
+		C48BCB8E2D6C603600173855 /* CustomSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48BCB8D2D6C603600173855 /* CustomSearchView.swift */; };
+		C48BCB942D6C61EC00173855 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48BCB932D6C61EC00173855 /* SearchViewModel.swift */; };
+		C48BCB962D6C676500173855 /* GetProductsSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48BCB952D6C676500173855 /* GetProductsSearchResult.swift */; };
+		C48BCB982D6C67D800173855 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48BCB972D6C67D300173855 /* SearchModel.swift */; };
 		C4B324AF2D6BD924002D1DA5 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B324AE2D6BD924002D1DA5 /* OnBoardingView.swift */; };
 		C4B324B22D6BF018002D1DA5 /* BoardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B324B12D6BF018002D1DA5 /* BoardingPage.swift */; };
 		C4B324B42D6BF107002D1DA5 /* pagingSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B324B32D6BF107002D1DA5 /* pagingSubView.swift */; };
@@ -409,6 +414,11 @@
 		C458D8BB2D6A940000A77408 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		C458D8C42D6A9DB700A77408 /* noConnectionAnimation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = noConnectionAnimation.json; sourceTree = "<group>"; };
 		C46288002D6506F6004372B1 /* MyOrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrdersView.swift; sourceTree = "<group>"; };
+		C48BCB8B2D6C5DD400173855 /* SearchProducts.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SearchProducts.graphql; sourceTree = "<group>"; };
+		C48BCB8D2D6C603600173855 /* CustomSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchView.swift; sourceTree = "<group>"; };
+		C48BCB932D6C61EC00173855 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		C48BCB952D6C676500173855 /* GetProductsSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductsSearchResult.swift; sourceTree = "<group>"; };
+		C48BCB972D6C67D300173855 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		C4B324AE2D6BD924002D1DA5 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		C4B324B12D6BF018002D1DA5 /* BoardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingPage.swift; sourceTree = "<group>"; };
 		C4B324B32D6BF107002D1DA5 /* pagingSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pagingSubView.swift; sourceTree = "<group>"; };
@@ -697,6 +707,7 @@
 		890D86C32D5CD4B90062E8D1 /* graphql */ = {
 			isa = PBXGroup;
 			children = (
+				C48BCB872D6C5DA000173855 /* Search */,
 				89C82A2E2D667E470018898E /* Cart */,
 				48A3368A2D64585B00F64F2A /* Address */,
 				C42E3FC22D665815006DF7A3 /* Orders */,
@@ -1300,6 +1311,7 @@
 		89D508622D5C10CE00046FA9 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				C48BCB8F2D6C60A400173855 /* Search */,
 				C4B324B52D6BF75F002D1DA5 /* SplashScreen */,
 				C4B324AC2D6BD8E3002D1DA5 /* OnBoarding */,
 				48B1F8982D636EB2004D13AC /* AddressComponent */,
@@ -1452,6 +1464,73 @@
 				C46288002D6506F6004372B1 /* MyOrdersView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		C48BCB872D6C5DA000173855 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				C48BCB8A2D6C5DC700173855 /* Extensions */,
+				C48BCB892D6C5DBA00173855 /* Queries */,
+				C48BCB882D6C5DA900173855 /* Mutations */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		C48BCB882D6C5DA900173855 /* Mutations */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Mutations;
+			sourceTree = "<group>";
+		};
+		C48BCB892D6C5DBA00173855 /* Queries */ = {
+			isa = PBXGroup;
+			children = (
+				C48BCB8B2D6C5DD400173855 /* SearchProducts.graphql */,
+			);
+			path = Queries;
+			sourceTree = "<group>";
+		};
+		C48BCB8A2D6C5DC700173855 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C48BCB952D6C676500173855 /* GetProductsSearchResult.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C48BCB8F2D6C60A400173855 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				C48BCB922D6C60BB00173855 /* Model */,
+				C48BCB912D6C60B400173855 /* ModelView */,
+				C48BCB902D6C60AF00173855 /* View */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		C48BCB902D6C60AF00173855 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C48BCB8D2D6C603600173855 /* CustomSearchView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C48BCB912D6C60B400173855 /* ModelView */ = {
+			isa = PBXGroup;
+			children = (
+				C48BCB932D6C61EC00173855 /* SearchViewModel.swift */,
+			);
+			path = ModelView;
+			sourceTree = "<group>";
+		};
+		C48BCB922D6C60BB00173855 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C48BCB972D6C67D300173855 /* SearchModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		C4B324AC2D6BD8E3002D1DA5 /* OnBoarding */ = {
@@ -1772,10 +1851,12 @@
 				C44BEDA72D5D198F0022B603 /* ImgModel.swift in Sources */,
 				C4DD10F42D68F21A00FCD9E2 /* MoyaNetworkManagerExtension.swift in Sources */,
 				C458D8BC2D6A940000A77408 /* NetworkMonitor.swift in Sources */,
+				C48BCB962D6C676500173855 /* GetProductsSearchResult.swift in Sources */,
 				485A11452D68601800046F29 /* PaymentView.swift in Sources */,
 				89935D332D6A76D8001752A6 /* Configuration.swift in Sources */,
 				89935D342D6A76D8001752A6 /* PaymentHandler.swift in Sources */,
 				89935D352D6A76D8001752A6 /* PaymentService.swift in Sources */,
+				C48BCB942D6C61EC00173855 /* SearchViewModel.swift in Sources */,
 				89424E992D67B0A600B5F736 /* CartLineUpdate.swift in Sources */,
 				8952A6912D6284870003ACF4 /* ApplicationUser.swift in Sources */,
 				89935D372D6A7702001752A6 /* PaymentViewModel.swift in Sources */,
@@ -1798,6 +1879,7 @@
 				C4B324B22D6BF018002D1DA5 /* BoardingPage.swift in Sources */,
 				89424E972D67B06400B5F736 /* CartLineAdd.swift in Sources */,
 				89CAF31C2D6007AE003984FA /* SettingsListRow.swift in Sources */,
+				C48BCB8E2D6C603600173855 /* CustomSearchView.swift in Sources */,
 				89CAF31D2D6007AE003984FA /* Settings.swift in Sources */,
 				89C82A412D6689C40018898E /* Line.swift in Sources */,
 				89CAF31E2D6007AE003984FA /* EditProfile.swift in Sources */,
@@ -1844,6 +1926,7 @@
 				89C82A2B2D663B430018898E /* SendingVerificationView.swift in Sources */,
 				894A65022D6BBA4300DB2915 /* NavigationManager.swift in Sources */,
 				8952A6802D6206960003ACF4 /* RegisterMutation.swift in Sources */,
+				C48BCB8C2D6C5E1300173855 /* SearchProducts.graphql in Sources */,
 				892967BD2D64B399007191DC /* Variant.swift in Sources */,
 				89C82A452D668D7F0018898E /* GetCart.swift in Sources */,
 				C4DD10F62D68F26500FCD9E2 /* CurrencyExchanger.swift in Sources */,
@@ -1911,6 +1994,7 @@
 				C46288012D6506F6004372B1 /* MyOrdersView.swift in Sources */,
 				890D87DB2D5DF66C0062E8D1 /* PopupCircleView.swift in Sources */,
 				C4BC56202D5FD70300F9D42A /* BrandsGrid.swift in Sources */,
+				C48BCB982D6C67D800173855 /* SearchModel.swift in Sources */,
 				89C4A6402D63E70600716CB1 /* ProfileUpdateMutation.swift in Sources */,
 				C4DD10F82D68F29C00FCD9E2 /* ApiErrors.swift in Sources */,
 				890D87402D5D40A30062E8D1 /* CustomRoundedButtonView.swift in Sources */,

@@ -21,6 +21,7 @@ struct CustomTextField: View {
     @FocusState private var isFocused: Bool
     @State private var errorMessage: String?
     var hasError: Bool { errorMessage != nil }
+    var onActive: ((Bool) -> Void)?
     
 
     var body: some View {
@@ -88,6 +89,9 @@ struct CustomTextField: View {
                         )
                         .animation(.easeInOut(duration: 0.3), value: isFocused)
                 }
+            }
+            .onChange(of:isFocused) { val in
+                onActive?(val)
             }
             .padding()
             .overlay(

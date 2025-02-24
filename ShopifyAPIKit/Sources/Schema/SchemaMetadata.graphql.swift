@@ -89,6 +89,7 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "QuantityRule": return ShopifyAPIKit.Objects.QuantityRule
     case "QueryRoot": return ShopifyAPIKit.Objects.QueryRoot
     case "SearchQuerySuggestion": return ShopifyAPIKit.Objects.SearchQuerySuggestion
+    case "SearchResultItemConnection": return ShopifyAPIKit.Objects.SearchResultItemConnection
     case "SellingPlan": return ShopifyAPIKit.Objects.SellingPlan
     case "Shop": return ShopifyAPIKit.Objects.Shop
     case "ShopPayInstallmentsFinancingPlan": return ShopifyAPIKit.Objects.ShopPayInstallmentsFinancingPlan
