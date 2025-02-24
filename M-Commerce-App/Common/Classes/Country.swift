@@ -12,4 +12,5 @@ struct Country : Hashable{
     let flag: String
     let currencyCode: String?
     let currencyName: String?
+    let currencyKey: String?
 }

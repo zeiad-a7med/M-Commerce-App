@@ -19,10 +19,10 @@ struct AdCardView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             VStack {
                 LazyHStack {
-                    ForEach(Array(discountCode.enumerated()), id: \.offset) {
-                        index, discount in
+                    ForEach(Array(Constants.coupons), id: \.self) {
+                        coupon in
 
-                        AsyncImage(url: URL(string: imageList.images[index])) {
+                        AsyncImage(url: URL(string: coupon.image)) {
                             phase in
                             switch phase {
                             case .empty:
@@ -47,13 +47,13 @@ struct AdCardView: View {
                                             .horizontal, alignment: .center
                                         ).onTapGesture {
                                             UIPasteboard.general.string =
-                                                discount.code
+                                            coupon.code
                                             withAnimation(.snappy) {
                                                 SnackbarManager.shared.show(message: "Copied to clipboard!")
                                             }
                                         }
 
-                                    Text("\(discount.code)")
+                                    Text(coupon.code)
                                         .frame(alignment: .leading)
                                         .foregroundStyle(.white)
                                         .bold()

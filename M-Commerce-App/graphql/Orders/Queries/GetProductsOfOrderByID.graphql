@@ -1,9 +1,9 @@
 query GetProductsOfOrderByID ($CustomerAT: String!) {
     customer(customerAccessToken: $CustomerAT) {
-        orders(first: 10) {
+        orders(first: 100) {
             totalCount
             nodes {
-                lineItems(first: 10) {
+                lineItems(first: 100) {
                     nodes {
                         currentQuantity
                         quantity

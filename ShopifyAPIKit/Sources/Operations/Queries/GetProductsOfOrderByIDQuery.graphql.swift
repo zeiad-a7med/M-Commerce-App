@@ -7,7 +7,7 @@ public class GetProductsOfOrderByIDQuery: GraphQLQuery {
   public static let operationName: String = "GetProductsOfOrderByID"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query GetProductsOfOrderByID($CustomerAT: String!) { customer(customerAccessToken: $CustomerAT) { __typename orders(first: 10) { __typename totalCount nodes { __typename lineItems(first: 10) { __typename nodes { __typename currentQuantity quantity title variant { __typename currentlyNotInStock id title image { __typename id url } price { __typename amount currencyCode } product { __typename id productType title totalInventory vendor } } } } currentSubtotalPrice { __typename amount currencyCode } currentTotalPrice { __typename amount currencyCode } id } } displayName id numberOfOrders } }"#
+      #"query GetProductsOfOrderByID($CustomerAT: String!) { customer(customerAccessToken: $CustomerAT) { __typename orders(first: 100) { __typename totalCount nodes { __typename lineItems(first: 100) { __typename nodes { __typename currentQuantity quantity title variant { __typename currentlyNotInStock id title image { __typename id url } price { __typename amount currencyCode } product { __typename id productType title totalInventory vendor } } } } currentSubtotalPrice { __typename amount currencyCode } currentTotalPrice { __typename amount currencyCode } id } } displayName id numberOfOrders } }"#
     ))
 
   public var customerAT: String
@@ -41,7 +41,7 @@ public class GetProductsOfOrderByIDQuery: GraphQLQuery {
       public static var __parentType: any ApolloAPI.ParentType { ShopifyAPIKit.Objects.Customer }
       public static var __selections: [ApolloAPI.Selection] { [
         .field("__typename", String.self),
-        .field("orders", Orders.self, arguments: ["first": 10]),
+        .field("orders", Orders.self, arguments: ["first": 100]),
         .field("displayName", String.self),
         .field("id", ShopifyAPIKit.ID.self),
         .field("numberOfOrders", ShopifyAPIKit.UnsignedInt64.self),
@@ -85,7 +85,7 @@ public class GetProductsOfOrderByIDQuery: GraphQLQuery {
           public static var __parentType: any ApolloAPI.ParentType { ShopifyAPIKit.Objects.Order }
           public static var __selections: [ApolloAPI.Selection] { [
             .field("__typename", String.self),
-            .field("lineItems", LineItems.self, arguments: ["first": 10]),
+            .field("lineItems", LineItems.self, arguments: ["first": 100]),
             .field("currentSubtotalPrice", CurrentSubtotalPrice.self),
             .field("currentTotalPrice", CurrentTotalPrice.self),
             .field("id", ShopifyAPIKit.ID.self),
