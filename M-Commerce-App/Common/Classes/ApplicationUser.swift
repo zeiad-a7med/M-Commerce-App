@@ -28,8 +28,9 @@ final class ApplicationUser{
     var defaultAddress: Address?
     var orders: [Order]?
     var cart: Cart?
+    var couponCode: String?
     
-    init(id: String, accessToken: String? = nil, accessTokenExpiresAt: String? = nil, displayName: String? = nil, email: String? = nil, firstName: String? = nil, lastName: String? = nil, numberOfOrders: Int? = nil, phone: String? = nil, addresses: [Address]? = nil, defaultAddress: Address? = nil, orders: [Order]? = nil, cart: Cart? = nil) {
+    init(id: String, accessToken: String? = nil, accessTokenExpiresAt: String? = nil, displayName: String? = nil, email: String? = nil, firstName: String? = nil, lastName: String? = nil, numberOfOrders: Int? = nil, phone: String? = nil, addresses: [Address]? = nil, defaultAddress: Address? = nil, orders: [Order]? = nil, cart: Cart? = nil,couponCode: String? = nil) {
         self.id = id
         self.accessToken = accessToken
         self.accessTokenExpiresAt = accessTokenExpiresAt
@@ -43,5 +44,6 @@ final class ApplicationUser{
         self.defaultAddress = defaultAddress
         self.orders = orders
         self.cart = cart
+        self.couponCode = couponCode
     }
 }

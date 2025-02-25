@@ -30,6 +30,7 @@ class PaymentViewModel : ObservableObject{
             PaymentService.createOrder(){ result in
                 var user = AuthManager.shared.applicationUser
                 user?.cart = nil
+                user?.couponCode = nil
                 AuthManager.shared.updateUser(updatedUser: user!)
                 SnackbarManager.shared.show(message: "your order has been placed!")
             }

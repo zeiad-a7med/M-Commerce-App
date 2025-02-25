@@ -46,6 +46,9 @@ class PromoCodeViewModel: ObservableObject {
             } else {
                 discountAmount = totalPrice - (coupon?.value ?? 0)
             }
+            var user = AuthManager.shared.applicationUser
+            user?.cart?.discount = discountAmount
+            AuthManager.shared.updateUser(updatedUser: user!)
         }
 
     }
@@ -127,7 +130,7 @@ struct CheckOutComponent: View {
                     onTap: {
                         if(viewModel.coupon != nil){
                             var user = AuthManager.shared.applicationUser
-                            user?.cart?.cost?.couponCode = viewModel.coupon?.code
+                            user?.couponCode = viewModel.coupon?.code
                             AuthManager.shared.updateUser(updatedUser: user!)
                         }
                         onClick?(true)
@@ -139,6 +142,9 @@ struct CheckOutComponent: View {
 
         }
         .onAppear {
+            var user = AuthManager.shared.applicationUser
+            user?.couponCode = nil
+            AuthManager.shared.updateUser(updatedUser: user!)
             viewModel.setUp(
                 totalPrice: Double(
                     cartCost?.totalAmount?.formattedPrice ?? "0.0") ?? 0.0)

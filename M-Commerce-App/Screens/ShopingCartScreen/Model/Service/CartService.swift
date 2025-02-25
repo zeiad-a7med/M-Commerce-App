@@ -145,7 +145,8 @@ class CartService: CartServiceProtocol {
                 
             }else{
                 createCart (lines: lines){ result in
-                    cartID = result?.cart?.id
+                    complitionHandler(result)
+                    return
                 }
             }
             

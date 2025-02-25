@@ -13,6 +13,7 @@ struct Cart : Codable {
     var totalQuantity : Int?
     var lines : [Line]?
     var cost : Cost?
+    var discount : Double?
     var createdAt : String?
     var updatedAt : String?
 }

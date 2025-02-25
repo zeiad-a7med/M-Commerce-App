@@ -14,13 +14,9 @@ struct PaymentView: View {
     @State var ableToCheckOut: Bool = false
     var body: some View {
 
-        VStack(alignment: .leading) {
-            HStack {
-                Text("Address")
-
-                    .bold()
-                    .font(.title2)
-                Spacer()
+        VStack{
+            
+            VStack(alignment: .trailing){
                 if AuthManager.shared.applicationUser?.defaultAddress != nil {
                     NavigationLink {
                         AddressesDisplayView()
@@ -31,25 +27,13 @@ struct PaymentView: View {
                             .foregroundStyle(.white)
                             .background(ThemeManager.darkPuble)
                             .clipShape(Circle())
-                    }
+                    }.padding(.leading,UIScreen.main.bounds.width - 50)
 
                 }
-
-            }.padding()
+            }.frame(width: UIScreen.main.bounds.width)
+            
 
             PaymentAddress()
-
-            if let temp = paymentViewModel.cartResult?.cart?.totalQuantity {
-                Text("Products(\(temp))")
-                    .bold()
-                    .font(.title2)
-                    .padding()
-            } else {
-                Text("Products()")
-                    .bold()
-                    .font(.title2)
-                    .padding()
-            }
 
             ScrollView {
                 if let temp = paymentViewModel.cartResult?.cart?.lines {
@@ -159,12 +143,14 @@ struct PaymentView: View {
                     }.presentationDetents([.medium])
                 })
         }
+        .navigationTitle("Summary")
+        
         .onAppear {
             paymentViewModel.getCartData()
             if AuthManager.shared.applicationUser?.defaultAddress != nil {
                 ableToCheckOut.toggle()
             }
-            viewModel.promoCode = AuthManager.shared.applicationUser?.cart?.cost?.couponCode ?? ""
+            viewModel.promoCode = AuthManager.shared.applicationUser?.couponCode ?? ""
             viewModel.setUp(
                 totalPrice: Double(
                     AuthManager.shared.applicationUser?.cart?.cost?.totalAmount?.formattedPrice ?? "0.0") ?? 0.0)

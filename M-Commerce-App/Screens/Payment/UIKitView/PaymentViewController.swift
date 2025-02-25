@@ -47,7 +47,7 @@ class ViewController: UIViewController {
     }
 
     @objc func payPressed(sender: AnyObject) {
-        paymentHandler.startPayment(couponCode: paymentViewModel?.couponCode){ success in
+        paymentHandler.startPayment{ success in
             if success {
                 self.paymentViewModel?.PageDismiss = true
                 print("Payment successful")

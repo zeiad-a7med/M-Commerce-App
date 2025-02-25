@@ -47,16 +47,20 @@ class PaymentService: OrderCreateService {
         var amount: String =
             AuthManager.shared.applicationUser?.cart?.cost?.totalAmount?.amount
             ?? ""
-        let couponCode: String? = AuthManager.shared.applicationUser?.cart?.cost?.couponCode
+        
+        
         var discount : Double = 0
-        if(AuthManager.shared.applicationUser?.cart?.cost?.couponCode != nil){
+        var coupon : Coupon?
+        var couponCode = AuthManager.shared.applicationUser?.couponCode
+        if(couponCode != nil){
             for item in Constants.coupons {
                 if item.code == couponCode {
                     if item.type == .percentage {
-                        discount = (Double(amount) ?? 0) * ((item.value) / 100)
+                        discount = (Double(amount) ?? 0.0) * ((item.value) / 100)
                     } else {
-                        discount = (Double(amount) ?? 0) - (item.value)
+                        discount = (Double(amount) ?? 0.0) - (item.value)
                     }
+                    coupon = item
                     break
                 }
             }
@@ -87,14 +91,23 @@ class PaymentService: OrderCreateService {
                 "billing_address": billingAddress,
                 "shipping_address": billingAddress,
                 "email": email,
+                "discount" : (Double(String(format: "%.2f", discount)) ?? 0.0),
                 "transactions": [
                     [
                         "kind": "authorization",
                         "status": "success",
-                        "amount": (Double(amount) ?? 0.0) - discount,
+                        "amount": (Double(amount) ?? 0.0) - (Double(String(format: "%.2f", discount)) ?? 0.0),
                     ]
                 ],
                 "financial_status": "paid",
+                "discount_codes": [
+                  [
+                    "code": "\(coupon?.code)",
+                    "amount": String(format: "%.2f", coupon?.value ?? 0),
+                    "type": "percentage"
+                  ]
+                ]
+                
             ]
 
         ]

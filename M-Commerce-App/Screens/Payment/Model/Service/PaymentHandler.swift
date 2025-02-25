@@ -58,7 +58,7 @@ class PaymentHandler: NSObject {
     //        return [shippingDelivery, shippingCollection]
     //    }
 
-    func startPayment(couponCode : String?,completion: @escaping PaymentCompletionHandler) {
+    func startPayment(completion: @escaping PaymentCompletionHandler) {
 
         completionHandler = completion
         let rate : Double = CurrencyManager.currentCurrencyRate.value ?? 1.0
@@ -84,7 +84,8 @@ class PaymentHandler: NSObject {
         
         
         var discount : Double = 0
-        if(AuthManager.shared.applicationUser?.cart?.cost?.couponCode != nil){
+        var couponCode = AuthManager.shared.applicationUser?.couponCode
+        if(couponCode != nil){
             for item in Constants.coupons {
                 if item.code == couponCode {
                     if item.type == .percentage {
@@ -97,23 +98,22 @@ class PaymentHandler: NSObject {
             }
         }
         
-        
-        let ticket1 = PKPaymentSummaryItem(
+        let ticket2 = PKPaymentSummaryItem(
             label: "Discount",
             amount: NSDecimalNumber(
                 string: String(format:"%.2f",discount)
             ), type: .final
         )
-        paymentSummaryItems.append(ticket1)
+        paymentSummaryItems.append(ticket2)
         
 
-        let ticket2 = PKPaymentSummaryItem(
+        let ticket3 = PKPaymentSummaryItem(
             label: "Total",
             amount: NSDecimalNumber(
                 string: String(format:"%.2f",Double(total * rate) - discount)
             ), type: .final
         )
-        paymentSummaryItems.append(ticket2)
+        paymentSummaryItems.append(ticket3)
         
         
         

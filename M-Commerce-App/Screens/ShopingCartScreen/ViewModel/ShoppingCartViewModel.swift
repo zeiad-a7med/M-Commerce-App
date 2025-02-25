@@ -13,6 +13,7 @@ class ShoppingCartViewModel: ObservableObject {
     @Published var linesToUpdate: [Line] = []
     func getCartData() {
         isLoading = true
+        let cart = AuthManager.shared.applicationUser?.cart
         CartService.getCart { result in
             guard let result = result else { return }
             
