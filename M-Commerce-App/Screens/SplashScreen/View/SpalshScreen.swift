@@ -6,13 +6,17 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct SpalshScreen: View {
+    @Query private var newComers: [NewComer]
+    @Environment(\.modelContext) private var modelContext
     let applicationName: String = "ZeinShop"
     let applicationComercialThought: String = "Any shoppping just from home"
     let applicationVersion: String = "0.0.1"
     let applicationPowerBy: String = "Shopify"
     @State var navigateToOnBoarding : Bool = false
+    @State var navigateToHome : Bool = false
     var body: some View {
         NavigationView {
             ZStack {
@@ -41,10 +45,25 @@ struct SpalshScreen: View {
                 ) {
                     EmptyView()
                 }
+                NavigationLink(
+                    destination: ContentView(), isActive: $navigateToHome
+                ) {
+                    EmptyView()
+                }
             }
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    navigateToOnBoarding = true
+                    if(newComers.isEmpty){
+                        navigateToOnBoarding = true
+                        do {
+                            modelContext.insert(NewComer(isNewComer: true))
+                            try modelContext.save()
+                        } catch {
+                        }
+                    }else{
+                        navigateToHome = true
+                    }
+                    
                 }
             }
         }

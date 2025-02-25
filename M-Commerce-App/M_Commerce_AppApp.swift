@@ -5,9 +5,9 @@
 //  Created by Andrew Emad on 12/02/2025.
 //
 
+import Firebase
 import SwiftData
 import SwiftUI
-import Firebase
 
 @main
 struct M_Commerce_AppApp: App {
@@ -16,7 +16,9 @@ struct M_Commerce_AppApp: App {
     var body: some Scene {
         WindowGroup {
             let sharedModelContainer: ModelContainer? = {
-                let schema = Schema([Product.self,ApplicationUser.self,CurrencyRate.self])
+                let schema = Schema([
+                    Product.self, ApplicationUser.self, CurrencyRate.self, NewComer.self
+                ])
                 let modelConfiguration = ModelConfiguration(
                     schema: schema, isStoredInMemoryOnly: false)
 
@@ -27,22 +29,25 @@ struct M_Commerce_AppApp: App {
                     fatalError("Could not create ModelContainer: \(error)")
                 }
             }()
-            NavigationView{
-                ZStack {
-                    ContentView()
-                        .environment(networkMonitor)
-                    SnackbarView()
-                        .environmentObject(SnackbarManager.shared)
-                    AlertView()
-                        .environmentObject(AlertManager.shared)
-                }
-                .applyModelContainer(sharedModelContainer)
+            
+            ZStack {
+                SpalshScreen()
+                    .environment(networkMonitor)
+                SnackbarView()
+                    .environmentObject(SnackbarManager.shared)
+                AlertView()
+                    .environmentObject(AlertManager.shared)
             }
+            .applyModelContainer(sharedModelContainer)
         }
     }
 }
 class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication
+            .LaunchOptionsKey: Any]?
+    ) -> Bool {
         FirebaseApp.configure()
         print("configured")
         return true
