@@ -36,6 +36,8 @@ class NavigationManager: ObservableObject {
         }
 
     }
+    
+    
     func pushReplacement(_ target: RouteTypes) {
         path.removeLast()
         path.append(target)
@@ -74,6 +76,8 @@ class NavigationManager: ObservableObject {
             return AnyView(AddressEditView(address: address, defaultAddress: defaultAddress))
         case .addressAdd:
             return AnyView(AddressAddView())
+        case .reviews:
+            return AnyView(ReviewsListView())
             
             
             
@@ -114,6 +118,7 @@ enum RouteTypes: Hashable {
     case addresses
     case addressEdit(address: Address, defaultAddress: Address?)
     case addressAdd
+    case reviews
 
 
     //Auth

@@ -96,7 +96,7 @@ struct ProductInfoView: View {
                             Spacer()
                             VStack(alignment: .leading) {
 
-                                ScrollView {
+                                ScrollView (showsIndicators: false){
                                     HStack {
                                         VStack(alignment: .leading) {
                                             Text(
@@ -107,8 +107,6 @@ struct ProductInfoView: View {
                                             .multilineTextAlignment(.leading)
                                             .bold(true)
                                             .padding(.bottom, 10)
-                                            StarRatingView(
-                                                rating: Double.random(in: 2...5))
                                         }.frame(
                                             width: UIScreen.main.bounds.width * 2
                                                 / 3,
@@ -118,7 +116,23 @@ struct ProductInfoView: View {
                                             product: viewModel.productRes!.product!,
                                             size: 30
                                         ).padding(.trailing, 5)
-                                    }.padding(.bottom, 20)
+                                    }.padding(.bottom,5)
+                                        .padding(.horizontal,5)
+                                    AvailabiltyView(title:"Available in stock",amount: viewModel.productRes?.product?.totalInventory ?? 0)
+                                    HStack{
+                                        StarRatingView(
+                                            rating: Double.random(in: 2...5))
+                                        Spacer()
+                                        Text("View all reviews")
+                                            .bold()
+                                            .foregroundStyle(.blue)
+                                            .onTapGesture {
+                                                NavigationManager.shared.push(.reviews)
+                                            }
+                                    }.padding(.bottom, 10)
+                                    
+                                    
+                                    
                                     if viewModel.variantsForCart
                                         .isEmpty == false
                                     {
@@ -184,6 +198,9 @@ struct ProductInfoView: View {
                                             }
                                         }
                                         .padding(.bottom, 15)
+                                    }
+                                    if(selectedVariant != nil){
+                                        AvailabiltyView(title:"Quantity for (\(selectedVariant?.title ?? ""))",amount: selectedVariant?.quantityAvailable ?? 0)
                                     }
                                     HStack {
                                         Text("Choose amount:")
