@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct AdCardView: View {
-    var copyToClipboard : (() -> Void)?
-    var adViewModel = AdViewModel()
+    var copyToClipboard: (() -> Void)?
     @State var isCopied = false
     var body: some View {
 
@@ -37,27 +36,39 @@ struct AdCardView: View {
                                     image
                                         .resizable()
                                         .frame(width: 330, height: 140)
+                                        .overlay {
+                                            Color.primary.opacity(0.5)
+                                        }
                                         .clipShape(
                                             RoundedRectangle(cornerRadius: 15)
                                         )
                                         .containerRelativeFrame(
                                             .horizontal, alignment: .center
-                                        ).onTapGesture {
-                                            if(AuthManager.shared.isLoggedIn()){
+                                        )
+                                        .overlay {
+                                            Text(coupon.code)
+                                                .font(.title3)
+                                                .foregroundStyle(.white)
+                                                .bold()
+                                                .italic()
+                                        }
+
+                                        .onTapGesture {
+                                            if AuthManager.shared.isLoggedIn() {
                                                 UIPasteboard.general.string =
-                                                coupon.code
+                                                    coupon.code
                                                 withAnimation(.snappy) {
-                                                    SnackbarManager.shared.show(message: "Copied to clipboard!")
+                                                    SnackbarManager.shared.show(
+                                                        message:
+                                                            "Copied to clipboard!"
+                                                    )
                                                 }
-                                            }else{
-                                                AlertManager.shared.showLoginAlert()
+                                            } else {
+                                                AlertManager.shared
+                                                    .showLoginAlert()
                                             }
                                         }
 
-                                    Text(coupon.code)
-                                        .frame(alignment: .leading)
-                                        .foregroundStyle(.white)
-                                        .bold()
                                 }
                             case .failure:
                                 ZStack {
@@ -89,6 +100,5 @@ struct AdCardView: View {
 }
 
 #Preview {
-    let tempImageList = ImageList(id: "")
     return AdCardView()
 }

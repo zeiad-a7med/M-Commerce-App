@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct HomePageView: View {
-    let tempImageList = ImageList(id: "")
     @State var favoriteCount: Int = 0
     @State var searchText: String = ""
     @State var isSearchActive: Bool = false
