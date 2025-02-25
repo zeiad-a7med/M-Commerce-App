@@ -44,9 +44,25 @@ class PaymentService: OrderCreateService {
             AuthManager.shared.applicationUser?.defaultAddress?.country ?? ""
         let zip: String =
             AuthManager.shared.applicationUser?.defaultAddress?.zip ?? ""
-        let amount: String =
+        var amount: String =
             AuthManager.shared.applicationUser?.cart?.cost?.totalAmount?.amount
             ?? ""
+        let couponCode: String? = AuthManager.shared.applicationUser?.cart?.cost?.couponCode
+        var discount : Double = 0
+        if(AuthManager.shared.applicationUser?.cart?.cost?.couponCode != nil){
+            for item in Constants.coupons {
+                if item.code == couponCode {
+                    if item.type == .percentage {
+                        discount = (Double(amount) ?? 0) * ((item.value) / 100)
+                    } else {
+                        discount = (Double(amount) ?? 0) - (item.value)
+                    }
+                    break
+                }
+            }
+        }
+        
+        
         let billingAddress = [
             "first_name": firstName,
             "last_name": lastName,
@@ -63,7 +79,7 @@ class PaymentService: OrderCreateService {
             "last_name": lastName,
             "email": email,
         ]
-        var orderData: [String: Any] = [
+        let orderData: [String: Any] = [
 
             "order": [
                 "line_items": lineItems,
@@ -75,7 +91,7 @@ class PaymentService: OrderCreateService {
                     [
                         "kind": "authorization",
                         "status": "success",
-                        "amount": Double(amount),
+                        "amount": (Double(amount) ?? 0.0) - discount,
                     ]
                 ],
                 "financial_status": "paid",
@@ -129,7 +145,7 @@ class PaymentService: OrderCreateService {
 
                 if let httpResponse = response as? HTTPURLResponse {
                     if (httpResponse.statusCode == 201 || httpResponse.statusCode == 200) {
-                        let user = AuthManager.shared.applicationUser
+                        var user = AuthManager.shared.applicationUser
                         user?.cart = nil
                         AuthManager.shared.updateUser(updatedUser: user!)
                         complitionHandler(

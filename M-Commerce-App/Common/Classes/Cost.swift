@@ -17,4 +17,5 @@ struct Cost: Codable {
     var subtotalAmount: Price?
     var totalDutyAmount: Price?
     var totalTaxAmount: Price?
+    var couponCode: String?
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PaymentView: View {
     @StateObject var paymentViewModel = PaymentViewModel()
+    @StateObject private var viewModel = PromoCodeViewModel()
     @State var showCheckOut: Bool = false
     @State var ableToCheckOut: Bool = false
     var body: some View {
@@ -57,34 +58,95 @@ struct PaymentView: View {
                     }
                 }
             }.frame(height: 300)
-
-            HStack {
-                Text("Total amount")
-                    .padding()
+            VStack{
                 Spacer()
-                Text(
-                    String(format: "%.2f", (Double(
-                        paymentViewModel.cartResult?.cart?.cost?
-                            .checkoutChargeAmount?.amount ?? "0") ?? 0)
-                    * (CurrencyManager.currentCurrencyRate.value ?? 1.0))
-                    
+                HStack {
+                    Text("SubTotal:")
+                        .padding()
+                    Spacer()
+                    Text(
+                        String(format: "%.2f", (Double(
+                            paymentViewModel.cartResult?.cart?.cost?
+                                .subtotalAmount?.amount ?? "0") ?? 0)
+                        * (CurrencyManager.currentCurrencyRate.value ?? 1.0))
+                        
+                    )
+                    .bold()
+                    Text(
+                        CurrencyManager.currentCurrencyRate.code ?? "EGP"
+                    )
+                    .padding(.trailing, 20)
+                    .bold()
+                }.frame(height:30)
+                HStack {
+                    Text("Checkout Charge Amount:")
+                        .padding()
+                    Spacer()
+                    Text(
+                        String(format: "%.2f", (Double(
+                            paymentViewModel.cartResult?.cart?.cost?
+                                .checkoutChargeAmount?.amount ?? "0") ?? 0)
+                        * (CurrencyManager.currentCurrencyRate.value ?? 1.0))
+                        
+                    )
+                    .bold()
+                    Text(
+                        CurrencyManager.currentCurrencyRate.code ?? "EGP"
+                    )
+                    .padding(.trailing, 20)
+                    .bold()
+                }.frame(height:30)
+                HStack {
+                    Text("Discount:")
+                        .padding()
+                    Spacer()
+                    Text(
+                        String(format: "%.2f", viewModel.discountAmount)
+                    )
+                    .bold()
+                    Text(
+                        CurrencyManager.currentCurrencyRate.code ?? "EGP"
+                    )
+                    .padding(.trailing, 20)
+                    .bold()
+                }.frame(height:30)
+                HStack {
+                    Text("Total Amount:")
+                        .padding()
+                    Spacer()
+                    Text(
+                        String(format: "%.2f",((Double(
+                            paymentViewModel.cartResult?.cart?.cost?
+                                .totalAmount?.amount ?? "0") ?? 0)
+                        * (CurrencyManager.currentCurrencyRate.value ?? 1.0) - viewModel.discountAmount))
+                        
+                    )
+                    .bold()
+                    Text(
+                        CurrencyManager.currentCurrencyRate.code ?? "EGP"
+                    )
+                    .padding(.trailing, 20)
+                    .bold()
+                }.frame(height:30)
+//                Spacer()
+                CustomRoundedButtonView(
+                    text: "Checkout Now", width: 80,
+                    onTap: {
+                        showCheckOut.toggle()
+                    }, isButtonEnabled: .constant(ableToCheckOut)
                 )
-
-                .bold()
-                Text(
-                    CurrencyManager.currentCurrencyRate.code ?? "EGP"
-                )
-                .padding(.trailing, 20)
-                .bold()
+                Spacer()
             }
-            Spacer()
-            CustomRoundedButtonView(
-                text: "Checkout Now", width: 80,
-                onTap: {
-                    showCheckOut.toggle()
-                }, isButtonEnabled: .constant(ableToCheckOut)
+            .ignoresSafeArea()
+            .frame(width:UIScreen.main.bounds.width,height:250)
+            
+            .background(.thinMaterial)
+            
+            .clipShape(
+                RoundedCornerShape(
+                    corners: [.topRight, .topLeft], radius: 40)
             )
-            .padding(.leading, 45).sheet(
+            .sheet(
                 isPresented: $showCheckOut,
                 content: {
                     PaymentMethodComponent { result in
@@ -96,13 +158,16 @@ struct PaymentView: View {
                         }
                     }.presentationDetents([.medium])
                 })
-            Spacer()
         }
         .onAppear {
+            paymentViewModel.getCartData()
             if AuthManager.shared.applicationUser?.defaultAddress != nil {
                 ableToCheckOut.toggle()
             }
-            paymentViewModel.getCartData()
+            viewModel.promoCode = AuthManager.shared.applicationUser?.cart?.cost?.couponCode ?? ""
+            viewModel.setUp(
+                totalPrice: Double(
+                    AuthManager.shared.applicationUser?.cart?.cost?.totalAmount?.formattedPrice ?? "0.0") ?? 0.0)
         }
 
     }

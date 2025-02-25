@@ -13,6 +13,7 @@ class PaymentViewModel : ObservableObject{
     @Published var isLoading : Bool = false
     @Published var PageDismiss : Bool = false
     @Published var orderCreateResult : OrderCreateResponse?
+    var couponCode : String?
     func getCartData(){
         isLoading = true
         CartService.getCart{ result in
@@ -20,6 +21,7 @@ class PaymentViewModel : ObservableObject{
             DispatchQueue.main.async {
                 self.isLoading = false
                 self.cartResult = result
+                self.couponCode = AuthManager.shared.applicationUser?.cart?.cost?.couponCode ?? ""
             }
         }
     }
