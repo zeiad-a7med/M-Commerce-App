@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CategorieView: View {
+    @State private var sliderValue: Double = (1000 * (CurrencyManager.currentCurrencyRate.value ?? 1.0))
+    @State var sliderAsPrice:String = "0"
     @State var isSelectedPopup: Bool = false
     @State var filterType: String = ""
     @State var subFilterIndex: Int = 3
@@ -48,11 +50,12 @@ struct CategorieView: View {
                             filterType = filterRes
                             print(filterRes)
                         })
+                    DebouncedSliderView(sliderValue: $sliderValue)
                     ProductsSubView(
                         filterString: $filterString,
                         SubFiltersArray: SubFiltersArray,
                         subFilterIndex: $subFilterIndex,
-                        filterType: $filterType, isSearchActive: $isSearchActive ,searchText: $searchText
+                        filterType: $filterType, isSearchActive: $isSearchActive ,searchText: $searchText ,sliderAsPrice: $sliderAsPrice
                     )
                 }
 
@@ -72,6 +75,10 @@ struct CategorieView: View {
         }
         .onAppear {
             cE = CurrencyManager.currentCurrencyRate.value
+        }
+        .onChange(of: sliderValue) { oldValue, newValue in
+            print("Slider changed from \(oldValue) to \(newValue)")
+            sliderAsPrice = "variants.price:>0 AND variants.price:<\(newValue / (CurrencyManager.currentCurrencyRate.value ?? 1.0))"
         }
         
 
