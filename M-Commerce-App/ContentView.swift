@@ -33,6 +33,14 @@ struct ContentView: View {
             .tabItem {
                 Label("Home", systemImage: "house.fill")
             }.tag(0)
+            
+            
+            
+            
+            
+            
+            
+            
             NavigationStack(path: $navigationManager.path) {
                 CategorieView()
                     .navigationTitle("Categories")
