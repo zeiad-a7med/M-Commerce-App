@@ -47,6 +47,7 @@ struct DetailsView: View {
                     detailsViewModel.fetchProductsOfOrder(orderId: orderId)
                 }
         }
+        .toolbar(.hidden, for: .tabBar)
         .navigationTitle(Text("Ordered Products"))
     }
 }
