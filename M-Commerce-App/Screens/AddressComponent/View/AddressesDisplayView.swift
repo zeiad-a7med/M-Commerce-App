@@ -55,17 +55,16 @@ struct AddressesDisplayView: View {
                     }
 
                 }.toolbar {
-                    NavigationLink {
-                        AddressAddView()
-
-                    } label: {
+                    Button(action:{
+                        NavigationManager.shared.push(.addressAdd)
+                    },label: {
                         Image(systemName: "plus")
                             .padding(5)
                             .bold()
                             .foregroundStyle(.white)
                             .background(ThemeManager.darkPuble)
                             .clipShape(Circle())
-                    }
+                    })
 
                 }
             }

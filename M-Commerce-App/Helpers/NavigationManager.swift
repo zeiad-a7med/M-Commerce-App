@@ -72,6 +72,8 @@ class NavigationManager: ObservableObject {
             return AnyView(AddressesDisplayView())
         case .addressEdit(let address, let defaultAddress):
             return AnyView(AddressEditView(address: address, defaultAddress: defaultAddress))
+        case .addressAdd:
+            return AnyView(AddressAddView())
             
             
             
@@ -111,6 +113,7 @@ enum RouteTypes: Hashable {
     case productInfo(productId: String)
     case addresses
     case addressEdit(address: Address, defaultAddress: Address?)
+    case addressAdd
 
 
     //Auth
