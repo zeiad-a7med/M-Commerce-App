@@ -158,6 +158,7 @@
 		89D5084B2D5C10C600046FA9 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D508462D5C10C600046FA9 /* CustomTextField.swift */; };
 		89D5084C2D5C10C600046FA9 /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D508472D5C10C600046FA9 /* ShimmerView.swift */; };
 		89D5084F2D5C10CA00046FA9 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D5084D2D5C10CA00046FA9 /* ThemeManager.swift */; };
+		89D622AF2D6D66B5002F11E4 /* PurchaseRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D622AE2D6D66B5002F11E4 /* PurchaseRule.swift */; };
 		89EE56E32D5E322700B05457 /* GetProductQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE56E22D5E321800B05457 /* GetProductQuery.swift */; };
 		C401B5CF2D61047F004BCB2F /* FloatingFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C401B5CE2D61047F004BCB2F /* FloatingFilter.swift */; };
 		C401B5D12D6108CD004BCB2F /* FloatingButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C401B5D02D6108CD004BCB2F /* FloatingButtonView.swift */; };
@@ -390,6 +391,7 @@
 		89D508462D5C10C600046FA9 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		89D508472D5C10C600046FA9 /* ShimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerView.swift; sourceTree = "<group>"; };
 		89D5084D2D5C10CA00046FA9 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		89D622AE2D6D66B5002F11E4 /* PurchaseRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseRule.swift; sourceTree = "<group>"; };
 		89EE56E22D5E321800B05457 /* GetProductQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductQuery.swift; sourceTree = "<group>"; };
 		C401B5CE2D61047F004BCB2F /* FloatingFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingFilter.swift; sourceTree = "<group>"; };
 		C401B5D02D6108CD004BCB2F /* FloatingButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButtonView.swift; sourceTree = "<group>"; };
@@ -1307,6 +1309,7 @@
 				89B00B8E2D6157DD00AF1FB7 /* TextValidation.swift */,
 				C4DD10FE2D690B4500FCD9E2 /* CurrencyManager.swift */,
 				C458D8BB2D6A940000A77408 /* NetworkMonitor.swift */,
+				89D622AE2D6D66B5002F11E4 /* PurchaseRule.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1980,6 +1983,7 @@
 				C42E3FAE2D660D21006DF7A3 /* OrderCard.swift in Sources */,
 				C4BC56142D5F8EE600F9D42A /* ProductsModel.swift in Sources */,
 				89CAF3292D60666B003984FA /* SnakeBar.swift in Sources */,
+				89D622AF2D6D66B5002F11E4 /* PurchaseRule.swift in Sources */,
 				89CAF3232D602432003984FA /* RoundedCornerShape.swift in Sources */,
 				890D87D62D5DF66C0062E8D1 /* AdCardView.swift in Sources */,
 				89B00B8D2D6148CF00AF1FB7 /* CustomSecureField.swift in Sources */,

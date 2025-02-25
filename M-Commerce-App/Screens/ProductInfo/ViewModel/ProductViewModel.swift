@@ -18,7 +18,8 @@ class VariantForCart {
     var price: Double
 
     init(
-        variantId: String,lineId: String? = nil, title: String, quantity: Int, totalQuantity: Int,
+        variantId: String, lineId: String? = nil, title: String, quantity: Int,
+        totalQuantity: Int,
         price: Double
     ) {
         self.variantId = variantId
@@ -48,15 +49,15 @@ class ProductViewModel: ObservableObject {
             guard let result = result else { return }
             DispatchQueue.main.async {
                 result.product?.variants?.forEach { variant in
-//                    let quantity: Int = self.getVariantQuantityFromCart(
-//                        variant: variant)
-//                    let lineId : String? = self.getLineIdFromCart(variant: variant)
+                    //                    let quantity: Int = self.getVariantQuantityFromCart(
+                    //                        variant: variant)
+                    //                    let lineId : String? = self.getLineIdFromCart(variant: variant)
                     self.variantsForCart.append(
                         VariantForCart(
                             variantId: variant.id ?? "",
-//                            lineId: lineId,
+                            //                            lineId: lineId,
                             title: variant.title ?? "",
-//                            quantity: quantity,
+                            //                            quantity: quantity,
                             quantity: 0,
                             totalQuantity: variant.quantityAvailable ?? 0,
                             price: Double(variant.price?.amount ?? "0") ?? 0
@@ -73,22 +74,31 @@ class ProductViewModel: ObservableObject {
         var quantity: Int = 0
         AuthManager.shared.applicationUser?.cart?.lines?.forEach { line in
             if line.variant?.id == variant.id {
-//                self.productAddedToCart = true
+                //                self.productAddedToCart = true
                 quantity = line.quantity ?? 0
             }
         }
         return quantity
     }
-    
+
     func getLineIdFromCart(variant: ProductVariant) -> String? {
         var lineId: String?
         AuthManager.shared.applicationUser?.cart?.lines?.forEach { line in
             if line.variant?.id == variant.id {
-//                self.productAddedToCart = true
+                //                self.productAddedToCart = true
                 lineId = line.id
             }
         }
         return lineId
+    }
+    func getVariantFromCart(variant: ProductVariant) -> ProductVariant? {
+        var cartVariant: ProductVariant?
+        AuthManager.shared.applicationUser?.cart?.lines?.forEach { line in
+            if line.variant?.id == variant.id {
+                cartVariant = line.variant
+            }
+        }
+        return cartVariant
     }
 
     func updateQuantity(
@@ -99,11 +109,11 @@ class ProductViewModel: ObservableObject {
         variantsForCart.forEach { variantInCart in
             if variantInCart.variantId == variant.id {
                 variantInCart.quantity = quantity
-                if(quantity == 0 && getLineIdFromCart(variant: variant) != nil){
-                    deletionAlertVisible = true
-                    currentdeletionVariant = variant
-                }
-                
+//                if quantity == 0 && getLineIdFromCart(variant: variant) != nil {
+//                    deletionAlertVisible = true
+//                    currentdeletionVariant = variant
+//                }
+
             }
             temp.append(variantInCart)
         }
@@ -111,60 +121,90 @@ class ProductViewModel: ObservableObject {
     }
 
     func addToCart() {
-//        isLoading = true
+        isLoading = true
+        var canAdd = true
         var cartLinesInput: [CartLineInputValue] = []
         variantsForCart.forEach { variant in
             if variant.quantity > 0 {
+                let addedQuantity : Int = variant.quantity
+                
+                let quantityFromCart: Int = self.getVariantQuantityFromCart(
+                    variant: ProductVariant(id:variant.variantId))
+                
+                let variantFromCart = self.getVariantFromCart(variant: ProductVariant(id:variant.variantId))
+                
+                let allowedLimit = PurchaseRule.ProductPurchaseLimit(productQuantity: variantFromCart?.quantityAvailable ?? 0)
+                
+                if(variantFromCart != nil){
+                    var onlyQuantity: Int = allowedLimit - (variantFromCart?.quantityAvailable ?? 0)
+                    
+                    onlyQuantity = PurchaseRule.ProductPurchaseLimit(productQuantity: variantFromCart?.quantityAvailable ?? 0) - quantityFromCart
+                    
+                    if(quantityFromCart == allowedLimit){
+                        SnackbarManager.shared.show(message: "you have already added \(quantityFromCart) from \(variantFromCart?.title ?? "") to your cart , you can't add more from this variant.")
+                        canAdd = false
+                        isLoading = false
+                        return
+                    }
+                    else if((quantityFromCart + variant.quantity) > allowedLimit){
+                        SnackbarManager.shared.show(message: "you have already added \(quantityFromCart) from \(variantFromCart?.title ?? "") to your cart , you can only add \(onlyQuantity) more.")
+                        canAdd = false
+                        isLoading = false
+                        return
+                    }
+                }
+               
+
                 cartLinesInput.append(
                     CartLineInputValue(
                         merchandiseId: variant.variantId,
-                        quantity: variant.quantity
+                        quantity: addedQuantity
                     )
                 )
             }
         }
-        CartService.cartLinesAdd(lines: cartLinesInput) { result in
-            if result?.success == true {
-//                self.isLoading = false
-                SnackbarManager.shared.show(message: "Product added to cart 🛒")
-
-            } else {
-//                self.isLoading = false
-                SnackbarManager.shared.show(message: "Some thing went wrong!")
+        if(canAdd){
+            CartService.cartLinesAdd(lines: cartLinesInput) { result in
+                self.isLoading = false
+                if result?.success == true {
+                    SnackbarManager.shared.show(message: "Product added to cart 🛒")
+                } else {
+                    SnackbarManager.shared.show(message: "Some thing went wrong!")
+                }
             }
         }
     }
-    
+
     func deleteFromCart() {
-//        isLoading = true
-        guard let lineId = getLineIdFromCart(variant: currentdeletionVariant!) else{
-//            self.isLoading = false
+        isLoading = true
+        guard let lineId = getLineIdFromCart(variant: currentdeletionVariant!)
+        else {
+            self.isLoading = false
             SnackbarManager.shared.show(message: "Some thing went wrong!")
             updateQuantity(variant: currentdeletionVariant!, quantity: 1)
             return
         }
-        
-        CartService.cartLinesRemove(lineIds: [lineId]){ result in
-            if result?.success == true {
-//                self.isLoading = false
-                SnackbarManager.shared.show(message: "Product removed from your cart 🛒")
 
+        CartService.cartLinesRemove(lineIds: [lineId]) { result in
+            self.isLoading = false
+            if result?.success == true {
+                SnackbarManager.shared.show(
+                    message: "Product removed from your cart 🛒")
             } else {
-//                self.isLoading = false
                 SnackbarManager.shared.show(message: "Some thing went wrong!")
             }
         }
     }
-    
+
     func updateCart(finishingUpdates: @escaping (Bool) -> Void) {
-//        self.isLoading = true
+        //        self.isLoading = true
         if hasNewUpdates {
             var cartLinesInput: [CartLineInputValue] = []
             variantsForCart.forEach { variant in
                 if variant.quantity > 0 {
                     cartLinesInput.append(
                         CartLineInputValue(
-                            id:variant.lineId,
+                            id: variant.lineId,
                             merchandiseId: variant.variantId,
                             quantity: variant.quantity
                         )
@@ -173,19 +213,19 @@ class ProductViewModel: ObservableObject {
             }
             CartService.cartLinesUpdate(lines: cartLinesInput) { result in
                 if result?.success == true {
-//                    self.isLoading = false
+                    //                    self.isLoading = false
                     SnackbarManager.shared.show(
                         message: "Cart updated successfully! 🛒")
                     finishingUpdates(true)
 
                 } else {
-//                    self.isLoading = false
+                    //                    self.isLoading = false
                     SnackbarManager.shared.show(
                         message: "Some thing went wrong while updating cart!")
                     finishingUpdates(false)
                 }
             }
-        }else{
+        } else {
             finishingUpdates(true)
         }
 

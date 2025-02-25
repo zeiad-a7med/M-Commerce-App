@@ -21,15 +21,17 @@ struct RowCard: View {
                     .overlay(alignment: .bottomLeading) {
                         NumberOfItems(
                             numberOfItem: $numberOfItems,
-                            max: line?.variant?.quantityAvailable
+                            max: PurchaseRule.ProductPurchaseLimit(
+                                productQuantity: line?.variant?
+                                    .quantityAvailable ?? 0)
                         ) { count in
-                            if(count<minimumNumberOfItems){
+                            if count < minimumNumberOfItems {
                                 onDelete?(true)
                                 numberOfItems = 1
-                            }else{
+                            } else {
                                 changeNumberOfItemInRow?(count)
                             }
-                           
+
                         }
                         .padding(.leading, 50)
                         .padding(.bottom, 20)
@@ -88,8 +90,9 @@ struct RowCard: View {
                 )
                 .padding(.trailing)
                 .font(.title2)
-            }.onTapGesture{
-                NavigationManager.shared.push(.productInfo(productId: line?.variant?.productId ?? ""))
+            }.onTapGesture {
+                NavigationManager.shared.push(
+                    .productInfo(productId: line?.variant?.productId ?? ""))
             }
 
         }
