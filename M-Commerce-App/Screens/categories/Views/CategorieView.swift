@@ -33,6 +33,7 @@ struct CategorieView: View {
                             Image(systemName: "magnifyingglass")
                         },
                         disActiveWhenCancel: true,
+                        showClearBtnWhenClearText: true,
                         initialText: .constant(""),
                         onActive: { active in
                             if active {

@@ -11,20 +11,17 @@ class ShoppingCartViewModel: ObservableObject {
     @Published var cartResult: CartResponse?
     @Published var isLoading: Bool = false
     @Published var linesToUpdate: [Line] = []
-    init() {
-        getCartData()
-    }
     func getCartData() {
         isLoading = true
         CartService.getCart { result in
             guard let result = result else { return }
-            DispatchQueue.main.async {
-                self.isLoading = false
-                self.cartResult = result
-            }
+            
             if self.cartResult?.success == false {
                 SnackbarManager.shared.show(
                     message: self.cartResult?.message ?? "Something went wrong")
+            }else{
+                self.isLoading = false
+                self.cartResult = result
             }
         }
     }

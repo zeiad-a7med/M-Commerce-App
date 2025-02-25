@@ -13,6 +13,7 @@ struct CustomTextField: View {
     var suffix: (() -> any View)?
     var enableClearButton: Bool = true
     var disActiveWhenCancel: Bool = false
+    var showClearBtnWhenClearText: Bool = false
     var validationType: ValidationType?
     var characterLimit: Int?
     var isValid: ((Bool) -> Void)?
@@ -67,7 +68,7 @@ struct CustomTextField: View {
                         })
 
                 // Suffix view (e.g., clear button)
-                if !text.isEmpty && enableClearButton {
+                if (!text.isEmpty || showClearBtnWhenClearText) && enableClearButton {
                     Button(action: {
                         text.removeAll()
                         if disActiveWhenCancel {

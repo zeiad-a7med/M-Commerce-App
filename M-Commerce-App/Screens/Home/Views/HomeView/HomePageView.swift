@@ -24,7 +24,9 @@ struct HomePageView: View {
                         prefix: {
                             Image(systemName: "magnifyingglass")
                         },
-                        disActiveWhenCancel: true, initialText: .constant(""),
+                        disActiveWhenCancel: true,
+                        showClearBtnWhenClearText: true,
+                        initialText: .constant(""),
                         onActive: { active in
                             if active {
                                 isSearchActive = true
@@ -32,7 +34,6 @@ struct HomePageView: View {
                                 isSearchActive = false
                             }
                         }
-
                     )
                     .padding([.leading, .trailing], 20)
                     if isSearchActive {

@@ -51,36 +51,7 @@ struct ShoppingView: View {
                             }
                         }, isButtonEnabled: .constant(true)
                     )
-                    .sheet(
-                        isPresented: $showCheckOut,
-                        content: {
-                            CheckOutComponent(
-                                cartCost: viewModel.cartResult?.cart?.cost,
-                                onClick: { isClicked in
-                                    showCheckOut = false
-                                    if isClicked{
-                                        NavigationManager.shared.push(.payment)
-                                    }
-                                }
-                            )
-                            .presentationDetents([.medium])
-
-                        }
-                    )
-                    .alert(
-                        "Do you really wish to remove your item from the cart?",
-                        isPresented: $deleteAlertVisible
-                    ) {
-                        Button("Delete", role: .destructive) {
-                            viewModel.deleteFromCart(
-                                deletedLine: currentDeletion!)
-                            currentDeletion = nil
-                        }
-                        Button("Cancel", role: .cancel) {
-                            deleteAlertVisible = false
-                            currentDeletion = nil
-                        }
-                    }
+                    
                 } else {
                     VStack {
                         ContentUnavailableView(
@@ -96,11 +67,44 @@ struct ShoppingView: View {
                 RequireLoginView()
             }
 
-        }.onAppear {
+        }
+        .onAppear {
+            
             isLoggedIn = AuthManager.shared.isLoggedIn()
+            viewModel.getCartData()
         }
         .onDisappear {
             viewModel.updateCart { success in
+            }
+        }
+        .sheet(
+            isPresented: $showCheckOut,
+            content: {
+                CheckOutComponent(
+                    cartCost: viewModel.cartResult?.cart?.cost,
+                    onClick: { isClicked in
+                        showCheckOut = false
+                        if isClicked{
+                            NavigationManager.shared.push(.payment)
+                        }
+                    }
+                )
+                .presentationDetents([.medium])
+
+            }
+        )
+        .alert(
+            "Do you really wish to remove your item from the cart?",
+            isPresented: $deleteAlertVisible
+        ) {
+            Button("Delete", role: .destructive) {
+                viewModel.deleteFromCart(
+                    deletedLine: currentDeletion!)
+                currentDeletion = nil
+            }
+            Button("Cancel", role: .cancel) {
+                deleteAlertVisible = false
+                currentDeletion = nil
             }
         }
         .navigationTitle("Shopping Cart")
