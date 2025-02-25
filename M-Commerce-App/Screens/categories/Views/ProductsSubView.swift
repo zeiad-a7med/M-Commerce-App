@@ -19,6 +19,7 @@ struct ProductsSubView: View {
     @Binding var isSearchActive: Bool
     @Binding var searchText: String
     @State var mainFilter:String?
+    @Binding var sliderAsPrice:String
     var body: some View {
 
         if isSearchActive {
@@ -29,7 +30,6 @@ struct ProductsSubView: View {
                 if let filteredProducts = cViewModel.categories
                     .categoryProducts
                 {
-
                     LazyVGrid(columns: columns, spacing: 10) {
                         ForEach(filteredProducts, id: \.id) { product in
                             ProductCardView(product: product)
@@ -51,6 +51,12 @@ struct ProductsSubView: View {
                     )
                     .onChange(
                         of: subFilterIndex,
+                        { oldValue, newValue in
+                            filter()
+                        }
+                    )
+                    .onChange(
+                        of: sliderAsPrice,
                         { oldValue, newValue in
                             filter()
                         }
@@ -95,30 +101,59 @@ struct ProductsSubView: View {
         if filterType == "All" {
             filterType = ""
         }
-        if filterType != "" && SubFiltersArray[subFilterIndex] != "" {
-            filterString = "\(filterType) | \(SubFiltersArray[subFilterIndex])"
-            print("1-\(filterString)")
-            self.cViewModel.fetchCategoriesWithFilter(
-                first: 50, after: nil, filter: filterString)
-        } else if filterType == "" && SubFiltersArray[subFilterIndex] != "" {
-            filterString = "\(SubFiltersArray[subFilterIndex])"
-            print("2-\(filterString)")
-            self.cViewModel.fetchCategoriesWithFilter(
-                first: 50, after: nil, filter: filterString)
-        } else if filterType != "" && SubFiltersArray[subFilterIndex] == "" {
-            filterString = "\(filterType)"
-            print("3-\(filterString)")
-            self.cViewModel.fetchCategoriesWithFilter(
-                first: 50, after: nil, filter: filterString)
-        } else if filterType == "" && SubFiltersArray[subFilterIndex] == "" {
-            filterString = ""
-            print("4-\(filterString)")
-            self.cViewModel.fetchCategoriesWithFilter(
-                first: 50, after: nil, filter: filterString)
-        } else {
-            print("else")
-            self.cViewModel.fetchCategoriesWithFilter(
-                first: 10, after: nil, filter: filterString)
+        if sliderAsPrice == "" {
+            if filterType != "" && SubFiltersArray[subFilterIndex] != "" {
+                filterString = "\(filterType) | \(SubFiltersArray[subFilterIndex])"
+                print("1-\(filterString)")
+                self.cViewModel.fetchCategoriesWithFilter(
+                    first: 50, after: nil, filter: filterString)
+            } else if filterType == "" && SubFiltersArray[subFilterIndex] != "" {
+                filterString = "\(SubFiltersArray[subFilterIndex])"
+                print("2-\(filterString)")
+                self.cViewModel.fetchCategoriesWithFilter(
+                    first: 50, after: nil, filter: filterString)
+            } else if filterType != "" && SubFiltersArray[subFilterIndex] == "" {
+                filterString = "\(filterType)"
+                print("3-\(filterString)")
+                self.cViewModel.fetchCategoriesWithFilter(
+                    first: 50, after: nil, filter: filterString)
+            } else if filterType == "" && SubFiltersArray[subFilterIndex] == "" {
+                filterString = ""
+                print("4-\(filterString)")
+                self.cViewModel.fetchCategoriesWithFilter(
+                    first: 50, after: nil, filter: filterString)
+            } else {
+                print("else")
+                self.cViewModel.fetchCategoriesWithFilter(
+                    first: 10, after: nil, filter: filterString)
+            }
+        }
+        else{
+            if filterType != "" && SubFiltersArray[subFilterIndex] != "" {
+                filterString = "\(filterType) | \(SubFiltersArray[subFilterIndex]) | \(sliderAsPrice)"
+                print("1-\(filterString)  | \(sliderAsPrice)")
+                self.cViewModel.fetchCategoriesWithFilter(
+                    first: 50, after: nil, filter: filterString)
+            } else if filterType == "" && SubFiltersArray[subFilterIndex] != "" {
+                filterString = "\(SubFiltersArray[subFilterIndex]) | \(sliderAsPrice)"
+                print("2-\(filterString) | \(sliderAsPrice)")
+                self.cViewModel.fetchCategoriesWithFilter(
+                    first: 50, after: nil, filter: filterString)
+            } else if filterType != "" && SubFiltersArray[subFilterIndex] == "" {
+                filterString = "\(filterType) | \(sliderAsPrice)"
+                print("3-\(filterString) | \(sliderAsPrice)")
+                self.cViewModel.fetchCategoriesWithFilter(
+                    first: 50, after: nil, filter: filterString)
+            } else if filterType == "" && SubFiltersArray[subFilterIndex] == "" {
+                filterString = sliderAsPrice
+                print("4-\(filterString) | \(sliderAsPrice)")
+                self.cViewModel.fetchCategoriesWithFilter(
+                    first: 50, after: nil, filter: filterString)
+            } else {
+                print("else")
+                self.cViewModel.fetchCategoriesWithFilter(
+                    first: 10, after: nil, filter: filterString)
+            }
         }
     }
 }
