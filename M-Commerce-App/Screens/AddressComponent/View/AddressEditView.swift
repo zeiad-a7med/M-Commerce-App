@@ -14,8 +14,6 @@ struct AddressEditView: View {
     @State var isEditEnabled: Bool = false
     @State var isDeleteAlertShown: Bool = false
     var body: some View {
-
-//        NavigationStack {
             VStack {
                 VStack {
                     HStack {
@@ -199,7 +197,7 @@ struct AddressEditView: View {
                     .transition(.opacity.combined(with: .scale)) // Fade & scale transition
                 }
             }.animation(.easeInOut(duration: 0.3), value: isEditEnabled)
-//        }
+            .navigationTitle("Edit Address")
 
     }
 }

@@ -10,9 +10,16 @@ import ShopifyAPIKit
 
 final class AddressComponentViewModel : ObservableObject {
     @Published var addressPackage = AddressResponse()
-    
+    @Published var isLoading : Bool = false
+    init(){
+        fetchAddresses(
+            AccessToken: AuthManager.shared.applicationUser?
+                .accessToken ?? " ")
+    }
     func fetchAddresses(AccessToken: String){
+        isLoading = true
         ApolloNetwokService.shared.apollo.fetch(query: GetCustomerAddressesQuery(customerAccessToken: AccessToken),cachePolicy: .fetchIgnoringCacheData){result in
+            self.isLoading = false
             switch result {
             case .success(let graphQlResult):
                 if let defaultAddress = graphQlResult.data?.customer?.defaultAddress{
@@ -42,7 +49,9 @@ final class AddressComponentViewModel : ObservableObject {
         }
     }
     func updateAddresses(accessToken: String ,selectedAddress: Address ){
+        isLoading = true
         ApolloNetwokService.shared.apollo.perform(mutation: UpdateAddressMutation(customerAccessToken: accessToken, id: selectedAddress.id ?? " ", zip: selectedAddress.zip ?? " ", phone: selectedAddress.phone ?? " ", firstName: selectedAddress.firstName ?? "", lastName: selectedAddress.lastName ?? "", country: selectedAddress.country ?? "", city: selectedAddress.city ?? "", address1: selectedAddress.address1 ?? "", address2: selectedAddress.address2 ?? "")){result in
+            self.isLoading = false
             switch result {
             case .success(let graphQlResult):
                 if let result = graphQlResult.data?.customerAddressUpdate?.customerAddress{
@@ -71,7 +80,9 @@ final class AddressComponentViewModel : ObservableObject {
         }
     }
     func updateDefaulteAddress(AccessToken : String , selectedAddressId: String){
+        isLoading = true
         ApolloNetwokService.shared.apollo.perform(mutation: UpdateDefaultAddressMutation(customerAccessToken: AccessToken, id: selectedAddressId)){result in
+            self.isLoading = false
             switch result {
             case .success(let graphQlResult):
                print("success")
@@ -90,7 +101,9 @@ final class AddressComponentViewModel : ObservableObject {
         }
     }
     func deleteAddress(AccessToken : String , selectedAddressId: String){
+        isLoading = true
         ApolloNetwokService.shared.apollo.perform(mutation: DeleteAddressMutation(customerAccessToken: AccessToken, id: selectedAddressId)){result in
+            self.isLoading = false
             switch result {
             case .success(let graphQlResult):
                 if let result = graphQlResult.data?.customerAddressDelete?.deletedCustomerAddressId{
@@ -111,7 +124,9 @@ final class AddressComponentViewModel : ObservableObject {
         }
     }
     func createAddresses(AccessToken: String ,selectedAddress: Address){
+        isLoading = true
         ApolloNetwokService.shared.apollo.perform(mutation: CreateAddressMutation(customerAccessToken: AccessToken, zip: selectedAddress.zip ?? " ", phone: selectedAddress.phone ?? " ", firstName: selectedAddress.firstName ?? "", lastName: selectedAddress.lastName ?? "", country: selectedAddress.country ?? "", city: selectedAddress.city ?? "", address1: selectedAddress.address1 ?? "", address2: selectedAddress.address2 ?? "")){result in
+            self.isLoading = false
             switch result {
             case .success(let graphQlResult):
                print("success")

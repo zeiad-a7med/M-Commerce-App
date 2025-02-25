@@ -13,7 +13,6 @@ import SwiftUI
 class LoginViewModel: ObservableObject {
     @Published var loginResponse: LoginResponse?
     @Published var isLoading: Bool = false
-    @Published var successLogin: Bool = false
     @Published var resendVerficationMailVisible: Bool = false
     @Published var alertContent: AlertContent?
 
@@ -26,6 +25,7 @@ class LoginViewModel: ObservableObject {
         Auth.auth().signIn(withEmail: email, password: password) {
             authResult, error in
             if let error = error {
+                self.isLoading = false
                 SnackbarManager.shared.show(
                     message:
                         "The email or password is incorrect, please try again!"
@@ -37,7 +37,7 @@ class LoginViewModel: ObservableObject {
                             message:
                                 "Some thing went wrong, please try again later!"
                         )
-                        self.resendVerficationMailVisible = true
+                        self.isLoading = false
                     } else {
                         if user.isEmailVerified {
 
@@ -50,6 +50,7 @@ class LoginViewModel: ObservableObject {
                                     "Email is not verified yet!\nCheck your inbox 📥 to verify"
                             )
                             self.resendVerficationMailVisible = true
+                            self.isLoading = false
                         }
                     }
                 }
@@ -76,19 +77,19 @@ class LoginViewModel: ObservableObject {
                     AuthManager.shared.updateUser(
                         updatedUser: result.applicationUser!)
                     NavigationManager.shared.pop()
-                    self.successLogin = true
                 } else {
                     SnackbarManager.shared.show(
                         message: "\(result.messages.first ?? "")!")
-                    self.successLogin = false
                 }
             }
         }
     }
     
     func resendEmailVerification() {
+        isLoading = true
         if let user = Auth.auth().currentUser, !user.isEmailVerified {
             user.sendEmailVerification { error in
+                self.isLoading = false
                 if let error = error {
                     SnackbarManager.shared.show(
                         message: "Failed To send verification mail!")
@@ -96,6 +97,7 @@ class LoginViewModel: ObservableObject {
                     
                     SnackbarManager.shared.show(
                         message: "Verification email sent successfully!")
+                    NavigationManager.shared.pushReplacement(.sendingVerification(email: user.email ?? ""))
                 }
             }
         }

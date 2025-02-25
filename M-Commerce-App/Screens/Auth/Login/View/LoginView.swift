@@ -74,6 +74,11 @@ struct LoginView: View {
                     { oldValue, newValue in
                         updateFormValidity()
                     })
+                .onChange(
+                    of: viewModel.isLoading,
+                    { oldValue, newValue in
+                        updateFormValidity()
+                    })
 
                 
                     Text("Don't have an account? Create account")
@@ -93,32 +98,30 @@ struct LoginView: View {
                             .foregroundColor(.blue)
                     }).padding(.top, 10)
                 }
-                
-
                 Spacer()
-                
-    //            NavigationLink(
-    //                destination: ContentView(), isActive: .constant(viewModel.successLogin)
-    //            ) {
-    //                EmptyView()
-    //            }
-
             }.padding(20)
         }
+        .overlay {
+            if(viewModel.isLoading){
+                VStack {
+                    CustomProgressView()
+                }.frame(
+                    width: UIScreen.main.bounds.width,
+                    height: UIScreen.main.bounds.height
+                )
+                .background(.primary.opacity(0.1))
+            }
+        }
+        .toolbar(.hidden,for: .tabBar)
             .navigationTitle("Sign In")
 
     }
     func updateFormValidity() {
-        isFormValid = [emailValid, passwordValid].allSatisfy { $0 }
+        var notLoading = !viewModel.isLoading
+        isFormValid = [emailValid, passwordValid, notLoading].allSatisfy { $0 }
     }
 }
 
 #Preview {
     LoginView()
 }
-//lastName: "ahmed"
-//            email: "zeiadahmed194@gmail.com"
-//            phone: "+201018698825"
-//            password: "zeiadahmed194"
-//            acceptsMarketing: false
-//            firstName: "zeiad"

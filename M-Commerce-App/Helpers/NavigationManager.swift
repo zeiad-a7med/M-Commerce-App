@@ -68,12 +68,23 @@ class NavigationManager: ObservableObject {
             return AnyView(DetailsView(orderId: orderId))
         case .productInfo(let productId):
             return AnyView(ProductInfoView(productId: productId))
-
+        case .addresses:
+            return AnyView(AddressesDisplayView())
+        case .addressEdit(let address, let defaultAddress):
+            return AnyView(AddressEditView(address: address, defaultAddress: defaultAddress))
+            
+            
+            
+            
         //Auth
         case .login:
             return AnyView(LoginView())
         case .register:
             return AnyView(RegisterView())
+        case .editProfile:
+            return AnyView(EditProfile())
+        case .sendingVerification(let email):
+            return AnyView(SendingVerificationView(email: email))
 
         default:
             return AnyView(EmptyView())
@@ -98,9 +109,14 @@ enum RouteTypes: Hashable {
     case payment
     case orderDetails(orderId: String)
     case productInfo(productId: String)
+    case addresses
+    case addressEdit(address: Address, defaultAddress: Address?)
+
 
     //Auth
     case login
     case register
+    case editProfile
+    case sendingVerification(email: String)
 
 }

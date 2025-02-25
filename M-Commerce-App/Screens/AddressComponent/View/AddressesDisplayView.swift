@@ -9,38 +9,55 @@ import SwiftUI
 
 struct AddressesDisplayView: View {
     @StateObject var addressModel = AddressComponentViewModel()
-    
+
     var body: some View {
-        VStack{
-          
-            
-    //        NavigationStack {
-                if addressModel.addressPackage.defaultAddress != nil{
-                    defaultAddresCard(address:addressModel.addressPackage.defaultAddress!)
+        VStack {
+            if addressModel.addressPackage.listOfAddress.isEmpty {
+                ContentUnavailableView(
+                    "There is no addresses", systemImage: "location.slash",
+                    description: Text(
+                        "add your addresses to make your order faster"
+                    ))
+            } else {
+                if addressModel.addressPackage.defaultAddress != nil {
+                    defaultAddresCard(
+                        address: addressModel.addressPackage.defaultAddress!)
                 }
+
                 Text("Choose your Location")
                     .bold()
-                    .padding(.trailing,150)
-                    .padding(.bottom,5)
+                    .padding(.trailing, 150)
+                    .padding(.bottom, 5)
                     .font(.title2)
                 ScrollView {
-                    
-                    if  addressModel.addressPackage.listOfAddress.count != 0 {
-                        ForEach(addressModel.addressPackage.listOfAddress,id: \.id) {element in
-                            NavigationLink {
-                                AddressEditView(address: element,defaultAddress: addressModel.addressPackage.defaultAddress )
-               
-                            } label: {
-                                addressCard(address:element,defaultAddress: addressModel.addressPackage.defaultAddress ?? Address())
-                                    .foregroundStyle(.black)
-                        }
+
+                    if addressModel.addressPackage.listOfAddress.count != 0 {
+                        ForEach(
+                            addressModel.addressPackage.listOfAddress, id: \.id
+                        ) { element in
+                            Button(action:{
+                                NavigationManager.shared.push(
+                                    .addressEdit(
+                                        address: element,
+                                        defaultAddress: addressModel
+                                            .addressPackage
+                                            .defaultAddress))
+                            },label: {
+                                addressCard(
+                                    address: element,
+                                    defaultAddress: addressModel.addressPackage
+                                        .defaultAddress ?? Address()
+                                )
+                                .foregroundStyle(.black)
+                            })
+                            
                         }
                     }
-                   
-                }.toolbar{
+
+                }.toolbar {
                     NavigationLink {
-                       AddressAddView()
-                        
+                        AddressAddView()
+
                     } label: {
                         Image(systemName: "plus")
                             .padding(5)
@@ -49,21 +66,24 @@ struct AddressesDisplayView: View {
                             .background(ThemeManager.darkPuble)
                             .clipShape(Circle())
                     }
-                    
 
                 }
-                
-         //   }
-            
+            }
+
         }
-        .onAppear{
-            DispatchQueue.main.asyncAfter(deadline: .now()+1, execute: {
-               
-                addressModel.fetchAddresses(AccessToken: AuthManager.shared.applicationUser?.accessToken ?? " ")
-            })
+        .overlay {
+            if addressModel.isLoading {
+                VStack {
+                    CustomProgressView()
+                }.frame(
+                    width: UIScreen.main.bounds.width,
+                    height: UIScreen.main.bounds.height
+                )
+                .background(.primary.opacity(0.1))
+            }
         }
         .navigationTitle("Address")
-        .toolbar(.hidden,for: .tabBar)
+        .toolbar(.hidden, for: .tabBar)
     }
 }
 
