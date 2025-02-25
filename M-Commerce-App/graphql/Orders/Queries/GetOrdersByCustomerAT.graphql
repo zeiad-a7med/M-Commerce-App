@@ -3,7 +3,7 @@ query GetOrdersFromCustomerAT($CustomerAT: String!) {
         id
         phone
         email
-        orders(first: 100) {
+        orders(first: 100,reverse: true) {
             totalCount
             nodes {
                 currencyCode

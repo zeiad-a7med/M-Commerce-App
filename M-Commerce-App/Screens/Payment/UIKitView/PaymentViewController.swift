@@ -11,7 +11,7 @@ import PassKit
 class ViewController: UIViewController {
     let paymentHandler = PaymentHandler()
     var applePayButton: UIButton?
-    var paymentViewModel : PaymentViewModel? 
+    var paymentViewModel : PaymentViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         setupApplePayButton()
@@ -47,7 +47,7 @@ class ViewController: UIViewController {
     }
 
     @objc func payPressed(sender: AnyObject) {
-        paymentHandler.startPayment { success in
+        paymentHandler.startPayment(couponCode: paymentViewModel?.couponCode){ success in
             if success {
                 self.paymentViewModel?.PageDismiss = true
                 print("Payment successful")

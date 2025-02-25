@@ -58,7 +58,7 @@ class PaymentHandler: NSObject {
     //        return [shippingDelivery, shippingCollection]
     //    }
 
-    func startPayment(completion: @escaping PaymentCompletionHandler) {
+    func startPayment(couponCode : String?,completion: @escaping PaymentCompletionHandler) {
 
         completionHandler = completion
         let rate : Double = CurrencyManager.currentCurrencyRate.value ?? 1.0
@@ -75,18 +75,51 @@ class PaymentHandler: NSObject {
             paymentSummaryItems.append(ticket)
         })
 
+        
+        
         let total =
             Double(
                 (AuthManager.shared.applicationUser?.cart?.cost?
                     .totalAmount?.amount ?? "0")) ?? 0
-
-        let ticket = PKPaymentSummaryItem(
-            label: "Total",
+        
+        
+        var discount : Double = 0
+        if(AuthManager.shared.applicationUser?.cart?.cost?.couponCode != nil){
+            for item in Constants.coupons {
+                if item.code == couponCode {
+                    if item.type == .percentage {
+                        discount = (Double(total)) * ((item.value) / 100)
+                    } else {
+                        discount = (Double(total)) - (item.value)
+                    }
+                    break
+                }
+            }
+        }
+        
+        
+        let ticket1 = PKPaymentSummaryItem(
+            label: "Discount",
             amount: NSDecimalNumber(
-                string: String(format:"%.2f",Double(total * rate))
+                string: String(format:"%.2f",discount)
             ), type: .final
         )
-        paymentSummaryItems.append(ticket)
+        paymentSummaryItems.append(ticket1)
+        
+
+        let ticket2 = PKPaymentSummaryItem(
+            label: "Total",
+            amount: NSDecimalNumber(
+                string: String(format:"%.2f",Double(total * rate) - discount)
+            ), type: .final
+        )
+        paymentSummaryItems.append(ticket2)
+        
+        
+        
+        
+        
+        
 
         // Create a payment request.
         let paymentRequest = PKPaymentRequest()

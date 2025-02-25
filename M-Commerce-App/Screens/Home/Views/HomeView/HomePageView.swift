@@ -18,7 +18,7 @@ struct HomePageView: View {
             ScrollView {
                 VStack {
                     CustomTextField(
-                        placeholder: "search for brand ...",
+                        placeholder: "search for products ...",
                         onChange: { text in
                             self.searchText = text
                         },
@@ -40,14 +40,7 @@ struct HomePageView: View {
                         CustomSearchView(
                             searchText: $searchText, mainFilter: .constant(""))
                     } else {
-                        AdCardView(
-                            imageList: tempImageList,
-                            discountCode: [
-                                DiscountCode(), DiscountCode(code: "ByeBye"),
-                                DiscountCode(code: "areWeThereYet"),
-                            ], pricesruleList: PriceRulesList(id: "")
-                        ) {
-                        }
+                        AdCardView()
                         HeaderView(
                             title: ThemeManager.secondSectionTitle,
                             color: ThemeManager.titleColor)

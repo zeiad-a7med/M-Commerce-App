@@ -8,9 +8,6 @@
 import SwiftUI
 
 struct AdCardView: View {
-    @State var imageList: ImageList
-    @State var discountCode: [DiscountCode]
-    @State var pricesruleList: PriceRulesList
     var copyToClipboard : (() -> Void)?
     var adViewModel = AdViewModel()
     @State var isCopied = false
@@ -46,10 +43,14 @@ struct AdCardView: View {
                                         .containerRelativeFrame(
                                             .horizontal, alignment: .center
                                         ).onTapGesture {
-                                            UIPasteboard.general.string =
-                                            coupon.code
-                                            withAnimation(.snappy) {
-                                                SnackbarManager.shared.show(message: "Copied to clipboard!")
+                                            if(AuthManager.shared.isLoggedIn()){
+                                                UIPasteboard.general.string =
+                                                coupon.code
+                                                withAnimation(.snappy) {
+                                                    SnackbarManager.shared.show(message: "Copied to clipboard!")
+                                                }
+                                            }else{
+                                                AlertManager.shared.showLoginAlert()
                                             }
                                         }
 
@@ -89,10 +90,5 @@ struct AdCardView: View {
 
 #Preview {
     let tempImageList = ImageList(id: "")
-    return AdCardView(
-        imageList: tempImageList,
-        discountCode: [
-            DiscountCode(), DiscountCode(code: "ByeBye"),
-            DiscountCode(code: "areWeThereYet"),
-        ], pricesruleList: PriceRulesList(id: ""))
+    return AdCardView()
 }
