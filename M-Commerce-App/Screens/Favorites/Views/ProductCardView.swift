@@ -17,37 +17,11 @@ struct ProductCardView: View {
     @State var didAppear: Bool = false
     @State var isFavorite: Bool = false
     var body: some View {
-//        NavigationLink(destination: {
-//            ProductInfoView(productId: product.id)
-//        }) {
-//            
-//            
-//        }
+
         LazyVStack {
-            //                CustomNetworkImageView(
-            //                    url: URL(
-            //                        string:
-            //                            url
-            //                    )!
-            //                )
-            AsyncImage(url: URL(string: product.featuredImage?.url ?? "")) {
-                phase in
-                switch phase {
-                case .success(let image):
-                    image
-                        .resizable()
-                        .scaledToFill()
-                case .empty:
-                    Image(systemName: "network.slash")
-                        .scaledToFit()
-                case .failure(_):
-                    Image(systemName: "wifi.slash")
-                        .scaledToFit()
-                @unknown default:
-                    Image(systemName: "circle.slash")
-                        .scaledToFit()
-                }
-            }
+            let defaultURL = URL(string: "https://m.media-amazon.com/images/I/51aRcLwwKAL._AC_UL1500_.jpg")!
+            let imageURL = URL(string: product.featuredImage?.url ?? "https://m.media-amazon.com/images/I/51aRcLwwKAL._AC_UL1500_.jpg") ?? defaultURL
+            CustomNetworkImageView(url: imageURL)
             .frame(width: 180, height: 200)
             .cornerRadius(20)
             .overlay(

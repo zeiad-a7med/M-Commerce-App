@@ -49,6 +49,7 @@ struct CustomNetworkImageView: View {
             if let image = loader.image {
                 Image(uiImage: image)
                     .resizable()
+//                    .scaledToFit()
                     
             } else {
                 ShimmerView(width: 150, height: 150)

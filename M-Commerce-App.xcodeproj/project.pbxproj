@@ -190,6 +190,7 @@
 		C48BCB942D6C61EC00173855 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48BCB932D6C61EC00173855 /* SearchViewModel.swift */; };
 		C48BCB962D6C676500173855 /* GetProductsSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48BCB952D6C676500173855 /* GetProductsSearchResult.swift */; };
 		C48BCB982D6C67D800173855 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48BCB972D6C67D300173855 /* SearchModel.swift */; };
+		C497191F2D6E403D00F592C5 /* noSearchAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = C497191E2D6E403D00F592C5 /* noSearchAnimation.json */; };
 		C4B324AF2D6BD924002D1DA5 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B324AE2D6BD924002D1DA5 /* OnBoardingView.swift */; };
 		C4B324B22D6BF018002D1DA5 /* BoardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B324B12D6BF018002D1DA5 /* BoardingPage.swift */; };
 		C4B324B42D6BF107002D1DA5 /* pagingSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B324B32D6BF107002D1DA5 /* pagingSubView.swift */; };
@@ -421,6 +422,7 @@
 		C48BCB932D6C61EC00173855 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		C48BCB952D6C676500173855 /* GetProductsSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductsSearchResult.swift; sourceTree = "<group>"; };
 		C48BCB972D6C67D300173855 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
+		C497191E2D6E403D00F592C5 /* noSearchAnimation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = noSearchAnimation.json; sourceTree = "<group>"; };
 		C4B324AE2D6BD924002D1DA5 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		C4B324B12D6BF018002D1DA5 /* BoardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingPage.swift; sourceTree = "<group>"; };
 		C4B324B32D6BF107002D1DA5 /* pagingSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pagingSubView.swift; sourceTree = "<group>"; };
@@ -665,6 +667,7 @@
 				48F009F52D5C94FF002A016E /* Assets.xcassets */,
 				C458D8C42D6A9DB700A77408 /* noConnectionAnimation.json */,
 				C4BC38D12D6B1ADB00BC307E /* loadingAnimation.json */,
+				C497191E2D6E403D00F592C5 /* noSearchAnimation.json */,
 				C4B324B92D6BFCB7002D1DA5 /* SpalshScreenAnimation.json */,
 				48F009F72D5C94FF002A016E /* Preview Content */,
 			);
@@ -1793,6 +1796,7 @@
 				89C82A222D66279C0018898E /* GoogleService-Info.plist in Resources */,
 				C4E932A82D675C4500078C97 /* GetProductsOfOrderByID.graphql in Resources */,
 				48F009F92D5C94FF002A016E /* Preview Assets.xcassets in Resources */,
+				C497191F2D6E403D00F592C5 /* noSearchAnimation.json in Resources */,
 				C44BEDDC2D5D2F9B0022B603 /* GetAllTheProducts.graphql in Resources */,
 				C4F3FC7F2D5EA788005151E9 /* GetFilteredProducts.graphql in Resources */,
 				890D86C62D5CD4B90062E8D1 /* schema.graphqls in Resources */,
