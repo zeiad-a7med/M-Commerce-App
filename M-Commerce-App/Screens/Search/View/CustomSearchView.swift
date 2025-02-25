@@ -19,11 +19,13 @@ struct CustomSearchView: View {
         VStack {
             if modelView.filteredProducts.products.isEmpty {
 
+                AnimationView(name: "noSearchAnimation")
+//                    .padding(.top,10)
                 ContentUnavailableView(
-                    "There is no products", systemImage: "exclamationmark.magnifyingglass",
+                    "There is no products", image: "",
                     description: Text(
                         "There is no products with '\(searchText)' in our store"
-                    )).padding(.top,100)
+                    ))
 
             } else {
                 LazyVGrid(columns: columns, spacing: 10) {
