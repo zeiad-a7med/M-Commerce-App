@@ -16,100 +16,103 @@ struct Settings: View {
     @State var isLoggedIn: Bool = false
     @State var isAlertVisible: Bool = false
     var body: some View {
+        VStack {
+            if isLoggedIn {
 
-        NavigationView {
-            VStack {
-                if isLoggedIn {
-                    List {
-                        Section(
-                            header: Text("General").foregroundStyle(
-                                ThemeManager.darkPuble
-                            ).font(.headline)
-                        ) {
-                            NavigationLink {
-                                EditProfile()
-                            } label: {
+                List {
+                    Section(
+                        header: Text("General").foregroundStyle(
+                            ThemeManager.darkPuble
+                        ).font(.headline)
+                    ) {
+
+                        Button(
+                            action: {
+                                NavigationManager.shared.push(.editProfile)
+                            },
+                            label: {
                                 SettingsListRow(
                                     imageName: "person", RowName: "Edit Profile"
                                 )
                             }
-//                            NavigationLink {
-//                                ChangePassword(
-//                                    oldPassword: $oldPassword,
-//                                    newPassword: $newPassword,
-//                                    confirmPassword: $confirmNewPassword)
-//                            } label: {
-//                                SettingsListRow(
-//                                    imageName: "lock",
-//                                    RowName: "Change Password")
-//                            }
+                        ).foregroundStyle(.primary)
 
-                        }
-                        Section(
-                            header: Text("Prefrences").foregroundStyle(
-                                ThemeManager.darkPuble
-                            ).font(.headline)
-                        ) {
-                            Currency()
+                    }
+                    Section(
+                        header: Text("Prefrences").foregroundStyle(
+                            ThemeManager.darkPuble
+                        ).font(.headline)
+                    ) {
+                        Currency()
 
-                            NavigationLink(
-                                destination: {
-                                    AddressesDisplayView()
-                                },
-                                label: {
-                                    SettingsListRow(
-                                        imageName:
-                                            "location",
-                                        RowName: "Addresses"
-                                    )
-                                })
+                        Button(
+                            action: {
+                                NavigationManager.shared.push(.addresses)
+                            },
+                            label: {
+                                SettingsListRow(
+                                    imageName:
+                                        "location",
+                                    RowName: "Addresses"
+                                )
+                            }
+                        ).foregroundStyle(.primary)
 
-                            Button(
-                                action: {
-                                    isAlertVisible.toggle()
-                                },
-                                label: {
-                                    SettingsListRow(
-                                        imageName:
-                                            "rectangle.portrait.and.arrow.forward",
-                                        RowName: "Logout", imageColor: .red
-                                    ).foregroundStyle(.red)
-                                }
+                        Button(
+                            action: {
+                                isAlertVisible.toggle()
+                            },
+                            label: {
+                                SettingsListRow(
+                                    imageName:
+                                        "rectangle.portrait.and.arrow.forward",
+                                    RowName: "Logout", imageColor: .red
+                                ).foregroundStyle(.red)
+                            }
 
+                        )
+                    }
+
+                }.listRowSpacing(15)
+                    .alert(
+                        "are you sure you want to logout",
+                        isPresented: $isAlertVisible
+                    ) {
+                        Button(
+                            role: .destructive,
+                            action: {
+                                viewModel.logout()
+                            },
+                            label: {
+                                Text("Logout")
+                                    .foregroundStyle(.red)
+                                    .bold()
+                            }
+                        ).disabled(viewModel.isLoading)
+
+                    } message: {
+                        Text(
+                            "once you logout you will lose all your favorites"
+                        )
+                    }.overlay {
+                        if(viewModel.isLoading){
+                            VStack {
+                                CustomProgressView()
+                            }.frame(
+                                width: UIScreen.main.bounds.width,
+                                height: UIScreen.main.bounds.height
                             )
+                            .background(.primary.opacity(0.1))
                         }
-
-                    }.listRowSpacing(15)
-                        .alert(
-                            "are you sure you want to logout",
-                            isPresented: $isAlertVisible
-                        ) {
-                            Button(
-                                role: .destructive,
-                                action: {
-                                    viewModel.logout()
-                                },
-                                label: {
-                                    Text("Logout")
-                                        .foregroundStyle(.red)
-                                        .bold()
-
-                                })
-
-                        } message: {
-                            Text(
-                                "once you logout you will lose all your favorites"
-                            )
-                        }
-                } else {
-                    RequireLoginView()
-                }
+                    }
+            } else {
+                RequireLoginView()
             }
-            .onAppear {
-                isLoggedIn = AuthManager.shared.isLoggedIn()
-            }
-            .navigationTitle("Settings")
         }
+        .onAppear {
+            isLoggedIn = AuthManager.shared.isLoggedIn()
+        }
+        .navigationTitle("Settings")
     }
 }
 

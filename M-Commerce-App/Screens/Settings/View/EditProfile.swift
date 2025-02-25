@@ -128,10 +128,27 @@ struct EditProfile: View {
                     updateFormValidity()
                 }
             )
+            .onChange(
+                of: viewModel.isLoading,
+                { oldValue, newValue in
+                    updateFormValidity()
+                }
+            )
 
         }.padding()
+            .overlay {
+                if viewModel.isLoading {
+                    VStack {
+                        CustomProgressView()
+                    }.frame(
+                        width: UIScreen.main.bounds.width,
+                        height: UIScreen.main.bounds.height
+                    )
+                    .background(.primary.opacity(0.1))
+                }
+            }
             .navigationTitle("Edit profile")
-            .toolbar(.hidden,for: .tabBar)
+            .toolbar(.hidden, for: .tabBar)
             .onAppear {
                 firstName = viewModel.user?.firstName ?? ""
                 lastName = viewModel.user?.lastName ?? ""
@@ -170,8 +187,9 @@ struct EditProfile: View {
 
     }
     func updateFormValidity() {
+        let notLoding = !viewModel.isLoading
         isFormValid = [
-            firstNameValid, lastNameValid, phoneValid,
+            firstNameValid, lastNameValid, phoneValid, notLoding,
         ].allSatisfy { $0 }
     }
 }

@@ -184,6 +184,11 @@ struct RegisterView: View {
                     { oldValue, newValue in
                         updateFormValidity()
                     })
+                .onChange(
+                    of: viewModel.isLoading,
+                    { oldValue, newValue in
+                        updateFormValidity()
+                    })
 
                 Text("Already have an account? Sign In")
                     .font(.footnote)
@@ -195,14 +200,28 @@ struct RegisterView: View {
 
             }.padding(20)
         }
+        .overlay {
+            if(viewModel.isLoading){
+                VStack {
+                    CustomProgressView()
+                }.frame(
+                    width: UIScreen.main.bounds.width,
+                    height: UIScreen.main.bounds.height
+                )
+                .background(.primary.opacity(0.1))
+            }
+        }
+        .toolbar(.hidden,for: .tabBar)
         .navigationTitle("Create account")
 
     }
     func updateFormValidity() {
+        var notLoading = !viewModel.isLoading
         isFormValid = [
             firstNameValid, lastNameValid, emailValid, phoneValid,
-            passwordValid,
+            passwordValid,notLoading
         ].allSatisfy { $0 }
+        
     }
 }
 

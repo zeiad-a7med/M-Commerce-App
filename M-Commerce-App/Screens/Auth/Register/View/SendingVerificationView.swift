@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SendingVerificationView: View {
-    var email : String
+    var email: String
     var body: some View {
         VStack {
             ContentUnavailableView(
@@ -17,16 +17,18 @@ struct SendingVerificationView: View {
                 description: Text(
                     "Check your inbox 📥 then Sign In")
             ).frame(height: 300)
-            NavigationLink(destination: LoginView()) {
-                CustomRoundedButtonView(
-                    text: "Sign In",
-                    width: 100,
-                    onTap: {},
-                    isButtonEnabled: .constant(true)
-                )
-                .allowsHitTesting(false)
-            }
+
+            CustomRoundedButtonView(
+                text: "Sign In",
+                width: 100,
+                onTap: {
+                    NavigationManager.shared.pushReplacement(.login)
+                },
+                isButtonEnabled: .constant(true)
+            )
+
         }
+        .toolbar(.hidden, for: .tabBar)
     }
 }
 

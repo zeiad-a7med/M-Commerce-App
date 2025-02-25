@@ -63,6 +63,7 @@ class RegisterViewModel: ObservableObject {
                                 self.registerResponse = result
                                 if result.success {
                                     self.successRegister = true
+                                    NavigationManager.shared.pushReplacement(.sendingVerification(email: email))
                                 } else {
                                     SnackbarManager.shared.show(
                                         message:

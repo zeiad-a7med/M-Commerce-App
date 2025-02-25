@@ -61,6 +61,7 @@ class SettingsViewModel: ObservableObject {
         if(AuthManager.shared.isLoggedIn()){
             isLoading = true
             AuthService.logOutCustomer(customerAccessToken: AuthManager.shared.applicationUser!.accessToken!) { result in
+                self.isLoading = false
                 if(result.success){
                     AuthManager.shared.logoutUser()
                     NavigationManager.shared.push(.home)
