@@ -28,9 +28,10 @@ class PaymentViewModel : ObservableObject{
     func createOrder(){
         if(cartResult?.cart != nil){
             PaymentService.createOrder(){ result in
-                print("success \(String(describing: result?.success))" )
-                print ("message\(result?.message ?? "")")
-                OrderCreateResponse(success: result?.success,message: result?.message)
+                var user = AuthManager.shared.applicationUser
+                user?.cart = nil
+                AuthManager.shared.updateUser(updatedUser: user!)
+                SnackbarManager.shared.show(message: "your order has been placed!")
             }
         }
     }

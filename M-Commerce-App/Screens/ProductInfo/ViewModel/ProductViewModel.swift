@@ -196,38 +196,38 @@ class ProductViewModel: ObservableObject {
         }
     }
 
-    func updateCart(finishingUpdates: @escaping (Bool) -> Void) {
-        //        self.isLoading = true
-        if hasNewUpdates {
-            var cartLinesInput: [CartLineInputValue] = []
-            variantsForCart.forEach { variant in
-                if variant.quantity > 0 {
-                    cartLinesInput.append(
-                        CartLineInputValue(
-                            id: variant.lineId,
-                            merchandiseId: variant.variantId,
-                            quantity: variant.quantity
-                        )
-                    )
-                }
-            }
-            CartService.cartLinesUpdate(lines: cartLinesInput) { result in
-                if result?.success == true {
-                    //                    self.isLoading = false
-                    SnackbarManager.shared.show(
-                        message: "Cart updated successfully! 🛒")
-                    finishingUpdates(true)
-
-                } else {
-                    //                    self.isLoading = false
-                    SnackbarManager.shared.show(
-                        message: "Some thing went wrong while updating cart!")
-                    finishingUpdates(false)
-                }
-            }
-        } else {
-            finishingUpdates(true)
-        }
-
-    }
+//    func updateCart(finishingUpdates: @escaping (Bool) -> Void) {
+//        //        self.isLoading = true
+//        if hasNewUpdates {
+//            var cartLinesInput: [CartLineInputValue] = []
+//            variantsForCart.forEach { variant in
+//                if variant.quantity > 0 {
+//                    cartLinesInput.append(
+//                        CartLineInputValue(
+//                            id: variant.lineId,
+//                            merchandiseId: variant.variantId,
+//                            quantity: variant.quantity
+//                        )
+//                    )
+//                }
+//            }
+//            CartService.cartLinesUpdate(lines: cartLinesInput) { result in
+//                if result?.success == true {
+//                    //                    self.isLoading = false
+//                    SnackbarManager.shared.show(
+//                        message: "Cart updated successfully! 🛒")
+//                    finishingUpdates(true)
+//
+//                } else {
+//                    //                    self.isLoading = false
+//                    SnackbarManager.shared.show(
+//                        message: "Some thing went wrong while updating cart!")
+//                    finishingUpdates(false)
+//                }
+//            }
+//        } else {
+//            finishingUpdates(true)
+//        }
+//
+//    }
 }

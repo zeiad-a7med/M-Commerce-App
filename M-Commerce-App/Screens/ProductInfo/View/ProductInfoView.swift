@@ -231,13 +231,13 @@ struct ProductInfoView: View {
                                             text: "View Cart",
                                             systemIconName: "cart",
                                             onTap: {
-                                                if AuthManager.shared.isLoggedIn() {
-                                                    viewModel.updateCart { success in
-                                                        NavigationManager.shared.push(.cart)
-                                                    }
-                                                } else {
-                                                    AlertManager.shared.showLoginAlert()
-                                                }
+//                                                if AuthManager.shared.isLoggedIn() {
+//                                                    viewModel.updateCart { success in
+//                                                        NavigationManager.shared.push(.cart)
+//                                                    }
+//                                                } else {
+//                                                    AlertManager.shared.showLoginAlert()
+//                                                }
                                             },
                                             isButtonEnabled: .constant(true)
                                         )
