@@ -39,6 +39,7 @@ struct M_Commerce_AppApp: App {
             }
             .applyModelContainer(sharedModelContainer)
         }
+        
     }
 }
 class AppDelegate: NSObject, UIApplicationDelegate {
