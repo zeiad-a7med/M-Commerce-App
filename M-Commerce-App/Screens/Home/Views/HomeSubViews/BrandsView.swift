@@ -16,31 +16,47 @@ struct BrandsView: View {
             .flexible(minimum: 100, maximum: 200), spacing: 0, alignment: nil),
     ]
     var body: some View {
-        LazyVGrid(
-            columns: rows,
-            content: {
-                ForEach(
-                    bViewModel.brands.collections ?? [], id: \.id,
-                    content: { brand in
-                        Button(action:{
-                            NavigationManager.shared.push(.brand(title: brand.title ?? ""))
-                        },label: {
-                            BrandCard(
-                                title: brand.title ?? "",
-                                imageUrl: brand.img?.url ?? ""
-                            )
-                            .onAppear {
-                                print("s")
+        if NetworkMonitor.shared.isConnected {
+            LazyVGrid(
+                columns: rows,
+                content: {
+                    ForEach(
+                        bViewModel.brands.collections ?? [], id: \.id,
+                        content: { brand in
+                            Button(
+                                action: {
+                                    NavigationManager.shared.push(
+                                        .brand(title: brand.title ?? ""))
+                                },
+                                label: {
+                                    BrandCard(
+                                        title: brand.title ?? "",
+                                        imageUrl: brand.img?.url ?? ""
+                                    )
+                                    .onAppear {
+                                        print("s")
 
-                                if brand.title ?? "" == bViewModel.brands
-                                    .collections?.last?.title ?? ""
-                                {
-                                    bViewModel.loadMore()
-                                }
-                            }
+                                        if brand.title ?? "" == bViewModel
+                                            .brands
+                                            .collections?.last?.title ?? ""
+                                        {
+                                            bViewModel.loadMore()
+                                        }
+                                    }
+                                })
                         })
-                    })
-            })
+                })
+            .refreshable {
+                bViewModel.fetchBrands()
+                }
+            .onAppear {
+                if !(bViewModel.brands.collections?.isEmpty ?? false)  {
+                    bViewModel.fetchBrands()
+                }
+            }
+        } else {
+            AnimationView(name: "noConnectionAnimation")
+        }
     }
 }
 
