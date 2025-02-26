@@ -10,14 +10,17 @@ import Network
 
 @Observable
 final class NetworkMonitor {
+    static let shared = NetworkMonitor() // Singleton instance
+    
     private let networkMonitor = NWPathMonitor()
     private let workerQueue = DispatchQueue(label: "Monitor")
     var isConnected = false
     
     init() {
-        networkMonitor.pathUpdateHandler = { path in
-            self.isConnected = path.status == .satisfied
+        networkMonitor.pathUpdateHandler = { [weak self] path in
+            self?.isConnected = path.status == .satisfied
         }
         networkMonitor.start(queue: workerQueue)
     }
 }
+
