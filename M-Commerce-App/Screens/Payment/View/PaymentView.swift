@@ -14,24 +14,27 @@ struct PaymentView: View {
     @State var ableToCheckOut: Bool = false
     var body: some View {
 
-        VStack{
-            
-            VStack(alignment: .trailing){
+        VStack(alignment: .center) {
+
+            VStack(alignment: .trailing) {
                 if AuthManager.shared.applicationUser?.defaultAddress != nil {
-                    NavigationLink {
-                        AddressesDisplayView()
-                    } label: {
-                        Image(systemName: "pencil")
-                            .padding(5)
-                            .bold()
-                            .foregroundStyle(.white)
-                            .background(ThemeManager.darkPuble)
-                            .clipShape(Circle())
-                    }.padding(.leading,UIScreen.main.bounds.width - 50)
+
+                    Button(
+                        action: {
+                            NavigationManager.shared.push(.addresses)
+                        },
+                        label: {
+                            Image(systemName: "pencil")
+                                .padding(5)
+                                .bold()
+                                .foregroundStyle(.white)
+                                .background(ThemeManager.darkPuble)
+                                .clipShape(Circle())
+                        }
+                    ).padding(.leading, UIScreen.main.bounds.width - 50)
 
                 }
             }.frame(width: UIScreen.main.bounds.width)
-            
 
             PaymentAddress()
 
@@ -42,18 +45,21 @@ struct PaymentView: View {
                     }
                 }
             }.frame(height: 300)
-            VStack{
+            VStack {
                 Spacer()
                 HStack {
                     Text("SubTotal:")
                         .padding()
                     Spacer()
                     Text(
-                        String(format: "%.2f", (Double(
-                            paymentViewModel.cartResult?.cart?.cost?
-                                .subtotalAmount?.amount ?? "0") ?? 0)
-                        * (CurrencyManager.currentCurrencyRate.value ?? 1.0))
-                        
+                        String(
+                            format: "%.2f",
+                            (Double(
+                                paymentViewModel.cartResult?.cart?.cost?
+                                    .subtotalAmount?.amount ?? "0") ?? 0)
+                                * (CurrencyManager.currentCurrencyRate.value
+                                    ?? 1.0))
+
                     )
                     .bold()
                     Text(
@@ -61,25 +67,7 @@ struct PaymentView: View {
                     )
                     .padding(.trailing, 20)
                     .bold()
-                }.frame(height:30)
-                HStack {
-                    Text("Checkout Charge Amount:")
-                        .padding()
-                    Spacer()
-                    Text(
-                        String(format: "%.2f", (Double(
-                            paymentViewModel.cartResult?.cart?.cost?
-                                .checkoutChargeAmount?.amount ?? "0") ?? 0)
-                        * (CurrencyManager.currentCurrencyRate.value ?? 1.0))
-                        
-                    )
-                    .bold()
-                    Text(
-                        CurrencyManager.currentCurrencyRate.code ?? "EGP"
-                    )
-                    .padding(.trailing, 20)
-                    .bold()
-                }.frame(height:30)
+                }.frame(height: 30)
                 HStack {
                     Text("Discount:")
                         .padding()
@@ -93,17 +81,20 @@ struct PaymentView: View {
                     )
                     .padding(.trailing, 20)
                     .bold()
-                }.frame(height:30)
+                }.frame(height: 30)
                 HStack {
                     Text("Total Amount:")
                         .padding()
                     Spacer()
                     Text(
-                        String(format: "%.2f",((Double(
-                            paymentViewModel.cartResult?.cart?.cost?
-                                .totalAmount?.amount ?? "0") ?? 0)
-                        * (CurrencyManager.currentCurrencyRate.value ?? 1.0) - viewModel.discountAmount))
-                        
+                        String(
+                            format: "%.2f",
+                            ((Double(
+                                paymentViewModel.cartResult?.cart?.cost?
+                                    .totalAmount?.amount ?? "0") ?? 0)
+                                * (CurrencyManager.currentCurrencyRate.value
+                                    ?? 1.0) - viewModel.discountAmount))
+
                     )
                     .bold()
                     Text(
@@ -111,8 +102,8 @@ struct PaymentView: View {
                     )
                     .padding(.trailing, 20)
                     .bold()
-                }.frame(height:30)
-//                Spacer()
+                }.frame(height: 30)
+                //                Spacer()
                 CustomRoundedButtonView(
                     text: "Checkout Now", width: 80,
                     onTap: {
@@ -121,39 +112,40 @@ struct PaymentView: View {
                 )
                 Spacer()
             }
-            .ignoresSafeArea()
-            .frame(width:UIScreen.main.bounds.width,height:250)
-            
+
+            .frame(width: UIScreen.main.bounds.width, height: 250)
             .background(.thinMaterial)
-            
             .clipShape(
                 RoundedCornerShape(
                     corners: [.topRight, .topLeft], radius: 40)
             )
+            .ignoresSafeArea()
             .sheet(
                 isPresented: $showCheckOut,
                 content: {
                     PaymentMethodComponent { result in
-                        
+
                         showCheckOut.toggle()
                         paymentViewModel.createOrder()
-                        DispatchQueue.main.asyncAfter(deadline: .now()+1){
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             NavigationManager.shared.push(.orders)
                         }
                     }.presentationDetents([.medium])
                 })
         }
         .navigationTitle("Summary")
-        
+
         .onAppear {
             paymentViewModel.getCartData()
             if AuthManager.shared.applicationUser?.defaultAddress != nil {
                 ableToCheckOut.toggle()
             }
-            viewModel.promoCode = AuthManager.shared.applicationUser?.couponCode ?? ""
+            viewModel.promoCode =
+                AuthManager.shared.applicationUser?.couponCode ?? ""
             viewModel.setUp(
                 totalPrice: Double(
-                    AuthManager.shared.applicationUser?.cart?.cost?.totalAmount?.formattedPrice ?? "0.0") ?? 0.0)
+                    AuthManager.shared.applicationUser?.cart?.cost?.totalAmount?
+                        .formattedPrice ?? "0.0") ?? 0.0)
         }
 
     }

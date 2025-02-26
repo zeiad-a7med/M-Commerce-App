@@ -41,7 +41,7 @@ class AuthManager: ObservableObject {
         guard let modelContext = modelContext else { return }
 
         if applicationUser != nil {
-            logoutUser()
+            removeUser()
         }
         modelContext.insert(updatedUser)
         applicationUser = updatedUser
@@ -70,6 +70,19 @@ class AuthManager: ObservableObject {
             }
         } catch {
             SnackbarManager.shared.show(message: "Error logging out user: \(error).")
+        }
+    }
+    func removeUser() {
+        guard let modelContext = modelContext, let user = applicationUser else {
+            return
+        }
+        do {
+            modelContext.delete(user)
+            try modelContext.save()
+            DispatchQueue.main.async {
+                self.applicationUser = nil
+            }
+        } catch {
         }
     }
     

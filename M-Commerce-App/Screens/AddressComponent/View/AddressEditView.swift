@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct AddressEditView: View {
-    @Environment(\.dismiss) private var dismiss
     @State var address: Address
     @State var defaultAddress: Address?
     @State var isEditEnabled: Bool = false
     @State var isDeleteAlertShown: Bool = false
+    let addressModel = AddressComponentViewModel()
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
@@ -100,13 +100,11 @@ struct AddressEditView: View {
                     CustomRoundedButtonView(
                         text: "Save address",
                         onTap: {
-                            let addressModel = AddressComponentViewModel()
                             addressModel.updateAddresses(
                                 accessToken:
                                     AuthManager.shared.applicationUser?
                                     .accessToken ?? "",
                                 selectedAddress: address)
-                            dismiss()
 
                         }, isButtonEnabled: .constant(true)
                     )
@@ -115,13 +113,12 @@ struct AddressEditView: View {
                     CustomRoundedButtonView(
                         text: "MakeDefault Address",
                         onTap: {
-                            let addressModel = AddressComponentViewModel()
+                            
                             addressModel.updateDefaulteAddress(
                                 AccessToken:
                                     AuthManager.shared.applicationUser?
                                     .accessToken ?? "",
                                 selectedAddressId: address.id ?? "")
-                            dismiss()
 
                         }, isButtonEnabled: .constant(true)
                     )
@@ -163,13 +160,11 @@ struct AddressEditView: View {
                         isPresented: $isDeleteAlertShown
                     ) {
                         Button("Yes", role: .destructive) {
-                            let addressModel = AddressComponentViewModel()
                             addressModel.deleteAddress(
                                 AccessToken: AuthManager.shared.applicationUser?
                                     .accessToken ?? "",
                                 selectedAddressId: address.id ?? ""
                             )
-                            dismiss()
                         }
                         Button("Cancel", role: .cancel) {}
                     }
@@ -205,7 +200,17 @@ struct AddressEditView: View {
                 }
             }.animation(.easeInOut(duration: 0.3), value: isEditEnabled)
         }
-
+        .overlay {
+            if addressModel.isLoading {
+                VStack {
+                    CustomProgressView()
+                }.frame(
+                    width: UIScreen.main.bounds.width,
+                    height: UIScreen.main.bounds.height
+                )
+                .background(.primary.opacity(0.1))
+            }
+        }
         .navigationTitle("Edit Address")
 
     }

@@ -11,19 +11,20 @@ class ShoppingCartViewModel: ObservableObject {
     @Published var cartResult: CartResponse?
     @Published var isLoading: Bool = false
     @Published var linesToUpdate: [Line] = []
-    func getCartData() {
+    func getCartData(finishingUpdates: @escaping (Bool) -> Void) {
         isLoading = true
         let cart = AuthManager.shared.applicationUser?.cart
         CartService.getCart { result in
-            guard let result = result else { return }
             
+            guard let result = result else { return }
             if self.cartResult?.success == false {
                 SnackbarManager.shared.show(
                     message: self.cartResult?.message ?? "Something went wrong")
             }else{
-                self.isLoading = false
                 self.cartResult = result
             }
+            finishingUpdates(true)
+            self.isLoading = false
         }
     }
 

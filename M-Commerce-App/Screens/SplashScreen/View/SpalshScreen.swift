@@ -26,11 +26,11 @@ struct SpalshScreen: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 230, height: 230)
-                        .background{
+                        .background {
                             Circle().fill(.white).frame(width: 330, height: 330)
                         }
-                        .padding(.bottom,80)
-                        
+                        .padding(.bottom, 80)
+
                     Text(applicationName)
                         .foregroundStyle(.white)
                         .font(.system(size: 40, weight: .bold, design: .serif))
@@ -42,7 +42,7 @@ struct SpalshScreen: View {
                     Text("Version \(applicationVersion)")
                         .foregroundStyle(.white)
                         .fontWeight(.light)
-                    HStack{
+                    HStack {
                         Text("Powered by")
                             .foregroundStyle(.white)
                             .fontWeight(.light)
@@ -65,6 +65,11 @@ struct SpalshScreen: View {
                 }
             }
             .onAppear {
+
+                FavoritesManager.shared.setContext(modelContext)
+                AuthManager.shared.setContext(modelContext)
+                CurrencyManager.shared.setContext(modelContext)
+
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     if !AuthManager.shared.isLoggedIn() {
                         navigateToOnBoarding = true
@@ -73,6 +78,7 @@ struct SpalshScreen: View {
                     }
                 }
             }
+
         }
     }
 }

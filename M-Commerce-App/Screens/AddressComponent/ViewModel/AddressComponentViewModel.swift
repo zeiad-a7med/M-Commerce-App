@@ -11,11 +11,6 @@ import ShopifyAPIKit
 final class AddressComponentViewModel : ObservableObject {
     @Published var addressPackage = AddressResponse()
     @Published var isLoading : Bool = false
-    init(){
-        fetchAddresses(
-            AccessToken: AuthManager.shared.applicationUser?
-                .accessToken ?? " ")
-    }
     func fetchAddresses(AccessToken: String){
         isLoading = true
         ApolloNetwokService.shared.apollo.fetch(query: GetCustomerAddressesQuery(customerAccessToken: AccessToken),cachePolicy: .fetchIgnoringCacheData){result in
@@ -56,8 +51,7 @@ final class AddressComponentViewModel : ObservableObject {
             case .success(let graphQlResult):
                 if let result = graphQlResult.data?.customerAddressUpdate?.customerAddress{
                     let tempAddress = Address(id: result.id, address1: result.address1, address2: result.address2, name: result.name, phone: result.phone, city: result.city, company: result.company, country: result.country,  firstName: result.firstName, lastName: result.lastName, zip: result.zip)
-                   
-               
+        
                     if let indexOfTheUpdated = self.addressPackage.listOfAddress.firstIndex(where: {$0.id == selectedAddress.id}){
                         self.addressPackage.listOfAddress[indexOfTheUpdated] = tempAddress
                         print("newAddress = \(self.addressPackage.listOfAddress[indexOfTheUpdated])")
@@ -71,10 +65,12 @@ final class AddressComponentViewModel : ObservableObject {
                    
                 }
                 self.addressPackage.success = true
+                SnackbarManager.shared.show(message: "Address Updated Successfully")
+                NavigationManager.shared.pop()
             case .failure(let error):
                 self.addressPackage.success = false
                 self.addressPackage.messages = [error.localizedDescription]
-                print("failed")
+                SnackbarManager.shared.show(message: "Failed to updated address")
             }
             
         }
@@ -85,17 +81,18 @@ final class AddressComponentViewModel : ObservableObject {
             self.isLoading = false
             switch result {
             case .success(let graphQlResult):
-               print("success")
                 if let result = graphQlResult.data?.customerDefaultAddressUpdate?.customer?.defaultAddress{
                     let tempAddress = Address(id: result.id, address1: result.address1, address2: result.address2, name: result.name, phone: result.phone, city: result.city, company: result.company, country: result.country,  firstName: result.firstName, lastName: result.lastName, zip: result.zip)
                     self.addressPackage.defaultAddress = tempAddress
                     
                 }
                 self.addressPackage.success = true
+                SnackbarManager.shared.show(message: "Default Address Updated Successfully")
+                NavigationManager.shared.pop()
             case .failure(let error):
                 self.addressPackage.success = false
                 self.addressPackage.messages = [error.localizedDescription]
-                print("failed")
+                SnackbarManager.shared.show(message: "Failed to update default address")
             }
             
         }
@@ -113,12 +110,14 @@ final class AddressComponentViewModel : ObservableObject {
                     }
                    
                 }
-               print("success")
+                
                 self.addressPackage.success = true
+                SnackbarManager.shared.show(message: "Address Deleted Successfully")
+                NavigationManager.shared.pop()
             case .failure(let error):
                 self.addressPackage.success = false
                 self.addressPackage.messages = [error.localizedDescription]
-                print("failed")
+                SnackbarManager.shared.show(message: "Failed to delete address")
             }
             
         }
@@ -129,16 +128,17 @@ final class AddressComponentViewModel : ObservableObject {
             self.isLoading = false
             switch result {
             case .success(let graphQlResult):
-               print("success")
                 if let result = graphQlResult.data?.customerAddressCreate?.customerAddress{
                     let tempAddress = Address(id: result.id, address1: result.address1, address2: result.address2,  phone: result.phone, city: result.city, country: result.country,  firstName: result.firstName, lastName: result.lastName, zip: result.zip)
                     self.addressPackage.listOfAddress.append(tempAddress)
                 }
                 self.addressPackage.success = true
+                SnackbarManager.shared.show(message: "Address created successfully")
+                NavigationManager.shared.pop()
             case .failure(let error):
                 self.addressPackage.success = false
                 self.addressPackage.messages = [error.localizedDescription]
-                print(error.localizedDescription)
+                SnackbarManager.shared.show(message: "Failed to create address")
             }
             
         }

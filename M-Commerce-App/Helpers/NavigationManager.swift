@@ -24,12 +24,13 @@ class NavigationManager: ObservableObject {
         case .categories:
             popToRoot()
             tab = 1
-        case .settings:
-            popToRoot()
-            tab = 2
         case .orders:
             popToRoot()
+            tab = 2
+        case .settings:
+            popToRoot()
             tab = 3
+        
 
         default:
             path.append(target)

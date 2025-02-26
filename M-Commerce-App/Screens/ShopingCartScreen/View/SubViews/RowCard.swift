@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RowCard: View {
-    @State var line: Line?
+    @Binding var line: Line?
     @State var changeNumberOfItemInRow: ((Int) -> (Void))?
     @State var onDelete: ((Bool) -> (Void))?
     var minimumNumberOfItems: Int = 1
@@ -103,33 +103,33 @@ struct RowCard: View {
 
 }
 
-#Preview {
-    let productVariant = ProductVariant(
-        id: "gid://shopify/ProductVariant/52383522586995",
-
-        title: "s / blue",
-        image: ImgModel(
-            url:
-                "https://burst.shopifycdn.com/photos/black-sneakers-with-white-sole.jpg?width=4460&height=4460&exif=0&iptc=0"
-        ),
-        quantityAvailable: 10,
-        sku: "NK-01-s-blue",
-        price: Price(amount: "40", currencyCode: "EGP"),
-        productId: "gid://shopify/Product/15046227886451",
-        productTitle: "NIKE | CRACKLE PRINT TB TEE",
-        productVendor: "NIKE"
-    )
-    RowCard(
-        line: Line(
-            id:
-                "gid://shopify/CartLine/95cb6a84-c888-4042-b693-ad66de2d729f?cart=Z2NwLWV1cm9wZS13ZXN0MTowMUpNTUNCVjlGRktONzExTjE2TVdINjQ0UQ",
-            variant: productVariant,
-            quantity: 2,
-            lineCost: LineCost(
-                totalAmount: Price(amount: "80", currencyCode: "EGP"),
-                subtotalAmount: Price(amount: "80", currencyCode: "EGP"),
-                amountPerQuantity: Price(amount: "40", currencyCode: "EGP")
-            )
-        )
-    )
-}
+//#Preview {
+//    let productVariant = ProductVariant(
+//        id: "gid://shopify/ProductVariant/52383522586995",
+//
+//        title: "s / blue",
+//        image: ImgModel(
+//            url:
+//                "https://burst.shopifycdn.com/photos/black-sneakers-with-white-sole.jpg?width=4460&height=4460&exif=0&iptc=0"
+//        ),
+//        quantityAvailable: 10,
+//        sku: "NK-01-s-blue",
+//        price: Price(amount: "40", currencyCode: "EGP"),
+//        productId: "gid://shopify/Product/15046227886451",
+//        productTitle: "NIKE | CRACKLE PRINT TB TEE",
+//        productVendor: "NIKE"
+//    )
+//    RowCard(
+//        line: Line(
+//            id:
+//                "gid://shopify/CartLine/95cb6a84-c888-4042-b693-ad66de2d729f?cart=Z2NwLWV1cm9wZS13ZXN0MTowMUpNTUNCVjlGRktONzExTjE2TVdINjQ0UQ",
+//            variant: productVariant,
+//            quantity: 2,
+//            lineCost: LineCost(
+//                totalAmount: Price(amount: "80", currencyCode: "EGP"),
+//                subtotalAmount: Price(amount: "80", currencyCode: "EGP"),
+//                amountPerQuantity: Price(amount: "40", currencyCode: "EGP")
+//            )
+//        )
+//    )
+//}

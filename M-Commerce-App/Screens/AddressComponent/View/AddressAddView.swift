@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct AddressAddView: View {
-    @Environment(\.dismiss) private var dismiss
     @State private var selectedCountry: Country = Constants.countries.first!
     @State var newAddress = Address()
     @State private var firstNameValid: Bool = false
@@ -19,6 +18,7 @@ struct AddressAddView: View {
     @State private var cityValid: Bool = false
     @State private var phoneValid: Bool = false
     @State private var zipValid: Bool = false
+    let addressModel = AddressComponentViewModel()
 
     @State private var isFormValid = false
 
@@ -179,18 +179,26 @@ struct AddressAddView: View {
                 CustomRoundedButtonView(
                     text: "Save address",
                     onTap: {
-                        let addressModel = AddressComponentViewModel()
                         addressModel.createAddresses(
                             AccessToken: AuthManager.shared.applicationUser?
                                 .accessToken ?? "",
                             selectedAddress: newAddress)
-                        SnackbarManager.shared.show(message: "Successfully Saved")
-                        NavigationManager.shared.pop()
 
                     }, isButtonEnabled: $isFormValid
                 )
                 .padding(.top, 200)
 
+            }
+            .overlay {
+                if addressModel.isLoading {
+                    VStack {
+                        CustomProgressView()
+                    }.frame(
+                        width: UIScreen.main.bounds.width,
+                        height: UIScreen.main.bounds.height
+                    )
+                    .background(.primary.opacity(0.1))
+                }
             }
         }
         .navigationTitle("Add new Address")

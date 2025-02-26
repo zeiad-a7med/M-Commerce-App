@@ -84,6 +84,7 @@ struct OrderedProductCard: View {
             Spacer()
         }
         .padding(.horizontal)
+        .foregroundStyle(.BILWID)
     }
     func formateDate(date:String) -> String {
         let dateFormatter = ISO8601DateFormatter()

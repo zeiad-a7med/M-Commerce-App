@@ -94,16 +94,6 @@ struct CheckOutComponent: View {
                     .padding(.bottom, 10)
 
                 HStack {
-                    Text("Checkout Charge Amount:")
-                        .foregroundStyle(.tertiary)
-                    Spacer()
-                    Text(
-                        "\(cartCost?.checkoutChargeAmount?.formattedCurrecyCode ?? "EGP") \(cartCost?.checkoutChargeAmount?.formattedPrice ?? "0.0")"
-                    )
-                }.padding(.horizontal)
-                    .padding(.bottom, 10)
-
-                HStack {
                     Text("Discount:")
                         .foregroundStyle(.tertiary)
                     Spacer()

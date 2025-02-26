@@ -23,7 +23,7 @@ struct ShoppingView: View {
                         {
                             ForEach(tempViewModel, id: \.id) { line in
                                 RowCard(
-                                    line: line,
+                                    line: .constant(line),
                                     changeNumberOfItemInRow: { count in
                                         viewModel.updateLineQuantity(
                                             line: line, quantity: count)
@@ -46,7 +46,10 @@ struct ShoppingView: View {
                         onTap: {
                             viewModel.updateCart { success in
                                 if success {
-                                    showCheckOut.toggle()
+                                    viewModel.getCartData { _ in
+                                        showCheckOut.toggle()
+                                    }
+                                    
                                 }
                             }
                         }, isButtonEnabled: .constant(true)
@@ -69,9 +72,9 @@ struct ShoppingView: View {
 
         }
         .onAppear {
-            
             isLoggedIn = AuthManager.shared.isLoggedIn()
-            viewModel.getCartData()
+            viewModel.getCartData{ _ in
+            }
         }
         .onDisappear {
             viewModel.updateCart { success in
@@ -89,7 +92,7 @@ struct ShoppingView: View {
                         }
                     }
                 )
-                .presentationDetents([.medium])
+                .presentationDetents([.height(350)])
 
             }
         )

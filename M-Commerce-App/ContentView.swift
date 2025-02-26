@@ -11,7 +11,6 @@ import SwiftUI
 
 struct ContentView: View {
     @State var navigateToLogin: Bool = false
-    @Environment(\.modelContext) private var modelContext
     @Environment(NetworkMonitor.self) private var newtworkMonitor
     @StateObject private var navigationManager = NavigationManager.shared
 
@@ -79,25 +78,6 @@ struct ContentView: View {
                 )
             }.tag(1)
             NavigationStack(path: $navigationManager.path) {
-                Settings()
-                    .navigationDestination(for: RouteTypes.self) { target in
-                        NavigationManager.shared.manageDestination(target)
-                    }
-                    .toolbar {  //start of: toolbar
-                        ToolbarItem(
-                            placement: .topBarLeading,
-                            content: {
-                                Image(.logoWithoutBackground)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(height:150)
-                            })
-                    }
-            }
-            .tabItem {
-                Label("Profile", systemImage: "person.fill")
-            }.tag(2)
-            NavigationStack(path: $navigationManager.path) {
                 MyOrdersView()
                     .navigationDestination(for: RouteTypes.self) { target in
                         NavigationManager.shared.manageDestination(target)
@@ -115,13 +95,27 @@ struct ContentView: View {
             }
             .tabItem {
                 Label("Orders", systemImage: "list.dash")
+            }.tag(2)
+            NavigationStack(path: $navigationManager.path) {
+                Settings()
+                    .navigationDestination(for: RouteTypes.self) { target in
+                        NavigationManager.shared.manageDestination(target)
+                    }
+                    .toolbar {  //start of: toolbar
+                        ToolbarItem(
+                            placement: .topBarLeading,
+                            content: {
+                                Image(.logoWithoutBackground)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height:150)
+                            })
+                    }
+            }
+            .tabItem {
+                Label("Profile", systemImage: "person.fill")
             }.tag(3)
 
-        }
-        .onAppear {
-            FavoritesManager.shared.setContext(modelContext)
-            AuthManager.shared.setContext(modelContext)
-            CurrencyManager.shared.setContext(modelContext)
         }
         .navigationBarHidden(true)
     }

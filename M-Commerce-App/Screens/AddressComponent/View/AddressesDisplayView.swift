@@ -81,6 +81,11 @@ struct AddressesDisplayView: View {
                 .background(.primary.opacity(0.1))
             }
         }
+        .onAppear{
+            addressModel.fetchAddresses(
+                AccessToken: AuthManager.shared.applicationUser?
+                    .accessToken ?? " ")
+        }
         .navigationTitle("Address")
         .toolbar(.hidden, for: .tabBar)
     }

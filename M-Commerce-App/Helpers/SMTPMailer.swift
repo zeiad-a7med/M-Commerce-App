@@ -33,8 +33,8 @@ class SMTPMailer {
         
 
         let sender = Mail.User(
-            name: "ZeinShop", email: "zeiadahmed194@gmail.com")
-        let recipient = Mail.User(email: "zeiadahmed194@gmail.com")
+            name: "Shopio", email: "zeiadahmed194@gmail.com")
+        let recipient = Mail.User(email: user?.email ?? "zeiadahmed194@gmail.com")
 
         // Create an email with the HTML content and set the content type
         let mail = Mail(
@@ -71,7 +71,8 @@ class SMTPMailer {
         else {
             return nil
         }
-
+        let currency = orderData["currency"] as? String
+        let totalPrice = orderData["current_total_price"] as? String
         var tableRows = ""
         for item in lineItems {
             let name = item["name"] as? String ?? "Unknown"
@@ -81,7 +82,7 @@ class SMTPMailer {
             let cur = "EGP"
             let quantity = item["quantity"] as? Int ?? 0
             tableRows +=
-                "<tr><td>\(name)</td><td>\(cur)\(price)</td><td>\(quantity)</td></tr>"
+                "<tr><td>\(name)</td></tr> <tr><td>price: \(cur)\(price)</td></tr> <tr><td>quantity: \(quantity)</td></tr><tr><td></td></tr>"
         }
 
         return """
@@ -91,24 +92,16 @@ class SMTPMailer {
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Order Details</title>
-                <style>
-                    body { font-family: Arial, sans-serif; margin: 20px; padding: 20px; }
-                    .container { max-width: 600px; margin: auto; border: 1px solid #ddd; padding: 20px; border-radius: 8px; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); }
-                    table { width: 100%; border-collapse: collapse; }
-                    .status-link { display: block; margin-top: 15px; text-align: center; font-size: 16px; color: #007bff; text-decoration: none; }
-                </style>
             </head>
             <body>
-                <div class="container">
+                <div>
                     <h2>Order Details</h2>
                     <table>
-                        <thead>
-                            <tr><th>Product Name</th><th>Price</th><th>Quantity</th></tr>
-                        </thead>
                         <tbody>
                             \(tableRows)
                         </tbody>
                     </table>
+                    <h3>Total price : \(currency ?? "EGP") \(totalPrice ?? "0")</h3>
                     <a class="status-link" href="\(orderStatusURL)" target="_blank">View Order Status</a>
                 </div>
             </body>

@@ -24,6 +24,9 @@ struct ProductCardView: View {
             CustomNetworkImageView(url: imageURL)
             .frame(width: 180, height: 180)
             .cornerRadius(20)
+            .onTapGesture {
+                NavigationManager.shared.push(.product(id: product.id))
+            }
             .overlay(
                 FavoriteButtonView(
                     product: product,
