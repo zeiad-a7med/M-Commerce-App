@@ -158,12 +158,12 @@ class PaymentService: OrderCreateService {
 
                 if let httpResponse = response as? HTTPURLResponse {
                     if (httpResponse.statusCode == 201 || httpResponse.statusCode == 200) {
-                        SMTPMailer.sendCompitionEmail(user: AuthManager.shared.applicationUser, data: data)
                         complitionHandler(
                             OrderCreateResponse(
                                 success: true,
                                 message: nil
                             ))
+                        SMTPMailer.sendCompitionEmail(user: AuthManager.shared.applicationUser, data: data)
                     } else {
                         complitionHandler(
                             OrderCreateResponse(
