@@ -16,9 +16,9 @@ struct pagingSubView: View {
     ]
     private let descArray =
         [
-            "Discover outfits curated just for you with AI-powered recommendations",
-            "ETry Now, Pay Later – because fashion waits for no one!",
-            "Easy returns and exchanges, because style should be stress-free!",
+            "Explore a variety of new arrivals, from trendy fashion and cutting-edge gadgets to home essentials and beauty must-haves",
+            "Find your perfect match with our full range of colors and sizes! Whether it’s fashion or accessories, we’ve got you covered.",
+            "Use our smart filters to browse by size, color, style, and more—making shopping quick and easy. Discover outfits that suit you best in just a few clicks!",
         ]
     private let pageCount = 3
     @State private var currentIndex = 0

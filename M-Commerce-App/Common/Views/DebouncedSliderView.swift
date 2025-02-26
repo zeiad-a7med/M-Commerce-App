@@ -17,7 +17,7 @@ struct DebouncedSliderView: View {
                         debouncePublisher.send(newValue)
                     }
 
-                Text("\(Int(sliderValue))")
+                Text("\(CurrencyManager.currentCurrencyRate.code ?? "EGP")\(Int(sliderValue))")
                     .offset(x: CGFloat(sliderValue / 10) - 10, y: -10) // Adjust position
                     .font(.caption)
                     .foregroundColor(ThemeManager.darkPuble)
