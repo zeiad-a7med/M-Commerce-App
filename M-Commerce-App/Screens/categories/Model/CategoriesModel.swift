@@ -7,7 +7,9 @@
 
 import Foundation
 
-class CategoriesResponse {
+struct CategoriesResponse {
     var categoryProducts: [Product]?
     var pageInfo: PageInfo?
+    var success: Bool?
+    var message: String?
 }

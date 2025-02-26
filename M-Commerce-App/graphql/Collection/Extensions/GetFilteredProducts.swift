@@ -11,8 +11,8 @@ import SwiftUI
 
 extension GetFilteredProductsQuery {
     
-    static func parseFilteredProducts(from prod: GetFilteredProductsQuery.Data.Products) -> CategoriesResponse {
-        let categories: CategoriesResponse = CategoriesResponse()
+    static func parseFilteredProductsForCat(from prod: GetFilteredProductsQuery.Data.Products) -> CategoriesResponse {
+        var categories: CategoriesResponse = CategoriesResponse()
         var productsArray = [Product]()
         
         

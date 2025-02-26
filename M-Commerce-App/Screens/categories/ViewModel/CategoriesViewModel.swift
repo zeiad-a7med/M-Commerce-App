@@ -27,30 +27,22 @@ final class CategoriesViewModel: ObservableObject {
         query: GraphQLNullable<String>
     ) {
         self.isLoading = true
-        ApolloNetwokService.shared.apollo.fetch(
-            query: GetFilteredProductsQuery(
-                first: first, after: after, query: query),
-            cachePolicy: .fetchIgnoringCacheData
-        ) { result in
-            switch result {
-            case .success(let graphQLResult):
-                if let data = graphQLResult.data?.products {
-                    self.categories =
-                        GetFilteredProductsQuery.parseFilteredProducts(
-                            from: data)
+        CategoriesService.getProductsFromApi(first: first, after: after, query: query, complitionHandler: { (result) in
+            guard let result = result else { return }
+            DispatchQueue.main.async {
+                self.categories.categoryProducts = [Product]()
+                self.categories.pageInfo = result.pageInfo
+                result.categoryProducts?.forEach { prod in
+                    self.categories.categoryProducts?.append(prod)
                 }
-
-            case .failure(let error):
-                print("Failure! Error: \(error.localizedDescription)")
+                self.isLoading = false
             }
-            self.isLoading = false
-        }
+        })
     }
     func fetchCategoriesWithFilter(
         first: GraphQLNullable<Int>, after: GraphQLNullable<String>,
         filter: String
     ) {
-        //        categories.categoryProducts?.removeAll()
         fetchCategories(
             first: first, after: after,
             query: GraphQLNullable<String>.some(filter))
@@ -59,33 +51,16 @@ final class CategoriesViewModel: ObservableObject {
         if !(categories.pageInfo?.hasNextPage ?? true) {
             return
         }
-        self.isLoading = true
-        ApolloNetwokService.shared.apollo.fetch(
-            query: GetFilteredProductsQuery(
-                first: 10, after: categories.pageInfo?.endCursor ?? "",
-                query: GraphQLNullable<String>.some(filter)),
-            cachePolicy: .fetchIgnoringCacheData
-        ) { result in
-            switch result {
-            case .success(let graphQLResult):
-                if let data = graphQLResult.data?.products {
-                    var tempCategories: CategoriesResponse =
-                        CategoriesResponse()
-                    tempCategories =
-                        GetFilteredProductsQuery.parseFilteredProducts(
-                            from: data)
-                    self.categories.pageInfo = tempCategories.pageInfo
-                    tempCategories.categoryProducts?.forEach { (item) in
-                        self.categories.categoryProducts?.append(item)
-                    }
+        isLoading = false
+        CategoriesService.getProductsFromApi(first: 10, after: categories.pageInfo?.endCursor ?? nil, query: GraphQLNullable<String>.some(filter), complitionHandler: { (result) in
+            guard let result = result else {
+                return }
+            DispatchQueue.main.async {
+                self.categories.pageInfo = result.pageInfo
+                result.categoryProducts?.forEach { prod in
+                    self.categories.categoryProducts?.append(prod)
                 }
-                print(
-                    "reloaded = \(self.categories.categoryProducts?.count ?? 0)"
-                )
-            case .failure(let error):
-                print("Failure! Error: \(error.localizedDescription)")
             }
-            self.isLoading = false
-        }
+        })
     }
 }

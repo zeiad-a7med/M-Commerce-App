@@ -34,32 +34,38 @@ final class M_Commerce_AppTests: XCTestCase {
     }
 
     
-    func testfetchCategories() {
+    func testgetProductsFromApi() {
+        let myExpectation = expectation(description: "waiting for currency api")
         ApolloNetwokService.shared.apollo.fetch(
             query: GetFilteredProductsQuery(
                 first: 10, after: nil, query: "men")) { res in
             switch res {
                 case .success(let data):
                 XCTAssertEqual(data.data?.products.nodes.isEmpty, false)
+                myExpectation.fulfill()
             case .failure(let error):
                 XCTFail("error: \(error)")
             }
         }
+        waitForExpectations(timeout: 5)
     }
+
+    func testgetProductFromApi() {
+        let myExpectation = expectation(description: "waiting for currency api")
+        ApolloNetwokService.shared.apollo.fetch( query: GetProductQuery(id: ""), cachePolicy: .fetchIgnoringCacheData) { res in
+            switch res {
+                case .success(let data):
+                XCTAssertNotNil(data, "Data should not be nil")
+                myExpectation.fulfill()
+            case .failure(let error):
+                XCTFail("error: \(error)")
+            }
+        }
+        waitForExpectations(timeout: 5)
+    }
+    
+    
 //
-//    func testGetFilteredProductsQuery() {
-//        ApolloNetwokService.shared.apollo.fetch(
-//            query: GetFilteredProductsQuery(
-//                first: 10, after: nil, query: "men")) { res in
-//            switch res {
-//                case .success(let data):
-//                XCTAssertEqual(data.data?.products.nodes.isEmpty, false)
-//            case .failure(let error):
-//                XCTFail("error: \(error)")
-//            }
-//        }
-//    }
-//    
 //    func testfetchCategoriesWithFilter() {
 //        ApolloNetwokService.shared.apollo.fetch(
 //            query: GetFilteredProductsQuery(

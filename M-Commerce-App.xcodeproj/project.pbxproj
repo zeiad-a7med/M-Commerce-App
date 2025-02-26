@@ -196,6 +196,7 @@
 		C48BCB942D6C61EC00173855 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48BCB932D6C61EC00173855 /* SearchViewModel.swift */; };
 		C48BCB962D6C676500173855 /* GetProductsSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48BCB952D6C676500173855 /* GetProductsSearchResult.swift */; };
 		C48BCB982D6C67D800173855 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48BCB972D6C67D300173855 /* SearchModel.swift */; };
+		C48C66CE2D6F037C00A606EF /* CategoriesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48C66CD2D6F037C00A606EF /* CategoriesService.swift */; };
 		C497191F2D6E403D00F592C5 /* noSearchAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = C497191E2D6E403D00F592C5 /* noSearchAnimation.json */; };
 		C4B324AF2D6BD924002D1DA5 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B324AE2D6BD924002D1DA5 /* OnBoardingView.swift */; };
 		C4B324B22D6BF018002D1DA5 /* BoardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B324B12D6BF018002D1DA5 /* BoardingPage.swift */; };
@@ -433,6 +434,7 @@
 		C48BCB932D6C61EC00173855 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		C48BCB952D6C676500173855 /* GetProductsSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductsSearchResult.swift; sourceTree = "<group>"; };
 		C48BCB972D6C67D300173855 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
+		C48C66CD2D6F037C00A606EF /* CategoriesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesService.swift; sourceTree = "<group>"; };
 		C497191E2D6E403D00F592C5 /* noSearchAnimation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = noSearchAnimation.json; sourceTree = "<group>"; };
 		C4B324AE2D6BD924002D1DA5 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		C4B324B12D6BF018002D1DA5 /* BoardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingPage.swift; sourceTree = "<group>"; };
@@ -1556,6 +1558,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		C48C66CC2D6F036700A606EF /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				C48C66CD2D6F037C00A606EF /* CategoriesService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		C4B324AC2D6BD8E3002D1DA5 /* OnBoarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -1699,6 +1709,7 @@
 		C4F3FC782D5E88AA005151E9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C48C66CC2D6F036700A606EF /* Service */,
 				C4F3FC7A2D5E88CC005151E9 /* CategoriesModel.swift */,
 			);
 			path = Model;
@@ -1956,6 +1967,7 @@
 				894A65022D6BBA4300DB2915 /* NavigationManager.swift in Sources */,
 				8952A6802D6206960003ACF4 /* RegisterMutation.swift in Sources */,
 				C48BCB8C2D6C5E1300173855 /* SearchProducts.graphql in Sources */,
+				C48C66CE2D6F037C00A606EF /* CategoriesService.swift in Sources */,
 				892967BD2D64B399007191DC /* Variant.swift in Sources */,
 				89C82A452D668D7F0018898E /* GetCart.swift in Sources */,
 				C4DD10F62D68F26500FCD9E2 /* CurrencyExchanger.swift in Sources */,
@@ -2221,7 +2233,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"M-Commerce-App/Preview Content\"";
-				DEVELOPMENT_TEAM = RY8QUA6KKV;
+				DEVELOPMENT_TEAM = PV83M9G75A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -2229,7 +2241,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2251,7 +2263,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"M-Commerce-App/Preview Content\"";
-				DEVELOPMENT_TEAM = RY8QUA6KKV;
+				DEVELOPMENT_TEAM = PV83M9G75A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -2259,7 +2271,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
