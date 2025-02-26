@@ -8,84 +8,54 @@
 import SwiftUI
 
 struct HomePageView: View {
-    let screenTitle: String = "Home"
-    let tempImageList = ImageList(id: "")
-    @State var isCopied: Bool = false
+    @State var favoriteCount: Int = 0
+    @State var searchText: String = ""
+    @State var isSearchActive: Bool = false
+    //    @StateObject var searchViewModel = SearchViewModel(filterProduct: "m")
     var body: some View {
-
-        NavigationView {
-            ZStack {  //start of: ZStack
-                ScrollView {
-                    LazyVStack {
-                        CustomSearchBarView(
-                            placeholder: "search for brand ...",
-                            onChange: { text in
-                                print("Search text: \(text)")
-                            },
-                            prefix: {
-                                Image(systemName: "magnifyingglass")
-                                    .foregroundColor(.black)
-                                    .font(.title2)
+        ZStack {  //start of: ZStack
+            ScrollView {
+                VStack {
+                    CustomTextField(
+                        placeholder: "search for products ...",
+                        onChange: { text in
+                            self.searchText = text
+                        },
+                        prefix: {
+                            Image(systemName: "magnifyingglass")
+                        },
+                        disActiveWhenCancel: true,
+                        showClearBtnWhenClearText: true,
+                        initialText: .constant(""),
+                        onActive: { active in
+                            if active {
+                                isSearchActive = true
+                            } else {
+                                isSearchActive = false
                             }
-                        )
-                        .padding()
-                        Divider()
-                        HeaderView(
-                            title: ThemeManager.firstSectionTitle,
-                            color: ThemeManager.titleColor)
-                        AdCardView(
-                            imageList: tempImageList,
-                            discountCode: [
-                                DiscountCode(), DiscountCode(code: "ByeBye"),
-                                DiscountCode(code: "areWeThereYet"),
-                            ], pricesruleList: PriceRulesList(id: "")
-                        ) {
-                            self.isCopied.toggle()
                         }
+                    )
+                    .padding([.leading, .trailing], 20)
+                    if isSearchActive {
+                        CustomSearchView(
+                            searchText: $searchText, mainFilter: .constant(""))
+                    } else {
+                        AdCardView()
                         HeaderView(
                             title: ThemeManager.secondSectionTitle,
                             color: ThemeManager.titleColor)
-                        BrandsView(imageUrlArray: dummyImgsUrlArray)
-                        Spacer()
+                        BrandsView()
                     }
                 }
-                if isCopied{
-                    Text("Copied to Clipboard")
-                        .foregroundStyle(.gray)
-                        .transition(.move(edge: .bottom))
-                        .frame(height:50 , alignment: .bottom)
-                        .offset(y:UIScreen.main.bounds.height/3)
-                }
-            }  //end of: ZStack
-            .navigationTitle(screenTitle)
-            .toolbar {  //start of: toolbar
-                ToolbarItem(
-                    placement: .topBarTrailing,
-                    content: {
-                        LazyHStack {
-                            NavigationLink(destination: Text("cart")
-                                           , label: {
-                            ButtonView(
-                                imageSystemName: ThemeManager.cartImg,
-                                itemCounter: 10)
-                        })
-                            NavigationLink(destination: FavoritesView()
-                                           , label: {
-                            ButtonView(
-                                imageSystemName: ThemeManager.favouriteImg,
-                                itemCounter: 2)
-                            })
-                        }
-                    })
             }
-        }  //end of: toolbar
+        }  //end of: ZStack
     }
 }
 
 #Preview {
-    NavigationView {
-        HomePageView()
-    }
+    //    NavigationView {
+    HomePageView(searchText: "m")
+    //    }
 }
 
 let dummyImgsUrlArray = [

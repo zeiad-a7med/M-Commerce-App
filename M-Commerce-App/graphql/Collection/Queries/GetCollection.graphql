@@ -1,0 +1,59 @@
+query GetCollection(
+    $id : ID,
+    $first : Int
+){
+    collection(id: $id) {
+        id
+        description
+        handle
+        title
+        image {
+            id
+            height
+            width
+            url
+            originalSrc
+            altText
+        }
+        products(first: $first) {
+            nodes {
+                id
+                availableForSale
+                title
+                productType
+                tags
+                vendor
+                images(first: 1) {
+                    nodes {
+                        id
+                        height
+                        width
+                        url
+                        originalSrc
+                    }
+                }
+                priceRange {
+                    maxVariantPrice {
+                        amount
+                        currencyCode
+                    }
+                    minVariantPrice {
+                        amount
+                        currencyCode
+                    }
+                }
+            }
+            filters {
+                id
+                label
+                type
+                values {
+                    count
+                    id
+                    label
+                    input
+                }
+            }
+        }
+    }
+}

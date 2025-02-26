@@ -1,0 +1,27 @@
+query GetCollections($first : Int, $after : String) {
+    collections(first: $first , after : $after) {
+        totalCount
+        nodes {
+            description
+            handle
+            id
+            title
+            trackingParameters
+            updatedAt
+            image {
+                altText
+                height
+                originalSrc
+                url
+                width
+                id
+            }
+        }
+        pageInfo {
+            endCursor
+            hasNextPage
+            hasPreviousPage
+            startCursor
+        }
+    }
+}

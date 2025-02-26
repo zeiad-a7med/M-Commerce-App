@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ButtonView: View {
     var imageSystemName:String
-    var itemCounter:Int
+    var itemCounter:Int = 0
     
     let cartTopPadding:CGFloat      = 3.0
     let cartTrailingPadding:CGFloat = 3.0
@@ -21,7 +21,10 @@ struct ButtonView: View {
                 .foregroundStyle(ThemeManager.navigationBarItemsColor)
                 .overlay(alignment: .topTrailing
                          ,content: {
-                    PopupCircleView(productCounter: itemCounter)
+                    if(itemCounter > 0){
+                        PopupCircleView(productCounter: itemCounter)
+                    }
+                    
                 })
         
     }

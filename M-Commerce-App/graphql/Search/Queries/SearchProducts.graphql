@@ -1,0 +1,28 @@
+query SearchProduct ($filter: String!) {
+    search(query: $filter, first: 50) {
+        nodes {
+            ... on Product {
+                description
+                id
+                productType
+                title
+                totalInventory
+                vendor
+                featuredImage {
+                    url
+                }
+                priceRange {
+                    maxVariantPrice {
+                        amount
+                        currencyCode
+                    }
+                    minVariantPrice {
+                        amount
+                        currencyCode
+                    }
+                }
+            }
+        }
+    }
+}
+

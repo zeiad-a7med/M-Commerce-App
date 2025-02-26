@@ -1,0 +1,28 @@
+mutation UpdateDefaultAddress($customerAccessToken: String!,$id: ID!) {
+    customerDefaultAddressUpdate(
+        customerAccessToken: $customerAccessToken
+        addressId: $id
+    ) {
+        customerUserErrors {
+            code
+            field
+            message
+        }
+        customer {
+            defaultAddress {
+                address1
+                address2
+                city
+                company
+                country
+                firstName
+                id
+                lastName
+                name
+                phone
+                zip
+            }
+        }
+    }
+}
+

@@ -1,0 +1,88 @@
+mutation UpdateProfile (
+    $customerAccessToken: String!,
+    $firstName: String,
+    $lastName: String,
+    $email: String,
+    $phone: String,
+    $password: String,
+    $acceptsMarketing: Boolean
+){
+    customerUpdate(
+        customerAccessToken:$customerAccessToken
+        customer: {
+            firstName: $firstName
+            lastName: $lastName
+            email: $email
+            phone: $phone
+            password: $password
+            acceptsMarketing: $acceptsMarketing
+        }
+    ) {
+        customer {
+            id
+            displayName
+            email
+            firstName
+            lastName
+            numberOfOrders
+            phone
+            tags
+            addresses(first: 20) {
+                nodes {
+                    address1
+                    address2
+                    city
+                    company
+                    country
+                    countryCode
+                    countryCodeV2
+                    firstName
+                    formatted
+                    formattedArea
+                    id
+                    lastName
+                    latitude
+                    longitude
+                    name
+                    phone
+                    province
+                    provinceCode
+                    zip
+                }
+            }
+            defaultAddress {
+                address1
+                address2
+                city
+                company
+                country
+                countryCode
+                countryCodeV2
+                firstName
+                formatted
+                formattedArea
+                id
+                lastName
+                latitude
+                longitude
+                name
+                phone
+                province
+                provinceCode
+                zip
+            }
+            orders(first: 1) {
+                totalCount
+            }
+        }
+        customerAccessToken {
+            accessToken
+            expiresAt
+        }
+        customerUserErrors {
+            code
+            field
+            message
+        }
+    }
+}

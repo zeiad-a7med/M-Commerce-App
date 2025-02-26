@@ -1,0 +1,48 @@
+query GetProductsOfOrderByID ($CustomerAT: String!) {
+    customer(customerAccessToken: $CustomerAT) {
+        orders(first: 100 , reverse: true) {
+            totalCount
+            nodes {
+                lineItems(first: 100) {
+                    nodes {
+                        currentQuantity
+                        quantity
+                        title
+                        variant {
+                            currentlyNotInStock
+                            id
+                            title
+                            image {
+                                id
+                                url
+                            }
+                            price {
+                                amount
+                                currencyCode
+                            }
+                            product {
+                                id
+                                productType
+                                title
+                                totalInventory
+                                vendor
+                            }
+                        }
+                    }
+                }
+                currentSubtotalPrice {
+                    amount
+                    currencyCode
+                }
+                currentTotalPrice {
+                    amount
+                    currencyCode
+                }
+                id
+            }
+        }
+        displayName
+        id
+        numberOfOrders
+    }
+}

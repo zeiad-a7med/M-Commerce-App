@@ -8,21 +8,17 @@
 import SwiftUI
 
 struct AdCardView: View {
-    @State var imageList: ImageList
-    @State var discountCode: [DiscountCode]
-    @State var pricesruleList: PriceRulesList
-    var copyToClipboard : (() -> Void)?
-    var adViewModel = AdViewModel()
+    var copyToClipboard: (() -> Void)?
     @State var isCopied = false
     var body: some View {
 
         ScrollView(.horizontal, showsIndicators: false) {
             VStack {
                 LazyHStack {
-                    ForEach(Array(discountCode.enumerated()), id: \.offset) {
-                        index, discount in
+                    ForEach(Array(Constants.coupons), id: \.self) {
+                        coupon in
 
-                        AsyncImage(url: URL(string: imageList.images[index])) {
+                        AsyncImage(url: URL(string: coupon.image)) {
                             phase in
                             switch phase {
                             case .empty:
@@ -40,31 +36,39 @@ struct AdCardView: View {
                                     image
                                         .resizable()
                                         .frame(width: 330, height: 140)
+                                        .overlay {
+                                            Color.primary.opacity(0.5)
+                                        }
                                         .clipShape(
                                             RoundedRectangle(cornerRadius: 15)
                                         )
                                         .containerRelativeFrame(
                                             .horizontal, alignment: .center
-                                        ).onTapGesture {
-                                            UIPasteboard.general.string =
-                                                discount.code
-                                            withAnimation(.snappy) {
-                                                copyToClipboard?()
-                                            }
-                                            DispatchQueue.main.asyncAfter(
-                                                deadline: .now() + 1
-                                            ) {
-                                                withAnimation(.snappy) {
-                                                    copyToClipboard?()
-                                                }
-                                            }
-
+                                        )
+                                        .overlay {
+                                            Text(coupon.code)
+                                                .font(.title3)
+                                                .foregroundStyle(.white)
+                                                .bold()
+                                                .italic()
                                         }
 
-                                    Text("\(discount.code)")
-                                        .frame(alignment: .leading)
-                                        .foregroundStyle(.white)
-                                        .bold()
+                                        .onTapGesture {
+                                            if AuthManager.shared.isLoggedIn() {
+                                                UIPasteboard.general.string =
+                                                    coupon.code
+                                                withAnimation(.snappy) {
+                                                    SnackbarManager.shared.show(
+                                                        message:
+                                                            "Copied to clipboard!"
+                                                    )
+                                                }
+                                            } else {
+                                                AlertManager.shared
+                                                    .showLoginAlert()
+                                            }
+                                        }
+
                                 }
                             case .failure:
                                 ZStack {
@@ -96,11 +100,5 @@ struct AdCardView: View {
 }
 
 #Preview {
-    let tempImageList = ImageList(id: "")
-    return AdCardView(
-        imageList: tempImageList,
-        discountCode: [
-            DiscountCode(), DiscountCode(code: "ByeBye"),
-            DiscountCode(code: "areWeThereYet"),
-        ], pricesruleList: PriceRulesList(id: ""))
+    return AdCardView()
 }

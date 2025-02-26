@@ -5,53 +5,74 @@
 //  Created by Zeiad on 09/02/2025.
 //
 
+import SwiftData
 import SwiftUI
 
 struct FavoritesView: View {
+    @Query private var products: [Product]
+    @State var searchText: String = ""
+    var filteredProducts: [Product] {
+        if searchText.isEmpty {
+            return products
+        } else {
+            return products.filter {
+                $0.title.localizedStandardContains(searchText)
+            }
+        }
+    }
+    @State private var isLoggedIn: Bool = false
 
-    // Define the number of columns for the grid
     let columns: [GridItem] = [
         GridItem(.flexible(), spacing: 16),  // First column
         GridItem(.flexible(), spacing: 16),  // Second column
     ]
 
     var body: some View {
-
-        ScrollView {
-            CustomSearchBarView(
-                placeholder: "search in favorites.....",
-                onChange: { text in
-                    print("Search text: \(text)")
-                },
-                prefix: {
-                    Image(systemName: "magnifyingglass")
-                        .foregroundColor(.black)
-                        .font(.title2)
-                },
-                suffix: {
-                    Button(action: {
-                        print("Cleared")
-                    }) {
-                        Image(systemName: "line.3.horizontal.decrease")
-                            .foregroundColor(.black)
-                            .font(.title2)
+        VStack {
+            if isLoggedIn {
+                VStack {
+                    if(!products.isEmpty){
+                        CustomTextField(
+                            placeholder: "search in favorites.....",
+                            onChange: { text in
+                                searchText = text
+                            },
+                            prefix: {
+                                Image(systemName: "magnifyingglass")
+                            },
+                            initialText: .constant("")
+                        )
+                        .padding()
                     }
+                    if filteredProducts.isEmpty {
+                        ContentUnavailableView(
+                            "There is no favorites", systemImage: "heart.slash",
+                            description: Text(
+                                "discovery new products and add them to your favorites"
+                            ))
+                    } else {
+                        ScrollView {
+                            LazyVGrid(columns: columns, spacing: 16) {
+                                ForEach(filteredProducts) { product in
+                                    ProductCardView(product: product)
+                                }
+                            }
+                            .padding()
+
+                        }
+                    }
+
                 }
-            )
-            .padding()
-
-            // Use LazyVGrid for grid layout
-            LazyVGrid(columns: columns, spacing: 16) {
-                // Add your product cards as grid items
-                ProductCardView()
-                ProductCardView()
-                ProductCardView()
-
+            } else {
+                RequireLoginView()
             }
-            .padding(.horizontal)
         }
-        .navigationTitle("My favorites")
+        .onAppear {
+            isLoggedIn = AuthManager.shared.isLoggedIn()
+        }
 
+        .navigationTitle("My favorites")
+        .toolbar(.hidden, for: .tabBar)
     }
 }
 

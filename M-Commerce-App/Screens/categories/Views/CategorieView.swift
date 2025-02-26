@@ -8,97 +8,85 @@
 import SwiftUI
 
 struct CategorieView: View {
+    @State private var sliderValue: Double = (1000 * (CurrencyManager.currentCurrencyRate.value ?? 1.0))
+    @State var sliderAsPrice:String = "0"
     @State var isSelectedPopup: Bool = false
+    @State var filterType: String = ""
+    @State var subFilterIndex: Int = 3
+    @State var filterString: String = ""
+    @State var favoriteCount: Int = 0
+    @State var isSubFilterSelected: Bool = false
+    @State var cE = CurrencyManager.currentCurrencyRate.value
+    //    @State var currentFilter:String = ""
+    var SubFiltersArray: [String] = ["ACCESSORIES", "T-SHIRTS", "SHOES", ""]
+    @State var isSearchActive:Bool = false
+    @State var searchText:String = ""
     var body: some View {
-        NavigationView {
-            ZStack (alignment: .bottomTrailing){
-                ScrollView {
-                    LazyVStack {
-                        CustomSearchBarView(placeholder: "search for a product...", onChange: {text in
-                            print(text)
-                        }).padding(10)
-                        
-                        FilterBar()
-                        
-                        ProductsSubView()
-                    }
-                }
-                
-                HStack {
-                    Spacer()
-                        ZStack {
-                            Button(action: {
-                                
-                            }, label: {
-                                FloatingButtonView(color: .gray, inconName: "hat.cap")
-                            }).offset(y:isSelectedPopup ? -270.0 : 0.0)
-                            Button(action: {
-                                
-                            }, label: {
-                                FloatingButtonView(color: .gray, inconName: "tshirt")
-                            }).offset(y:isSelectedPopup ? -180.0 : 0.0)
-                            Button(action: {
-                               
-                            }, label: {
-                                FloatingButtonView(color: .gray, inconName: "shoe")
-                            }).offset(y:isSelectedPopup ? -90.0 : 0.0)
-                            
-                            Button(action: {
-                                withAnimation(.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 0)) {
-                                    isSelectedPopup.toggle()
-                                }
-                            }, label: {
-                                FloatingButtonView(color: .primary, inconName: "plus")
-                            })
+
+        ZStack(alignment: .bottomTrailing) {
+            ScrollView {
+                LazyVStack {
+                    CustomTextField(
+                        placeholder: "search for products ...",
+                        onChange: { text in
+                            self.searchText = text
+                        },
+                        prefix: {
+                            Image(systemName: "magnifyingglass")
+                        },
+                        disActiveWhenCancel: true,
+                        showClearBtnWhenClearText: true,
+                        initialText: .constant(""),
+                        onActive: { active in
+                            if active {
+                                isSearchActive = true
+                            }else {
+                                isSearchActive = false
+                            }
                         }
-                        
-                }
-                
-            }
-            .navigationTitle("Categories")
-            .toolbar {  //start of: toolbar
-                ToolbarItem(
-                    placement: .topBarTrailing,
-                    content: {
-                        LazyHStack {
-                            NavigationLink(destination: Text("cart")
-                                .font(.title)
-                                           , label: {
-                            ButtonView(
-                                imageSystemName: ThemeManager.cartImg,
-                                itemCounter: 10)
+                    ).padding(10)
+                    FilterBar(
+                        filterItems: ["All", "Men", "Women", "Kid"],
+                        willFilter: { filterRes in
+                            filterType = filterRes
+                            print(filterRes)
                         })
-                            NavigationLink(destination: FavoritesView()
-                                .font(.title)
-                                           , label: {
-                            ButtonView(
-                                imageSystemName: ThemeManager.favouriteImg,
-                                itemCounter: 2)
-                            })
-                        }
+                    DebouncedSliderView(sliderValue: $sliderValue)
+                    ProductsSubView(
+                        filterString: $filterString,
+                        SubFiltersArray: SubFiltersArray,
+                        subFilterIndex: $subFilterIndex,
+                        filterType: $filterType, isSearchActive: $isSearchActive ,searchText: $searchText ,sliderAsPrice: $sliderAsPrice
+                    )
+                }
+
+            }
+
+            HStack {
+                Spacer()
+                FloatingFilter(
+                    SubFiltersArray: SubFiltersArray,
+                    filter: { filterRes in
+                        subFilterIndex = filterRes
+                    }, isSelectedPopup: isSubFilterSelected,
+                    filterBtnToggle: {
+                        isSubFilterSelected.toggle()
                     })
-            }//End of: toolbar
+            }
         }
+        .onAppear {
+            cE = CurrencyManager.currentCurrencyRate.value
+        }
+        .onChange(of: sliderValue) { oldValue, newValue in
+            print("Slider changed from \(oldValue) to \(newValue)")
+            sliderAsPrice = "variants.price:>0 AND variants.price:<\(newValue / (CurrencyManager.currentCurrencyRate.value ?? 1.0))"
+        }
+        
+
     }
+
 }
 
 #Preview {
     CategorieView()
-}
-
-struct FloatingButtonView: View {
-    var color: Color
-    var inconName: String
-    var body: some View {
-        ZStack{
-            Circle()
-                .fill(color)
-                .frame(width: 60, height: 60)
-                .shadow(radius: 8)
-                .padding(12)
-            Image(systemName: inconName)
-                .font(.system(size: 30))
-                .foregroundStyle(.white)
-        }
-    }
 }

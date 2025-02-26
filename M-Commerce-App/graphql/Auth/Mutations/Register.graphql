@@ -1,0 +1,35 @@
+mutation Register (
+    $firstName: String,
+    $lastName: String,
+    $email: String!,
+    $phone: String,
+    $password: String!,
+    $acceptsMarketing: Boolean
+){
+    customerCreate(
+        input: {
+            firstName: $firstName
+            lastName: $lastName
+            email: $email
+            phone: $phone
+            password: $password
+            acceptsMarketing: $acceptsMarketing
+        }
+    ) {
+        customer {
+            acceptsMarketing
+            createdAt
+            displayName
+            email
+            firstName
+            id
+            lastName
+            numberOfOrders
+            phone
+        }
+        customerUserErrors {
+            field
+            message
+        }
+    }
+}

@@ -1,0 +1,121 @@
+mutation CreateCart(
+    $email: String,
+    $customerAccessToken : String,
+    $phone: String,
+    $lines: [CartLineInput!]
+) {
+    cartCreate(
+    input: {
+        buyerIdentity: {
+            email: $email
+            customerAccessToken: $customerAccessToken
+            phone: $phone
+        }
+        lines: $lines
+    }
+    ) {
+        cart {
+            checkoutUrl
+            createdAt
+            id
+            note
+            totalQuantity
+            updatedAt
+            lines(first: 50) {
+                nodes {
+                    id
+                    merchandise {
+                        ... on ProductVariant {
+                            availableForSale
+                            barcode
+                            currentlyNotInStock
+                            id
+                            quantityAvailable
+                            requiresComponents
+                            requiresShipping
+                            sku
+                            taxable
+                            title
+                            weight
+                            weightUnit
+                            image {
+                                altText
+                                height
+                                id
+                                originalSrc
+                                src
+                                transformedSrc
+                                url
+                                width
+                            }
+                            price {
+                                amount
+                                currencyCode
+                            }
+                            priceV2 {
+                                amount
+                                currencyCode
+                            }
+                            quantityRule {
+                                increment
+                                maximum
+                                minimum
+                            }
+                            product {
+                                id
+                                title
+                                vendor
+                            }
+                        }
+                    }
+                    quantity
+                    cost {
+                        totalAmount {
+                            amount
+                            currencyCode
+                        }
+                        subtotalAmount {
+                            amount
+                            currencyCode
+                        }
+                        amountPerQuantity {
+                            amount
+                            currencyCode
+                        }
+                    }
+                }
+            }
+            cost {
+                subtotalAmountEstimated
+                totalAmountEstimated
+                totalDutyAmountEstimated
+                totalTaxAmountEstimated
+                checkoutChargeAmount {
+                    amount
+                    currencyCode
+                }
+                totalAmount {
+                    amount
+                    currencyCode
+                }
+                subtotalAmount {
+                    amount
+                    currencyCode
+                }
+                totalDutyAmount {
+                    amount
+                    currencyCode
+                }
+                totalTaxAmount {
+                    amount
+                    currencyCode
+                }
+            }
+        }
+        userErrors {
+            code
+            field
+            message
+        }
+    }
+}

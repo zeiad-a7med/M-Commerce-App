@@ -1,0 +1,46 @@
+query GetOrdersFromCustomerAT($CustomerAT: String!) {
+    customer(customerAccessToken: $CustomerAT) {
+        id
+        phone
+        email
+        orders(first: 100,reverse: true) {
+            totalCount
+            nodes {
+                currencyCode
+                edited
+                email
+                financialStatus
+                fulfillmentStatus
+                id
+                name
+                orderNumber
+                processedAt
+                statusUrl
+                currentSubtotalPrice {
+                    amount
+                    currencyCode
+                }
+                currentTotalPrice {
+                    amount
+                    currencyCode
+                }
+            }
+        }
+        addresses(first: 1) {
+            nodes {
+                address1
+                city
+                country
+                countryCode
+                firstName
+                id
+                lastName
+                latitude
+                longitude
+                name
+                phone
+            }
+        }
+        displayName
+    }
+}
