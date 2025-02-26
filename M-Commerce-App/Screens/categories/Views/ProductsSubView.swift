@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ApolloAPI
 
 struct ProductsSubView: View {
     @StateObject var cViewModel: CategoriesViewModel = CategoriesViewModel(
@@ -98,63 +99,24 @@ struct ProductsSubView: View {
         }
     }
     func filter() {
-        if filterType == "All" {
-            filterType = ""
-        }
-        if sliderAsPrice == "" {
-            if filterType != "" && SubFiltersArray[subFilterIndex] != "" {
-                filterString = "\(filterType) | \(SubFiltersArray[subFilterIndex])"
-                print("1-\(filterString)")
-                self.cViewModel.fetchCategoriesWithFilter(
-                    first: 50, after: nil, filter: filterString)
-            } else if filterType == "" && SubFiltersArray[subFilterIndex] != "" {
-                filterString = "\(SubFiltersArray[subFilterIndex])"
-                print("2-\(filterString)")
-                self.cViewModel.fetchCategoriesWithFilter(
-                    first: 50, after: nil, filter: filterString)
-            } else if filterType != "" && SubFiltersArray[subFilterIndex] == "" {
-                filterString = "\(filterType)"
-                print("3-\(filterString)")
-                self.cViewModel.fetchCategoriesWithFilter(
-                    first: 50, after: nil, filter: filterString)
-            } else if filterType == "" && SubFiltersArray[subFilterIndex] == "" {
-                filterString = ""
-                print("4-\(filterString)")
-                self.cViewModel.fetchCategoriesWithFilter(
-                    first: 50, after: nil, filter: filterString)
-            } else {
-                print("else")
-                self.cViewModel.fetchCategoriesWithFilter(
-                    first: 10, after: nil, filter: filterString)
+            // Ensure subFilterIndex is valid
+            let subFilter = (SubFiltersArray.indices.contains(subFilterIndex)) ? SubFiltersArray[subFilterIndex] : ""
+
+            // Remove "All" from filter type
+            if filterType == "All" {
+                filterType = ""
             }
-        }
-        else{
-            if filterType != "" && SubFiltersArray[subFilterIndex] != "" {
-                filterString = "\(filterType) | \(SubFiltersArray[subFilterIndex]) | \(sliderAsPrice)"
-                print("1-\(filterString)  | \(sliderAsPrice)")
-                self.cViewModel.fetchCategoriesWithFilter(
-                    first: 50, after: nil, filter: filterString)
-            } else if filterType == "" && SubFiltersArray[subFilterIndex] != "" {
-                filterString = "\(SubFiltersArray[subFilterIndex]) | \(sliderAsPrice)"
-                print("2-\(filterString) | \(sliderAsPrice)")
-                self.cViewModel.fetchCategoriesWithFilter(
-                    first: 50, after: nil, filter: filterString)
-            } else if filterType != "" && SubFiltersArray[subFilterIndex] == "" {
-                filterString = "\(filterType) | \(sliderAsPrice)"
-                print("3-\(filterString) | \(sliderAsPrice)")
-                self.cViewModel.fetchCategoriesWithFilter(
-                    first: 50, after: nil, filter: filterString)
-            } else if filterType == "" && SubFiltersArray[subFilterIndex] == "" {
-                filterString = sliderAsPrice
-                print("4-\(filterString) | \(sliderAsPrice)")
-                self.cViewModel.fetchCategoriesWithFilter(
-                    first: 50, after: nil, filter: filterString)
-            } else {
-                print("else")
-                self.cViewModel.fetchCategoriesWithFilter(
-                    first: 10, after: nil, filter: filterString)
-            }
-        }
+
+            // Construct the filter string
+            let components = [filterType, subFilter, sliderAsPrice].filter { !$0.isEmpty }
+            filterString = components.joined(separator: " | ")
+            
+            print("Filter String: \(filterString)")
+
+            // Call API
+            let firstItems = filterString.isEmpty ? 10 : 50
+            self.cViewModel.fetchCategoriesWithFilter(first: GraphQLNullable<Int>(integerLiteral: 10), after: nil, filter: filterString)
+
     }
 }
 
