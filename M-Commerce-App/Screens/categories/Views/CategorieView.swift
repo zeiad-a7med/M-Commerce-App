@@ -74,6 +74,7 @@ struct CategorieView: View {
                     })
             }
         }
+        .navigationBarBackButtonHidden(true)
         .onAppear {
             cE = CurrencyManager.currentCurrencyRate.value
         }
