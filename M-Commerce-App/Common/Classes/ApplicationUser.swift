@@ -13,6 +13,7 @@ import Foundation
 import ShopifyAPIKit
 import SwiftData
 
+
 @Model
 final class ApplicationUser{
     var accessToken: String?

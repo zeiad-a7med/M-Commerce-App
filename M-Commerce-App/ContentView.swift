@@ -22,6 +22,14 @@ struct ContentView: View {
                     .navigationTitle("Home")
                     .toolbar {  //start of: toolbar
                         ToolbarItem(
+                            placement: .topBarLeading,
+                            content: {
+                                Image(.logoWithoutBackground)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height:150)
+                            })
+                        ToolbarItem(
                             placement: .topBarTrailing,
                             content: {
                                 CustomToolBar()
@@ -47,6 +55,14 @@ struct ContentView: View {
                     .navigationTitle("Categories")
                     .toolbar {  //start of: toolbar
                         ToolbarItem(
+                            placement: .topBarLeading,
+                            content: {
+                                Image(.logoWithoutBackground)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height:150)
+                            })
+                        ToolbarItem(
                             placement: .topBarTrailing,
                             content: {
                                 CustomToolBar()
@@ -67,18 +83,38 @@ struct ContentView: View {
                     .navigationDestination(for: RouteTypes.self) { target in
                         NavigationManager.shared.manageDestination(target)
                     }
+                    .toolbar {  //start of: toolbar
+                        ToolbarItem(
+                            placement: .topBarLeading,
+                            content: {
+                                Image(.logoWithoutBackground)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height:150)
+                            })
+                    }
             }
             .tabItem {
-                Label("Settings", systemImage: "person.fill")
+                Label("Profile", systemImage: "person.fill")
             }.tag(2)
             NavigationStack(path: $navigationManager.path) {
                 MyOrdersView()
                     .navigationDestination(for: RouteTypes.self) { target in
                         NavigationManager.shared.manageDestination(target)
                     }
+                    .toolbar {  //start of: toolbar
+                        ToolbarItem(
+                            placement: .topBarLeading,
+                            content: {
+                                Image(.logoWithoutBackground)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height:150)
+                            })
+                    }
             }
             .tabItem {
-                Label("Orders", systemImage: "car")
+                Label("Orders", systemImage: "list.dash")
             }.tag(3)
 
         }
