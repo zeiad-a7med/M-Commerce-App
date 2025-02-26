@@ -49,6 +49,7 @@ struct HomePageView: View {
                 }
             }
         }  //end of: ZStack
+        .navigationBarBackButtonHidden(true)
     }
 }
 

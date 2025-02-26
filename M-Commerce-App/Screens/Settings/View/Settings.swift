@@ -113,6 +113,7 @@ struct Settings: View {
             isLoggedIn = AuthManager.shared.isLoggedIn()
         }
         .navigationTitle("Settings")
+        .navigationBarBackButtonHidden(true)
     }
 }
 

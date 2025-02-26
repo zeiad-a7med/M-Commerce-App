@@ -10,10 +10,11 @@ import SwiftUI
 struct AddressEditView: View {
     @Environment(\.dismiss) private var dismiss
     @State var address: Address
-    @State var defaultAddress : Address?
+    @State var defaultAddress: Address?
     @State var isEditEnabled: Bool = false
     @State var isDeleteAlertShown: Bool = false
     var body: some View {
+        ScrollView(showsIndicators: false) {
             VStack {
                 VStack {
                     HStack {
@@ -102,9 +103,10 @@ struct AddressEditView: View {
                             let addressModel = AddressComponentViewModel()
                             addressModel.updateAddresses(
                                 accessToken:
-                                    AuthManager.shared.applicationUser?.accessToken ?? "",
+                                    AuthManager.shared.applicationUser?
+                                    .accessToken ?? "",
                                 selectedAddress: address)
-                         dismiss()
+                            dismiss()
 
                         }, isButtonEnabled: .constant(true)
                     )
@@ -116,7 +118,8 @@ struct AddressEditView: View {
                             let addressModel = AddressComponentViewModel()
                             addressModel.updateDefaulteAddress(
                                 AccessToken:
-                                    AuthManager.shared.applicationUser?.accessToken ?? "",
+                                    AuthManager.shared.applicationUser?
+                                    .accessToken ?? "",
                                 selectedAddressId: address.id ?? "")
                             dismiss()
 
@@ -130,19 +133,22 @@ struct AddressEditView: View {
             .toolbar {
                 if isEditEnabled {
                     Button {
-                        do{
+                        do {
                             let addressModel = AddressComponentViewModel()
-                            if let temp = defaultAddress{
-                                try addressModel.checkIfSelectedIsDefaultAddress(selectedAddressId: address.id ?? "" , defaultAddressId: temp.id ?? "")
+                            if let temp = defaultAddress {
+                                try addressModel.checkIfSelectedIsDefaultAddress(
+                                    selectedAddressId: address.id ?? "",
+                                    defaultAddressId: temp.id ?? "")
                             }
-                           
+
                             withAnimation {
                                 isDeleteAlertShown.toggle()
                             }
-                        }catch{
-                            SnackbarManager.shared.show(message: error.localizedDescription)
+                        } catch {
+                            SnackbarManager.shared.show(
+                                message: error.localizedDescription)
                         }
-                        
+
                     } label: {
                         Image(systemName: "xmark.bin")
                             .padding(5)
@@ -151,7 +157,7 @@ struct AddressEditView: View {
                             .background(.red)
                             .clipShape(Circle())
                     }
-                    .transition(.scale) // Smooth appearance transition
+                    .transition(.scale)  // Smooth appearance transition
                     .alert(
                         "Are you sure you want to delete the address",
                         isPresented: $isDeleteAlertShown
@@ -159,12 +165,13 @@ struct AddressEditView: View {
                         Button("Yes", role: .destructive) {
                             let addressModel = AddressComponentViewModel()
                             addressModel.deleteAddress(
-                                AccessToken: AuthManager.shared.applicationUser?.accessToken ?? "",
+                                AccessToken: AuthManager.shared.applicationUser?
+                                    .accessToken ?? "",
                                 selectedAddressId: address.id ?? ""
                             )
                             dismiss()
                         }
-                        Button("Cancel", role: .cancel) { }
+                        Button("Cancel", role: .cancel) {}
                     }
 
                     Button {
@@ -179,7 +186,7 @@ struct AddressEditView: View {
                             .background(ThemeManager.darkPuble)
                             .clipShape(Circle())
                     }
-                    .transition(.opacity.combined(with: .scale)) // Fade & scale transition
+                    .transition(.opacity.combined(with: .scale))  // Fade & scale transition
 
                 } else {
                     Button {
@@ -194,10 +201,12 @@ struct AddressEditView: View {
                             .background(ThemeManager.darkPuble)
                             .clipShape(Circle())
                     }
-                    .transition(.opacity.combined(with: .scale)) // Fade & scale transition
+                    .transition(.opacity.combined(with: .scale))  // Fade & scale transition
                 }
             }.animation(.easeInOut(duration: 0.3), value: isEditEnabled)
-            .navigationTitle("Edit Address")
+        }
+
+        .navigationTitle("Edit Address")
 
     }
 }

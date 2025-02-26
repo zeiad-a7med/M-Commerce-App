@@ -26,164 +26,166 @@ struct EditProfile: View {
     @State private var isFormValid = false
     @State private var sureToUpdate = false
     var body: some View {
-        VStack {
-            ProfileImage(profilePic: profilePic)
+        ScrollView(showsIndicators: false){
+            VStack {
+                ProfileImage(profilePic: profilePic)
 
-            VStack(alignment: .leading) {
-                Text("First name")
-                    .font(.title2)
-                CustomTextField(
-                    placeholder: "First name",
-                    onChange: { val in
-                        firstName = val
-                    },
-                    prefix: {
-                        Image(systemName: "person.fill")
-                    },
-                    validationType: .text,
-                    isValid: { valid in
-                        firstNameValid = valid
-                    },
-                    initialText: $firstName
+                VStack(alignment: .leading) {
+                    Text("First name")
+                        .font(.title2)
+                    CustomTextField(
+                        placeholder: "First name",
+                        onChange: { val in
+                            firstName = val
+                        },
+                        prefix: {
+                            Image(systemName: "person.fill")
+                        },
+                        validationType: .text,
+                        isValid: { valid in
+                            firstNameValid = valid
+                        },
+                        initialText: $firstName
 
-                )
+                    )
 
-                Text("Last name")
-                    .font(.title2)
+                    Text("Last name")
+                        .font(.title2)
 
-                CustomTextField(
-                    placeholder: "Last name",
-                    onChange: { val in
-                        lastName = val
-                    },
-                    prefix: {
-                        Image(systemName: "person.fill")
-                    },
-                    validationType: .text,
-                    isValid: { valid in
-                        lastNameValid = valid
-                    },
-                    initialText: $lastName
+                    CustomTextField(
+                        placeholder: "Last name",
+                        onChange: { val in
+                            lastName = val
+                        },
+                        prefix: {
+                            Image(systemName: "person.fill")
+                        },
+                        validationType: .text,
+                        isValid: { valid in
+                            lastNameValid = valid
+                        },
+                        initialText: $lastName
 
-                )
+                    )
 
-                Text("phone")
-                    .font(.title2)
-                CustomTextField(
-                    placeholder: "Enter your phone number",
-                    onChange: { val in
-                        phone = val
-                    },
-                    prefix: {
-                        Picker(
-                            "Select Country",
-                            selection: $selectedCountry
-                        ) {
-                            ForEach(Constants.countries, id: \.self) {
-                                country in
-                                Text(
-                                    "\(country.flag) \(country.name) (\(country.code))"
-                                )
-                                .tag(country)
+                    Text("phone")
+                        .font(.title2)
+                    CustomTextField(
+                        placeholder: "Enter your phone number",
+                        onChange: { val in
+                            phone = val
+                        },
+                        prefix: {
+                            Picker(
+                                "Select Country",
+                                selection: $selectedCountry
+                            ) {
+                                ForEach(Constants.countries, id: \.self) {
+                                    country in
+                                    Text(
+                                        "\(country.flag) \(country.name) (\(country.code))"
+                                    )
+                                    .tag(country)
+                                }
                             }
-                        }
-                        .pickerStyle(MenuPickerStyle())
+                            .pickerStyle(MenuPickerStyle())
 
+                        },
+                        validationType: .phoneNumber,
+                        characterLimit: 10,
+                        isValid: { valid in
+                            phoneValid = valid
+                        },
+                        initialText: $phone
+                    )
+
+                    Spacer()
+
+                }.padding()
+
+                CustomRoundedButtonView(
+                    text: "Save Changes",
+                    width: 80,
+                    onTap: {
+                        sureToUpdate.toggle()
                     },
-                    validationType: .phoneNumber,
-                    characterLimit: 10,
-                    isValid: { valid in
-                        phoneValid = valid
-                    },
-                    initialText: $phone
+                    isButtonEnabled: $isFormValid
                 )
-
-                Spacer()
+                .onChange(
+                    of: firstNameValid,
+                    { oldValue, newValue in
+                        updateFormValidity()
+                    }
+                )
+                .onChange(
+                    of: lastNameValid,
+                    { oldValue, newValue in
+                        updateFormValidity()
+                    }
+                )
+                .onChange(
+                    of: phoneValid,
+                    { oldValue, newValue in
+                        updateFormValidity()
+                    }
+                )
+                .onChange(
+                    of: viewModel.isLoading,
+                    { oldValue, newValue in
+                        updateFormValidity()
+                    }
+                )
 
             }.padding()
-
-            CustomRoundedButtonView(
-                text: "Save Changes",
-                width: 80,
-                onTap: {
-                    sureToUpdate.toggle()
-                },
-                isButtonEnabled: $isFormValid
-            )
-            .onChange(
-                of: firstNameValid,
-                { oldValue, newValue in
-                    updateFormValidity()
-                }
-            )
-            .onChange(
-                of: lastNameValid,
-                { oldValue, newValue in
-                    updateFormValidity()
-                }
-            )
-            .onChange(
-                of: phoneValid,
-                { oldValue, newValue in
-                    updateFormValidity()
-                }
-            )
-            .onChange(
-                of: viewModel.isLoading,
-                { oldValue, newValue in
-                    updateFormValidity()
-                }
-            )
-
-        }.padding()
-            .overlay {
-                if viewModel.isLoading {
-                    VStack {
-                        CustomProgressView()
-                    }.frame(
-                        width: UIScreen.main.bounds.width,
-                        height: UIScreen.main.bounds.height
-                    )
-                    .background(.primary.opacity(0.1))
-                }
-            }
-            .navigationTitle("Edit profile")
-            .toolbar(.hidden, for: .tabBar)
-            .onAppear {
-                firstName = viewModel.user?.firstName ?? ""
-                lastName = viewModel.user?.lastName ?? ""
-                phone = String(viewModel.user?.phone?.suffix(10) ?? "")
-            }
-            .alert(
-                "are you sure you want to update your profile?",
-                isPresented: $sureToUpdate
-            ) {
-                Button(
-                    role: .destructive,
-                    action: {
-                        var codedPhone: String = phone
-                        codedPhone.insert(
-                            contentsOf: selectedCountry.code,
-                            at: phone.startIndex)
-                        viewModel.updateProfile(
-                            firstName: firstName,
-                            lastName: lastName,
-                            email: viewModel.user?.email ?? "",
-                            phone: codedPhone
+                .overlay {
+                    if viewModel.isLoading {
+                        VStack {
+                            CustomProgressView()
+                        }.frame(
+                            width: UIScreen.main.bounds.width,
+                            height: UIScreen.main.bounds.height
                         )
-                    },
-                    label: {
-                        Text("Update")
-                            .foregroundStyle(.red)
-                            .bold()
+                        .background(.primary.opacity(0.1))
+                    }
+                }
+                .navigationTitle("Edit profile")
+                .toolbar(.hidden, for: .tabBar)
+                .onAppear {
+                    firstName = viewModel.user?.firstName ?? ""
+                    lastName = viewModel.user?.lastName ?? ""
+                    phone = String(viewModel.user?.phone?.suffix(10) ?? "")
+                }
+                .alert(
+                    "are you sure you want to update your profile?",
+                    isPresented: $sureToUpdate
+                ) {
+                    Button(
+                        role: .destructive,
+                        action: {
+                            var codedPhone: String = phone
+                            codedPhone.insert(
+                                contentsOf: selectedCountry.code,
+                                at: phone.startIndex)
+                            viewModel.updateProfile(
+                                firstName: firstName,
+                                lastName: lastName,
+                                email: viewModel.user?.email ?? "",
+                                phone: codedPhone
+                            )
+                        },
+                        label: {
+                            Text("Update")
+                                .foregroundStyle(.red)
+                                .bold()
 
-                    })
+                        })
 
-            } message: {
-                Text(
-                    "once you logout you will lose all your favorites"
-                )
-            }
+                } message: {
+                    Text(
+                        "once you logout you will lose all your favorites"
+                    )
+                }
+        }
 
     }
     func updateFormValidity() {
