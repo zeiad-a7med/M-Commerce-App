@@ -10,6 +10,7 @@ import SwiftData
 import SwiftUI
 
 struct ContentView: View {
+    @State var navigateToLogin: Bool = false
     @Environment(\.modelContext) private var modelContext
     @Environment(NetworkMonitor.self) private var newtworkMonitor
     @StateObject private var navigationManager = NavigationManager.shared
@@ -29,18 +30,18 @@ struct ContentView: View {
                     .navigationDestination(for: RouteTypes.self) { target in
                         NavigationManager.shared.manageDestination(target)
                     }
+                    .onAppear{
+                        if(navigateToLogin){
+                            navigateToLogin = false
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                                NavigationManager.shared.push(.login)
+                            })
+                        }
+                    }
             }
             .tabItem {
                 Label("Home", systemImage: "house.fill")
             }.tag(0)
-            
-            
-            
-            
-            
-            
-            
-            
             NavigationStack(path: $navigationManager.path) {
                 CategorieView()
                     .navigationTitle("Categories")
@@ -86,6 +87,7 @@ struct ContentView: View {
             AuthManager.shared.setContext(modelContext)
             CurrencyManager.shared.setContext(modelContext)
         }
+        .navigationBarHidden(true)
     }
 
 }

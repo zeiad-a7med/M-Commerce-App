@@ -36,7 +36,7 @@ struct BrandCard: View {
                         .shadow(radius: shadowRadius)
                 }
                 Text(title.capitalized)
-                    .foregroundStyle(.black)
+                .foregroundStyle(.BILWID)
                     .bold()
             
             }.padding()

@@ -45,20 +45,18 @@ struct CustomNetworkImageView: View {
     @StateObject private var loader = ImageLoader()
     
     var body: some View {
-        Group {
+        
             if let image = loader.image {
                 Image(uiImage: image)
                     .resizable()
-//                    .scaledToFit()
                     
             } else {
                 ShimmerView(width: 150, height: 150)
+                    .onAppear {
+                        if loader.image == nil { // Load image only if not already loaded
+                            loader.load(from: url)
+                        }
+                    }
             }
-        }
-        .onAppear {
-            if loader.image == nil { // Load image only if not already loaded
-                loader.load(from: url)
-            }
-        }
     }
 }

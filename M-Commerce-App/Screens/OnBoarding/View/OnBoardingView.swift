@@ -9,13 +9,15 @@ import SwiftUI
 
 struct BoardingTabView: View {
     @State var navigateToHome : Bool = false
+    @State var navigateToLogin : Bool = false
     var body: some View {
         VStack {
             pagingSubView()
             CustomRoundedButtonView(
-                text: "Register", width: 80,
+                text: "Sign In", width: 80,
                 onTap: {
                     navigateToHome = true
+                    navigateToLogin = true
                 }, isButtonEnabled: .constant(true))
             Text("Continue as Guest")
                 .foregroundStyle(ThemeManager.darkPuble)
@@ -25,12 +27,13 @@ struct BoardingTabView: View {
                     navigateToHome = true
                 }
             NavigationLink(
-                destination: ContentView(), isActive: $navigateToHome
+                destination: ContentView(navigateToLogin:navigateToLogin), isActive: $navigateToHome
             ) {
                 EmptyView()
             }
         }
-        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true) // Hide the navigation bar for this view
+
     }
 }
 

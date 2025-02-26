@@ -18,11 +18,11 @@ struct ProductCardView: View {
     @State var isFavorite: Bool = false
     var body: some View {
 
-        LazyVStack {
+        VStack {
             let defaultURL = URL(string: "https://m.media-amazon.com/images/I/51aRcLwwKAL._AC_UL1500_.jpg")!
             let imageURL = URL(string: product.featuredImage?.url ?? "https://m.media-amazon.com/images/I/51aRcLwwKAL._AC_UL1500_.jpg") ?? defaultURL
             CustomNetworkImageView(url: imageURL)
-            .frame(width: 180, height: 200)
+            .frame(width: 180, height: 180)
             .cornerRadius(20)
             .overlay(
                 FavoriteButtonView(
@@ -36,6 +36,7 @@ struct ProductCardView: View {
             .frame(width: 180, height: 200)
             .cornerRadius(cornerRadius)
             .shadow(radius: shadowRadius)
+            
             Text(product.title)
                 .font(.headline)
                 .fontWeight(.bold)
