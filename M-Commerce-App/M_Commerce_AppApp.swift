@@ -29,7 +29,6 @@ struct M_Commerce_AppApp: App {
                     fatalError("Could not create ModelContainer: \(error)")
                 }
             }()
-            
             ZStack {
                 SpalshScreen()
                     .environment(networkMonitor)
