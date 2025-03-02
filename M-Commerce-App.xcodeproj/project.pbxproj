@@ -212,6 +212,7 @@
 		C4BC561C2D5F937C00F9D42A /* FlatFilterBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC561B2D5F937C00F9D42A /* FlatFilterBar.swift */; };
 		C4BC561E2D5F96DC00F9D42A /* FlatFilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC561D2D5F96DB00F9D42A /* FlatFilterButton.swift */; };
 		C4BC56202D5FD70300F9D42A /* BrandsGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC561F2D5FD70300F9D42A /* BrandsGrid.swift */; };
+		C4D01C762D71B5B500E9CE82 /* BrandsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D01C752D71B5B500E9CE82 /* BrandsService.swift */; };
 		C4DD10A12D68B6DD00FCD9E2 /* MoyaNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD10A02D68B6DD00FCD9E2 /* MoyaNetworkManager.swift */; };
 		C4DD10F22D68F1BD00FCD9E2 /* ApiHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD10F12D68F1BD00FCD9E2 /* ApiHandler.swift */; };
 		C4DD10F42D68F21A00FCD9E2 /* MoyaNetworkManagerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD10F32D68F21A00FCD9E2 /* MoyaNetworkManagerExtension.swift */; };
@@ -450,6 +451,7 @@
 		C4BC561B2D5F937C00F9D42A /* FlatFilterBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatFilterBar.swift; sourceTree = "<group>"; };
 		C4BC561D2D5F96DB00F9D42A /* FlatFilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatFilterButton.swift; sourceTree = "<group>"; };
 		C4BC561F2D5FD70300F9D42A /* BrandsGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsGrid.swift; sourceTree = "<group>"; };
+		C4D01C752D71B5B500E9CE82 /* BrandsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsService.swift; sourceTree = "<group>"; };
 		C4DD10A02D68B6DD00FCD9E2 /* MoyaNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaNetworkManager.swift; sourceTree = "<group>"; };
 		C4DD10F12D68F1BD00FCD9E2 /* ApiHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiHandler.swift; sourceTree = "<group>"; };
 		C4DD10F32D68F21A00FCD9E2 /* MoyaNetworkManagerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaNetworkManagerExtension.swift; sourceTree = "<group>"; };
@@ -995,6 +997,7 @@
 		890D87B12D5DF66C0062E8D1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C4D01C742D71B59400E9CE82 /* BrandsService */,
 				890D87B02D5DF66C0062E8D1 /* BrandsModel.swift */,
 			);
 			path = Model;
@@ -1653,6 +1656,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		C4D01C742D71B59400E9CE82 /* BrandsService */ = {
+			isa = PBXGroup;
+			children = (
+				C4D01C752D71B5B500E9CE82 /* BrandsService.swift */,
+			);
+			path = BrandsService;
+			sourceTree = "<group>";
+		};
 		C4DD10EE2D68F16900FCD9E2 /* MoyaNetworkHandler */ = {
 			isa = PBXGroup;
 			children = (
@@ -2015,6 +2026,7 @@
 				8952A68A2D621F340003ACF4 /* LoginResponse.swift in Sources */,
 				48A336962D64ADD400F64F2A /* updateDefaultAddress.graphql in Sources */,
 				890D87D42D5DF66C0062E8D1 /* imageCard.swift in Sources */,
+				C4D01C762D71B5B500E9CE82 /* BrandsService.swift in Sources */,
 				890D87D52D5DF66C0062E8D1 /* ProductViewModel.swift in Sources */,
 				C42E3FAE2D660D21006DF7A3 /* OrderCard.swift in Sources */,
 				C4BC56142D5F8EE600F9D42A /* ProductsModel.swift in Sources */,

@@ -11,6 +11,8 @@ struct BrandsResponse {
     var collectionCount: String?
     var collections: [Collection]?
     var pageInfo: PageInfo?
+    var message:String?
+    var success:Bool?
 }
 
 

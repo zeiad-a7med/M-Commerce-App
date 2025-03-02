@@ -19,6 +19,6 @@ class MoyaNetworkManager: Networkable {
     static public let shared = MoyaNetworkManager()
     private init() {}
     func fetchCurrencyExchangeRates(complition:@escaping (Result<CurrencyModel, ApiErrors>) -> Void) {
-        fetchCurrencyExchangeRatesFromApi(target: .getLatestCurrency , complition: complition)
+        fetchFromApi(target: .getLatestCurrency , complition: complition)
     }
 }

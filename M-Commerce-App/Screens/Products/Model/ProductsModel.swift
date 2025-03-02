@@ -10,4 +10,6 @@ import Foundation
 class BrandResponse {
     var BrandProducts: [Product]?
     var pageInfo: PageInfo?
+    var messae:String?
+    var success:Bool?
 }

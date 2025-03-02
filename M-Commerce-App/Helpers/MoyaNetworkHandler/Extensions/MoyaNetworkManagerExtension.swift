@@ -9,7 +9,7 @@ import Foundation
 import CombineMoya
 
 extension MoyaNetworkManager {
-    func fetchCurrencyExchangeRatesFromApi<T : Codable>(target: ApiHandler,complition:@escaping (Result<T,ApiErrors>)->Void) {
+    func fetchFromApi<T : Codable>(target: ApiHandler,complition:@escaping (Result<T,ApiErrors>)->Void) {
         provider.requestPublisher(target)
             .map{$0.data}
             .decode(type: T.self , decoder: JSONDecoder())

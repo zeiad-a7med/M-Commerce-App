@@ -65,17 +65,5 @@ final class M_Commerce_AppTests: XCTestCase {
     }
     
     
-//
-//    func testfetchCategoriesWithFilter() {
-//        ApolloNetwokService.shared.apollo.fetch(
-//            query: GetFilteredProductsQuery(
-//                first: 10, after: nil, query: "men")) { res in
-//            switch res {
-//                case .success(let data):
-//                XCTAssertEqual(data.data?.products.nodes.isEmpty, false)
-//            case .failure(let error):
-//                XCTFail("error: \(error)")
-//            }
-//        }
-//    }
+
 }

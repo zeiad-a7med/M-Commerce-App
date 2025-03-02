@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BrandsView: View {
-    @StateObject var bViewModel: BrandsViewModel = BrandsViewModel()
+    @StateObject var bViewModel: BrandsViewModel = BrandsViewModel(first: 10, after: nil)
     let rows: [GridItem] = [
         GridItem(
             .flexible(minimum: 100, maximum: 200), spacing: 0, alignment: nil),
