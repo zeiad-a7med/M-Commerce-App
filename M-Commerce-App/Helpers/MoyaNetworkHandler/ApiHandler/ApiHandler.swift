@@ -24,7 +24,7 @@ extension ApiHandler : TargetType {
     var apiKey: String {
         switch self {
         case .getLatestCurrency:
-            return "cur_live_xNtji35Jx8QYuSRrjJBdwWQM6AnANyg79QPp2xbc"
+            return "cur_live_AnT3nfPNRCTHkFDJpaeYMrfkma3y9LlLNVt10PvT"
         }
     }
     var path: String {

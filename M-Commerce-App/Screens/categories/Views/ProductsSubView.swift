@@ -10,13 +10,14 @@ import ApolloAPI
 
 struct ProductsSubView: View {
     @StateObject var cViewModel: CategoriesViewModel = CategoriesViewModel(
-        first: 20, after: nil, filter: "")
+        first: 50, after: nil, filter: "")
     @Binding var filterString: String
     var SubFiltersArray: [String]
     @Binding var subFilterIndex: Int
     @Binding var filterType: String
     private let columns = [GridItem(.flexible()), GridItem(.flexible())]
     @State private var lastItemID: String?
+    @State var filteredProducts: [Product] = []
     @Binding var isSearchActive: Bool
     @Binding var searchText: String
     @State var mainFilter:String?
@@ -30,11 +31,12 @@ struct ProductsSubView: View {
                                      mainFilter: $mainFilter)
                 }else {
                     if !cViewModel.isLoading {
-                        if let filteredProducts = cViewModel.categories
-                            .categoryProducts
+                        if cViewModel.categories
+                            .categoryProducts?.count ?? 0 > 0
                         {
                             LazyVGrid(columns: columns, spacing: 10) {
-                                ForEach(filteredProducts, id: \.id) { product in
+                                ForEach(cViewModel.categories
+                                    .categoryProducts ?? [], id: \.id) { product in
                                     ProductCardView(product: product)
                                         .id(product.id)
                                         .onAppear {
@@ -46,6 +48,10 @@ struct ProductsSubView: View {
                                         }
                                 }
                             }
+                            .onChange(of: cViewModel.categories
+                                .categoryProducts, { oldValue, newValue in
+                                    filteredProducts = cViewModel.categories.categoryProducts ?? []
+                                })
                             .onChange(
                                 of: filterType,
                                 { oldValue, newValue in
@@ -93,11 +99,11 @@ struct ProductsSubView: View {
                 }
             }
         }.refreshable {
-            cViewModel.fetchCategories(first: 10, after: nil, query: "")
+            cViewModel.fetchCategories(first: 50, after: nil, query: "")
             }
         .onAppear {
             if !(cViewModel.categories.categoryProducts?.isEmpty ?? false)  {
-                cViewModel.fetchCategories(first: 10, after: nil, query: "")
+                cViewModel.fetchCategories(first: 50, after: nil, query: "")
             }
         }
         
@@ -110,9 +116,9 @@ struct ProductsSubView: View {
         else { return }
         if currentProduct.id == lastProduct.id {
             lastItemID = lastProduct.id
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 cViewModel.loadMore(filter: filterString)
-            }
+//            }
         }
     }
     func filter() {
@@ -132,7 +138,7 @@ struct ProductsSubView: View {
 
             // Call API
             let firstItems = filterString.isEmpty ? 10 : 50
-            self.cViewModel.fetchCategoriesWithFilter(first: GraphQLNullable<Int>(integerLiteral: 10), after: nil, filter: filterString)
+            self.cViewModel.fetchCategoriesWithFilter(first: 50, after: nil, filter: filterString)
 
     }
 }

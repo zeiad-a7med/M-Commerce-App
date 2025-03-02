@@ -62,7 +62,7 @@ final class CategoriesViewModel: ObservableObject {
         self.isLoading = true
         ApolloNetwokService.shared.apollo.fetch(
             query: GetFilteredProductsQuery(
-                first: 10, after: categories.pageInfo?.endCursor ?? "",
+                first: 50, after: categories.pageInfo?.endCursor ?? "",
                 query: GraphQLNullable<String>.some(filter)),
             cachePolicy: .fetchIgnoringCacheData
         ) { result in

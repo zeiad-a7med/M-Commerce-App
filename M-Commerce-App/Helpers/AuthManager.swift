@@ -65,9 +65,9 @@ class AuthManager: ObservableObject {
             try Auth.auth().signOut()
             FavoritesManager.shared.removeAllFavorites()
             try modelContext.save()
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 self.applicationUser = nil
-            }
+//            }
         } catch {
             SnackbarManager.shared.show(message: "Error logging out user: \(error).")
         }
@@ -79,9 +79,9 @@ class AuthManager: ObservableObject {
         do {
             modelContext.delete(user)
             try modelContext.save()
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 self.applicationUser = nil
-            }
+//            }
         } catch {
         }
     }

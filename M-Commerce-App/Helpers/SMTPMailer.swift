@@ -95,7 +95,6 @@ class SMTPMailer {
             </head>
             <body>
                 <div>
-                    <h2>Order Details</h2>
                     <table>
                         <tbody>
                             \(tableRows)
@@ -109,12 +108,4 @@ class SMTPMailer {
             """
     }
 
-}
-
-class HTMLFetcher: ObservableObject {
-    @Published var htmlContent: String = "Loading..."
-
-    func fetchHTML(from urlString: String) {
-
-    }
 }
